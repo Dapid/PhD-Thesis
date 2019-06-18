@@ -1,24 +1,29 @@
 \documentclass[b5paper, 12pt]{book}
+%\documentclass[12pt,paper=b5,footinclude,headinclude]{scrbook} % KOMA-Script book
+\usepackage[pdfpagelabels, unicode, pdfstartview=FitH]{hyperref}
 %\usepackage[utf8]{inputenc}
 
-\usepackage{lmodern}
+%\usepackage{lmodern}
+\usepackage{url}
 \usepackage{fontspec}
 \usepackage{graphicx}
+
 
 \usepackage[centertags]{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
 
-\usepackage{doi}
-\usepackage[authoryear, round]{natbib} %Allow to split citations across lines.
-\bibliographystyle{myplainnat}
-
 \usepackage[eulerchapternumbers, eulermath, parts, floatperchapter]{classicthesis}
 \usepackage[paperwidth=165mm, paperheight=242mm]{geometry}
+
+\usepackage[authoryear, round]{natbib} %Allow to split citations across lines.
+\usepackage{doi}
+\bibliographystyle{plainnat}
+
 \usepackage{todonotes}
 
-\hyphenation{PSICOV, PconsC3, PconsFold, PconsC2, PconsFold2, FADE}
+\hyphenation{PSICOV, PconsC3, PconsFold, PconsC2, PconsFold2}
 
 \begin{document}
 
@@ -35,6 +40,7 @@
 \include{intro/intro}
 \part{The informatics}
 \include{machine_learning/machine_learning}
+\include{machine_learning/deep_learning}
 
 \part{The biology}
 \include{bioinfo/bioinfo}

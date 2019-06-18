@@ -1,0 +1,74 @@
+\chapter{Machine learning}
+%\section{What is machine learning?}
+
+The Scientific Revolution during the Renaissance was fuelled by the realisation that Nature can be parametrised using only a handful of equations.
+With these tools, and sufficient measurements, natural philosophers could use the universal equations to fully model the mechanical universe.
+
+
+
+The triumph of systematic study and analytical calculations was not limited to Physics, but also was adapted and expanded to the rest of the sciences, 
+
+The first roadblock was chaos.
+
+Despite the wild success in
+
+
+These new methods triumphed were not limited to Physics, but 
+The success of these new methods in Mechanics, Optics,  lead natural philosophers
+
+These philosophical revolutions
+
+
+
+
+Machine learning is the inference of statistical models from collections of examples.
+The models can be as concrete as relating the voltage and measured current intensity in a circuit, as complex as relating the sensory input of a rocket with its control, or as abstract as mapping natural images to the text describing its contents.
+
+In general, designing a computer program fully capable of solving these problems can be time consuming, and with a high degree of complexity.
+Machine learning solves this limitation with data.
+Instead of a programmer deciding every step, the algorithm depends on a series of free parameters that are inferred from the data.
+
+\section{Classification and typology}
+Machine learning tasks can be classified according to several criteria.
+Here are, in broad strokes, some of the main types that cover the majority of the machine learning problems according to different criteria.
+
+\subsection{Do we have labels?}
+\begin{itemize}
+\item \emph{Supervised:} our training data has assigned labels, and we want to predict them to new data. \emph{Ex: image recognition, linear regression.}
+\item \emph{Unsupervised:} we do not have data with annotated target values. \emph{Ex: clustering, dimensionality reduction.}
+\end{itemize}
+
+The focus of this thesis will be on supervised tasks.
+
+\subsection{Are labels categorical or continuous?}
+The supervised tasks can be again divided depending on the nature of the labels:
+\begin{itemize}
+\item \emph{Classification:} our labels are categorical variables. \emph{Ex: image recognition, automated transcription of speech, presence or absence of tumours}
+\item \emph{Regression:} we are interested in the value of continuous variables. \emph{Ex: curve fitting, counting.}
+\end{itemize}
+
+\todo[inline]{add more types}
+
+\section{The machine learning spectrum}
+We can design machine learning models with different degrees of restrictions, or parametric assumptions.
+A more restricted model needs less data to converge, and its performance will not be hindered if the underlying assumptions are correct.
+On the other hand, if these restrictions are not accurate, the model will be biased and its performance, limited.
+
+If we instead relax the parametric assumptions we obtain a more flexible model, capable of tackling more complex problems.
+But this versatility comes with a cost: they require more data to train.
+
+\todo[inline]{Figure}
+
+Can we take it to the extreme?
+\marginpar{A theoretical result} 
+Can we train a model completely free  of assumptions in the case of infinite data? The No Free Lunch Theorem \citep{no_free_lunch} says, averaging over all problems, all algorithms are equally good.
+In other words, without inputting domain knowledge, we cannot do better than random.
+
+\section{A point of comparison: traditional machine learning}
+\section{Deep learning}
+\subsection{Blocks}
+\subsection{Taming the complexity: regularisation}
+\subsection{The quest for depth}
+b
+\subsection{Deep transfer learning}
+a

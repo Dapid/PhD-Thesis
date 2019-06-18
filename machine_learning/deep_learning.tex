@@ -1,5 +1,10 @@
 \chapter{Deep learning}
-\section{Blocks}
+\section{Success stories}
+We start this section introducing the two fields that have been spearheading the Deep Learning revolution: computer vision and speech recognition.
+The first is 
+\todo{perceptual learning}
+
+\section{The basic blocks}
 \section{Taming the complexity: regularisation}
 Neural networks can have millions of parameters, so they are susceptible to over-fitting.
 In order to converge to generalisable models, we can apply a variety of regularisation techniques.
@@ -12,9 +17,11 @@ To prevent any single activation from
 
 $L^2$ regularisation can be interpreted as a Gaussian prior over the weights centred around $0$.
 
-\marginpar{Dropout}
-The most popular technique specifically developed for artificial neural networks is Dropout, \citep{dropout}.
-During training, a random fraction $0 < \rho < 1$ of intermediate inputs is set to $0$, while the rest of values are .
+The most popular technique \marginpar{Dropout} 
+specifically developed for deep learning is Dropout, \citep{dropout}. 
+During training, a random fraction $0 < \rho < 1$ of intermediate inputs is set to $0$, while the rest of values are scaled by a factor of $\frac{1}{1-\rho}$ to compensate.
+
+Since 
 
 \marginpar{Batch Normalisation}
 
@@ -27,3 +34,5 @@ Special mention
 b
 \section{Deep transfer learning}
 a
+
+

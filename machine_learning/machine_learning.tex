@@ -13,15 +13,16 @@ For example, modelling the dynamics of $n$-bodies gravitationally interacting ar
 But the advent of computers not only gave us mathematical muscle, it provided us with large amounts of data on the real world.
 Data that can be used to fit statistical models, even in the absence of underlying mathematical theories, such as recognising objects in images, or translating natural language.
 The Scientific Revolution of the 16th century brought the concept \emph{``if it can be measured, it can be modelled"}, but the Data Revolution of the 20th century expanded it \emph{``if it can be \emph{represented}, it can be modelled"}.
+We went from measuring the variables present in our equations, to representing the world in numbers in a computer.
 
 Machine learning \marginpar{What is machine learning?}
 is the study of statistical models that can create inferences from collections of examples. 
 The models can be as concrete as relating the voltage and measured current intensity in a circuit, as complex as relating the sensory input of a rocket with its control, or as abstract as mapping natural images to the text describing its contents.
 
-
-
-In general, designing a computer program fully capable of solving these problems can be time-consuming, and with a high degree of complexity.
-Machine learning solves this limitation with data: instead of a programmer deciding every step, the algorithm depends on a series of free parameters that are deduced from the data.
+Instead of designing algorithms that simulate reality from first principles, that can be insurmountably complex and time-consuming; a machine learning model uses data: the algorithm depends on a series of free parameters that are deduced from the examples.
+\marginpar{The costs}
+This flexibility comes with a price: in the programmer has relinquished the control to the dataset, and sacrificed the possibility of a mechanistic interpretation.
+More on this on Section~\ref{sec:wrong}.
 
 \section{Classification and typology}
 Machine learning tasks can be classified according to several criteria.
@@ -60,7 +61,7 @@ Can we take it to the extreme?
 Can we train a model completely free  of assumptions in the case of infinite data? The No Free Lunch Theorem \citep{no_free_lunch} says, averaging over all problems, all algorithms are equally good.
 In other words, without inputting domain knowledge, we cannot do better than random.
 
-\section{A point of comparison: traditional machine learning}
+\section[Traditional machine learning]{A point of comparison: traditional machine learning}
 In this section, I will give an overview to some of the most popular supervised machine learning algorithms to illustrate how they work, and the kind of underlying assumptions they operate under.
 
 \subsection{Ordinary Least Squares, Ridge, and LASSO}
@@ -70,4 +71,4 @@ In this section, I will give an overview to some of the most popular supervised 
 \subsection{Gaussian Processes}
 \subsection{Monotonic regression}
 
-\section{On the wrongness of machine learning}
+\section{On the wrongness of machine learning}\label{sec:wrong}

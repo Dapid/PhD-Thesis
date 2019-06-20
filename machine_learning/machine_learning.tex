@@ -1,22 +1,27 @@
 \chapter{Machine learning}
 %\section{What is machine learning?}
 
-The Scientific Revolution during the Renaissance was fuelled by the realisation that Nature can be parametrised using only a handful of equations.
+The Scientific Revolution during the Renaissance \marginpar{A historical note}
+was fuelled by the realisation that Nature can be parametrised using only a handful of equations.
 With these tools, and sufficient measurements, natural philosophers could use the universal equations to fully model the mechanical universe.
-
-As mathematical tools improved increasingly more complex systems could be analysed from first principles, such as orbits of astrophysical objects or complex optical designs.
+As mathematical tools improved, increasingly more complex systems could be analysed, such as orbits of astrophysical objects or complex optical designs.
 Furthermore, the development of computers allowed for an explosion in the size and breadth of tractable problems, such as dynamics of atomic nuclei, or weather forecast.
 
-But we were still 
+These applications were either developed from first principles, or as effective theories; but contained at their core, relatively simple mathematical models.
+For example, modelling the dynamics of $n$-bodies gravitationally interacting are very rich and complicated to solve, but they all spawn from two simple equations: $\vec{F} = m \cdot \vec{a}$  and $F_g=G\frac{m_1  m_2}{r^2}$.
 
+But the advent of computers not only gave us mathematical muscle, it provided us with large amounts of data on the real world.
+Data that can be used to fit statistical models, even in the absence of underlying mathematical theories, such as recognising objects in images, or translating natural language.
+The Scientific Revolution of the 16th century brought the concept \emph{``if it can be measured, it can be modelled"}, but the Data Revolution of the 20th century expanded it \emph{``if it can be \emph{represented}, it can be modelled"}.
 
-
-Machine learning is the inference of statistical models from collections of examples.
+Machine learning \marginpar{What is machine learning?}
+is the study of statistical models that can create inferences from collections of examples. 
 The models can be as concrete as relating the voltage and measured current intensity in a circuit, as complex as relating the sensory input of a rocket with its control, or as abstract as mapping natural images to the text describing its contents.
 
-In general, designing a computer program fully capable of solving these problems can be time consuming, and with a high degree of complexity.
-Machine learning solves this limitation with data.
-Instead of a programmer deciding every step, the algorithm depends on a series of free parameters that are inferred from the data.
+
+
+In general, designing a computer program fully capable of solving these problems can be time-consuming, and with a high degree of complexity.
+Machine learning solves this limitation with data: instead of a programmer deciding every step, the algorithm depends on a series of free parameters that are deduced from the data.
 
 \section{Classification and typology}
 Machine learning tasks can be classified according to several criteria.
@@ -45,7 +50,10 @@ On the other hand, if these restrictions are not accurate, the model will be bia
 If we instead relax the parametric assumptions we obtain a more flexible model, capable of tackling more complex problems.
 But this versatility comes with a cost: they require more data to train.
 
-\todo[inline]{Figure}
+\begin{center}
+	\missingfigure[figcolor=white]{Spectrum diagram}
+\end{center}
+
 
 Can we take it to the extreme?
 \marginpar{A theoretical result} 
@@ -62,3 +70,4 @@ In this section, I will give an overview to some of the most popular supervised 
 \subsection{Gaussian Processes}
 \subsection{Monotonic regression}
 
+\section{On the wrongness of machine learning}

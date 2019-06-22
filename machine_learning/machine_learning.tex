@@ -67,6 +67,7 @@ In other words, without inputting domain knowledge, we cannot do better than ran
 In this section, I will give an overview to some of the most popular supervised machine learning algorithms to illustrate how they work, and the kind of underlying assumptions they operate under.
 
 \subsection{Ordinary Least Squares, Ridge, and LASSO}
+\subsection{Multi Layer Perceptron}
 \subsection{Support Vector Machines}
 A Support Vector Machine, or SVM, is in its simplest form, a supervised, binary classification algorithm that tries to find the hyperplane that maximises the separation of the two groups.
 To account for noise, we can include a slack parameter, that will ignore points that are too close to the boundary.
@@ -81,12 +82,15 @@ Figure~\ref{fig:svm} illustrates an example of classifying two species from the 
 \caption{Classification of two species of Iris flowers according to the length and width of sepals.}\label{fig:svm}
 \end{figure}
 
-It can be generalised \marginpar{The kernel trick: a projection into an infinite-dimensional space} to non-flat boundaries using the so-called \emph{kernel trick}, where Euclidean distances are replaced with an arbitrary measure of similarity given by positive-definite kernel function:
+It can be generalised \marginpar{The kernel trick} to non-flat boundaries using the so-called \emph{kernel trick}, where Euclidean distances are replaced with an arbitrary measure of similarity given by positive-definite kernel function:
 $$||\vec{x}_1 - \vec{x}_2|| \rightarrow k(\vec{x}_1, \vec{x}_2)$$
 
 For example, in Figure~\ref{subfig:svm_rbf} we have used a Radial Basis Function:
 
-$$k(\vec{x}_1, \vec{x}_2) = e^{-\gamma ||\vec{x}_1 - \vec{x}_2||^2 }$$
+$$k(\vec{x}_1, \vec{x}_2) = e^{-\gamma ||\vec{x}_1 - \vec{x}_2||^2 },$$
+which implicitly projects the data into an infinite-dimensional space.
+
+Another way of interpreting the kernel trick is to think of it as learning a deformation of the space that makes the data separable by a hyperplane, a linear function.
 
 \subsection{Decision tree}
 \subsection{Random Forest}
@@ -107,7 +111,8 @@ A Gaussian Process takes as an input a set of data points $(x, y)$ that are assu
 	\caption{Reconstruction of the $\sin$ function using Gaussian Processes.  Note the larger uncertainty when there is a gap in the training set.}\label{fig:gp_toy}
 \end{figure}
 
-Consider a vector space over functions, called Hilbert space $\mathscr{H}$, and define a complete, orthonormal basis ($\{\phi_i(x)\}_{i=0}^{n}$).
+
+Consider a vector space over functions\footnote{This is a mathematical justification. If you are not interested in Hilbert spaces, jump to the last equation.}, called Hilbert space $\mathscr{H}$, and define a complete, orthonormal basis ($\{\phi_i(x)\}_{i=0}^{n}$).
 Any function $f$ in this space can be decomposed:
 
  $$f(x) = \sum_{i=0}^{n} c_i \phi_i(x)$$

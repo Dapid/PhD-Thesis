@@ -65,6 +65,8 @@ In other words, without inputting domain knowledge, we cannot do better than ran
 
 \section[Traditional machine learning]{A point of comparison: traditional machine learning}
 In this section, I will give an overview to some of the most popular supervised machine learning algorithms to illustrate how they work, and the kind of underlying assumptions they operate under.
+I will describe them in their simplest form, be it for regression or classification, but both can be easily generalised: a regression algorithm can be turned to a binary classifier mapping the positive and negative labels to $(1, -1)$ or vice-versa.
+A binary classifier can be used in a problem with $N$ classes by either training $N$ binary classifiers for each class versus the rest, or all the $\binom{N}{2}$ pairwise binary classifications.
 
 \subsection{Ordinary Least Squares, Ridge, and LASSO}
 \subsection{Multi Layer Perceptron}
@@ -92,6 +94,18 @@ which implicitly projects the data into an infinite-dimensional space.
 
 Another way of interpreting the kernel trick is to think of it as learning a deformation of the space that makes the data separable by a hyperplane, a linear function.
 
+\subsection{$k$-Nearest Neighbour}
+A Nearest Neighbour classifier takes the $k$ closest points in the training set, and predicts the most common label.
+The choice of $k$ is a balance between noise and flexibility: smaller values give more distinct frontiers, but are more susceptible to noise.
+
+
+\begin{figure}[htb]
+	\centering
+	\subcaptionbox{Closest neighbour}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/knn_1}}
+	\hfill
+	\subcaptionbox{Average of the five closest neighbours.}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/knn_5}}
+	\caption{Classification of three species of Iris flowers according to the length and width of sepals.}\label{fig:knn}
+\end{figure}
 \subsection{Decision tree}
 \subsection{Random Forest}
 \subsection{Gaussian Processes}
@@ -100,15 +114,11 @@ A Gaussian Process takes as an input a set of data points $(x, y)$ that are assu
 
 \begin{figure}[htb]
 	\centering
-	\begin{subfigure}[b]{0.4\textwidth}
-		\includegraphics[width=\textwidth]{machine_learning/figures/sin_toy}
-		\caption{Complete data}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\includegraphics[width=\textwidth]{machine_learning/figures/sin_toy_gapped}
-		\caption{Gapped data.}
-	\end{subfigure}
-	\caption{Reconstruction of the $\sin$ function using Gaussian Processes.  Note the larger uncertainty when there is a gap in the training set.}\label{fig:gp_toy}
+	\subcaptionbox{Complete data}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/sin_toy}}
+	\hfill
+	\subcaptionbox{Gapped data.}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/sin_toy_gapped}}
+	\caption{Reconstruction of the $\sin$ function using Gaussian Processes.
+	Note the larger uncertainty when there is a gap in the training set.}\label{fig:gp_toy}
 \end{figure}
 
 

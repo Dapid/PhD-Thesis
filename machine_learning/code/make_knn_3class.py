@@ -30,7 +30,7 @@ for k in (1,  5, 10):
 	
 	#xx = np.linspace(X[:, 0].min() - 0.1 * X[:, 0].ptp(), X[:, 0].max() + 0.1 * X[:, 0].ptp(), 1000)
 	#yy = np.linspace(X[:, 1].min() - 0.1 * X[:, 1].ptp(), X[:, 1].max() + 0.1 * X[:, 1].ptp(), 1000)
-	xx = np.linspace(4, 7.2)
+	xx = np.linspace(4, 8.2)
 	yy = np.linspace(1, 5)
 	plt.figure()
 

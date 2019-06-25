@@ -99,7 +99,6 @@ A Nearest Neighbour classifier takes the $k$ closest points in the training set,
 \marginpar{Bias-variance tradeoff}
 The choice of $k$ is a balance between noise and flexibility: smaller values give more distinct frontiers, but are more susceptible to noise.
 
-
 \begin{figure}[htb]
 	\centering
 	\subcaptionbox{Closest neighbour}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/knn_1}}
@@ -107,7 +106,31 @@ The choice of $k$ is a balance between noise and flexibility: smaller values giv
 	\subcaptionbox{Average of the five closest neighbours.}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/knn_5}}
 	\caption{Classification of three species of Iris flowers according to the length and width of sepals.}\label{fig:knn}
 \end{figure}
+
 \subsection{Decision tree}\label{sec:decision_tree}
+Decision trees are based on a measure of impurity of a sample: the more homogeneous, the less impure it is.
+The most common is the Gini impurity:
+
+$$ G(\vec x) = \sum_k p_{k} (1-p_k),$$
+where $p_k$ is the fraction of labels equal to $k$ in the group.
+
+A decision tree splits recursively the training based on the feature that gives the highest decrease in Gini impurity, as illustrated on the Figure~\ref{subfig:gini}.
+The final result is a series of simple boolean rules that can be interpreted by humans.
+Figure~\ref{subfig:tree_explained} is an example: the root of the tree (shown in white) contains all the training points, and each branch splits it according to a single feature.
+The process is repeated until no more cuts can improve the performance, or until the tree reaches a maximum depth.
+
+
+\begin{figure}[htb]
+	\centering
+	\subcaptionbox{The rules of a decision tree are interpretable. The shading corresponds to the purity of the node.\label{subfig:tree_explained}}{\includegraphics[width=\textwidth]{machine_learning/figures/tree}}
+	\\
+	\subcaptionbox{Gini impurity as a function of the first split. The ideal cut is selected.\label{subfig:gini}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/tree_split}}
+	\hfill
+	\subcaptionbox{Regions predicted by the tree.\label{subfig:tree}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/tree_2d}}
+	\caption{Predictions made by a decision tree on the Iris dataset. }\label{fig:tree}
+\end{figure}
+
+
 \subsection{Random Forest}\label{sec:random_forest}
 A Random Forest is an ensemble of decision trees, as described in the section~\ref{sec:decision_tree}.
 Each tree is trained on a random subset of the data, and the final score is a vote across the trees.

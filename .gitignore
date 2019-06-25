@@ -8,4 +8,6 @@ main.pdf
 *.toc
 *.fls
 *.fdb_latexmk
+.idea
+__pycache__
 

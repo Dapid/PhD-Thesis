@@ -100,7 +100,6 @@ x_values = np.linspace(x.min(), x.max(), num=400)
 y_values_gini = [gini(y, x, threshold) for threshold in x_values]
 y_values_s = [entropy(y, x, threshold) for threshold in x_values]
 
-print(np.min(y_values_gini), np.argmin(y_values_gini), x_values[np.argmin(y_values_gini)])
 pos = 5.450
 plt.axvline(pos, color='k', ls=':')
 

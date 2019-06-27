@@ -72,7 +72,9 @@ A binary classifier can be used in a problem with $N$ classes by either training
 Ordinary Least Squares (OLS) is the simplest linear regression model: the linear combination of the inputs that minimises the squared error.
 For a matrix $X$ of observations and a vector of target $y$, OLS finds the vector $w = (w_0, w_1, ... w_d)$ that minimises the loss:
 
-\[ L_{OLS} = || X w -y ||_2 ^2, \]
+\begin{equation*}
+ L_{OLS} = || X w -y ||_2 ^2,
+\end{equation*}
 where $d$ is the number of dimensions of the inputs, ie., the number of input features.
 
 This method is simple and can be solved efficiently by linear algebra libraries through, for example, an LU decomposition.
@@ -97,10 +99,75 @@ The higher it is, the more weights will be close to $0$.
 Logistic regression \marginpar{Linear models for classification} is an adaptation of linear models for classification.
 The output of the linear model is wrapped by a logistic function:
 
-\[f(o) = \]
+\begin{equation*}
+f(\vec x) = \frac{1}{1 + e^{- \vec{w} \cdot \vec x}}
+\end{equation*}
+
+It can also be generalised to $N$ multiple mutually exclusive classes.
+Each class has one linear model given by the vector of weights $\left\{\vec{w_i}\right\}_{i=1} ^N$:
+
+\begin{equation*}
+\begin{bmatrix}z_1 \\ z_2 \\ \vdots \\ z_N\end{bmatrix} = 
+\begin{bmatrix}
+\vec{w_1} \vec{x} \\ \vec{w_2} \vec{x} \\ \vdots \\ \vec{w_N} \vec{x}
+\end{bmatrix} = 
+W \cdot \vec{x},
+\end{equation*}
+where $W$ is a $(N \times d)$ matrix.
+The vector $\vec{z}$ are called the \emph{logits}. 
+To obtain probabilities we use the exponential to make them all positive, and normalise the sum.
+This is called the softmax function:
+
+\begin{equation*}
+\sigma(\vec{z})_i = \frac{e^{z_i}}{\sum_j^N e^{z_j}}
+\end{equation*}
+
+If the logits are scaled up, the softmax will be more concentrated around the max, suggesting a more confident prediction.
+As before, we can apply $L^1$ or $L^2$ regularisations, which imply lower coefficients on $W$, ergo lower values for the logits.
+A stronger regularisation returns a less confident predictor.
+
+\begin{center}
+	\missingfigure[figcolor=white]{Logistic regression and regularisation}
+\end{center}
+
 
 \subsection{Multi Layer Perceptron}
-A linear model is limited
+A linear model on $d$ features is limited to $d$ free parameters, or at most $d \cdot N$ for $N$ classes, and are limited to linear functions.
+When we have more data, and more complicated tasks, we would like to be able to learn more parameters.
+A simple way would be to build upon linear models, and have an intermediate \emph{hidden state} $\vec{h}$ of arbitrary dimension.
+The vector of probabilities for every class is then:
+
+\begin{align*}
+\vec{h} &= W_1 \cdot \vec{x} \\
+\vec{z} &= W_2 \cdot \vec{h} \\
+p(\vec x \in i) &= \sigma(\vec z)_i
+\end{align*}
+where the last line is only necessary for classification.
+
+Although we now have more free parameters, the model is exactly equivalent to a linear model, since the two matrices $W_1$ and $W_2$ act right one after the other, so can be multiplied together to recover our equivalent weights.
+This can be fixed by introducing an arbitrary non-linear function $f$ to the hidden layer:
+
+\begin{align*}
+\vec{h} &= W_1 \cdot \vec{x} \\
+\vec{z} &= W_2 \cdot f(\vec{h}) \\
+p(\vec x \in i) &= \sigma(\vec z)_i
+\end{align*}
+
+Since we have no constraints over the properties of $f$, common choices are simple pointwise functions, such as $\tanh(x)$; the logistic, $\frac{1}{1 + e^-x}$; or the Rectified Linear Unit, $ReLU(x)=[x \; if \; x > 0 \; else \; 0]$.
+
+We can repeat the same procedure \marginpar{More layers!} and chain two hidden layers:
+
+\begin{align*}
+\vec{h_1} &= W_1 \cdot \vec{x} \\
+\vec{h_2} &= W_2 \cdot f(\vec{h_2}) \\
+\vec{z} &= W_3 \cdot f(\vec{h_2}) \\
+p(\vec x \in i) &= \sigma(\vec z)_i
+\end{align*}
+
+The training is done by computing the gradients of the loss with respect to every parameter given a set of data, and updating the weights accordingly.
+We will discuss this in more detail in Section~\ref{sec:grad_descent}.
+While there is no theoretical limit to how many layers we can add, but two hidden layers are the practical limit since adding more layers degrades the gradient information, making it harder to converge.
+
 
 \subsection{Support Vector Machines}
 A Support Vector Machine, or SVM, is in its simplest form, a supervised, binary classification algorithm that tries to find the hyperplane that maximises the separation of the two groups.

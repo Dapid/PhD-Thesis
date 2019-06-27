@@ -23,13 +23,14 @@ Also known as ``dense" layers, they are the simplest
 \section{Taming the complexity: regularisation}
 Neural networks can have millions of parameters, so they are susceptible to over-fitting.
 In order to converge to generalisable models, we can apply a variety of regularisation techniques.
+Most of them act as a barrier that hinders the training, that only enough data can overcome.
 
-In general, they are a barrier that hinders the training, that will only be overcame if enough data supports it.
 
 Here are some:
 
-\marginpar{Weight decay}
-To prevent any single activation from
+
+To prevent any single activation from \marginpar{Weight decay}
+
 $L^2$ regularisation can be interpreted as a Gaussian prior over the weights centred around $0$.
 
 The most popular technique \marginpar{Dropout} 
@@ -41,10 +42,12 @@ The architecture is effectively different for every batch, so we are training an
 
 \marginpar{Batch Normalisation}
 
+\marginpar{Architectural}
+
 \marginpar{Differential privacy}
 Special mention
 
-\marginpar{Architectural}
+
 
 \section{The quest for depth}
 b

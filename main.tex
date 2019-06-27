@@ -10,19 +10,27 @@
 \usepackage{caption}
 \usepackage{subcaption}
 
+
 \usepackage[centertags]{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
 
+% Remove indentation in bulletpoints
+\usepackage{enumitem}
+\setlist{leftmargin=0mm}
+
+
 \usepackage[eulerchapternumbers=true, eulermath=true, parts=true, floatperchapter, drafting]{classicthesis}
 \usepackage[paperwidth=165mm, paperheight=242mm]{geometry}
 
-\usepackage[authoryear, round]{natbib} %Allow to split citations across lines.
+\usepackage[authoryear, round]{natbib} % Allow to split citations across lines.
 \usepackage{doi}
 \bibliographystyle{plainnat}
-
-\setmathfont[Scale=MatchUppercase]{Asana Math}
+ 
+%\usepackage[math-style=upright]{unicode-math}
+%\setmathfont[Scale=MatchUppercase]{Asana Math}
+%\setmathfont{Neo Euler}
 %\newcommand{\oldvector}[1]{\vec{#1}}
 %\usepackage{accents}
 %\newcommand{\vectorh}[1]{\accentset{\rightharpoonup}{#1}}

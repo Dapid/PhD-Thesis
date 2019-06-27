@@ -69,7 +69,29 @@ I will describe them in their simplest form, be it for regression or classificat
 A binary classifier can be used in a problem with $N$ classes by either training $N$ binary classifiers for each class versus the rest, or all the $\binom{N}{2}$ pairwise binary classifications.
 
 \subsection{Ordinary Least Squares, Ridge, and LASSO}
+Ordinary Least Squares (OLS) is the simplest linear regression model: the linear combination of the inputs that minimises the squared error.
+For a matrix $X$ of observations and a vector of target $y$, OLS finds the vector $w = (w_0, w_1, ... w_d)$ that minimises the loss:
 
+\[ L_{OLS} = || X w -y ||_2 ^2, \]
+where $d$ is the number of dimensions of the inputs, ie., the number of input features.
+
+This method is simple and can be solved efficiently by linear algebra libraries through, for example, an LU decomposition.
+But if there is co-linearity between input features, the matrix $X$ is close to singular, so its inverse can become numerically unstable.
+
+A simple solution \marginpar{Ridge} is to add a term that tends to shrink the coefficients of $w$, and makes the solution unique even in the singular case:
+
+\[ L_{Ridge} = || X w -y ||_2 ^2 + \lambda ||w||_2^2,\]
+where $\lambda$ regulates the strength of this shrinkage.
+Since the penalisation depends on the $L^2$ norm of the vector $w$, the weight of co-linear features will be ``distributed" amongst them.
+
+Sometimes, we want sparse weights, \marginpar{LASSO} for example if we know some features are irrelevant, but we don't know which ones.
+We can then use $L^1$ regularisation:
+
+\[ L_{LASSO} = || X w -y ||_2 ^2 + \nu ||w||_1^2,\]
+where $\nu$ is our new regularisation strenght parameter.
+The higher it is, the more weights will be close to $0$.
+
+LASSO cannot be solved analytically, so we need to use iterative methods.
 
 \subsection{Multi Layer Perceptron}
 \subsection{Support Vector Machines}
@@ -87,11 +109,11 @@ Figure~\ref{fig:svm} illustrates an example of classifying two species from the 
 \end{figure}
 
 It can be generalised \marginpar{The kernel trick} to non-flat boundaries using the so-called \emph{kernel trick}, where Euclidean distances are replaced with an arbitrary measure of similarity given by positive-definite kernel function:
-$$||\vec{x}_1 - \vec{x}_2|| \rightarrow k(\vec{x}_1, \vec{x}_2)$$
+\[||\vec{x}_1 - \vec{x}_2|| \rightarrow k(\vec{x}_1, \vec{x}_2)\]
 
 For example, in Figure~\ref{subfig:svm_rbf} we have used a Radial Basis Function:
 
-$$k(\vec{x}_1, \vec{x}_2) = e^{-\gamma ||\vec{x}_1 - \vec{x}_2||^2 },$$
+\[k(\vec{x}_1, \vec{x}_2) = e^{-\gamma ||\vec{x}_1 - \vec{x}_2||^2 },\]
 which implicitly projects the data into an infinite-dimensional space.
 
 Another way of interpreting the kernel trick is to think of it as learning a deformation of the space that makes the data separable by a hyperplane, a linear function.
@@ -113,7 +135,7 @@ The choice of $k$ is a balance between noise and flexibility: smaller values giv
 Decision trees are based on a measure of impurity of a sample: the more homogeneous, the less impure it is.
 The most common is the Gini impurity:
 
-$$ G(\vec x) = \sum_k p_{k} (1-p_k),$$
+\[ G(\vec x) = \sum_k p_{k} (1-p_k),\]
 where $p_k$ is the fraction of labels equal to $k$ in the group.
 
 A decision tree splits recursively the training based on the feature that gives the highest decrease in Gini impurity, as illustrated on the Figure~\ref{subfig:gini}.
@@ -159,12 +181,12 @@ A Gaussian Process (GP) takes as an input a set of data points $(x, y)$ that are
 Consider a vector space over functions\footnote{This is a mathematical justification. If you are not interested in Hilbert spaces, jump to the last equation.}, called Hilbert space $\mathscr{H}$, and define a complete, orthonormal basis $\{\phi_i(x)\}_{i=0}^{n}$.
 Any function $f$ in this space can be decomposed as a linear combination of the basis:
 
- $$f(x) = \sum_{i=0}^{n} c_i \phi_i(x)$$
+ \[f(x) = \sum_{i=0}^{n} c_i \phi_i(x)\]
  
 In GP, we define our Hilbert space through a positive semi-definite \emph{covariance function} $k(x, x')$.
 This induces a metric defined through the distance:
 
-	$$	d(f, g) =\int_{\mathcal{R}}  f(x) k(x, x') g(x') dx dx', $$
+	\[	d(f, g) =\int_{\mathcal{R}}  f(x) k(x, x') g(x') dx dx', \]
 and a series of eigenfunctions of the covariance function.
 	
 For example,\marginpar{RBF appears again} the previously seen radial basis covariance function defines the Hilbert space of $C^\infty \cap L^2$ functions: all the smooth functions of squared-integrable..
@@ -172,7 +194,7 @@ For example,\marginpar{RBF appears again} the previously seen radial basis covar
 The GP will thus project our $n$ data points into this $N$ dimensional space (in general, $N >> n$; usually $N = \infty$). Note that, due to geometry, our $n$ data points must live in a $n$-dimensional subspace of $\mathscr{H}$.
 The output is an estimation $\hat f$ of our latent function $f$, that can be interpreted as a decomposition in the eigenfunctions of our covariance function.
 	
-	$$\hat f(x) = \sum_{i=0}^{n} c_i \phi_i(x)$$
+	\[\hat f(x) = \sum_{i=0}^{n} c_i \phi_i(x)\]
 	
 But, unlike other procedures, $c_i$ have probability distributions over them.
 We can use them to sample likely candidates for the latent function, as shown in the Figure~\ref{fig:gp_sampling}

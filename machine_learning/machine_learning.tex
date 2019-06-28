@@ -219,16 +219,20 @@ The final result is a series of simple boolean rules that can be interpreted by 
 Figure~\ref{subfig:tree_explained} is an example: the root of the tree (shown in white) contains all the training points, and each branch splits it according to a single feature.
 The process is repeated until no more cuts can improve the performance, or until the tree reaches a maximum depth.
 
-
-\begin{figure}[!h]
-	\centering
-	\subcaptionbox{The rules of a decision tree are interpretable. The shading corresponds to the purity of the node.\label{subfig:tree_explained}}{\includegraphics[width=\textwidth]{machine_learning/figures/tree}}
-	\\
+\begin{figure}[tb]
 	\subcaptionbox{Gini impurity as a function of the first split. The ideal cut is selected.\label{subfig:gini}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/tree_split}}
 	\hfill
 	\subcaptionbox{Regions predicted by the tree.\label{subfig:tree}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/tree_2d}}
 	\caption{Predictions made by a decision tree on the Iris dataset. }\label{fig:tree}
 \end{figure}
+
+\begin{figure}[h]
+	\centering
+	%\subcaptionbox{The rules of a decision tree are interpretable. The shading corresponds to the purity of the node.\label{subfig:tree_explained}}{\includegraphics[width=\textwidth]{machine_learning/figures/tree}}
+	\includegraphics[width=\textwidth]{machine_learning/figures/tree}
+	\caption{The rules of a decision tree are interpretable. The shading corresponds to the purity of the node.\label{subfig:tree_explained}}
+\end{figure}
+
 
 
 \subsection{Random Forest}\label{sec:random_forest}

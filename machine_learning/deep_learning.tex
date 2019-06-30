@@ -7,10 +7,23 @@ It is striking that both cases correspond to tasks that humans are very good at.
 Indeed, neural networks are very good at \emph{perceptual learning}
 
 \section{The basic blocks}
+A deep learning model is composed by a series of layers, or simple transformations (usually linear), plus a point-wise non-linearity.
+
+
 \subsection{Fully connected layers}
-Also known as ``dense" layers, they are the simplest 
+Also known as ``dense" layers, they are the simplest building block of deep learning: a simple matrix multiplication, as described in the Section~\ref{sec:mlp}.
+To make them more general, they can include a \emph{bias} term, that is added after the multiplication.
+
+\[
+\vec{o} = W \cdot \vec{i} + \vec{b}
+\]
+
+Every element of the output is a function of every input, so this layer destroys the structure of the data.
+On the other hand, since it can have a lot of parameters, it can be very powerful.
+It is often used as the last layer of the model.
 
 \subsection{Convolutions}
+
 \subsection{Recurrent}
 \subsection{Non-linearities}
 
@@ -50,7 +63,10 @@ Special mention
 
 
 \section{The quest for depth}
-b
+%relu
+%batchnorm
+%residual
+
 \section{Deep transfer learning}
 a
 

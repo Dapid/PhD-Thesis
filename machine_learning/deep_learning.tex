@@ -202,8 +202,60 @@ A common choice is to cool down the system, so on the $k-$th epoch, the learning
 
 Another option is to reduce it when the system stops learning, for example, when the loss has not improved for a certain number of epochs, reduce it by a constant factor: $\eta \rightarrow \eta/5$.
 
+Instead of setting a learning rate schedule from the beginning, adaptive optimisers try to adjust it to the data.
+The fundamental idea is that the closer we are to the minimum in each dimension, the smaller the learning rate should be.
 
-For a thorough review consult~\citep{optimisers_review}.
+AdaGrad\marginpar{AdaGrad} (Adaptative Gradients~\citep{adagrad}) uses the $L^2$ norm of the gradients to regulate the learning rate.
+We drop the index subscripts, as every term corresponds to one dimension:
+
+\begin{align*}
+&\left.a\right|_{k+1} = \left. a\right|_{k} + \left.g^2\right|_{it=k}\\
+&\left.\Delta w\right|_{it=k+1} = - \eta\frac{g}{\sqrt{a + \epsilon}} =  - \eta\frac{g}{\sqrt{\sum_{\tau=0}^{k} \left.g\right|_\tau + \epsilon}}
+\end{align*}
+where $\epsilon$ is a small number to prevent division by 0.
+The effective learning rate of AdaGrad is monotonously decreasing, and it decays faster in the directions where the gradients are higher.
+This makes it sensitive to initial conditions: if any dimension is given a bad initial condition, the gradients will be large, and the effective learning rate small, so AdaGrad will be limited to only small steps in that direction.
+ADADELTA~\citep{adadelta} solves this by accumulating only the updates over a window with an exponential decay:
+
+\begin{equation*}
+\left.a\right|_{k+1} = \rho \left. a\right|_{k} + (1-\rho) \left.g^2\right|_{it=k},
+\end{equation*}
+allowing the algorithm to overcome past large gradients.
+It also considers the dimensionality of the quantities, and noted that in AdaGrad, the learning rate has dimensions.
+They replaced it for a value of the right dimensionality:
+
+\begin{align*}
+\left.\Delta w\right|_{it=k+1} = - \frac{\sqrt{\left.\Delta w\right|_{k}^2}}{\sqrt{a + \epsilon}}g 
+\end{align*}
+
+ADADELTA depends only on one paramter, $\rho$, and it is less sensitive to starting points.
+
+Adaptive Moment Estimation (Adam)~\citep{adam}\marginpar{Adam}
+is the most modern optimiser, and it combines several of the ideas of previous algorithms.
+In the first place, it keeps track of the two moments of the distribution of the gradient on a sliding window with decay rates $\beta_1$ and $\beta_2$:
+
+\begin{align*}
+&\left.m\right|_{k+1} = \beta_1 \left.m\right|_k + (1-\beta_1) \left.g\right|_{k+1}\\
+&\left.v\right|_{k+1} = \beta_1 \left.v\right|_k + (1-\beta_1) \left.g^2\right|_{k+1}
+\end{align*}
+
+Since they are initialised with 0s, they are biased, specially at the beginning. We can correct them:
+
+\begin{align*}
+	&\left.\hat{m}\right|_{k+1} = \frac{\left.m\right|_{k+1}}{1-\beta_1^{k+1}}\\
+	&\left.\hat{v}\right|_{k+1} = \frac{\left.v\right|_{k+1}}{1-\beta_2^{k+1}}
+\end{align*}
+
+The final update rule is:
+
+\begin{equation*}
+\left.\Delta w\right|_{k+1} = - \frac{\eta}{\sqrt{\left.v\right|_{k+1}} + \epsilon}\left.\hat{m}\right|_{k+1}
+\end{equation*} 
+
+This is the optimiser that will be used in the rest of the thesis.
+
+
+For a thorough review consult the work of \citet{optimisers_review}.
 
 \section{Conjunctive tissue: tensors and gradients}
 \todo[inline]{todo}

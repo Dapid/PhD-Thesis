@@ -95,7 +95,7 @@ The higher it is, the more weights will be close to $0$.
 
 %LASSO cannot be solved analytically, so we need to use iterative methods.
 
-\subsection{Logistic regression}
+\subsection{Logistic regression}\label{sec:logistic_regression}
 Logistic regression \marginpar{Linear models for classification} is an adaptation of linear models for classification.
 The output of the linear model is wrapped by a logistic function:
 
@@ -153,7 +153,7 @@ This can be fixed by introducing an arbitrary non-linear function $f$ to the hid
 p(\vec x \in i) &= \sigma(\vec z)_i
 \end{align*}
 
-Since we have no constraints over the properties of $f$, common choices are simple pointwise functions, such as $\tanh(x)$; the logistic, $\frac{1}{1 + e^{-x}}$; or the Rectified Linear Unit, $ReLU(x)=[x \; if \; x > 0 \; else \; 0]$.
+Since we have no constraints over the properties of $f$, common choices are simple point-wise functions, such as $\tanh(x)$; the logistic, $\frac{1}{1 + e^{-x}}$; or the Rectified Linear Unit, $ReLU(x)=[x \; if \; x > 0 \; else \; 0]$.
 
 We can repeat the same procedure \marginpar{More layers!} and chain two hidden layers:
 

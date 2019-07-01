@@ -14,24 +14,88 @@ A deep learning model is composed by a series of layers, or simple transformatio
 Also known as ``dense" layers, they are the simplest building block of deep learning: a simple matrix multiplication, as described in the Section~\ref{sec:mlp}.
 To make them more general, they can include a \emph{bias} term, that is added after the multiplication.
 
-\[
+\begin{equation*}
 \vec{o} = W \cdot \vec{i} + \vec{b}
-\]
+\end{equation*}
 
 Every element of the output is a function of every input, so this layer destroys the structure of the data.
-On the other hand, since it can have a lot of parameters, it can be very powerful.
+On the other hand, since the intermediate layers can be arbitrarily large, it can have a lot of parameters, ie, it can be very expressive.
 It is often used as the last layer of the model.
 
 \subsection{Convolutions}
 
 \subsection{Recurrent}
 \subsection{Non-linearities}
+The workhorse of deep learning layers are linear transformations.
+The composition of linear transformations is also linear, so in order to rip the benefits of multiple layers we need non-linearities.
+For the most part, they are point-wise functions that act on the output of a layer.
+Historically, the first non-linearity used was the sigmoid:
 
-\section{Conjunctive tissue: tensors and gradients}
+\begin{equation*}
+f(x) = \frac{1}{1 + e^{- x}}
+\end{equation*}
+
+It has the advantage of clipping the range of values between 0 and 1, which makes the network stable with respect to large intermediate values. (Figure~\ref{subfig:sigmoid})
+An improvement was the hyperbolic tangent:
+
+\begin{equation*}
+f(x) = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}},
+\end{equation*}
+with a similar shape to the sigmoid, but now outputting values between -1 and 1. (Figure~\ref{subfig:tanh})
+Being anti-symmetric, it can achieve a stable distribution of outputs with normally weights in the intermediate layers.
+
+\begin{figure}[tb]
+	\subcaptionbox{Sigmoid\label{subfig:sigmoid}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/sigmoid}}
+	\hfill
+	\subcaptionbox{Tanh\label{subfig:tanh}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/tanh}}
+	\caption{Saturating non-linarities}\label{fig:non_linear}
+\end{figure}
+
+Both functions saturate on extreme values, so their derivative approaches zero, which on one hand is useful to control the stability of the outputs, but on the other is a problem for the propagation of gradients.
+The alternative is using non-saturating functions, that allow the gradients to flow for a wider range of values.
+
+The simplest is the Rectified Linear Unit, or ReLU, plotted in the Figure~\ref{subfig:relu}:
+\begin{equation*}
+f(x) =  \begin{cases}
+x &  if x \geq 0 \\
+0 & otherwise
+\end{cases}
+\end{equation*}
+
+But in this thesis I have mostly used the Exponential Linear Unit, or ELU, shown in the Figure~\ref{subfig:elu}:
+\begin{equation*}
+f(x) =  \begin{cases}
+x &  if x \geq 0 \\
+\frac{1}{1 + e^{-x}} & otherwise
+\end{cases}
+\end{equation*}
+
+The choice of this non-linearity usually incurs in a slightly larger computational time for training, but a moderate improvement in performance as well.
+
+\begin{figure}[tb]
+	\subcaptionbox{ReLU\label{subfig:relu}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/relu}}
+	\hfill
+	\subcaptionbox{ELU\label{subfig:elu}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/elu}}
+	\caption{Non-saturating non-linarities}\label{fig:non_linear}
+\end{figure}
+
+The last layer is an exception.\marginpar{Output}
+The function applied depends on the properties of the target.
+\begin{enumerate}
+\item If the output is a binary classification, use a sigmoid, as described in the Section~\ref{sec:logistic_regression} on logistic regression.
+\item If the output are a series of mutually exclusive classes, use a softmax, as explained in the Section~\ref{sec:mlp} on multi layered perceptrons.
+\item If the output is a regression, use a linear layer to minimise the squeezing of the outputs.
+This is valid even if the output is bounded between 0 and 1, when the values at the extrema are likely to appear, because the network would need to learn very high values for the logits.
+\end{enumerate}
+
+
+
 
 \section[Gradient descent]{Training procedure: gradient descent}\label{sec:grad_descent}
 \subsection{Backpropagation}
 \subsection{Stochastic gradient descent}
+
+\section{Conjunctive tissue: tensors and gradients}
 
 \section{Taming the complexity: regularisation}
 Neural networks can have millions of parameters, so they are susceptible to over-fitting.

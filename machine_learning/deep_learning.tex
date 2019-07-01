@@ -23,8 +23,13 @@ On the other hand, since the intermediate layers can be arbitrarily large, it ca
 It is often used as the last layer of the model.
 
 \subsection{Convolutions}
+Convolutions capture spatial relationships in the data.
 
 \subsection{Recurrent}
+A recurrent layer tries to capture temporal dependencies on arbitrary time steps, such as those of natural language, or repeating motifs in proteins.
+They work by taking two inputs: the vector at the current position, and the hidden state of the previous cell.
+A simple cell:
+
 \subsection{Non-linearities}
 The workhorse of deep learning layers are linear transformations.
 The composition of linear transformations is also linear, so in order to rip the benefits of multiple layers we need non-linearities.
@@ -51,7 +56,8 @@ Being anti-symmetric, it can achieve a stable distribution of outputs with norma
 	\caption{Saturating non-linarities}\label{fig:non_linear}
 \end{figure}
 
-Both functions saturate on extreme values, so their derivative approaches zero, which on one hand is useful to control the stability of the outputs, but on the other is a problem for the propagation of gradients.
+Both functions saturate on extreme values, \marginpar{Gradient saturation}
+so their derivative approaches zero, which on one hand is useful to control the stability of the outputs, but on the other is a problem for the propagation of gradients.
 The alternative is using non-saturating functions, that allow the gradients to flow for a wider range of values.
 
 The simplest is the Rectified Linear Unit, or ReLU, plotted in the Figure~\ref{subfig:relu}:
@@ -81,19 +87,49 @@ The choice of this non-linearity usually incurs in a slightly larger computation
 
 The last layer is an exception.\marginpar{Output}
 The function applied depends on the properties of the target.
-\begin{enumerate}
-\item If the output is a binary classification, use a sigmoid, as described in the Section~\ref{sec:logistic_regression} on logistic regression.
+\begin{itemize}
+\item If the output is a binary classification, or multiple mutually compatible classes, use a sigmoid, as described in the Section~\ref{sec:logistic_regression} on logistic regression.
 \item If the output are a series of mutually exclusive classes, use a softmax, as explained in the Section~\ref{sec:mlp} on multi layered perceptrons.
 \item If the output is a regression, use a linear layer to minimise the squeezing of the outputs.
 This is valid even if the output is bounded between 0 and 1, when the values at the extrema are likely to appear, because the network would need to learn very high values for the logits.
-\end{enumerate}
-
-
-
+\item If the outputs are sines and cosines of angles, use the hyperbolic tangent.
+\end{itemize}
 
 \section[Gradient descent]{Training procedure: gradient descent}\label{sec:grad_descent}
-\subsection{Backpropagation}
+A deep learning network can have millions of parameters, but how do we find the optimal values?
+
+In the first place, we need to define a loss function, or a measurement of how wrong our predictions are on known data.
+For example, the mean squared error for $N$ data points  $x_i$ with labels $y_i$ and predictions $o_i$ is:
+
+\begin{equation*}
+L_{MSE} = \sum_i^N \left(y_i - o_i\right)^2
+\end{equation*}
+and the cross entropy loss:
+\begin{equation*}
+L_{H} = \sum_i^N y_i \cdot \log\left(o_i\right) 
+\end{equation*}
+
+We initialise the network with random numbers, and measure how wrong we are.
+Then, we compute the gradients of the loss with respect to each of the parameters $w_j$ of the network:
+\begin{equation*}
+g_j = \frac{1}{N}\sum_i^N\frac{\partial L\left(o_i, y_i \right)}{\partial w_j}
+\end{equation*}
+
+The gradients tell us in which direction we have to ``nudge" the network to improve its performance for the next iteration:
+
+\begin{equation*}
+\left. w_j\right|_{it=k+1} = \left. w_j\right|_{it=k} + \eta \cdot \left. g_j\right|_{it=k},
+\end{equation*}
+where $\eta$ is the step size, a small number that reflects our believe of the size of the region where the gradients still point in the same direction.
+
+\subsection{Back-propagation}
+In order to train, we need to compute the gradients of the loss with respect to all the parameters of the network.
+This can be done automatically using the back-propagation algorithm, or \emph{backprop}, the machine version of the chain rule.
+
+\todo[inline]{backprop}
+
 \subsection{Stochastic gradient descent}
+\subsection{Optimisers}
 
 \section{Conjunctive tissue: tensors and gradients}
 

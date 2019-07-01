@@ -68,7 +68,7 @@ In this section, I will give an overview to some of the most popular supervised 
 I will describe them in their simplest form, be it for regression or classification, but both can be easily generalised: a regression algorithm can be turned to a binary classifier mapping the positive and negative labels to $(1, -1)$ or vice-versa.
 A binary classifier can be used in a problem with $N$ classes by either training $N$ binary classifiers for each class versus the rest, or all the $\binom{N}{2}$ pairwise binary classifications.
 
-\subsection[Linear regression]{Linear regression: Ordinary Least Squares, Ridge, and LASSO}
+\subsection[Linear regression]{Linear regression: Ordinary Least Squares, Ridge, and LASSO}\label{sec:linear}
 Ordinary Least Squares (OLS) is the simplest linear regression model: the linear combination of the inputs that minimises the squared error.
 For a matrix $X$ of observations and a vector of target $y$, OLS finds the vector $w = (w_0, w_1, ... w_d)$ that minimises the loss:
 

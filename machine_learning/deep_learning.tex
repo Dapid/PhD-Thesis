@@ -24,11 +24,14 @@ It is often used as the last layer of the model.
 
 \subsection{Convolutions}
 Convolutions capture spatial relationships in the data.
+\todo{todo}
 
 \subsection{Recurrent}
 A recurrent layer tries to capture temporal dependencies on arbitrary time steps, such as those of natural language, or repeating motifs in proteins.
 They work by taking two inputs: the vector at the current position, and the hidden state of the previous cell.
 A simple cell:
+
+\todo{todo}
 
 \subsection{Non-linearities}
 The workhorse of deep learning layers are linear transformations.
@@ -257,40 +260,54 @@ This is the optimiser that will be used in the rest of the thesis.
 
 For a thorough review consult the work of \citet{optimisers_review}.
 
-\section{Conjunctive tissue: tensors and gradients}
-\todo[inline]{todo}
 
 \section{Taming the complexity: regularisation}
 Neural networks can have millions of parameters, so they are susceptible to over-fitting.
 In order to converge to generalisable models, we can apply a variety of regularisation techniques.
 Most of them act as a barrier that hinders the training, that only enough data can overcome.
-
-
 Here are some:
 
 
 To prevent any single activation from \marginpar{Weight decay}
-
-$L^2$ regularisation can be interpreted as a Gaussian prior over the weights centred around $0$.
+dominating the predictions, we can add a term to the loss penalising large weights.
+If this term is proportional to the square of the weights, it is called $L^2$ regularisation, and can be interpreted as a Gaussian prior over the weights centred around $0$, as seen with linear models in Section~\ref{sec:linear}.
 
 The most popular technique \marginpar{Dropout} 
-specifically developed for deep learning is Dropout, \citep{dropout}. 
+specifically developed for deep learning is Dropout,~\citep{dropout}. 
 During training, a random fraction $0 < \rho < 1$ of intermediate inputs is set to $0$ (\emph{dropped out}), while the rest of values are scaled by a factor of $\frac{1}{1-\rho}$ to compensate.
-
 Since the network cannot trust any particular neuron activation to be present, it must distribute the information across different parts.
-The architecture is effectively different for every batch, so we are training an ensemble of models, most of which have not seen any data, but are heavily regularised to the average.
+The network is effectively different for every batch, so we are training an ensemble of models, most of which have not seen any data, but are heavily regularised to the average.
+At prediction time, dropout is usually turned off, but if we leave it on and sample with the same input, we can estimate the uncertainty of the prediction like in Gaussian Processes.
 
-\marginpar{Batch Normalisation}
+The next breakthrough in regularisation is Batch Normalisation, \marginpar{Batchnorm}
+or Batchnorm~\citep{bn}.
+This has the unusual properties of both increasing generalisation capabilities (thus serving as a regulariser), and helping training performance (ergo, without hindering).
+
+It works as a layer that keeps \todo{batchnorm}
+
+In the original paper it was placed before the activation, but further research suggests it is better to place it after it.
 
 \marginpar{Architectural}
+\todo{todo}
 
-\marginpar{Differential privacy}
-Special mention
+Sometimes, \marginpar{Data augmentation} we wish our network to learn an invariance that cannot be embedded in the network architecture or the representation, such as scales of natural images in computer vision, or multiple sequence alignment quality in protein bioinformatics.
+Since deep learning models can leverage arbitrarily large datasets, we can use \emph{data augmentation}, a procedure where data points at training time are modified in the way we want our network to learn invariance.
+So, by showing the same cat at multiple sizes and orientations, we hope our network can recognise a cat regardless of the two transformations.
+
+Special mention deserves the concept of \emph{Differential privacy}, \marginpar{Differential privacy}
+or how to learn from sensitive data without leaking private information.
+This framework allows users to train models with the confidence that an adversary with full access to the trained model cannot recover any single identifiable information because the model is guaranteed to not memorise any of its training data.
+
+The procedure starts by splitting the minibatch into microbatches, and computing the gradient for each of them.
+Then, the gradients are clipped, so that any microbatch can provide only so much change in the weights, and independent random Gaussian noise is added to each of the microbatches, to dilute any private signal they may have.
+At the end of the iteration, the minibatch is averaged, and the weights updated.
 
 
+\section{Conjunctive tissue: tensors and gradients}
 
 \section{The quest for depth}
 %relu
+%init
 %batchnorm
 %residual
 

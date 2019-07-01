@@ -40,7 +40,7 @@ Historically, the first non-linearity used was the sigmoid:
 f(x) = \frac{1}{1 + e^{- x}}
 \end{equation*}
 
-It has the advantage of clipping the range of values between 0 and 1, which makes the network stable with respect to large intermediate values. (Figure~\ref{subfig:sigmoid})
+It has the advantage of clipping the range of values between 0 and 1, which makes the network stable with respect to large intermediate values (Figure~\ref{subfig:sigmoid}).
 An improvement was the hyperbolic tangent:
 
 \begin{equation*}
@@ -51,7 +51,7 @@ Being anti-symmetric, it can achieve a stable distribution of outputs with norma
 
 \begin{figure}[tb]
 	\subcaptionbox{Sigmoid\label{subfig:sigmoid}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/sigmoid}}
-	\hfill
+	\hfil
 	\subcaptionbox{Tanh\label{subfig:tanh}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/tanh}}
 	\caption{Saturating non-linarities}\label{fig:non_linear}
 \end{figure}
@@ -63,15 +63,15 @@ The alternative is using non-saturating functions, that allow the gradients to f
 The simplest is the Rectified Linear Unit, or ReLU, plotted in the Figure~\ref{subfig:relu}:
 \begin{equation*}
 f(x) =  \begin{cases}
-x &  if x \geq 0 \\
-0 & otherwise
+\hfil x &  \text{if } x \geq 0 \\
+\hfil 0 & otherwise
 \end{cases}
 \end{equation*}
 
 But in this thesis I have mostly used the Exponential Linear Unit, or ELU, shown in the Figure~\ref{subfig:elu}:
 \begin{equation*}
 f(x) =  \begin{cases}
-x &  if x \geq 0 \\
+\hfil x &  \text{if } x \geq 0 \\
 \frac{1}{1 + e^{-x}} & otherwise
 \end{cases}
 \end{equation*}
@@ -80,7 +80,7 @@ The choice of this non-linearity usually incurs in a slightly larger computation
 
 \begin{figure}[tb]
 	\subcaptionbox{ReLU\label{subfig:relu}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/relu}}
-	\hfill
+	\hfil
 	\subcaptionbox{ELU\label{subfig:elu}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/elu}}
 	\caption{Non-saturating non-linarities}\label{fig:non_linear}
 \end{figure}
@@ -92,7 +92,9 @@ The function applied depends on the properties of the target.
 \item If the output are a series of mutually exclusive classes, use a softmax, as explained in the Section~\ref{sec:mlp} on multi layered perceptrons.
 \item If the output is a regression, use a linear layer to minimise the squeezing of the outputs.
 This is valid even if the output is bounded between 0 and 1, when the values at the extrema are likely to appear, because the network would need to learn very high values for the logits.
-\item If the outputs are sines and cosines of angles, use the hyperbolic tangent.
+\item If the outputs are angles, split the labels into sines and cosines and use the hyperbolic tangent.
+This representation preserves angular distances (ie, angles that differ by almost $2 \pi$ are close), and are not biased towards an arbitrary middle point.
+The original angle can be recovered using the $\arctantwo$ function.
 \end{itemize}
 
 \section[Gradient descent]{Training procedure: gradient descent}\label{sec:grad_descent}
@@ -118,20 +120,93 @@ g_j = \frac{1}{N}\sum_i^N\frac{\partial L\left(o_i, y_i \right)}{\partial w_j}
 The gradients tell us in which direction we have to ``nudge" the network to improve its performance for the next iteration:
 
 \begin{equation*}
-\left. w_j\right|_{it=k+1} = \left. w_j\right|_{it=k} + \eta \cdot \left. g_j\right|_{it=k},
+\left. w_j\right|_{it=k+1} = \left. w_j\right|_{it=k} - \eta \cdot \left. g_j\right|_{it=k},
 \end{equation*}
 where $\eta$ is the step size, a small number that reflects our believe of the size of the region where the gradients still point in the same direction.
 
 \subsection{Back-propagation}
 In order to train, we need to compute the gradients of the loss with respect to all the parameters of the network.
-This can be done automatically using the back-propagation algorithm, or \emph{backprop}, the machine version of the chain rule.
+This can be done automatically using the back-propagation algorithm, or \emph{backprop} \citep{backprop}, the machine version of the chain rule.
 
-\todo[inline]{backprop}
+We start computing the derivative of the loss with respect to the output of the network ${L}/{\partial o_i}$.
+Then we can apply the chain rule to compute the derivatives with respect to the output $y_i$ before the non-linearity:
+\begin{equation*}
+\frac{\partial L}{\partial y_i} = \frac{\partial L}{\partial o_i} \frac{d o_i}{d y_i}
+\end{equation*}
+
+For example, if the last layer is a fully connected layer without a bias, the gradients for each weight are:
+
+\begin{equation*}
+\frac{\partial L}{\partial w_{ij}} = \frac{\partial L}{\partial y_j} \frac{\partial y_j}{\partial w_{ij}} =  \frac{\partial L}{\partial y_j}  w_{ij}
+\end{equation*}
+
+The procedure can be applied recursively to the rest of the computational graph for an arbitrary number of layers.
+The differentiation can be done automatically, so the deep learning practitioner can write models without needing to explicitly write down the gradients, which is time-consuming and error-prone.
+
+Computing the outputs \marginpar{Backward and forward pass}
+of the network is called \emph{forward pass}, since the output of each layer depends only the previous values, closer to the inputs.
+In order to compute the gradients we need to keep the outputs of each layer between the weight and the labels.
+Since we transverse the graph in the opposite direction, it is called the \emph{backward pass}.
 
 \subsection{Stochastic gradient descent}
+Computing the backward pass takes roughly 3 times longer than the forward pass~\citep{dl_course}.
+Since deep learning models require large amounts of data, computing the gradients on the whole dataset is impractical.
+Instead, we can approximate the gradients of the loss w.r.t the whole data by a random sample:
+
+\begin{equation*}
+g_j = \frac{1}{N} \sum_i^N \frac{\partial L\left(o_i, y_i\right)}{\partial w_i} \simeq \frac{1}{n} \sum_i^n \frac{\partial L\left(o_i, y_i\right)}{\partial w_i}
+\end{equation*}
+where $n << N$.
+Each subsample is called a \emph{minibatch}, \marginpar{Minibatch}
+and it is re-sampled after every iteration.
+Once we have sampled the whole data, we have completed an \emph{epoch}.
+
+The stochasticity of the gradient descent introduces noise in the gradients.
+While this may slow down convergence, it also helps the network explore, allowing it to break from possible local minima.
+
 \subsection{Optimisers}
+The optimisers are the algorithms responsible from transforming the gradient into weights updates.
+The simplest form is the already introduced Stochastic Gradient Descent (SGD), \marginpar{SGD}
+where the weight updates are proportional to the gradient computed at the previous iteration:
+
+\begin{equation*}
+\left.\Delta w_j\right|_{it=k+1} = - \left.\eta g_j\right|_{it=k} = - \eta \left.\frac{\partial L}{\partial w_j}\right|_{it=k}
+\end{equation*}
+
+This is the basis for all optimisers used in Deep Learning.
+
+
+In order to reduce the noise introduced by the stochasticity we can introduce a momentum term, regulated by the parameter $\mu$:
+
+\begin{align*}
+&\left.v_j\right|_{k+1} = \mu \left. v_j\right|_{k} - \left.\eta g_j\right|_{it=k}\\
+&\left.\Delta w_j\right|_{it=k+1} = \left.v_j\right|_{k+1}
+\end{align*}
+
+The ``velocity" vector $v_j$ keeps a memory of the latest updates.
+The ``mass" $\mu$ controls the balance between the directions pointed at by new updates, and keeping the inertia.
+
+The momentum term \marginpar{Nesterov}
+may be pointing in the wrong direction, for example, because we have overshot the minimum.
+The Nesterov momentum update~\citep{nag} performs the momentum update before computing the gradients.
+This gives the gradient the possibility of correcting mistakes if the momentum was misleading.
+If the momentum term was instead a good estimation, the new gradient will be computed closer to the minimum, yielding a better estimation.
+
+In similarity \marginpar{Learning rate schedule}
+to the temperature in Simulated Annealing~\citep{genSA}, we can reduce the learning rate~$\eta$ as the training progresses.
+A common choice is to cool down the system, so on the $k-$th epoch, the learning rate is:
+
+\begin{equation}
+\eta= \frac{\eta_0}{1 + \delta \cdot k}
+\end{equation}
+
+Another option is to reduce it when the system stops learning, for example, when the loss has not improved for a certain number of epochs, reduce it by a constant factor: $\eta \rightarrow \eta/5$.
+
+
+For a thorough review consult~\citep{optimisers_review}.
 
 \section{Conjunctive tissue: tensors and gradients}
+\todo[inline]{todo}
 
 \section{Taming the complexity: regularisation}
 Neural networks can have millions of parameters, so they are susceptible to over-fitting.

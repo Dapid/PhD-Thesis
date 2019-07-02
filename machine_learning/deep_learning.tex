@@ -4,9 +4,14 @@ We start this section introducing the two fields that have been spearheading the
 The first consists in identifying objects in digital images; while the second is being able to transcribe and process audio.
 
 It is striking that both cases correspond to tasks that humans are very good at.
-Indeed, neural networks are very good at \emph{perceptual learning}, or tasks where the computer replaces the senses.
+Indeed, neural networks are very good at \emph{perceptual learning}, or tasks where the computer replaces the human senses.
+This is perhaps due to the fact that neural networks are inspired by the biological nervous system, but also because humans can understand the process,
+label more data, and guess at why it is wrong.
 
-\todo{but not only}
+But not only.
+Deep neural networks have shown to be good at tasks that humans cannot perform well, like contact prediction~\citep{ultra_deep_contacts}, estimation of protein model quality~\citep{casp13_ema}, and other tasks.
+
+%The rest of this chapter will contain a summary of the fundamental blocks, how to train, 
 
 \section{The basic blocks}
 A deep learning model is composed by a series of layers, or simple transformations (usually linear), plus a point-wise non-linearity.
@@ -65,7 +70,7 @@ Both functions saturate on extreme values, \marginpar{Gradient saturation}
 so their derivative approaches zero, which on one hand is useful to control the stability of the outputs, but on the other is a problem for the propagation of gradients.
 The alternative is using non-saturating functions, that allow the gradients to flow for a wider range of values.
 
-The simplest is the Rectified Linear Unit, or ReLU, plotted in the Figure~\ref{subfig:relu}:
+The simplest is the Rectified Linear Unit, or ReLU, introduced by~\citet{relu} and plotted in the Figure~\ref{subfig:relu}:
 \begin{equation*}
 f(x) =  \begin{cases}
 \hfil x &  \text{if } x \geq 0 \\
@@ -87,7 +92,7 @@ The choice of this non-linearity usually incurs in a slightly larger computation
 	\subcaptionbox{ReLU\label{subfig:relu}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/relu}}
 	\hfil
 	\subcaptionbox{ELU\label{subfig:elu}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/elu}}
-	\caption{Non-saturating non-linarities}\label{fig:non_linear}
+	\caption{Non-saturating non-linarities}\label{fig:non_linear2}
 \end{figure}
 
 The last layer is an exception.\marginpar{Output}
@@ -266,7 +271,7 @@ For a thorough review consult the work of \citet{optimisers_review}.
 \section{Taming the complexity: regularisation}
 Neural networks can have millions of parameters, so they are susceptible to over-fitting.
 In order to converge to generalisable models, we can apply a variety of regularisation techniques.
-Most of them act as a barrier that hinders the training, that only enough data can overcome.
+Most of them act as a barrier that hinders the training, in a way that only enough data can overcome, while others encode invariances of the real world into our model.
 Here are some:
 
 
@@ -285,12 +290,17 @@ The next breakthrough in regularisation is Batch Normalisation, \marginpar{Batch
 or Batchnorm~\citep{bn}.
 This has the unusual properties of both increasing generalisation capabilities (thus serving as a regulariser), and helping training performance (ergo, without hindering).
 
-It works as a layer that keeps \todo{batchnorm}
-
+It works as a layer that learns the mean and standard deviation of the distribution of its inputs, and corrects them to keep them close to 0 and 1, respectively.
+As was seen with some optimisers, it can keep a momentum term to smooth out the changes in averages.
 In the original paper it was placed before the activation, but further research suggests it is better to place it after it.
 
-\marginpar{Architectural}
-\todo{todo}
+The reason why Batch Normalisation actually works as a regulariser was not well understood until the work of \citet{how_bn_works}, who showed how it smooths the loss function landscape, both helping the training and converging to more generalised minima.
+The relationship between smoothness and generalisation was studied in~\citep{large_batch}.
+
+On a higher level,\marginpar{Architectural}
+we can design our network to be robust with respect to invariances in our data.
+For example, convolutions are translational invariant, so a convolution-based secondary structure predictor will be able to recognise the sequence signature of an $\alpha$-helix regardless of its relative position.
+We can also  design our training and architecture to fit the problem, as we did on Paper IV.
 
 Sometimes, \marginpar{Data augmentation} we wish our network to learn an invariance that cannot be embedded in the network architecture or the representation, such as scales of natural images in computer vision, or multiple sequence alignment quality in protein bioinformatics.
 Since deep learning models can leverage arbitrarily large datasets, we can use \emph{data augmentation}, a procedure where data points at training time are modified in the way we want our network to learn invariance.
@@ -306,14 +316,52 @@ At the end of the iteration, the minibatch is averaged, and the weights updated.
 
 
 \section{Conjunctive tissue: tensors and gradients}
+\todo{todo}
 
 \section{The quest for depth}
-%relu
-%init
-%batchnorm
-%residual
+Deeper networks have advantages over shallower ones, even for the same number of parameters.
+For example, stacking convolutions with a few filters each means the final layer has a bigger receptive field than a single convolution with many filters.
+Furthermore, most layers are ``stupid" linear transformations with non-linearities between them.
+Stacking more layers means we obtain a more non-linear function, and hence, richer.
+The main practical obstacle to train deeper networks is to be able to transmit the gradient information down to every layer.
+Indeed, in the first attempts with multi-layered perceptrons, more than two hidden layers did not offer and advantage.
+\citet{glorot} studied in depth the difficulties of training multi-layered perceptrons known at the time.
+
+The first contribution \marginpar{ReLU, again} was non-saturating non-linearities, like ReLU.
+Since they do not saturate, neurons are never stuck in ranges where the gradients are almost zero, and thus prevented from learning.
+ReLU has a null gradient for negative numbers, but we expect that to happen only half of the examples, while half of the others will give a positive signal.
+This is not guaranteed, and there is a chance of ``dead neurons", where the activation is always zero, but that has not been found to be a significant problem.
+If dead neurons are a problem, LeakyReLU  \marginpar{LeakyReLU} can be the solution.
+This activation is like ReLU, but the negative side has a small, fixed slope, so the gradient is non-zero everywhere.
+\footnote{ReLU has the advantage of providing a sparse intermediate representation, which is useful for information disentangling, ie, inferring the causes of the prediction, since perturbing the inputs do not affect all the outputs.}
+
+Tightly tied \marginpar{Weight initialisation} with the non-linearity is the initialisation of the weights.
+Glorot recommended initialising the layers with 0 mean and standard deviation $\sigma=6/\sqrt{n_{in}+ n_{out}}$, where $n_{in}$ and $n_{out}$ are the number of input and output features of the layer.
+In this case, small initialisations are critical because saturating neurons are very slow to train.
+With non-saturating initialisations like ReLU, we can use larger weights without fearing the plateaus.
+\citet{he} recommends $2/\sqrt{n_{in}}$ as a stable choice: each output will be a linear combination of $n_{in}$ input features.
+Since the standard deviation of the sum of $n$ normal random variables is proportional to $\sqrt{n}$, and half the activations are zero, this factor keeps the distribution of activation stable across layers.
+
+Adapting the initialisation \marginpar{Batchnorm} to the non-linearity uses the expected dynamics of a random network to keep stable distributions.
+Batch normalisation forces them, ensuring that the information can flow regardless of the dynamical state of the network, and adapting to the particular features of the dataset.
+
+If the first layers \marginpar{Auxiliary outputs} in a deep model are
+too far from the labels, can we bring them closer, without sacrificing depth?
+\citet{googlenet} attempted that in GoogleLeNet, where the network had several output layers at different depths.
+While only the last one was actually used in production, the intermediate inject gradients and help train the lower layers.
+
+The last fundamental idea \marginpar{ResNets} are Residual Networks~\citep{resnet}, which allows to train networks of arbitrary depth.
+Resnets are composed of blocks of two layers (convolutions in the original paper, but applicable to any other type), where the output is directly added to the inputs using a so-called \emph{skip connection}, as illustrated in the Figure~\ref{fig:resnet}.
+This extra path opens an information highway from the inputs to the labels.
+
+\begin{figure}[tb]
+	\centering
+	\includegraphics[width=0.45\textwidth]{machine_learning/figures/resnet}
+	\caption{Resnet block}\label{fig:resnet}
+\end{figure}
+
 
 \section{Deep transfer learning}
-a
+\todo{do}
 
 

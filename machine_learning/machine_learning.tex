@@ -122,7 +122,7 @@ This is called the softmax function:
 \sigma(\vec{z})_i = \frac{e^{z_i}}{\sum_j^N e^{z_j}}
 \end{equation*}
 
-If the logits are scaled up, the softmax will be more concentrated around the max, suggesting a more confident prediction.
+If the logits are scaled up, the softmax will be more concentrated around the maximum, suggesting a more confident prediction.
 As before, we can apply $L^1$ or $L^2$ regularisations, which imply lower coefficients on $W$, ergo lower values for the logits.
 A stronger regularisation returns a less confident predictor.
 
@@ -277,7 +277,7 @@ The output is an estimation $\hat f$ of our latent function $f$, that can be int
 	\[\hat f(x) = \sum_{i=0}^{n} c_i \phi_i(x)\]
 	
 But, unlike other procedures, $c_i$ have probability distributions over them.
-We can use them to sample likely candidates for the latent function, as shown in the Figure~\ref{fig:gp_sampling}
+We can use them to sample likely candidates for the latent function, as shown in the Figure~\ref{fig:gp_sampling}.
 	
 \begin{figure}[hbt]
 \centering
@@ -286,7 +286,7 @@ We can use them to sample likely candidates for the latent function, as shown in
 \end{figure}
 
 \subsection{Isotonic regression}
-Isotonic regression minimises the squared errors of a function that is piecewise constant, and non decreasing.
+Isotonic regression minimises the squared errors of a function that is piecewise constant, and non-decreasing.
 Given enough data points, it can fit arbitrarily complex curves, as long as they are monotonous.
 This method is particularly useful in calibration to turn predicted scores into actual probabilities.
 

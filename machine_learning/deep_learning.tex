@@ -307,16 +307,18 @@ Since deep learning models can leverage arbitrarily large datasets, we can use \
 So, by showing the same cat at multiple sizes and orientations, we hope our network can recognise a cat regardless of the two transformations.
 
 Special mention deserves the concept of \emph{Differential privacy}, \marginpar{Differential privacy}
-or how to learn from sensitive data without leaking private information.
+or how to learn from sensitive data without leaking private information~\citep{differential_privacy}.
 This framework allows users to train models with the confidence that an adversary with full access to the trained model cannot recover any single identifiable information because the model is guaranteed to not memorise any of its training data.
 
-The procedure starts by splitting the minibatch into microbatches, and computing the gradient for each of them.
+One procedure implemented by \citet{tf_privacy} starts by splitting the minibatch into microbatches, and computing the gradient for each of them.
 Then, the gradients are clipped, so that any microbatch can provide only so much change in the weights, and independent random Gaussian noise is added to each of the microbatches, to dilute any private signal they may have.
 At the end of the iteration, the minibatch is averaged, and the weights updated.
 
 
 \section{Conjunctive tissue: tensors and gradients}
 \todo{todo}
+
+%Learning representations
 
 \section{The quest for depth}
 Deeper networks have advantages over shallower ones, even for the same number of parameters.
@@ -363,5 +365,3 @@ This extra path opens an information highway from the inputs to the labels.
 
 \section{Deep transfer learning}
 \todo{do}
-
-

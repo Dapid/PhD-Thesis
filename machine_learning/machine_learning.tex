@@ -8,9 +8,10 @@ As mathematical tools improved, increasingly more complex systems could be analy
 Furthermore, the development of computers allowed for an explosion in the size and breadth of tractable problems, such as dynamics of atomic nuclei, or weather forecast.
 
 These applications were either developed from first principles, or as effective theories; but contained at their core, relatively simple mathematical models.
-For example, modelling the dynamics of $n$-bodies gravitationally interacting are very rich and complicated to solve, but they all spawn from two simple equations: $\vec{F} = m \cdot \vec{a}$  and $F_g=G\frac{m_1  m_2}{r^2}$.\todo{?}
+For example, modelling the dynamics of $n$-bodies gravitationally interacting are very rich and complicated to solve, but they all spawn from two simple equations, Newton's second law of motion for an object of mass $m$: $\vec{F} = m \cdot \vec{a}$ and the force of gravity between two objects of masses $m_1$ and $m_2$: $F_g=G\frac{m_1  m_2}{r^2}$.
 
-But the advent of computers not only gave us mathematical muscle, it provided us with large amounts of data about the real world.\todo{clarify}
+But the advent of computers not only gave us mathematical muscle, it also allowed to connect them to sensors;
+providing us with large amounts of data about the real world.
 Data that can be used to fit statistical models, even in the absence of underlying mathematical theories, such as recognising objects in images, identifying where in the cell a protein is going to end up, or translating natural language.
 The Scientific Revolution of the 16th century brought the concept \emph{``if it can be measured, it can be modelled"}, but the Data Revolution of the 20th century expanded it \emph{``if it can be \emph{represented}, it can be modelled"}.
 We went from measuring the variables present in our equations, to representing the world in numbers in a computer.
@@ -32,8 +33,8 @@ Here are, in broad strokes, some of the main types that cover the majority of th
 
 \subsection{Do we have labels?}
 \begin{itemize}
-\item \emph{Supervised:} our training data has assigned labels, and we want to predict them to new data. \emph{Ex: protein secondary structure prediction, linear regression.}
 \item \emph{Unsupervised:} we do not have data with annotated target values. \emph{Ex: clustering, dimensionality reduction.}
+\item \emph{Supervised:} our training data has assigned labels, and we want to predict them to new data. \emph{Ex: protein secondary structure prediction, linear regression.}
 \end{itemize}
 
 The focus of this thesis will be on supervised tasks.
@@ -61,7 +62,7 @@ But this versatility comes with a cost: they require more data to train.
 Can we take it to the extreme?
 \marginpar{A theoretical result} 
 Can we train a model completely free  of assumptions in the case of infinite data? The No Free Lunch Theorem \citep{no_free_lunch} says, averaging over all problems, all algorithms are equally good.
-In other words, without inputting domain knowledge, we cannot do better than random.\todo{elaborate}
+In other words, without inputting domain knowledge that restrict the space of possibilities, we cannot do better than random. \todo{elaborate}
 
 \section[Traditional machine learning]{A point of comparison: traditional machine learning}
 In this section, I will give an overview to some of the most popular supervised machine learning algorithms to illustrate how they work, and the kind of underlying assumptions they operate under.
@@ -114,7 +115,7 @@ Each class has one linear model given by the vector of weights $\left\{\vec{w_i}
 W \cdot \vec{x},
 \end{equation*}
 where $W$ is a $(N \times d)$ matrix.
-The vector $\vec{z}$ are called the \emph{logits}. 
+The components of the vector $\vec{z}$ are called the \emph{logits}. 
 To obtain probabilities we use the exponential to make them all positive, and normalise the sum.
 This is called the softmax function:
 
@@ -132,9 +133,9 @@ A stronger regularisation returns a less confident predictor.
 
 
 \subsection{Multi Layer Perceptron}\label{sec:mlp}
-A linear model on $d$ features is limited to $d$ free parameters, or at most $d \cdot N$ for $N$ classes, and are limited to linear functions.
+A linear model on $d$ features is limited to $d$ free parameters, or at most $d \cdot N$ for $N$ classes, and is limited to linear functions.
 When we have more data, and more complicated tasks, we would like to be able to learn more parameters.
-A simple way would be to build upon linear models, and have an intermediate \emph{hidden state} $\vec{h}$ of arbitrary dimension.
+A simple way to do so is to build upon linear models, and have an intermediate \emph{hidden state} $\vec{h}$ of arbitrary dimension.
 The vector of probabilities for every class is then:
 
 \begin{align*}
@@ -172,7 +173,7 @@ This is because adding layers degrades the gradient from the previous ones, maki
 
 \subsection{Support Vector Machines}
 A Support Vector Machine, or SVM, is in its simplest form, a supervised, binary classification algorithm that tries to find the hyperplane that maximises the separation of the two groups.
-To account for noise, we can include a slack parameter, that will ignore points that are too close to the boundary.
+To account for noise, a slack parameter, that will ignore points that are too close to the boundary can be included.
 Figure~\ref{fig:svm} illustrates an example of classifying two species from the classic Iris dataset~\citep{iris_dataset}.
 
 

@@ -7,6 +7,7 @@ It is striking that both cases correspond to tasks that humans are very good at.
 Indeed, neural networks are very good at \emph{perceptual learning}, or tasks where the computer replaces the human senses.
 This is perhaps due to the fact that neural networks are inspired by the biological nervous system, but also because humans can understand the process,
 label more data, and guess at why it is wrong.
+Furthermore, they are problems that are \emph{solvable},
 
 But not only.
 Deep neural networks have shown to be good at tasks that humans cannot perform well, like contact prediction~\citep{ultra_deep_contacts}, estimation of protein model quality~\citep{casp13_ema}, and other tasks.
@@ -203,7 +204,7 @@ This gives the gradient the possibility of correcting mistakes if the momentum w
 If the momentum term was instead a good estimation, the new gradient will be computed closer to the minimum, yielding a better estimation.
 
 In similarity \marginpar{Learning rate schedule}
-to the temperature in Simulated Annealing~\citep{genSA}, we can reduce the learning rate~$\eta$ as the training progresses.
+to the temperature in Simulated Annealing \citep{genSA}, we can reduce the learning rate~$\eta$ as the training progresses.
 A common choice is to cool down the system, so on the $k-$th epoch, the learning rate is:
 
 \begin{equation}

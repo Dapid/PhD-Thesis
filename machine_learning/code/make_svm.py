@@ -1,23 +1,13 @@
 import numpy as np
 
-import matplotlib
-from matplotlib import rc
-
-rc('font',**{'family':'serif','serif':['palatino']})
-rc('text', usetex=True)
-rc('text.latex', preamble=r'\usepackage{amsmath} \usepackage{amssymb} \usepackage[euler-digits]{eulervm}')
-
 import matplotlib.pyplot as plt
 from sklearn import svm, datasets
 
-MAROON='#AD1737'
-BLUE = 'RoyalBlue'
-
+from settings import MAROON, BLUE
 
 iris = datasets.load_iris()
 y = iris.target[iris.target < 2]
 X = iris.data[iris.target < 2, :2]
-
 
 clf = svm.LinearSVC(C=5., max_iter=int(1e4))
 clf.fit(X, y)
@@ -43,11 +33,10 @@ plt.fill_between(xx, yy_down, yy, alpha=0.2, color=BLUE)
 plt.fill_between(xx, 1, yy_down, alpha=0.5, color=BLUE)
 plt.fill_between(xx, yy_up, 5, alpha=0.5, color=MAROON)
 
-
 plt.xlim(xx.min(), xx.max())
 plt.ylim(1, 5)
 
-plt.legend(loc=0)
+plt.legend(loc=1)
 
 plt.title('Linear SVM')
 

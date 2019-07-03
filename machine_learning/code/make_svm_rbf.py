@@ -1,37 +1,24 @@
 import numpy as np
 
-import matplotlib
-from matplotlib import rc
-
-rc('font',**{'family':'serif','serif':['palatino']})
-rc('text', usetex=True)
-rc('text.latex', preamble=r'\usepackage{amsmath} \usepackage{amssymb} \usepackage[euler-digits]{eulervm}')
-
 import matplotlib.pyplot as plt
 from sklearn import svm, datasets
 
-MAROON='#AD1737'
-BLUE = 'RoyalBlue'
+from settings import MAROON, BLUE
 
 
 iris = datasets.load_iris()
 y = iris.target[iris.target < 2]
 X = iris.data[iris.target < 2, :2]
 
-
 clf = svm.SVC(C=5., kernel='rbf', max_iter=int(1e4))
 clf.fit(X, y)
 xx = np.linspace(4, 7.2)
 
-
-
 plt.scatter(X[y == 0, 0], X[y == 0, 1], color=MAROON, label='\emph{Iris setosa}')
 plt.scatter(X[y == 1, 0], X[y == 1, 1], color=BLUE, label='\emph{Iris versicolor}')
 
-
 plt.xlim(xx.min(), xx.max())
 plt.ylim(1, 5)
-
 
 ax = plt.gca()
 xlim = ax.get_xlim()
@@ -44,11 +31,11 @@ Z = clf.decision_function(xy).reshape(XX.shape)
 
 ax.contour(XX, YY, Z, colors='k', levels=[-1, 0, 1], alpha=0.5,
            linestyles=['--', '-', '--'])
-           
-ax.contourf(XX, YY, Z, colors=[ MAROON, BLUE], levels=[-1, 0, 1], alpha=0.2)           
-ax.contourf(XX, YY, Z, colors=[MAROON,], levels=[-100, -1], alpha=0.5) 
-ax.contourf(XX, YY, Z, colors=[BLUE,], levels=[1, 1000], alpha=0.5) 
-plt.legend(loc=0)
+
+ax.contourf(XX, YY, Z, colors=[MAROON, BLUE], levels=[-1, 0, 1], alpha=0.2)
+ax.contourf(XX, YY, Z, colors=[MAROON, ], levels=[-100, -1], alpha=0.5)
+ax.contourf(XX, YY, Z, colors=[BLUE, ], levels=[1, 1000], alpha=0.5)
+plt.legend(loc=1)
 
 plt.title('SVM with RBF kernel')
 

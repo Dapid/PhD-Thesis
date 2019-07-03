@@ -50,8 +50,10 @@ Once the values of $J$ are obtained, the scores of the contacts can be estimated
 That is, the square root of the sum of the squares of the couplings between each pair of amino acids:
 
 \begin{equation*}
-C(i, j) = \sqrt{\sum_{\sigma_i, \sigma_j=1}^{21} J_{i, j}(\sigma_i, \sigma_j)^2}
+C(i, j) = \sqrt{\sum_{\sigma_i, \sigma_j=1}^{21} J_{i, j}(\sigma_i, \sigma_j)^2},
 \end{equation*}
+where $C(i, j)$ is the contact score between residues $i$ and $j$.
+This number cannot be readily interpreted as a probability.
 
 This model approximations ignore the possibility of multiple rotamers for a given amino acid, \marginpar{The sphericity of the cow}
 and consider that any interaction between three or more residues can be decomposed to the sum of each pair.

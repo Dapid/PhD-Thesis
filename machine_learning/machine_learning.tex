@@ -125,11 +125,15 @@ This is called the softmax function:
 
 If the logits are scaled up, the softmax will be more concentrated around the maximum, suggesting a more confident prediction.
 As before, we can apply $L^1$ or $L^2$ regularisations, which imply lower coefficients on $W$, ergo lower values for the logits.
-A stronger regularisation returns a less confident predictor.
+A stronger regularisation returns a less confident predictor, as shown in Figure~\ref{fig:logistic}.
+In particular, \ref{subfig:logistic_strong}, has a much narrower region of uncertain predictions. 
 
-\begin{center}
-	\missingfigure[figcolor=white]{Logistic regression and regularisation}
-\end{center}
+\begin{figure}
+	\centering
+	\subcaptionbox{Weak regularisation}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/logistic_3}}
+	\subcaptionbox{Strong regularisation\label{subfig:logistic_strong}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/logistic_1}}
+	\caption{Classification of two species of Iris flowers according to the length and width of sepals using logistic regression.}\label{fig:logistic}
+\end{figure}
 
 
 \subsection{Multi Layer Perceptron}\label{sec:mlp}
@@ -182,7 +186,7 @@ Figure~\ref{fig:svm} illustrates an example of classifying two species from the 
 \subcaptionbox{Linear kernel}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/svm.pdf}}%
 \hfill
 \subcaptionbox{RBF kernel\label{subfig:svm_rbf}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/svm_rbf.pdf}}%
-\caption{Classification of two species of Iris flowers according to the length and width of sepals.}\label{fig:svm}
+\caption{Classification of two species of Iris flowers according to the length and width of sepals using Suport Vector Machines.}\label{fig:svm}
 \end{figure}
 
 It can be generalised \marginpar{The kernel trick} to non-flat boundaries using the so-called \emph{kernel trick}, where Euclidean distances are replaced with an arbitrary measure of similarity given by positive-definite kernel function:
@@ -202,10 +206,10 @@ The choice of $k$ is a balance between noise and flexibility: smaller values giv
 
 \begin{figure}[htb]
 	\centering
-	\subcaptionbox{Closest neighbour}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/knn_1}}
+	\subcaptionbox{Closest neighbour ($k=1$)}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/knn_1}}
 	\hfill
-	\subcaptionbox{Average of the five closest neighbours.}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/knn_5}}
-	\caption{Classification of three species of Iris flowers according to the length and width of sepals.}\label{fig:knn}
+	\subcaptionbox{Average of the five closest neighbours. ($k=5$)}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/knn_5}}
+	\caption{Classification of three species of Iris flowers according to the length and width of sepals using Nearest Neighbour.}\label{fig:knn}
 \end{figure}
 
 \subsection{Decision tree}\label{sec:decision_tree}
@@ -224,7 +228,7 @@ The process is repeated until no more cuts can improve the performance, or until
 	\subcaptionbox{Gini impurity as a function of the first split. The ideal cut is selected.\label{subfig:gini}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/tree_split}}
 	\hfill
 	\subcaptionbox{Regions predicted by the tree.\label{subfig:tree}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/tree_2d}}
-	\caption{Predictions made by a decision tree on the Iris dataset. }\label{fig:tree}
+	\caption{Classifications made by a decision tree on the Iris species dataset.}\label{fig:tree}
 \end{figure}
 
 \begin{figure}[h]

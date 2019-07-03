@@ -8,9 +8,9 @@ As mathematical tools improved, increasingly more complex systems could be analy
 Furthermore, the development of computers allowed for an explosion in the size and breadth of tractable problems, such as dynamics of atomic nuclei, or weather forecast.
 
 These applications were either developed from first principles, or as effective theories; but contained at their core, relatively simple mathematical models.
-For example, modelling the dynamics of $n$-bodies gravitationally interacting are very rich and complicated to solve, but they all spawn from two simple equations: $\vec{F} = m \cdot \vec{a}$  and $F_g=G\frac{m_1  m_2}{r^2}$.
+For example, modelling the dynamics of $n$-bodies gravitationally interacting are very rich and complicated to solve, but they all spawn from two simple equations: $\vec{F} = m \cdot \vec{a}$  and $F_g=G\frac{m_1  m_2}{r^2}$.\todo{?}
 
-But the advent of computers not only gave us mathematical muscle, it provided us with large amounts of data on the real world.
+But the advent of computers not only gave us mathematical muscle, it provided us with large amounts of data about the real world.\todo{clarify}
 Data that can be used to fit statistical models, even in the absence of underlying mathematical theories, such as recognising objects in images, identifying where in the cell a protein is going to end up, or translating natural language.
 The Scientific Revolution of the 16th century brought the concept \emph{``if it can be measured, it can be modelled"}, but the Data Revolution of the 20th century expanded it \emph{``if it can be \emph{represented}, it can be modelled"}.
 We went from measuring the variables present in our equations, to representing the world in numbers in a computer.
@@ -21,9 +21,9 @@ Machine learning \marginpar{What is machine learning?}
 is the study of statistical models that can create inferences from collections of examples. 
 The models can be as concrete as relating the voltage and measured current intensity in a circuit, as complex as relating the sensory input of a rocket with its control, or as abstract as mapping natural images to the text describing its contents.
 
-Instead of designing algorithms that simulate reality from first principles, that can be insurmountably complex and time-consuming; a machine learning model uses data: the algorithm depends on a series of free parameters that are deduced from the examples.
+Instead of designing algorithms that simulate reality from first principles, that can be insurmountably complex and time-consuming; a machine learning model uses data: the algorithm depends on a series of free parameters that are deduced from examples.
 \marginpar{The costs}
-This flexibility comes with a price: in the programmer has relinquished the control to the dataset, and sacrificed the possibility of a mechanistic interpretation.
+This flexibility comes with a price: the programmer has relinquished the control to the dataset, and sacrificed the possibility of a mechanistic interpretation.
 More on this on Section~\ref{sec:wrong}.
 
 \section{Classification and typology}
@@ -61,7 +61,7 @@ But this versatility comes with a cost: they require more data to train.
 Can we take it to the extreme?
 \marginpar{A theoretical result} 
 Can we train a model completely free  of assumptions in the case of infinite data? The No Free Lunch Theorem \citep{no_free_lunch} says, averaging over all problems, all algorithms are equally good.
-In other words, without inputting domain knowledge, we cannot do better than random.
+In other words, without inputting domain knowledge, we cannot do better than random.\todo{elaborate}
 
 \section[Traditional machine learning]{A point of comparison: traditional machine learning}
 In this section, I will give an overview to some of the most popular supervised machine learning algorithms to illustrate how they work, and the kind of underlying assumptions they operate under.
@@ -194,7 +194,7 @@ which implicitly projects the data into an infinite-dimensional space.
 
 Another way of interpreting the kernel trick is to think of it as learning a deformation of the space that makes the data separable by a hyperplane, a linear function.
 
-\subsection{$k$-Nearest Neighbour}
+\subsection{\emph{k}-Nearest Neighbour}
 A Nearest Neighbour classifier takes the $k$ closest points in the training set, and predicts the most common label.
 \marginpar{Bias-variance tradeoff}
 The choice of $k$ is a balance between noise and flexibility: smaller values give more distinct frontiers, but are more susceptible to noise.

@@ -31,7 +31,13 @@
 \usepackage{doi}
 \bibliographystyle{plainnat}
 
+\usepackage{xpatch} %Adjust the spacing in smallcaps
+\xapptocmd{\scshape}{\spaceskip=2\fontdimen2\font plus 2\fontdimen3\font minus \fontdimen4\font	\xspaceskip=0\fontdimen7\font}{}{}
+
 \usepackage{tikz}
+
+\usepackage{microtype}
+\SetProtrusion{encoding=*, family=*}{- = {, 1000} } % Hanging hyphens
 
 \setmathfont[Scale=MatchUppercase]{Asana Math}
 %\setmathfont{Neo Euler}
@@ -72,6 +78,7 @@
 \part{My work} \label{part:work}
 
 \backmatter
+%Increase margins here
 \bibliography{references}
 
 % Papers

@@ -315,9 +315,10 @@ class _BaseTreeExporter(object):
         # Write node majority class
         if (self.class_names is not None and
                 tree.n_classes[0] != 1 and
-                tree.n_outputs == 1):
+                tree.n_outputs == 1 and
+                '0' in [x.strip() for x in value_text.strip('[').strip(']').split(',')]):
             # Only done for single-output classification trees
-            if labels:
+            if labels :
                 node_string += 'species = '
             if self.class_names is not True:
                 class_name = self.class_names[np.argmax(value)]

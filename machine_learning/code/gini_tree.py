@@ -1,11 +1,12 @@
 from sklearn import tree, datasets
 import _plot_tree
 
-from settings import MAROON, BLUE
+from settings import MAROON, BLUE, rc
 
 import numpy as np
 import pylab as plt
 
+rc('font', **{'size': 20})
 iris = datasets.load_iris()
 y = iris.target[iris.target < 2]
 X = iris.data[iris.target < 2, :2]
@@ -17,7 +18,7 @@ plt.figure(figsize=(10, 8))
 
 _plot_tree.plot_tree(clf, class_names=('\emph{Iris setosa}', '\emph{Iris versicolor}'),
                      feature_names=('Sepal \- length', 'Sepal \- width'),
-                     filled=True, precision=2, rounded=False)
+                     filled=True, precision=2, rounded=False, impurity=False, proportion=False)
 
 plt.tight_layout()
 plt.savefig('../figures/tree.pdf')

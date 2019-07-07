@@ -2,7 +2,7 @@
 Bioinformatics is the application of computational methods to biological problems,
 either by analysing large amounts of data, or by replacing experiments with computer programs.
 
-One of the main goals of protein bioinformatics is predicting the 3D structure of a protein given only its sequence.
+
 
 \section{Predictors}
 
@@ -18,7 +18,9 @@ A Multiple Sequence Alignment (MSA) contains a collection of proteins evolutiona
 \subsubsection{Phylogenetic bias: the APC correction}
 
 \subsection{Direct Coupling Analysis}
-Mutual Information has a problem with the transitivity property: \todo{}
+Mutual Information has a problem with the transitivity property: consider three residues, A, B, and C; where B is close to both A and C, but A and C are far away.
+Mutual Information will likely detect a correlation between A and B, and between B and C; but it will also show a correlation between A and C!
+
 In order to discern true from spurious correlations, we need to fit a statistical model to the whole data at once, in this way, we hope to recover the true (direct) relationships.
 This can be accomplished with Direct Coupling Analysis (DCA).
 Several variations exists, but they are all based on a Potts model of statistical mechanics.
@@ -62,11 +64,26 @@ Finally, DCA attempts to reconstruct the evolutionary couplings, not necessarily
 The coupling is real, but its nature is different from the model explained at the beginning of this section.
 
 \subsection{Pattern recognition}
+Contacts do not appear at random.
+Since the protein is a continuous chain, contacts are rarely isolated, and appear in groups.
+Furthermore, since most of the protein is locally organised in secondary structure elements, this gives rise to specific patterns in the contact map.
+The statistical methods like DCA and Mutual Information do not consider this, so a refinement step can be done using pattern recognition.
+We can train a machine learning algorithm on the outputs of statistical methods and recognise the underlying patterns, which is able to remove much of the spurious contacts, noise, and artefacts in the alignments.
+
+\missingfigure{alpha and beta contacts}
 
 \section{Protein folding}
 
+One of the main goals of protein bioinformatics is predicting the 3D structure of a protein given only its sequence.
+
+\subsection{Physics-based modelling}
+Unfolded natural proteins in physiological conditions are known to fold into their native state \citep{fold_graciously}.
+In principle, the same procedure can be replicated \emph{in silico} with molecular dynamics, as first done by \citet{physics_folding}.
+This is not a practical solution, and can only be done after a lot of computational work for small fast-folding proteins.
 
 \subsection{Homology modelling}
+Proteins that are close in sequence are close in structure.
+
 \subsection{\emph{Ab-initio} folding}
 
 \section{Other predictors}

@@ -4,15 +4,33 @@ Proteins are the fundamental machines of biology, performing tasks such as catal
 They play fundamental roles in the biochemical pathways, so understanding them can lead us to create new and refined drugs,
 or bio-engineered bacteria.
 
-In this chapter I will present the basic vocabulary of protein structures, and give an overview of their biochemistry.
+%In this chapter I will present the basic vocabulary of protein structures, and give an overview of their biochemistry.
+
+But, how are they created?
+The information \marginpar{Protein biosynthesis}
+used by the cell to build proteins is encoded in the DNA.
+When the biosynthesis begins, the double helix unfolds, and the genetic contact is translated into RNA.
+This new molecule is then transported to the ribosomes, the organelles that translate the RNA into functional proteins.
+
 
 \section{The many levels of protein structures}
-Proteins are structured at several levels.
+Proteins are structured at several levels, depending at the scale we look at them.
+In this section, I will present the main descriptions of proteins at different scopes.
+
+
 \subsection{The amino acids}
 Amino acids are the building blocks of proteins.
-They are composed of a backbone and a sidechain
+They are composed of a carboxyl (-$COOH$) and an amine (-$NH_2$) groups, forming the backbone, and a side-chain.
+Two examples are illustrated in Figure~\ref{fig:amino_acids}.
+\marginpar{Only a few of all amino acids appear in the DNA.}
+There are at least 500 known naturally occurring amino acids \citep{500_amino_acids}, of which only twenty different species are usually codified in the DNA.
+The differences between most of them are only on the side chain\footnote{Proline's sidechain has a ring connecting with the amine in the backbone.}.
 
-There are twenty different species of side chains 
+The side chains are the group responsible for the specific physico-chemical properties of the compound, such as hydrophobicity, pH, or electrostatic charge.
+
+The backbone can polymerise, bonding with other amino acids and forming a long chain.
+Having a common backbone means that in principle, any amino acid can be connected to any other, which gives proteins a very rich and flexible biochemistry:
+for a protein of length $L$ there are $20^L$ possible combinations. %$20/19 (20^L - 1)$
 
 \begin{figure}
 \centering
@@ -21,11 +39,9 @@ There are twenty different species of side chains
 \hfil %
 \subcaptionbox{Tyrosine (Y) \label{subfig:aminoY}}{\input{bioinfo/figures/aminoY.tikz}} %
 \hfil %
-\caption{Two amino acids.
+\caption{Two amino acids as appear in proteins.
 The \textcolor{Maroon}{maroon}, solid rectangle indicates the backbone, common to all amino acids; and the \textcolor{RoyalBlue}{blue} dashed the side chain, that determines the specific chemical properties.}\label{fig:amino_acids}
 \end{figure}
-
-
 
 \subsection{Primary structure}
 The amino acids can connect to each other through the peptide bond forming a chain.
@@ -34,9 +50,18 @@ The \emph{primary structure} is the sequence of amino acids as encoded in the DN
 \texttt{ALA ARG ILE ASN GLY ARG GLU ILE ASN VAL THR LYS LYS}
 \end{center}
 
+This is the easiest to obtain experimentally, since the advent of next generation sequencing techniques.
+The collection of all protein sequences of an organism is the \emph{proteome}.
+Anfinsen's dogma states that, under physiological conditions, the primary structure of globular proteins determines the secondary and tertiary structure, and thus, its function, independently of the cell's machinery.
+This hypothesis has a few exceptions, namely large, fibrous proteins, prions -- proteins with alternative, stable conformations --, and aggregating proteins -- where the individual proteins bind to each other forming large and non-functional structures.
+
 \subsection{Secondary structure}
-%blabla hydrogen bonds
-\ref{subfig:alpha}
+The polypeptide chains are locally organised in motifs stabilised by hydrogen bonds.
+The most common is the $\alpha$-helix, \marginpar{$\alpha$} shown in Figure~\ref{subfig:alpha}, where the hydrogen bonds are formed between the backbone oxygen of one residue, and the hydrogen of the amine group, four residues beyond, and continued in a regular pattern, forcing the backbone to twist into a helix.
+The same bond is possible with residues that are closer -- two or three residues --, or further  -- five residues, the $\pi$ helix -- but are less common.
+
+The second most common arrangement is the $\beta$-sheet  \marginpar{$\beta$} depicted in Figure~\ref{subfig:beta}, where approximately extended chains are placed next to each other and bonds are formed between juxtaposed residues.
+
 \begin{figure}[hb]
 	\centering
 	\subcaptionbox{$\alpha$-helix\label{subfig:alpha}}{\includegraphics[width=0.9\textwidth]{bioinfo/figures/helix}}\\
@@ -46,7 +71,10 @@ The \emph{primary structure} is the sequence of amino acids as encoded in the DN
 
 
 \subsection{Tertiary structure}
-The amino acids are placed in very specific positions in space, the so-called \emph{tertiary structure}
+Once the chain is locally stabilised by the hydrogen bonds
+ 
+The amino acids are placed in very specific positions in space, the so-called \emph{tertiary structure.}
+In the 1960's Anfinsen showed
 
 
 \begin{figure}[htb]
@@ -68,7 +96,8 @@ The amino acids are placed in very specific positions in space, the so-called \e
 \subsection{Levinthal's paradox}
 %cite how to fold graciously
 \subsection{The protein backbone}
-\subsection{Energy terms} %Force field
 \subsection{The hydrophobic effect}
+\subsection{Energy terms} %Force field
+
 
 \section{Membrane proteins}

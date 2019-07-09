@@ -23,7 +23,7 @@ Also known as ``dense" layers, they are the simplest building block of deep lear
 To make them more general, they can include a \emph{bias} term, that is added after the multiplication.
 
 \begin{equation*}
-\vec{o} = W \cdot \vec{i} + \vec{b}
+\vec{o} = \widetilde W \cdot \vec{i} + \vec{b}
 \end{equation*}
 
 Every element of the output is a function of every input, so this layer destroys the structure of the data.
@@ -36,10 +36,25 @@ Convolutions capture spatial relationships in the data.
 
 \subsection{Recurrent}
 A recurrent layer tries to capture temporal dependencies on arbitrary time steps, such as those of natural language, or repeating motifs in proteins.
-They work by taking two inputs: the vector at the current position, and the hidden state of the previous cell.
-A simple cell:
+They work by taking two inputs: the vector at the current position ($\vec x_t$), and the hidden state of the previous cell ($\vec h_{t-1}$).
+A simple cell has the form:
 
-\todo{todo}
+\begin{align*}
+\vec h_t &= \sigma\left(\widetilde W_{hh} \vec{h}_{t-1} + \widetilde W_{xh} \vec{x}_{t}\right) \\
+\vec y_t &=  \widetilde W_{hy} \vec h_t,
+\end{align*}
+where $ \widetilde W_{\cdot \cdot}$ are three matrices, and $\sigma$ a non-linear function, usually the hyperbolic tangent.
+\marginpar{RNN as a rolled MLP}
+Note that this structure is very similar to a fully connected layer with two inputs, where the weights are shared across steps.
+The series of outputs at every time step $\vec y_t$ can be kept, to get a different prediction at every time step, or only considered the last one if we want a global one.
+
+This layer has practical problems. \marginpar{Convergence issues}
+In particular, as we will see in the next section, if the non-linearity is saturating -- like the hyperbolic tangent -- if any of the intermediate steps reaches the saturating region, the gradients will vanish, preventing the flow of information.
+If, instead, we use a non-saturating non-linearity we risk having an unstable dynamical system, where the values explode.
+The most popular solution \marginpar{LSTM} is the Long Short Term Memory (LSTM) layer, that will be explained in Section~\ref{sec:depth}.
+
+
+\citet{unreasonable_RNN} has a thorough introduction to Recurrent networks, and \citet{colah_rnn} delves deeper into the convergence issues in long range, and the solutions.
 
 \subsection{Non-linearities}
 The workhorse of deep learning layers are linear transformations.
@@ -321,7 +336,7 @@ At the end of the iteration, the minibatch is averaged, and the weights updated.
 
 %Learning representations
 
-\section{The quest for depth}
+\section{The quest for depth}\label{sec:depth}
 Deeper networks have advantages over shallower ones, even for the same number of parameters.
 For example, stacking convolutions with a few filters each means the final layer has a bigger receptive field than a single convolution with many filters.
 Furthermore, most layers are ``stupid" linear transformations with non-linearities between them.
@@ -354,7 +369,7 @@ too far from the labels, can we bring them closer, without sacrificing depth?
 While only the last one was actually used in production, the intermediate inject gradients and help train the lower layers.
 
 The last fundamental idea \marginpar{ResNets} are Residual Networks~\citep{resnet}, which allows to train networks of arbitrary depth.
-Resnets are composed of blocks of two layers (convolutions in the original paper, but applicable to any other type), where the output is directly added to the inputs using a so-called \emph{skip connection}, as illustrated in the Figure~\ref{fig:resnet}.
+Resnets are composed of blocks of two layers  -- convolutions in the original paper, but applicable to any other type -- , where the output is directly added to the inputs using a so-called \emph{skip connection}, as illustrated in the Figure~\ref{fig:resnet}.
 This extra path opens an information highway from the inputs to the labels.
 
 \begin{figure}[tb]
@@ -363,6 +378,8 @@ This extra path opens an information highway from the inputs to the labels.
 	\caption{Resnet block}\label{fig:resnet}
 \end{figure}
 
+Recurrent networks \marginpar{Recurrent networks, revisited}, albeit formally ``shallow" -- they typically have one or two layers -- face similar problems to feed-forward networks, now because the information has to travel along the time dimension
+A similar idea is applied in recurrent networks LSTM 
 
 \section{Deep transfer learning}
 \todo{do}

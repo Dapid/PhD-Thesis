@@ -73,7 +73,7 @@ The second most common arrangement is the $\beta$-sheet  \marginpar{$\beta$} dep
 \subsection{Tertiary structure}
 Once the chain is locally stabilised by the hydrogen bonds it needs to fold into a compact structure.
 The spatial arrangement of the secondary structure elements is the \emph{tertiary structure.}
-One example is the chain A of the protein \texttt{4V0B}, in Figure~\ref{fig:tertiary}
+One example is the chain A of the protein \texttt{4V0B}, in Figure~\ref{fig:tertiary}.
 
 
 \begin{figure}[htb]
@@ -94,28 +94,35 @@ The relative arrangement of each chain is the quaternary structure.
 
 %\subsection{Quintenary structure} %?
 \section{Protein biochemistry}
-\subsection{Levinthal's paradox}
-Cite \citep{fold_graciously}
-%cite how to fold graciously
-\subsection{The protein backbone}
-\subsection{The hydrophobic effect}
-\subsection{Energy terms} %Force field
 
+\citet{fold_graciously} \marginpar{Levinthal's paradox}
+
+%\subsection{The protein backbone}
+\subsection{The hydrophobic effect}
+\subsection{Energy terms}
+A relatively generic form of the energy dictating the dynamics of a protein is:
 \begin{align*}
-H(\left\{r\right\}_{i=0}^N) =& \sum_{bonds} k_b \left(d - d_0\right)^2 + 
-\sum_{angles} k_a \left(\theta - \theta_0\right) +  \\
-&+ \sum_{torsions} f\left(\omega\right) +
-\sum_{free\ pairs} k_{ij} \left[\left(\frac{r_{0ij}}{r_{ij}}\right)^{12} - 2 \left(\frac{r_{0ij}}{r_{ij}}\right)^{6} \right] + \\
-&+ \sum_{pairs} \frac{q_i q_j}{4 \pi \epsilon r_{ij}}
+H(\left\{r\right\}_{i=0}^N) =& \underbrace{\sum_{bonds} k_b \left(d - d_0\right)^2}_\alpha + 
+\underbrace{\sum_{angles} k_a \left(\theta - \theta_0\right)}_\beta +  \\
+&+ \underbrace{\sum_{torsions} f\left(\omega\right)}_\gamma +
+\underbrace{\sum_{free\ pairs} k_{ij} \left[\left(\frac{r_{0ij}}{r_{ij}}\right)^{12} - 2 \left(\frac{r_{0ij}}{r_{ij}}\right)^{6} \right]}_\delta + \\
+&+ \underbrace{\sum_{i,j} \frac{q_i q_j}{4 \pi \epsilon r_{ij}}}_\epsilon
 \end{align*}
 The terms correspond to:
 
 \begin{itemize}
-\item Harmonic potential on the bond lengths.
-\item Harmonic potential on the bond angles.
-\item Arbitrary function $f$ on every torsion angle.
-\item Lennard-Jones potential between all unbonded pairs.
-\item Electrostatic energy between charges.
+\item[$\alpha$] Harmonic potential on the bond lengths $d$ for every pair of covalent bonded atoms, where $d_0$ is the ideal bond length and $k_b$ is the strength of the potential for the atom types.
+\item[$\beta$] Harmonic potential on the angles between adjacent bonds $\theta$.
+\item[$\gamma$] Arbitrary function $f$ on every torsion angle $\omega$.
+\item[$\delta$] Lennard-Jones potential between all pairs of atoms not covalent bonded, where $r_{0ij}$ denotes the equilibrium distance and $k_{ij}$ the depth of the energy well.
+\item[$\epsilon$] Electrostatic energy between charges, assuming they are spherically distributed.
 \end{itemize}
 
+Of these terms, $\alpha$ and $\beta$ are strictly valid only near their respective minima, while $\delta$ is valid for distances around and beyond the minimum.
+In practice, this is not a significant problem because we can set them to the ideal values, and the perturbations are typically small.
+From here we can see that most of the dynamics in proteins is given by the flexibility of the torsion angles.
+Roughly speaking the torsions on the backbone determine the secondary structure, and the torsions of the side chains determine the packing.
+
 \section{Membrane proteins}
+
+\section{Experimental determination}

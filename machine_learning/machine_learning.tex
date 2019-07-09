@@ -33,7 +33,7 @@ Here are, in broad strokes, some of the main types that cover the majority of th
 
 \subsection{Do we have labels?}
 \begin{itemize}
-\item \emph{Unsupervised:} we do not have data with annotated target values. \emph{Ex: clustering, dimensionality reduction.}
+\item \emph{Unsupervised:} we do not have data with annotated target values. \emph{Ex: clustering of DNA sequences, dimensionality reduction.}
 \item \emph{Supervised:} our training data has assigned labels, and we want to predict them to new data. \emph{Ex: protein secondary structure prediction, linear regression.}
 \end{itemize}
 
@@ -77,7 +77,7 @@ For a matrix $ \widetilde X$ of observations and a vector of target $\vec y$, OL
 \end{equation*}
 where $d$ is the number of dimensions of the inputs, ie., the number of input features.
 
-This method is simple and can be solved efficiently by linear algebra libraries through, for example, an LU decomposition.
+This method is simple and can be solved efficiently by linear algebra libraries through, for example, an LU decomposition\footnote{A standard procedure to solve systems of equations, where the matrix $\widetilde{X}$ is factored into the product of a lower and an upper triangular matrices, without needing to explicitly invert the matrix. Then, the components of $\vec w$ can be obtained iteratively.}.
 But if there is co-linearity between input features, the matrix $ \widetilde X$ is close to singular, so its inverse can become numerically unstable.
 
 A simple solution \marginpar{Ridge} is to add a term that tends to shrink the coefficients of $\vec w$, and makes the solution unique even in the singular case:
@@ -148,7 +148,7 @@ p(\vec x \in i) &= \sigma(\vec z)_i
 \end{align*}
 where the last line is only necessary for classification.
 
-Although we now have more free parameters, the model is exactly equivalent to a linear model, since the two matrices $W_1$ and $W_2$ act right one after the other, so can be multiplied together to recover our equivalent weights.
+Although we now have more free parameters -- the components of the matrices $W_1$ and $W_2$ -- the model is exactly equivalent to a linear model, since the two matrices $W_1$ and $W_2$ act right one after the other, so can be multiplied together to recover our equivalent weights.
 This can be fixed by introducing an arbitrary non-linear function $f$ to the hidden layer:
 
 \begin{align*}
@@ -168,7 +168,7 @@ We can repeat the same procedure \marginpar{More layers!} and chain two hidden l
 p(\vec x \in i) &= \sigma(\vec z)_i
 \end{align*}
 
-The training is done by computing the gradients of the loss with respect to every parameter given a set of data, and updating the weights accordingly.
+The training is done by computing the gradients of the loss -- the measure of how wrong our predictions are -- with respect to every parameter -- the matrix elements -- given a set of data, and updating the weights accordingly.
 We will discuss this in more detail in Section~\ref{sec:grad_descent}.
 While there is no theoretical limit to how many hidden layers can be added, but two is the practical limit.
 This is because adding layers degrades the gradient from the previous ones, making it harder to converge, as the information cannot reach the first layers.

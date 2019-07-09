@@ -23,7 +23,7 @@ for g in h5.root:
 
 h5.close()
 
-f, ax = plt.subplot(1)
+f, ax = plt.subplots()
 dh = np.concatenate(dh)
 rsa = np.concatenate(rsa)
 rsa[rsa.argmax()] = 1

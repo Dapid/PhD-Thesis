@@ -1,4 +1,6 @@
 import settings
+
+from matplotlib.ticker import FuncFormatter, MultipleLocator
 import matplotlib.pyplot as plt
 
 import numpy as np
@@ -21,7 +23,7 @@ for g in h5.root:
 
 h5.close()
 
-plt.figure()
+f, ax = plt.subplot(1)
 dh = np.concatenate(dh)
 rsa = np.concatenate(rsa)
 rsa[rsa.argmax()] = 1
@@ -32,6 +34,11 @@ plt.xlabel(r'$\phi$')
 plt.ylabel(r'$\psi$')
 
 plt.colorbar(label='RSA')
+ax.xaxis.set_major_formatter(FuncFormatter(lambda val, pos: '{:.0g}$\pi$'.format(val / np.pi) if val != 0 else '0'))
+ax.xaxis.set_major_locator(MultipleLocator(base=np.pi))
+
+ax.yaxis.set_major_formatter(FuncFormatter(lambda val, pos: '{:.0g}$\pi$'.format(val / np.pi) if val != 0 else '0'))
+ax.yaxis.set_major_locator(MultipleLocator(base=np.pi))
 
 plt.tight_layout()
 plt.savefig('../figures/transfer_learning.pdf')

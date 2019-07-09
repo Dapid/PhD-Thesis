@@ -7,7 +7,7 @@ rc('axes', labelsize=22)
 rc('legend', fontsize=18)
 rc('axes', titlesize=30)
 rc('text', usetex=True)
-rc('text.latex', preamble=r'\usepackage{amsmath} \usepackage{amssymb} \usepackage[euler-digits]{eulervm}')
+rc('text.latex', preamble=r'\usepackage{amsmath} \usepackage{amssymb} \usepackage[euler-digits]{eulervm} \usepackage{nicefrac}')
 
 MAROON = '#AD1737'
 BLUE = 'RoyalBlue'

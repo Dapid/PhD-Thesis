@@ -15,7 +15,7 @@ Deep neural networks have shown to be good at tasks that humans cannot perform w
 %The rest of this chapter will contain a summary of the fundamental blocks, how to train, 
 
 \section{The basic blocks}
-A deep learning model is composed by a series of layers, or simple transformations (usually linear), plus a point-wise non-linearity.
+A deep learning model is composed by a series of layers, or simple transformations -- usually linear -- plus a point-wise non-linearity.
 
 
 \subsection{Fully connected layers}
@@ -119,7 +119,7 @@ The function applied depends on the properties of the target.
 \item If the output is a regression, use a linear layer to minimise the squeezing of the outputs.
 This is valid even if the output is bounded between 0 and 1, when the values at the extrema are likely to appear, because the network would need to learn very high values for the logits.
 \item If the outputs are angles, split the labels into sines and cosines and use the hyperbolic tangent.
-This representation preserves angular distances (ie, angles that differ by almost $2 \pi$ are close), and are not biased towards an arbitrary middle point.
+This representation preserves angular distances -- ie, angles that differ by almost $2 \pi$ are close -- and are not biased towards an arbitrary middle point.
 The original angle can be recovered using the $\arctantwo$ function.
 \end{itemize}
 
@@ -297,14 +297,14 @@ If this term is proportional to the square of the weights, it is called $L^2$ re
 
 The most popular technique \marginpar{Dropout} 
 specifically developed for deep learning is Dropout,~\citep{dropout}. 
-During training, a random fraction $0 < \rho < 1$ of intermediate inputs is set to $0$ (\emph{dropped out}), while the rest of values are scaled by a factor of $\frac{1}{1-\rho}$ to compensate.
+During training, a random fraction $0 < \rho < 1$ of intermediate inputs is set to $0$ -- \emph{dropped out} --  while the rest of values are scaled by a factor of $\frac{1}{1-\rho}$ to compensate.
 Since the network cannot trust any particular neuron activation to be present, it must distribute the information across different parts.
 The network is effectively different for every batch, so we are training an ensemble of models, most of which have not seen any data, but are heavily regularised to the average.
 At prediction time, dropout is usually turned off, but if we leave it on and sample with the same input, we can estimate the uncertainty of the prediction like in Gaussian Processes.
 
 The next breakthrough in regularisation is Batch Normalisation, \marginpar{Batchnorm}
 or Batchnorm~\citep{bn}.
-This has the unusual properties of both increasing generalisation capabilities (thus serving as a regulariser), and helping training performance (ergo, without hindering).
+This has the unusual properties of both increasing generalisation capabilities -- thus serving as a regulariser -- and helping training performance -- ergo, without hindering.
 
 It works as a layer that learns the mean and standard deviation of the distribution of its inputs, and corrects them to keep them close to 0 and 1, respectively.
 As was seen with some optimisers, it can keep a momentum term to smooth out the changes in averages.
@@ -369,7 +369,7 @@ too far from the labels, can we bring them closer, without sacrificing depth?
 While only the last one was actually used in production, the intermediate inject gradients and help train the lower layers.
 
 The last fundamental idea \marginpar{ResNets} are Residual Networks~\citep{resnet}, which allows to train networks of arbitrary depth.
-Resnets are composed of blocks of two layers  -- convolutions in the original paper, but applicable to any other type -- , where the output is directly added to the inputs using a so-called \emph{skip connection}, as illustrated in the Figure~\ref{fig:resnet}.
+Resnets are composed of blocks of two layers  -- convolutions in the original paper, but applicable to any other type -- where the output is directly added to the inputs using a so-called \emph{skip connection}, as illustrated in the Figure~\ref{fig:resnet}.
 This extra path opens an information highway from the inputs to the labels.
 
 \begin{figure}[tb]
@@ -378,8 +378,11 @@ This extra path opens an information highway from the inputs to the labels.
 	\caption{Resnet block}\label{fig:resnet}
 \end{figure}
 
-Recurrent networks \marginpar{Recurrent networks, revisited}, albeit formally ``shallow" -- they typically have one or two layers -- face similar problems to feed-forward networks, now because the information has to travel along the time dimension
-A similar idea is applied in recurrent networks LSTM 
+Recurrent networks \marginpar{Recurrent networks, revisited}, albeit formally ``shallow" -- they typically have one or two layers -- face similar problems to feed-forward networks, now because the information has to travel along the time dimension.
+Long Short Term Memory (LSTM) layers are a variation of the simple RNN that includes some internal skip connections, allowing the network to transfer long range information, but also ``forget" gates that can learn to ignore certain parts of the input that may be irrelevant.
+
+\citet{difficult_recurrent} explored the influence and solutions of initialisations and non-linearities to the problems of vanishing and exploding gradients, and provide recipes for training recurrent networks minimising these problems.
+
 
 \section{Deep transfer learning}
 \todo{do}

@@ -101,13 +101,13 @@ The relative arrangement of each chain is the quaternary structure.
 \subsection{The hydrophobic effect}
 \subsection{Energy terms}
 A relatively generic form of the energy dictating the dynamics of a protein is:
-\begin{align*}
-H(\left\{r\right\}_{i=0}^N) =& \underbrace{\sum_{bonds} k_b \left(d - d_0\right)^2}_\alpha + 
-\underbrace{\sum_{angles} k_a \left(\theta - \theta_0\right)}_\beta +  \\
+\begin{align}
+H(\left\{\vec r_i\right\}_{i=0}^N) =& \underbrace{\sum_{bonds} k_b \left(d - d_0\right)^2}_\alpha + 
+\underbrace{\sum_{angles} k_a \left(\theta - \theta_0\right)}_\beta +  \nonumber \\
 &+ \underbrace{\sum_{torsions} f\left(\omega\right)}_\gamma +
-\underbrace{\sum_{free\ pairs} k_{ij} \left[\left(\frac{r_{0ij}}{r_{ij}}\right)^{12} - 2 \left(\frac{r_{0ij}}{r_{ij}}\right)^{6} \right]}_\delta + \\
+\underbrace{\sum_{free\ pairs} k_{ij} \left[\left(\frac{r_{0ij}}{r_{ij}}\right)^{12} - 2 \left(\frac{r_{0ij}}{r_{ij}}\right)^{6} \right]}_\delta + \nonumber \\
 &+ \underbrace{\sum_{i,j} \frac{q_i q_j}{4 \pi \epsilon r_{ij}}}_\epsilon
-\end{align*}
+\end{align}
 The terms correspond to:
 
 \begin{itemize}
@@ -118,8 +118,11 @@ The terms correspond to:
 \item[$\epsilon$] Electrostatic energy between charges, assuming they are spherically distributed.
 \end{itemize}
 
+Note that the collection $\vec r_i$ % $\left\{\vec r_i\right\}_{i=0}^N$
+includes the water molecules and other atoms in the environment of the protein itself.
+
 Of these terms, $\alpha$ and $\beta$ are strictly valid only near their respective minima, while $\delta$ is valid for distances around and beyond the minimum.
-In practice, this is not a significant problem because we can set them to the ideal values, and the perturbations are typically small.
+In practice, this is not a significant problem because the deviations from the ideal values are small. \marginpar{Dynamics}
 From here we can see that most of the dynamics in proteins is given by the flexibility of the torsion angles.
 Roughly speaking the torsions on the backbone determine the secondary structure, and the torsions of the side chains determine the packing.
 

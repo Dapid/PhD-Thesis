@@ -220,7 +220,7 @@ where $p_k$ is the fraction of labels equal to $k$ in the group.
 
 A decision tree splits recursively the training based on the feature that gives the highest decrease in Gini impurity, as illustrated on the Figure~\ref{subfig:gini}.
 The final result is a series of simple boolean rules that can be interpreted by humans.
-Figure~\ref{subfig:tree_explained} is an example: the root of the tree (shown in white) contains all the training points, and each branch splits it according to a single feature.
+Figure~\ref{subfig:tree_explained} is an example: the root of the tree -- shown in white -- contains all the training points, and each branch splits it according to a single feature.
 The process is repeated until no more cuts can improve the performance, or until the tree reaches a maximum depth.
 
 \begin{figure}[tb]
@@ -278,7 +278,7 @@ and a series of eigenfunctions of the covariance function.
 	
 For example,\marginpar{RBF appears again} the previously seen radial basis covariance function defines the Hilbert space of $C^\infty \cap L^2$ functions: all the smooth functions of squared-integrable..
 	
-The GP will thus project our $n$ data points into this $N$ dimensional space (in general, $N >> n$; usually $N = \infty$). Note that, due to geometry, our $n$ data points must live in a $n$-dimensional subspace of $\mathscr{H}$.
+The GP will thus project our $n$ data points into this $N$ dimensional space -- in general, $N >> n$; usually $N = \infty$. Note that, due to geometry, our $n$ data points must live in a $n$-dimensional subspace of $\mathscr{H}$.
 The output is an estimation $\hat f$ of our latent function $f$, that can be interpreted as a decomposition in the eigenfunctions of our covariance function.
 	
 	\[\hat f(x) = \sum_{i=0}^{n} c_i \phi_i(x)\]

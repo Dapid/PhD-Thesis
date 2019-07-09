@@ -34,5 +34,5 @@ plt.ylabel(r'$\psi$')
 plt.colorbar(label='RSA')
 
 plt.tight_layout()
-plt.show()
 plt.savefig('../figures/transfer_learning.pdf')
+plt.show()

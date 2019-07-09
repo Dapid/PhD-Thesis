@@ -71,10 +71,9 @@ The second most common arrangement is the $\beta$-sheet  \marginpar{$\beta$} dep
 
 
 \subsection{Tertiary structure}
-Once the chain is locally stabilised by the hydrogen bonds
- 
-The amino acids are placed in very specific positions in space, the so-called \emph{tertiary structure.}
-In the 1960's Anfinsen showed
+Once the chain is locally stabilised by the hydrogen bonds it needs to fold into a compact structure.
+The spatial arrangement of the secondary structure elements is the \emph{tertiary structure.}
+One example is the chain A of the protein \texttt{4V0B}, in Figure~\ref{fig:tertiary}
 
 
 \begin{figure}[htb]
@@ -84,6 +83,8 @@ In the 1960's Anfinsen showed
 \end{figure}
 
 \subsection{Quaternary structure}
+Proteins do not always work alone, but they form complexes composed of several chains.
+The relative arrangement of each chain is the quaternary structure.
 
 \begin{figure}[htb]
 \centering
@@ -100,5 +101,21 @@ Cite \citep{fold_graciously}
 \subsection{The hydrophobic effect}
 \subsection{Energy terms} %Force field
 
+\begin{align*}
+H(\left\{r\right\}_{i=0}^N) =& \sum_{bonds} k_b \left(d - d_0\right)^2 + 
+\sum_{angles} k_a \left(\theta - \theta_0\right) +  \\
+&+ \sum_{torsions} f\left(\omega\right) +
+\sum_{free\ pairs} k_{ij} \left[\left(\frac{r_{0ij}}{r_{ij}}\right)^{12} - 2 \left(\frac{r_{0ij}}{r_{ij}}\right)^{6} \right] + \\
+&+ \sum_{pairs} \frac{q_i q_j}{4 \pi \epsilon r_{ij}}
+\end{align*}
+The terms correspond to:
+
+\begin{itemize}
+\item Harmonic potential on the bond lengths.
+\item Harmonic potential on the bond angles.
+\item Arbitrary function $f$ on every torsion angle.
+\item Lennard-Jones potential between all unbonded pairs.
+\item Electrostatic energy between charges.
+\end{itemize}
 
 \section{Membrane proteins}

@@ -17,5 +17,5 @@ check:
 	@find . -name "*tex" | xargs -I [] grep \" [] | grep -v "\`\`" && exit 1 || exit 0
 
 txt:
-	pandoc -f latex -t plain -o thesis.txt main.tex
+	pandoc -f latex --bibliography=references.bib -t plain -o thesis.txt main.tex
 

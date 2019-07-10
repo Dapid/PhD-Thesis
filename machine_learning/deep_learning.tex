@@ -1,4 +1,4 @@
-\chapter{Deep learning}
+\chapter{Deep learning}t
 We saw in the previous chapter how to turn simple linear models into more general multi-layered perceptrons via stacking.
 
 \section{Success stories}
@@ -340,7 +340,7 @@ Then, the gradients are clipped, so that any microbatch can provide only so much
 At the end of the iteration, the minibatch is averaged, and the weights updated.
 
 
-\section[Tensors and gradients]{Conjunctive tissue: tensors and gradients}
+\section[Tensors and gradients]{Conjunctive tissue: tensors and gradients}\label{sec:tensors}
 \todo{todo}
 \todo{learning representations}
 
@@ -382,7 +382,7 @@ The last fundamental idea \marginpar{ResNets} are Residual Networks~\citep{resne
 Resnets are composed of blocks of two layers  -- convolutions in the original paper, but applicable to any other type -- where the output is directly added to the inputs using a so-called \emph{skip connection}, as illustrated in the Figure~\ref{fig:resnet}.
 This extra path opens an information highway from the inputs to the labels.
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[width=0.45\textwidth]{machine_learning/figures/resnet}
 	\caption{The Resnet block as appeared in the publication.
@@ -398,10 +398,11 @@ Long Short Term Memory (LSTM) layers are a variation of the simple RNN that incl
 \section{Deep transfer learning}
 The success of machine learning is tightly coupled to the quality and quantity of both the training data and the labels.
 The concept of \emph{transfer learning} can help us mitigate to some extent these limitations by leveraging related datasets and extracting knowledge.
-It comes in two flavours: multi-task learning, and representation learning.
+It comes in two flavours: multi-task, and representation learning.
 
-\subsection{Multiple task}
+\subsection{Multiple tasks}
 Some tasks are related to each other, so a model that learns them simultaneously will perform better than when done independently.
+\marginpar{A worked example}
 Figure~\ref{fig:transfer_learning} shows the Ramachandran plot,  $\phi$ and $\psi$ dihedral angles, for a set of proteins.
 The points are clustered in distinct regions, suggesting that knowledge of one of the angles also conditions the other.
 An algorithm that learns them together has a better chance of recovering this relationship than two distinct models without information from each other.
@@ -409,10 +410,18 @@ Furthermore, the dihedral angles are conditioned by secondary structure, so for 
 Lastly, we can observe that the surface accessibility is not completely conditioned by the dihedral angles, but they are not independent.
 Indeed, $\alpha$-helices are more likely to be exposed than $\beta$-sheets, but rarely more than 60\%.
 
-%injecting gradients
-%easier tasks
+The ways multi-task learning \marginpar{The general case} can help our predictions are:
+\begin{itemize}
+	\item Implicitly learn of the joint distributions of dependent outputs.
+	\item Some tasks are difficult.
+	Having labels for an easier task can help bring the network to a state where it is easier to predict the harder one.
+	\item Even if the tasks are equally hard, combining gradients from several tasks can help reduce noise and improve convergence.
+	\item Labels from different annotations mean we have more data, which means we can train a larger and more expressive model.
+	%In the extreme case where we have two tasks completely unrelated, the network will converge into two separated sub-networks, so we can train a network that is, ideally, as big as the sum of the ideal network for each of the two tasks.
+	%In the practical case, where tasks are indeed related, a significant fraction of the network is ``recycled", so each section is effectively bigger.
+\end{itemize}
 
-\begin{figure}
+\begin{figure}[bht]
 \centering
 \input{machine_learning/figures/transfer_learning_annotated.tikz} %
 \caption{Plot of the $\phi$ and $\psi$ dihedral angles for a random set of ten proteins.
@@ -420,3 +429,6 @@ The colouring correspond to their relative exposure to solvent (RSA),
 and the annotated clusters correspond to the most common secondary structure elements.
 The figure shows how the three tasks, albeit independent, can help each other. }\label{fig:transfer_learning}
 \end{figure}
+
+\subsection{Representation learning}
+As explained in Section~\ref{sec:tensors}, each intermediate layer in a deep network is learning a representation of its inputs th.

@@ -13,3 +13,6 @@ count:
 	@echo -n "FIGS: "
 	@find . -name "*.tex" | xargs grep -F "\missingfigure" | wc -l
 
+check:
+	@find . -name "*tex" | xargs -I [] grep \" [] | grep -v "\`\`" && exit 1 || exit 0 
+

@@ -324,7 +324,7 @@ The reason why Batch Normalisation actually works as a regulariser was not well 
 On a higher level,\marginpar{Architectural}
 we can design our network to be robust with respect to invariances in our data.
 For example, convolutions are translational invariant, so a convolution-based secondary structure predictor will be able to recognise the sequence signature of an $\alpha$-helix regardless of its relative position.
-We can also  design our training and architecture to fit the problem, as we did on Paper IV.
+We can also  design our training and architecture to fit the problem, as we did on Paper \textcolor{Maroon}{IV}.
 
 Sometimes, \marginpar{Data augmentation} we wish our network to learn an invariance that cannot be embedded in the network architecture or the representation, such as scales of natural images in computer vision, or multiple sequence alignment quality in protein bioinformatics.
 Since deep learning models can leverage arbitrarily large datasets, we can use \emph{data augmentation}, a procedure where data points at training time are modified in the way we want our network to learn invariance.
@@ -343,7 +343,9 @@ At the end of the iteration, the mini-batch is averaged, and the weights updated
 \section[Tensors and gradients]{Conjunctive tissue: tensors and gradients}\label{sec:tensors}
 \todo{todo}
 \todo{learning representations}
-
+each intermediate layer in a deep network is learning a representation of its inputs, a transformation that brings it closer to the target.
+These representations are, in general, difficult for humans to interpret, but in computer vision we can \emph{visualise} them.
+A convolutional network trained to identify objects in images will learn
 
 
 \section{The quest for depth}\label{sec:depth}
@@ -421,6 +423,8 @@ The ways multi-task learning \marginpar{The general case} can help our predictio
 	%In the practical case, where tasks are indeed related, a significant fraction of the network is ``recycled", so each section is effectively bigger.
 \end{itemize}
 
+This was the idea behind the secondary structure predictor used in Papers \textcolor{Maroon}{III} and \textcolor{Maroon}{IV}.
+
 \begin{figure}[bht]
 \centering
 \input{machine_learning/figures/transfer_learning_annotated.tikz} %
@@ -432,4 +436,10 @@ The figure shows how the three tasks, albeit independent, can help each other. }
 
 \subsection{Representation learning}
 As explained in Section~\ref{sec:tensors}, each intermediate layer in a deep network is learning a representation of its inputs, a transformation that brings it closer to the target.
-Interpreting the nature of these representations is difficult for humans
+If the dataset for our task of interest is small or biased, our network will not be able to learn a good representation, ergo the performance will be poor.
+
+With transfer learning we can learn a high quality representation on a related task for which we have a suitable dataset, and transfer it to our model of interest.
+\todo{finish}
+
+Paper \textcolor{Maroon}{IV}
+

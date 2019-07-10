@@ -3,18 +3,18 @@
 
 The Scientific Revolution during the Renaissance \marginpar{A historical note}
 was fuelled by the realisation that Nature can be parametrised using only a handful of equations.
-With these tools, and sufficient measurements, natural philosophers could use the universal equations to fully model the mechanical universe.
+With these tools and sufficient measurements, natural philosophers could use the universal equations to fully model the mechanical universe.
 As mathematical tools improved, increasingly more complex systems could be analysed, such as orbits of astrophysical objects or complex optical designs.
 Furthermore, the development of computers allowed for an explosion in the size and breadth of tractable problems, such as dynamics of atomic nuclei, or weather forecast.
 
-These applications were either developed from first principles, or as effective theories; but contained at their core, relatively simple mathematical models.
+These applications were either developed from first principles or as effective theories; but contained at their core, relatively simple mathematical models.
 For example, modelling the dynamics of $n$-bodies gravitationally interacting are very rich and complicated to solve, but they all spawn from two simple equations, Newton's second law of motion for an object of mass $m$: $\vec{F} = m \cdot \vec{a}$ and the force of gravity between two objects of masses $m_1$ and $m_2$: $F_g=G\frac{m_1  m_2}{r^2}$.
 
 But the advent of computers not only gave us mathematical muscle, it also allowed to connect them to sensors;
 providing us with large amounts of data about the real world.
 Data that can be used to fit statistical models, even in the absence of underlying mathematical theories, such as recognising objects in images, identifying where in the cell a protein is going to end up, or translating natural language.
 The Scientific Revolution of the 16th century brought the concept \emph{``if it can be measured, it can be modelled"}, but the Data Revolution of the 20th century expanded it \emph{``if it can be \emph{represented}, it can be modelled"}.
-We went from measuring the variables present in our equations, to representing the world in numbers in a computer.
+We went from measuring the variables present in our equations, to representing the world in numbers on a computer.
 
 %This opens new oportunities to tackle and explore anything we 
 
@@ -61,10 +61,10 @@ But this versatility comes with a cost: they require more data to train.
 Can we take it to the extreme?
 \marginpar{A theoretical result} 
 Can we train a model completely free  of assumptions in the case of infinite data? The No Free Lunch Theorem \citep{no_free_lunch} says, averaging over all problems, all algorithms are equally good.
-In other words, without inputting domain knowledge that restrict the space of possibilities, we cannot do better than random. \todo{elaborate}
+In other words, without inputting domain knowledge that restricts the space of possibilities, we cannot do better than random. \todo{elaborate}
 
 \section[Traditional machine learning]{A point of comparison: traditional machine learning}
-In this section, I will give an overview to some of the most popular supervised machine learning algorithms to illustrate how they work, and the kind of underlying assumptions they operate under.
+In this section, I will give an overview of some of the most popular supervised machine learning algorithms to illustrate how they work, and the kind of underlying assumptions they operate under.
 I will describe them in their simplest form, be it for regression or classification, but both can be easily generalised: a regression algorithm can be turned to a binary classifier mapping the positive and negative labels to $(1, -1)$ or vice-versa.
 A binary classifier can be used in a problem with $N$ classes by either training $N$ binary classifiers for each class versus the rest, or all the $\binom{N}{2}$ pairwise binary classifications.
 
@@ -86,7 +86,7 @@ A simple solution \marginpar{Ridge} is to add a term that tends to shrink the co
 where $\lambda$ regulates the strength of this shrinkage.
 Since the penalisation depends on the $L^2$ norm of the vector $w$, the weight of co-linear features will be ``distributed" amongst them.
 
-Sometimes, we want sparse weights, \marginpar{LASSO} for example if we know some features are irrelevant, but we don't know which ones.
+Sometimes, we want sparse weights, \marginpar{LASSO} for example, if we know some features are irrelevant, but we don't know which ones.
 We can then use $L^1$ regularisation:
 
 \[ L_{LASSO} = || \widetilde X \vec w - \vec y ||_2 ^2 + \alpha ||\vec w||_1^2,\]
@@ -116,7 +116,7 @@ Each class has one linear model given by the vector of weights $\left\{\vec w_i 
 \end{equation*}
 where $\widetilde W$ is a $(N \times d)$ matrix.
 The components of the vector $\vec{z}$ are called the \emph{logits}. 
-To obtain probabilities we use the exponential to make them all positive, and normalise the sum.
+To obtain probabilities we use the exponential to make them all positive and normalise the sum.
 This is called the softmax function:
 
 \begin{equation*}
@@ -136,7 +136,7 @@ In particular, \ref{subfig:logistic_strong}, has a much narrower region of uncer
 \end{figure}
 
 
-\subsection{Multi Layer Perceptron}\label{sec:mlp}
+\subsection{Multi-Layer Perceptron}\label{sec:mlp}
 A linear model on $d$ features is limited to $d$ free parameters, or at most $d \cdot N$ for $N$ classes, and is limited to linear functions.
 When we have more data, and more complicated tasks, we would like to be able to learn more parameters.
 A simple way to do so is to build upon linear models, and have an intermediate \emph{hidden state} $\vec{h}$ of arbitrary dimension.
@@ -200,7 +200,7 @@ which implicitly projects the data into an infinite-dimensional space.
 Another way of interpreting the kernel trick is to think of it as learning a deformation of the space that makes the data separable by a hyperplane, a linear function.
 
 \subsection{\emph{k}-Nearest Neighbour}
-A Nearest Neighbour classifier takes the $k$ closest points in the training set, and predicts the most common label.
+A Nearest Neighbour classifier takes the $k$ closest points in the training set and predicts the most common label.
 \marginpar{Bias-variance tradeoff}
 The choice of $k$ is a balance between noise and flexibility: smaller values give more distinct frontiers, but are more susceptible to noise.
 
@@ -244,7 +244,7 @@ The process is repeated until no more cuts can improve the performance, or until
 
 
 \subsection{Random Forest}\label{sec:random_forest}
-A Random Forest is an ensemble of decision trees, as described in the section~\ref{sec:decision_tree}.
+A Random Forest is an ensemble of decision trees, as described in Section~\ref{sec:decision_tree}.
 Each tree is trained on a random subset of the data, and the final score is a vote across the trees.
 Furthermore, for every split, we only consider a new random subset of the features, to increase diversity.
 The advantage over a single decision tree is that now we have an ensemble of trees, each trained on slightly different data.
@@ -277,15 +277,15 @@ This induces a metric defined through the distance:
 	\[	d(f, g) =\int_{\mathcal{R}}  f(x) k(x, x') g(x') dx dx', \]
 and a series of eigenfunctions of the covariance function.
 	
-For example,\marginpar{RBF appears again} the previously seen radial basis covariance function defines the Hilbert space of $C^\infty \cap L^2$ functions: all the smooth functions of squared-integrable..
+For example,\marginpar{RBF appears again} the previously seen radial basis covariance function defines the Hilbert space of $C^\infty \cap L^2$ functions: all the smooth functions of square-integrable..
 	
-The GP will thus project our $n$ data points into this $N$ dimensional space -- in general, $N >> n$; usually $N = \infty$. Note that, due to geometry, our $n$ data points must live in a $n$-dimensional subspace of $\mathscr{H}$.
+The GP will thus project our $n$ data points into this $N$-dimensional space -- in general, $N >> n$; usually $N = \infty$. Note that, due to geometry, our $n$ data points must live in an $n$-dimensional subspace of $\mathscr{H}$.
 The output is an estimation $\hat f$ of our latent function $f$, that can be interpreted as a decomposition in the eigenfunctions of our covariance function.
 	
 	\[\hat f(x) = \sum_{i=0}^{n} c_i \phi_i(x)\]
 	
 But, unlike other procedures, $c_i$ have probability distributions over them.
-We can use them to sample likely candidates for the latent function, as shown in the Figure~\ref{fig:gp_sampling}.
+We can use them to sample likely candidates for the latent function, as shown in Figure~\ref{fig:gp_sampling}.
 	
 \begin{figure}[hbt]
 \centering

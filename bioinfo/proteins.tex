@@ -50,7 +50,7 @@ The \emph{primary structure} is the sequence of amino acids as encoded in the DN
 \texttt{ALA ARG ILE ASN GLY ARG GLU ILE ASN VAL THR LYS LYS}
 \end{center}
 
-This is the easiest to obtain experimentally, since the advent of next generation sequencing techniques.
+This is the easiest to obtain experimentally, since the advent of next-generation sequencing techniques.
 The collection of all protein sequences of an organism is the \emph{proteome}.
 
 
@@ -100,7 +100,7 @@ As long as the protein is chemically unaltered, it will recover the tertiary str
 This was codified as Anfinsen's dogma: under physiological conditions, the primary structure of globular proteins determines the secondary and tertiary structure, and thus, its function, independently of the cell's machinery \citep{Anfinsen_dogma}.
 Typically, the fully folded state is reached in the order of mili- to seconds.
 The hypothesis has a few exceptions, namely large, fibrous proteins, prions -- proteins with alternative, stable conformations -- and aggregating proteins -- where the individual proteins bind to each other forming large and non-functional structures.
-A reasonable hypothesis is that, a priori, the native conformation seems to be the state in the lowest energy, and the random coil is just rolling down the energy landscape.
+A reasonable hypothesis is that a priori, the native conformation seems to be the state in the lowest energy, and the random coil is just rolling down the energy landscape.
 
 \citet{fold_graciously} \marginpar{Levinthal's paradox} noted that, for every amino acid, a protein has two main degrees of freedom corresponding to the torsion of the backbone, plus one more for the rotation of the side chain.
 This gives us a configuration space of the order of $10^{2L}$ for a protein of $L$ residues, but the kinematics suggest that it only has time to sample $10^8$ conformations, an exponentially tiny fraction for proteins of typical length.
@@ -131,7 +131,7 @@ H(\left\{\vec r_i\right\}_{i=0}^N) =& \underbrace{\sum_{bonds} k_b \left(d - d_0
 The terms correspond to:
 
 \begin{itemize}
-\item[$\alpha$] A harmonic potential on the bond lengths $d$ for every pair of covalent bonded atoms, where $d_0$ is the ideal bond length and $k_b$ is the strength of the potential for the atom types.
+\item[$\alpha$] A harmonic potential on the bond lengths $d$ for every pair of covalently bonded atoms, where $d_0$ is the ideal bond length and $k_b$ is the strength of the potential for the atom types.
 \item[$\beta$] A harmonic potential on the angles between adjacent bonds $\theta$.
 \item[$\gamma$] An arbitrary function $f$ on every torsion angle $\omega$.
 \item[$\delta$] The Lennard-Jones potential between all pairs of atoms not covalent bonded, where $r_{0ij}$ denotes the equilibrium distance and $k_{ij}$ the depth of the energy well.
@@ -144,7 +144,7 @@ includes the water molecules and other atoms in the environment of the protein i
 Of these terms, $\alpha$ and $\beta$ are strictly valid only near their respective minima, while $\delta$ is valid for distances around and beyond the minimum.
 In practice, this is not a significant problem because the deviations from the ideal values are small. \marginpar{Dynamics}
 From here we can see that most of the dynamics in proteins is given by the flexibility of the torsion angles.
-Roughly speaking the torsions on the backbone determine the secondary structure, and the torsions of the side chains determine the packing.
+Roughly speaking the torsions on the backbone determine the secondary structure and the torsions of the side chains determine the packing.
 
 \section{Membrane proteins}
 

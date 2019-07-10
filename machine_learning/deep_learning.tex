@@ -382,10 +382,11 @@ The last fundamental idea \marginpar{ResNets} are Residual Networks~\citep{resne
 Resnets are composed of blocks of two layers  -- convolutions in the original paper, but applicable to any other type -- where the output is directly added to the inputs using a so-called \emph{skip connection}, as illustrated in the Figure~\ref{fig:resnet}.
 This extra path opens an information highway from the inputs to the labels.
 
-\begin{figure}[tb]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.45\textwidth]{machine_learning/figures/resnet}
-	\caption{Resnet block}\label{fig:resnet}
+	\caption{The Resnet block as appeared in the publication.
+	Note that placing the BatchNorm after the activation is usually advantageous.}\label{fig:resnet}
 \end{figure}
 
 Recurrent networks \marginpar{Recurrent networks, revisited}, albeit formally ``shallow" -- they typically have one or two layers -- face similar problems to feed-forward networks, now because the information has to travel along the time dimension.
@@ -400,12 +401,22 @@ The concept of \emph{transfer learning} can help us mitigate to some extent thes
 It comes in two flavours: multi-task learning, and representation learning.
 
 \subsection{Multiple task}
-Some tasks are strongly related.
-\todo{todo}
+Some tasks are related to each other, so a model that learns them simultaneously will perform better than when done independently.
+Figure~\ref{fig:transfer_learning} shows the Ramachandran plot,  $\phi$ and $\psi$ dihedral angles, for a set of proteins.
+The points are clustered in distinct regions, suggesting that knowledge of one of the angles also conditions the other.
+An algorithm that learns them together has a better chance of recovering this relationship than two distinct models without information from each other.
+Furthermore, the dihedral angles are conditioned by secondary structure, so for example, knowing a residue is in an $\alpha$-helix means the $\psi$ angle is close to zero.
+Lastly, we can observe that the surface accessibility is not completely conditioned by the dihedral angles, but they are not independent.
+Indeed, $\alpha$-helices are more likely to be exposed than $\beta$-sheets, but rarely more than 60\%.
+
+%injecting gradients
+%easier tasks
 
 \begin{figure}
 \centering
 \input{machine_learning/figures/transfer_learning_annotated.tikz} %
-\caption{Dihedral angles, surface accessibility, and secondary structure for a random set of ten proteins.
+\caption{Plot of the $\phi$ and $\psi$ dihedral angles for a random set of ten proteins.
+The colouring correspond to their relative exposure to solvent (RSA), 
+and the annotated clusters correspond to the most common secondary structure elements.
 The figure shows how the three tasks, albeit independent, can help each other. }\label{fig:transfer_learning}
 \end{figure}

@@ -14,5 +14,8 @@ count:
 	@find . -name "*.tex" | xargs grep -F "\missingfigure" | wc -l
 
 check:
-	@find . -name "*tex" | xargs -I [] grep \" [] | grep -v "\`\`" && exit 1 || exit 0 
+	@find . -name "*tex" | xargs -I [] grep \" [] | grep -v "\`\`" && exit 1 || exit 0
+
+txt:
+	pandoc -f latex -t plain -o thesis.txt main.tex
 

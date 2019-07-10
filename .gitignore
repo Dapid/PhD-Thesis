@@ -10,4 +10,5 @@ main.pdf
 *.fdb_latexmk
 .idea
 __pycache__
+thesis.txt
 

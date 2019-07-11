@@ -24,7 +24,7 @@ They are composed of a carboxyl (-$COOH$) and an amine (-$NH_2$) groups, forming
 Two examples are illustrated in Figure~\ref{fig:amino_acids}.
 \marginpar{Only a few of all amino acids appear in the DNA.}
 There are at least 500 known naturally occurring amino acids \citep{500_amino_acids}, of which only twenty different species are usually codified in the DNA.
-The differences between most of them are only on the side chain\footnote{Proline's sidechain has a ring connecting with the amine in the backbone.}.
+The differences between most of them are only on the side chain\footnote{The amino acid proline's sidechain has a ring connecting with the amine in the backbone.}.
 
 The side chains are the group responsible for the specific physico-chemical properties of the compound, such as hydrophobicity, pH, or electrostatic charge.
 
@@ -98,8 +98,8 @@ When restored to physiological conditions, they will refold into its natural sha
 As long as the protein is chemically unaltered, it will recover the tertiary structure independently of the folding machinery of the cell.
 \marginpar{Dogmas that govern protein folding}
 This was codified as Anfinsen's dogma: under physiological conditions, the primary structure of globular proteins determines the secondary and tertiary structures, and thus, its function, independently of the cell's machinery \citep{Anfinsen_dogma}.
-Typically, the fully folded state is reached in the order of mili- to seconds.
-The hypothesis has a few exceptions, namely large, fibrous proteins, prions -- proteins with alternative, stable conformations -- and aggregating proteins -- where the individual proteins bind to each other forming large and non-functional structures.
+Typically, the fully folded state is reached in the order of miliseconds to seconds.
+The hypothesis has a few exceptions, namely: fibrous proteins, prions -- which are proteins that have an alternative but non-functional stable tertiary structure\footnote{Infamous cause of the mad cows disease.} -- and aggregating proteins -- where the individual proteins bind to each other forming large and non-functional structures\footnote{For example, the cause of Alzheimer and Multiple Sclerosis}.
 A reasonable hypothesis is that a priori, the native conformation seems to be the state in the lowest energy, and the random coil is just rolling down the energy landscape.
 
 \citet{fold_graciously} \marginpar{Levinthal's paradox} noted that, for every amino acid, a protein has two main degrees of freedom corresponding to the torsion of the backbone, plus one more for the rotation of the side chain.
@@ -107,8 +107,9 @@ This gives us a configuration space of the order of $10^{2L}$ for a protein of $
 
 Levinthal suggested two corrections:
 \begin{itemize}
-	\item The native conformation is not necessarily the one of minimum energy, but a local minimum with a deep enough well that it is stable.
+	\item The native conformation is not necessarily the one of minimum energy, but a local meta-stable minimum with a deep enough well that it is stable.
 	\item The native conformation must be kinematically accessible, possibly guided by local interactions that partially fold the protein.
+	In other words, the energy landscape of protein folding presents a wide funnel from the unfolded state to its near-native conformation, which allows for a rapid transition.
 \end{itemize}
 
 These corrections are supported by experiments showing that a certain enzyme only folds at temperatures around 37 C, but it is completely stable up to 90 C.
@@ -151,8 +152,56 @@ Roughly speaking the torsions of the backbone determine the secondary structure 
 \todo{do}
 \section{Experimental methods}
 How can we know the structure of a protein?
-\todo{X-ray, NMR, Cryo-EM}
+The most commonly used methods are X-ray crystalography and NMR spectroscopy.
 
-\subsection{Restraints}
-\todo{SAX, SAN, cross-linking}
+X-ray crystalography starts by
+\marginpar{X-ray}
+purifying and crystallising the protein, and observing the diffraction pattern of an X-ray beam.
+The X-rays interact with the protein, diffract, and form a pattern of dots that is proportional to the intensity of the Fourier transform of the electron density.
+By taking the inverse transformation, the crystallographers can reconstruct the electron density, and then fit an atomic model.
+The X-ray detector -- a photographic plate or a CCD sensor -- can only measure intensities, not phase information.
+Experimentalist have to apply an iterative process where they combine estimated phases from models with the real intensities.
 
+One criticism of X-ray crystallography is that the protein are in crystals, not in physiological conditions.
+The alternative method is Nuclear Magnetic Resonance (NMR), \marginpar{NMR} which applies strong oscillating magnetic fields and measures resonances.
+From the spectrum, one can identify distances between atoms with non-zero nuclear spin.
+The method cannot provide sufficient constraints to determine the whole system, so it is given as an ensemble of models instead.
+The differences between individual structures can be caused by natural movements of the protein, or by uncertainties in the experiment itself.
+
+In the last decades a new method has become practical for protein structures: cryogenic electron microscopy \marginpar{cryo-EM}.
+In this method, the protein samples are placed in solution on a thin sheet of solution, flash frozen to cryogenic temperatures, and put under an electron microscope.
+Since proteins are diluted, each individual one is frozen in a random orientation, so each image is a 2D projection along a different axis.
+The different images are clustered and combined to reduce noise, and a 3D model is inferred from it.
+
+This technique allows us to study large complexes in solution, without the necessity to crystallise them.
+It can reveal the presence of unknown proteins, and even provide information on the thermodynamics:
+The Boltzmann distribution says that the probability of a state $x$ depends on the energy of the system:
+
+\begin{equation*}
+p(x) \propto e^{-\frac{H(x)}{k_B T}}
+\end{equation*}
+
+So, when we have a sample with different conformations of the same protein, counting the number of images that correspond to each state gives us a measure of the difference of energies between the two states.
+
+The development of Cryo-EM was recognised in 2017 with the award of the Nobel Prize in Chemistry \emph{"for developing cryo-electron microscopy for the high-resolution structure determination of biomolecules in solution"} to Jacques Dubochet, Joachim Frank, and Richard Henderson
+
+
+\subsection{Partial restraints}
+Sometimes, an experiment to obtain the full structure is not possible.
+There are simplified methods that, while they cannot give a full structure, they may be able to provide enough constraints for computational methods.
+
+The first is Small Angle X-ray Scatering, or SAXS. \marginpar{SAXS}
+The process is similar to X-ray crystallography, but now the protein is in solution.
+Each individual will produce its own interference pattern, but since they are not crystallised, the orientation of each pattern is randomised.
+From this we can infer a rough shape of the protein, and the presence or absence of differences between conformations.
+
+A related method is Small Angle Neutron Scattering, or SANS. \marginpar{SANS}
+It replaces X-rays with neutrons, which changes the sensitivity to different nuclear species.
+In particular, hydrogen has one of the largest cross-sections.
+One application is the study of membrane proteins in a appropriately chosen detergent, which can be almost invisible to the neutron beam.
+
+Mass-spectrometry cross-linking can be used to measure distances within proteins.
+The protein is mixed with a reagent that connects to specific functional groups of amino acid side chains.
+Then, an enzyme is added that cleaves the protein, and the fragments are sent to a liquid chromatography tandem mass spectrometer that analyses the composition of each fragment.
+The linkers keep the fragments split by the digestion together, from which we can infer they were in contact.
+Furthermore, since we know the size of the linker, we can have an accurate upper bound on the distance.

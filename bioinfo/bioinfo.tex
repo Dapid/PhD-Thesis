@@ -2,19 +2,20 @@
 Bioinformatics is the application of computational methods to biological problems,
 either by analysing large amounts of data or by replacing experiments with computer programs.
 
-
-
 \section{Predictors}
+A significant fraction of the protein bioinformatics work is the development of predictors: statistical or machine learning methods that can, given limited information, predict properties of proteins.
+A common choice is to make predictions taking only the amino acid sequence, because this is the easiest information we can acquire of a protein.
+Other methods may require extra annotation, such as Gene Ontology -- an annotation condensing all our knowledge of the gene that produced the protein -- or 3D structures -- experimental or models.
 
 \section[Multiple Sequence Alignments]{Increasing statistics: Multiple Sequence Alignments}
 
 \section{Contact prediction}
-Folded proteins are tightly packed structures
-\ref{fig:packing}
+Folded proteins are tightly packed structures, as illustrated in Figure~\ref{fig:packing}.
+Since there is very little to no space between neighbouring residues, not every mutation is allowed.
 Proteins that have evolved 
 
 
-\begin{figure}[hb]
+\begin{figure}[!hb]
 	\centering
 	\hfil
 	\subcaptionbox{Cartoon and sticks\label{subfig:sticks}}{\includegraphics[trim={65mm 3mm 32mm 0},clip, width=0.45\textwidth]{bioinfo/figures/sheet_sticks}}
@@ -97,11 +98,53 @@ In principle, the same procedure can be replicated \emph{in silico} with molecul
 This was possible because the domain is very short -- 35 residues --, and fast folding; but in general is not a practical solution, as it requires a lot of computational work.
 
 \subsection{Homology modelling}
-Proteins that are close in sequence are close in structure.
+Proteins that are close in sequence are close in structure, so if we can find a protein of known structure that has a sequence close to our protein of interest, we can use it as a \emph{template}.
+When a good hit is found, this is the most accurate and reliable modelling strategy.
+
+MODELLER \citep{modeller}, for example, uses the templates to infer distance restraints, uses geometrical algorithms to create an initial model, and then relaxes it with a short molecular dynamics run.
+
 
 \subsection{\emph{Ab-initio} folding}
+In the absence of available templates, we can use \emph{ab-initio} or \emph{template-free} methods, in which we try to find the minimum energy of the system, including additional terms derived from predictors.
+
+ROSETTA's \citep{Rosetta3} \marginpar{ROSETTA} \emph{ab initio} protocol implements a simulated annealing that starts with an extended chain, and randomly replaces fragments with ones derived from the PDB.
+Since the fragments are taken from real proteins, the models tend to have good chemical properties, even when completely wrong.
+In order to speed up and improve convergence, we can add additional energy terms to the force field, such as contact restraints.
+
+\marginpar{CONFOLD}
+
 
 \subsection{Evaluation}
+Once we have a model, how can we compare it with the native structure? How can we measure how accurate it is?
+
+One option is to superimpose model 
+\marginpar{Superposition}
+in such a way that the metric is optimised.
+Given two structures with $L$ residues in common, and being $d_i$ the distance between the $i-$th residues of both structures, we define the distances as:
+
+RMSD, or the Root Mean Squared Deviation:
+\begin{equation*}
+RMSD = \min \left(\sqrt{\frac{\sum_{i=1}^L d_i^2}{L}}\right),
+\end{equation*}
+
+The S-score (Superposition score) is:
+\begin{equation*}
+S = \max\left[\frac{1}{L} \sum_{i=1}^L \frac{1}{1 + \left(\frac{d_i}{d_0}\right)^2}\right],
+\end{equation*}
+where $d_0$ is a parameter to be decided, usually $\SI{3}{\angstrom}$.
+
+The TM (Template Modelling score) is the same as S, but $d_0 = 1.24 \sqrt[3]{L - 15} - 1.8$, to keep TM roughly independent of the length.
+
+Both S and TM scores give values between $0$ and $1$.
+For TM, values below $0.3$ correspond to random structures, and scores over $0.5$ indicate structures about in the same fold \citep{tmscore05}.
+
+The problem with superposition scores are that are sensitive to conformational changes.
+For example, consider a protein composed of two subunits connected by a small, flexible hinge; and a model where each of the subunits is perfect, but the relative orientation is not the same.
+The superposition scores would align one of the subunits, with perfect scoring, and give bad values to the other. 
+
+\todo{lddt, cad}
+
+\subsection{Model Quality Asessment, or Estimation of Model Accuracy}
 
 \section{Other predictors}
 

@@ -31,7 +31,13 @@ A Multiple Sequence Alignment (MSA) contains a collection of proteins evolutiona
 
 \subsection{Mutual Information}
 
-\subsubsection{Phylogenetic bias: the APC correction}
+\begin{equation*}
+MI\left(i, j\right) = \sum_{x, y}^{q_{max}} f(x_i, y_j) \log \left(\frac{f(x_i, y_j)}{f(x_i)f(y_j)}\right),
+\end{equation*}
+where $f(x_i, x_j)$ is the joint distribution of amino acids $x_i$ and $y_j$ at positions $i$ and $j$, $f(x_i)$ and $f(y_j)$ are the marginal distributions, and $q_{max}$ is the maximum number of amino acids types in the alignment, including gaps.
+If the MSA is of enough quality, the contacts will present high values of $MI$.
+
+
 
 \subsection{Direct Coupling Analysis}
 Mutual Information has a problem with the transitivity property: consider three residues, A, B, and C; where B is close to both A and C, but A and C are far away.
@@ -78,6 +84,8 @@ and consider that any interaction between three or more residues can be decompos
 Finally, DCA attempts to reconstruct the evolutionary couplings, not necessarily the contacts.
 \citet{contact_errors} showed that most of the top-scoring pairs indicated by DCA are true contacts, others correspond to contacts between different subunits in a homodimer or pairs of separated residues involved in the function.
 The coupling is real, but its nature is different from the model explained at the beginning of this section.
+
+\subsection{Phylogenetic bias: the APC correction}
 
 \subsection{Pattern recognition}
 Contacts do not appear at random.
@@ -140,9 +148,22 @@ For TM, values below $0.3$ correspond to random structures, and scores over $0.5
 
 The problem with superposition scores are that are sensitive to conformational changes.
 For example, consider a protein composed of two subunits connected by a small, flexible hinge; and a model where each of the subunits is perfect, but the relative orientation is not the same.
-The superposition scores would align one of the subunits, with perfect scoring, and give bad values to the other. 
+The superposition scores would align one of the subunits, with perfect scoring, and give bad values to the other.
 
-\todo{lddt, cad}
+A solution is to compare structures locally. 
+LDDT (Local Distance Difference Test) \citep{lddt} \marginpar{LDDT}
+measures, for every atom, the fraction of preserved  distances, up to a tolerance, within an inclusion radius.
+LDDT considers all inter-atomic distances that are within $\SI{0.5}{\angstrom}$, $\SI{1}{\angstrom}$, $\SI{2}{\angstrom}$, and $\SI{4}{\angstrom}$.
+The final scores is obtained averaging over all the atoms in the residue and inclusion thresholds.
+
+\citet{cad} proposed a similar method, using surface contacts instead of distances. \marginpar{CAD}
+They represent each residue as the Voronoi volume of its atoms.
+The surface area for the contact between residues $i$ and $j$ of the model is $S_m(i,j)$, and for the reference -- native structure -- $S_r(i,j)$.
+CAD score is proportional to the difference between the two, with some normalisation terms:
+
+\begin{equation*}
+CAD_{score} = 1 - \frac{\sum_{i,j} \min\left( \left| \: S_{r}(i, j) - S_{m}(i, j)\right|, S_{r}(i, j)\right)}{\sum_{i,j} S_{r}(i, j)}
+\end{equation*}
 
 \subsection{Model Quality Asessment, or Estimation of Model Accuracy}
 

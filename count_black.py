@@ -25,4 +25,4 @@ print()
 print('{} BW'.format(bw_ct))
 print('{} Colour'.format(len(colour)))
 print('{:.1f}% B&W'.format(100 * bw_ct / (bw_ct + len(colour))))
-
+print(', '.join(str(x) for x in colour))

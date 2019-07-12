@@ -119,7 +119,8 @@ ROSETTA's \citep{Rosetta3} \marginpar{ROSETTA} \emph{ab initio} protocol impleme
 Since the fragments are taken from real proteins, the models tend to have good chemical properties, even when completely wrong.
 In order to speed up and improve convergence, we can add additional energy terms to the force field, such as contact restraints.
 
-\marginpar{CONFOLD}
+CONFOLD \citep{confold} \marginpar{CONFOLD} is the other protocol used in this thesis.
+\todo{confold}
 
 
 \subsection{Evaluation}
@@ -166,6 +167,9 @@ CAD_{score} = 1 - \frac{\sum_{i,j} \min\left( \left| \: S_{r}(i, j) - S_{m}(i, j
 \end{equation*}
 
 \subsection{Model Quality Assessment, or Estimation of Model Accuracy}
+The previous section dealt with the case where we know the native structure, but what can we do when we do not know it?
+After all, if we have the experimental data, there is no need for modelling.
+The task of predicting the quality of a model is called \emph{Model Quality Assessment} (MQA), or in some modern papers, \emph{Estimation of Model Accuracy} (EMA).
 
 \section{Other predictors}
 

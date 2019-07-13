@@ -11,21 +11,24 @@ def line():
     plt.axvline(0, color='k', alpha=0.5)
 
 
+W=3
+
 NON = BLUE
-plt.plot(x, 1 / (1 + np.exp(-x)), color=MAROON)
+plt.plot(x, 1 / (1 + np.exp(-x)), color=MAROON, linewidth=W)
 line()
 
-plt.title('Sigmoid')
+#plt.title('Sigmoid')
 plt.figure()
-plt.plot(x, np.tanh(x), color=MAROON)
+plt.plot(x, np.tanh(x), color=MAROON, linewidth=W)
 line()
 
-plt.title('Hyperbolic tangent')
+#plt.title('Hyperbolic tangent')
 plt.figure()
-plt.plot(x, np.where(x > 0, x, 0), color=NON)
+plt.plot(x, np.where(x > 0, x, 0), color=NON, linewidth=W)
 line()
-plt.title('ReLU')
+#plt.title('ReLU')
 plt.xlim(-5, 5)
+plt.ylim(-1.5, 5)
 plt.tight_layout()
 plt.savefig('../figures/relu.pdf')
 plt.close()
@@ -38,10 +41,11 @@ plt.tight_layout()
 plt.savefig('../figures/sigmoid.pdf')
 
 plt.figure()
-plt.plot(x, np.where(x > 0, x, np.exp(x) - 1), color=NON)
+plt.plot(x, np.where(x > 0, x, np.exp(x) - 1), color=NON, linewidth=W)
 line()
 
-plt.title('Exponential Linear Unit')
+#plt.title('Exponential Linear Unit')
 plt.xlim(-5, 5)
+plt.ylim(-1.5, 5)
 plt.tight_layout()
 plt.savefig('../figures/elu.pdf')

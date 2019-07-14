@@ -8,6 +8,63 @@ A common choice is to make predictions taking only the amino acid sequence, beca
 Other methods may require extra annotation, such as Gene Ontology -- an annotation condensing all our knowledge of the gene that produced the protein -- or 3D structures -- experimental or models.
 
 \section[Multiple Sequence Alignments]{Increasing statistics: Multiple Sequence Alignments}
+Proteins, as organisms, are products of evolution, so we can find similar versions of the same protein in different organisms.
+Even when the function is novel, it usually evolves as a minor modification on pre-existing proteins.
+This means that, in most cases, we can obtain a better prediction when working at the \emph{family level,}
+i.e., considering not only our protein of interest, but also any related sequence in our database.
+
+In order to have coherent statistics, every sequence must be aligned to the original query, as in the following example:
+
+\begin{center}
+\begin{Verbatim}[fontsize=\small]
+1       10        20        30        40        50   
+FCLEPPYTGPCKARMIRYFYNARSGSCETFIYGGCKAKRNNFKSEEDCMRTCG
+FCREPPYTGPCSAHFVRYFYNATTGLCQSFVYGGCRGKQNNFMDEKECLHTCD
+FCREPPYTGPCRAHFIRYFYNATTGLCQTFVYGGCRGKQNNFMDEKECLHTCD
+ICSMKNDTGPCKAYMPRWFFNSQTKQCEEFIYGGCSGNNNNFMTREDCCNSCS
+-CTLPKVPGPCNAYFVRWWYDQQKEICSSFIYGGCQGNNNNFQSESVC-----
+------DPGPCKAYMPRFYFEIEKKECQEFIYGGCGGNENRFFTKRECQRICK
+ECLMAPDPGNCGGVRERWFFSPEAKQCRLFGYSGCQGNANNFATIEDCMAKC-
+LCHLAMESGPCRAAKPRWYFDQGKQTCVEYIYGGCRGNSNNFETKAECMRTCS
+-CEQAMDPGPCKAAFPRWYFNSQTGQCEQFIYGGCLGNDNNFVTEQECQTTCG
+\end{Verbatim}
+\end{center}
+
+The collection of sequences is called a Multiple Sequence Alignment, or MSA, and the dash \texttt{-} indicates a gap, a residue that is not present at that particular position.
+This section explains how to build it.
+
+
+\subsection{Pairwise alignment}
+The building block of an MSA is the alignment of each related sequence to our query, and the first step is measure how similar they are.
+The most basic scheme is simply count the number of matching amino acids, assigning a positive score for matches, and a penalty for mismatches.
+
+Proteins \marginpar{The reason for gaps} have insertions and deletions, which means the matching regions in different proteins may be discontinuous.
+We can allow for gaps in the scores including a term that considers both opening -- our belief of how common insertions and deletions are -- and extending the gap -- considering our expectation of their length.
+
+Furthermore, not all mismatches are the same.
+For example leucine (L) and isoleucine (I) are functionally very similar, and can often be replaced without loss of function.
+On the other hand, a single mutation from glutamic acid (E) to valine (V), in humans is enough to cause sickle cell anaemia.
+
+Nor are all matches.
+Alanine (A) forms over $7\%$ of the proteome, so we are more likely to find a hit at random than with tryptophan (W), which forms less than $2\%$.
+
+We can codify \marginpar{Substitution matrix} the difference between different amino acids in a substitution matrix.
+The most common choice to detect distant related proteins is the \texttt{BLOSUM} family.
+\citet{blosum} derived them from a set of 500 multiple sequence alignments.
+
+\subsection{Scaling up: BLAST}
+Performing a pairwise alignment on a whole sequence database would be very slow, but for a given query, most entries in the database are not related.
+Programs like BLAST (Basic Local Alignment Search Tool) introduce a set of heuristics to discard negatives as quickly as possible.
+They do not guarantee an optimal alignment according to the scoring matrix, but this is offset by a much higher amount of data.
+
+\subsection{Position Specific Scoring Matrices and PSI-BLAST}
+
+Substitution matrices assume a fixed evolution model.
+
+
+\subsection{Increasing sensitivity with Hidden Markow Models}
+
+\subsection{What can we learn from it?}
 
 \section{Contact prediction}
 Folded proteins are tightly packed structures, as illustrated in Figure~\ref{fig:packing}.
@@ -28,15 +85,19 @@ Proteins that have evolved
 
 A Multiple Sequence Alignment (MSA) contains a collection of proteins evolutionary related to our query.
 \marginpar{Correlated mutations}
+\todo{correlated mutations}
 
 \subsection{Mutual Information}
+How can we formalise mathematically correlated mutations?
+Mutual Information codifies the information gain that we can obtain for one distribution knowing the other, and considering the relative distributions.
+The formula is:
 
 \begin{equation*}
 MI\left(i, j\right) = \sum_{x, y}^{q_{max}} f(x_i, y_j) \log \left(\frac{f(x_i, y_j)}{f(x_i)f(y_j)}\right),
 \end{equation*}
 where $f(x_i, x_j)$ is the joint distribution of amino acids $x_i$ and $y_j$ at positions $i$ and $j$, $f(x_i)$ and $f(y_j)$ are the marginal distributions, and $q_{max}$ is the maximum number of amino acids types in the alignment, including gaps.
+Note that if $x$ and $y$ are independent, $f(x_i, y_j) := f(x_i)f(y_j)$, the logarithm vanishes, and thus $M(i, j) = 0$.
 If the MSA is of enough quality, the contacts will present high values of $MI$.
-
 
 
 \subsection{Direct Coupling Analysis}
@@ -86,6 +147,8 @@ Finally, DCA attempts to reconstruct the evolutionary couplings, not necessarily
 The coupling is real, but its nature is different from the model explained at the beginning of this section.
 
 \subsection{Phylogenetic bias: the APC correction}
+
+\todo{todo}
 
 \subsection{Pattern recognition}
 Contacts do not appear at random.

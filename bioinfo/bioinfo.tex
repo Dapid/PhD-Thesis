@@ -16,7 +16,11 @@ i.e., considering not only our protein of interest, but also any related sequenc
 In order to have coherent statistics, every sequence must be aligned to the original query, as in the following example:
 
 \begin{center}
-\begin{Verbatim}[fontsize=\small]
+\marginpar{\phantom{a}}
+\marginpar{\phantom{a}}
+\marginpar{\phantom{a}}
+\marginpar{An example MSA}
+\begin{Verbatim}[fontsize=\small, xleftmargin=1em]
 1       10        20        30        40        50   
 FCLEPPYTGPCKARMIRYFYNARSGSCETFIYGGCKAKRNNFKSEEDCMRTCG
 FCREPPYTGPCSAHFVRYFYNATTGLCQSFVYGGCRGKQNNFMDEKECLHTCD
@@ -53,18 +57,24 @@ The most common choice to detect distant related proteins is the \texttt{BLOSUM}
 \citet{blosum} derived them from a set of 500 multiple sequence alignments.
 
 \subsection{Scaling up: BLAST}
-Performing a pairwise alignment on a whole sequence database would be very slow, but for a given query, most entries in the database are not related.
+Performing a pairwise alignment on a large sequence database would be very slow, but for a given query, most entries in the database are not related.
 Programs like BLAST (Basic Local Alignment Search Tool) introduce a set of heuristics to discard negatives as quickly as possible.
 They do not guarantee an optimal alignment according to the scoring matrix, but this is offset by a much higher amount of data.
 
 \subsection{Position Specific Scoring Matrices and PSI-BLAST}
 
-Substitution matrices assume a fixed evolution model.
+Substitution matrices assume a fixed evolution model, and that every residue is as important as every other.
+But this is not true, we can observe that some protein regions are highly conserved because they are, in one way or another, important for the function of the protein.
+In the earlier example, we can see how around column 40, there are fewer changes.
+We want our search to reflect this fact, and, for instance only accept changes in these regions if they provide enough similarity in the rest of the protein to support the fact that they are related.
 
+PSI-BLAST does this using an iterated search, and building Position Specific Scoring Matrices (PSSM).
+The first iteration is a normal BLAST search, using the default substitution matrix, but in the subsequent iterations, it uses the statistics of each column to update the substitution matrix.
+Since each position is treated independently, it can model better the importance of each residue.
 
 \subsection{Increasing sensitivity with Hidden Markow Models}
+\todo{HMM}
 
-\subsection{What can we learn from it?}
 
 \section{Contact prediction}
 Folded proteins are tightly packed structures, as illustrated in Figure~\ref{fig:packing}.
@@ -147,8 +157,13 @@ Finally, DCA attempts to reconstruct the evolutionary couplings, not necessarily
 The coupling is real, but its nature is different from the model explained at the beginning of this section.
 
 \subsection{Phylogenetic bias: the APC correction}
+Natural proteins are not randomly drawn from a generative model, like Potts.
+Proteins evolve alongside a tree, where a mutation in an organism is likely to be shared among all the descendants.
+This appears as a pattern of vertical and horizontal lines on the contact map.
 
-\todo{todo}
+\citet{apc} proposed a simple method to reduce this bias: for each column in the contact map, substract the average of the row times the average of the column, normalised by the total average.
+
+\missingfigure{APC effect}
 
 \subsection{Pattern recognition}
 Contacts do not appear at random.
@@ -178,12 +193,14 @@ MODELLER \citep{modeller}, for example, uses the templates to infer distance res
 \subsection{\emph{Ab-initio} folding}
 In the absence of available templates, we can use \emph{ab-initio} or \emph{template-free} methods, in which we try to find the minimum energy of the system, including additional terms derived from predictors.
 
-ROSETTA's \citep{Rosetta3} \marginpar{ROSETTA} \emph{ab initio} protocol implements a simulated annealing that starts with an extended chain, and randomly replaces fragments with ones derived from the PDB.
+Rosetta's \citep{Rosetta3} \marginpar{Rosetta} \emph{ab initio} protocol implements a simulated annealing that starts with an extended chain, and randomly replaces fragments with ones derived from the PDB.
 Since the fragments are taken from real proteins, the models tend to have good chemical properties, even when completely wrong.
 In order to speed up and improve convergence, we can add additional energy terms to the force field, such as contact restraints.
 
 CONFOLD \citep{confold} \marginpar{CONFOLD} is the other protocol used in this thesis.
-\todo{confold}
+It is build upon CNS, a NMR reconstruction software, and works by transforming contacts and secondary structure to a large set of distance restraints between atoms.
+Then, it runs a geometric solver, followed by a fast relaxation.
+This method is much faster than Rosetta, but since it lacks the chemical information of the fragments, it does not work well on regions without contacts.
 
 
 \subsection{Evaluation}

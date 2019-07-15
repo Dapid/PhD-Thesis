@@ -54,10 +54,6 @@ On the other hand, if these restrictions are not accurate, the model will be bia
 If we instead relax the parametric assumptions we obtain a more flexible model, capable of tackling more complex problems.
 But this versatility comes with a cost: they require more data to train.
 
-\begin{center}
-	\missingfigure[figcolor=white]{Spectrum diagram}
-\end{center}
-
 Can we take it to the extreme?
 \marginpar{A theoretical result} 
 Can we train a model completely free  of assumptions in the case of infinite data? The No Free Lunch Theorem \citep{no_free_lunch} says, averaging over all problems, all algorithms are equally good.
@@ -250,7 +246,9 @@ The process is repeated until no more cuts can improve the performance, or until
 	%\includegraphics[width=1.2\textwidth, center]{machine_learning/figures/tree}
 	\includegraphics[trim={20mm, 29mm, -10mm, 11mm}, clip, width=1.4\textwidth, center]{machine_learning/figures/tree} %
 	\caption{The rules of a decision tree are interpretable.
-	The darkness of the background corresponds to the purity of the node.\label{subfig:tree_explained}}
+	The darkness of the background corresponds to the purity of the node.
+	While a human can read them, they do not make much sense to us,
+	it is just splitting the space, one feature at a time.\label{subfig:tree_explained}}
 \end{figure}
 
 
@@ -318,5 +316,9 @@ This method is particularly useful in calibration to turn predicted scores into 
 %\section{Evaluating predictions: figures of merit}
 
 \section{On the wrongness of machine learning}\label{sec:wrong}
-The results of machine learning can be 
+The results of machine learning can be impressive and lead to think too much of them.
+Machine learning models are incapable of reasoning, and they are blindly extracting a signal from the training data.
+
+
+
 \todo[inline]{TODO}

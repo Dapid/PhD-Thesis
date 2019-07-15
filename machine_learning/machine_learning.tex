@@ -316,9 +316,14 @@ This method is particularly useful in calibration to turn predicted scores into 
 %\section{Evaluating predictions: figures of merit}
 
 \section{On the wrongness of machine learning}\label{sec:wrong}
-The results of machine learning can be impressive and lead to think too much of them.
-Machine learning models are incapable of reasoning, and they are blindly extracting a signal from the training data.
+The results of machine learning can be impressive and may lead to think too much of them.
+But in their power lies their weakness: they can blindly extract a signal from the training data without humans needing to guide it, but that means they are incapable of reasoning.
+Since they lack a mechanistic model, they can find correlations, but not causations.
 
+Furthermore, they are vulnerable to outliers.
+Training a machine learning model means finding the set of parameters that ``best" fit the training points, but we have no constraints outside of that.
+If we were to feed it data points that are sufficiently far away from what was used to train, our outputs will be, essentially, unconstrained.
+A machine learning model is a mathematical function, which means it will always give us an answer, but in general, and unlike a human, it lacks the capability of murmuring \emph{``that is strange..."}.
 
+In general, a machine learning model can only get to be as good as the data it was used to train it, and will always incorporate all of its biases and limitations.
 
-\todo[inline]{TODO}

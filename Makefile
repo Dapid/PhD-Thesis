@@ -9,9 +9,9 @@ purge:
 
 count:
 	@echo -n "TODO: "
-	@find . -name "*.tex" | xargs grep -F "\todo" | wc -l
+	@find . -name "*.tex" | xargs grep -F "\todo" |  py -x "x.split('%', 1)[-1]" | grep -F "\todo" | wc -l
 	@echo -n "FIGS: "
-	@find . -name "*.tex" | xargs grep -F "\missingfigure" | wc -l
+	@find . -name "*.tex" | xargs grep -F "\missingfigure" | py -x "x.split('%', 1)[-1]" | grep -F "\missingfigure" | wc -l
 
 check:
 	@find . -name "*tex" | xargs -I [] grep \" [] | grep -v "\`\`" && exit 1 || exit 0

@@ -33,8 +33,16 @@ On the other hand, since the intermediate layers can be arbitrarily large, it ca
 It is often used as the last layer of the model.
 
 \subsection{Convolutions}
-Convolutions capture spatial relationships in the data.
-\todo{todo}
+A convolution is a linear operation over a small patch, that is repeated across the whole input, in order to  capture spatial relationships in the data via keeping translational invariance.
+\marginpar{1D}
+Consider the case of 1D convolutions.
+The input is a 2D matrix, where we have a number of input channels at each position.
+A convolution looks at a small but fixed window and applies a linear operation; then it moves on unit and repeats the same operation, with the same weights as before.
+The output is another 2D vector, with an arbitrary number of channels, which outputs are mutually independent.
+The set of weights corresponding to each output is called a \emph{filter}.
+
+Each convolution  \marginpar{Receptive fields} has a limited field of view, that can be increased stacking layers.
+ 
 
 \subsection{Recurrent}
 A recurrent layer tries to capture temporal dependencies on arbitrary time steps, such as those of natural language, or repeating motifs in proteins.
@@ -158,7 +166,7 @@ where $\eta$ is the step size, a small number that reflects our belief of the si
 In order to train the network, we need to compute the gradients of the loss with respect to all the parameters of the network.
 This can be done automatically using the back-propagation algorithm, or \emph{backprop} \citep{backprop}, the machine version of the chain rule.
 
-We start computing the derivative of the loss with respect to the output of the network ${L}/{\partial o_i}$.
+We start computing the derivative of the loss with respect to the output of the network ${\partial L}/{\partial o_i}$.
 Then we can apply the chain rule to compute the derivatives with respect to the output $y_i$ before the non-linearity:
 \begin{equation*}
 \frac{\partial L}{\partial y_i} = \frac{\partial L}{\partial o_i} \frac{d o_i}{d y_i}
@@ -342,11 +350,15 @@ At the end of the iteration, the mini-batch is averaged, and the weights updated
 
 
 \section[Tensors and gradients]{Conjunctive tissue: tensors and gradients}\label{sec:tensors}
-\todo{todo}
-\todo{learning representations}
-each intermediate layer in a deep network is learning a representation of its inputs, a transformation that brings it closer to the target.
-These representations are, in general, difficult for humans to interpret, but in computer vision we can \emph{visualise} them.
-A convolutional network trained to identify objects in images will learn
+As we have seen before, each layer is composed of mostly tensors\footnote{In the Computer Science definition: a hypermatrix of an arbitrary dimensions, such as 1-D vectors, 2-D matrices, or 3-D volumes.} and linear operations.
+Every intermediate layer in a deep network is learning a transformation of its inputs, that we can interpret as a representation that brings it closer to the target.
+These representations are, in general, difficult for humans to interpret, but in some cases, like computer vision we can \emph{visualise} them.
+A convolutional network trained to identify objects in images will learn to recongise edges and simple textures in the first layers, that are combined into more complex representations as the information travels through the network.
+
+One important consequence is that all data, regardless of its source or nature, is represented as tensors.
+We can then seamlessly connect through these tensors different branches working with dissimilar kinds of data, and train end-to-end having them talk to each other through gradients.
+\citet{tensors_and_gradients} has a pedagogical explanation on this idea applied to automatic description of images in natural images.
+A more extreme example is the work of \citet{one_rule_all}, where they combine eight different tasks into a single network, including translation, captioning, and image recognition.
 
 
 \section{The quest for depth}\label{sec:depth}

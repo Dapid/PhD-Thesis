@@ -61,7 +61,7 @@ Performing a pairwise alignment on a large sequence database would be very slow,
 Programs like BLAST (Basic Local Alignment Search Tool) introduce a set of heuristics to discard negatives as quickly as possible.
 They do not guarantee an optimal alignment according to the scoring matrix, but this is offset by a much higher amount of data.
 
-\subsection{Position Specific Scoring Matrices and PSI-BLAST}
+\subsection[PSSMs and PSI-BLAST]{Position Specific Scoring Matrices and PSI-BLAST}
 
 Substitution matrices assume a fixed evolution model, and that every residue is as important as every other.
 But this is not true, we can observe that some protein regions are highly conserved because they are, in one way or another, important for the function of the protein.
@@ -72,7 +72,7 @@ PSI-BLAST does this using an iterated search, and building Position Specific Sco
 The first iteration is a normal BLAST search, using the default substitution matrix, but in the subsequent iterations, it uses the statistics of each column to update the substitution matrix.
 Since each position is treated independently, it can model better the importance of each residue.
 
-\subsection{Increasing sensitivity with Hidden Markov Models}
+\subsection[Hidden Markov Models]{Increasing sensitivity with Hidden Markov Models}
 PSSMs can model the differences in probabilities for each amino acid at different positions, but gaps are still modelled with a flat penalty across the sequence.
 We know this is not a good representation of proteins, since they are unlikely to happen in the core, due to the lack of space.
 Insertions are easy to introduce in short, external loops; and deletions are most likely in long loops. 
@@ -184,14 +184,14 @@ Finally, DCA attempts to reconstruct the evolutionary couplings, not necessarily
 \citet{contact_errors} showed that most of the top-scoring pairs indicated by DCA are true contacts, others correspond to contacts between different subunits in a homodimer or pairs of separated residues involved in the function.
 The coupling is real, but its nature is different from the model explained at the beginning of this section.
 
-\subsection{Phylogenetic bias: the APC correction}
+\subsection[Phylogenetic bias]{Phylogenetic bias: the APC correction}
 Natural proteins are not randomly drawn from a generative model, like Potts.
 Proteins evolve alongside a tree, where a mutation in an organism is likely to be shared among all the descendants.
 This appears as a pattern of vertical and horizontal lines on the contact map.
 
 \citet{apc} proposed a simple method to reduce this bias: for each column in the contact map, substract the average of the row times the average of the column, normalised by the total average.
 
-\missingfigure{APC effect}
+\missingfigure[figcolor=white]{APC effect}
 
 \subsection{Pattern recognition}
 Contacts do not appear at random.
@@ -200,7 +200,7 @@ Furthermore, since most of the protein is locally organised in secondary structu
 The statistical methods like DCA and Mutual Information do not consider this, so a refinement step can be done using pattern recognition.
 We can train a machine learning algorithm on the outputs of statistical methods and recognise the underlying patterns, which is able to remove much of the spurious contacts, noise, and artefacts in the alignments.
 
-\missingfigure{alpha and beta contacts}
+\missingfigure[figcolor=white]{alpha and beta contacts}
 
 \section{Protein folding}
 
@@ -274,7 +274,7 @@ CAD score is proportional to the difference between the two, with some normalisa
 CAD_{score} = 1 - \frac{\sum_{i,j} \min\left( \left| \: S_{r}(i, j) - S_{m}(i, j)\right|, S_{r}(i, j)\right)}{\sum_{i,j} S_{r}(i, j)}
 \end{equation*}
 
-\subsection{Model Quality Assessment, or Estimation of Model Accuracy}
+\subsection[Model Quality Assessment]{Model Quality Assessment, or Estimation of Model Accuracy}
 The previous section dealt with the case where we know the native structure, but what can we do when we do not know it?
 After all, if we have the experimental data, there is no need for modelling.
 The task of predicting the quality of a model is called \emph{Model Quality Assessment} (MQA), or in some modern papers, \emph{Estimation of Model Accuracy} (EMA).

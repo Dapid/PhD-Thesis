@@ -54,14 +54,12 @@ On the other hand, if these restrictions are not accurate, the model will be bia
 If we instead relax the parametric assumptions we obtain a more flexible model, capable of tackling more complex problems.
 But this versatility comes with a cost: they require more data to train.
 
-\begin{center}
-	\missingfigure[figcolor=white]{Spectrum diagram}
-\end{center}
-
 Can we take it to the extreme?
 \marginpar{A theoretical result} 
 Can we train a model completely free  of assumptions in the case of infinite data? The No Free Lunch Theorem \citep{no_free_lunch} says, averaging over all problems, all algorithms are equally good.
-In other words, without inputting domain knowledge that restricts the space of possibilities, we cannot do better than random. \todo{elaborate}
+In other words, without inputting domain knowledge that restricts the space of possibilities, we cannot do better than random.
+For a given dataset, an infinite number of models can fit it equally well.
+Domain knowledge can provide us with constraints -- for example, certain physical models must be continuous -- and give us a measure of simplicity -- all else being equal, Ockam's razor would point at the simplest one.
 
 \section[Traditional machine learning]{A point of comparison: traditional machine learning}
 In this section, I will give an overview of some of the most popular supervised machine learning algorithms to illustrate how they work, and the kind of underlying assumptions they operate under.
@@ -94,8 +92,17 @@ where $\alpha$ is our new regularisation strength parameter.
 The higher it is, the more weights will be close to $0$.
 
 %LASSO cannot be solved analytically, so we need to use iterative methods.
-\todo{sidetrack: parameters and hyperparameters}
+This is a good point to introduce
+\marginpar{Parameters and hyperparameters}
+some important vocabulary in machine learning:
 
+\begin{itemize}
+	\item \emph{Parameters} are a set of numbers involved in the algorithm inferred from the data.
+	In this case, the components of the vector $\vec{w}$ are the parameters learned.
+	\item {Hyperparameters} are the settings decided on by the human.
+	In this case, the strength of the regularisations, $\alpha$ and $\lambda$, are hyperparameters, but also the decision to use one or the other.
+\end{itemize}
+ 
 \subsection{Logistic regression}\label{sec:logistic_regression}
 Logistic regression \marginpar{Linear models for classification} is an adaptation of linear models for classification.
 The output of the linear model is wrapped by a logistic function:
@@ -234,11 +241,14 @@ The process is repeated until no more cuts can improve the performance, or until
 
 \begin{figure}[p] %[p]age of floats
 	\centering
-	%\subcaptionbox{The rules of a decision tree are interpretable. The shading corresponds to the purity of the node.\label{subfig:tree_explained}}{\includegraphics[width=\textwidth]{machine_learning/figures/tree}}
-	\includegraphics[width=1.\textwidth]{machine_learning/figures/tree}
+	%\includegraphics[width=1.2\textwidth]{machine_learning/figures/tree}
+	%\makebox[\paperwidth][l]{\includegraphics[width=1.2\textwidth]{machine_learning/figures/tree}}
+	%\includegraphics[width=1.2\textwidth, center]{machine_learning/figures/tree}
+	\includegraphics[trim={20mm, 29mm, -10mm, 11mm}, clip, width=1.4\textwidth, center]{machine_learning/figures/tree} %
 	\caption{The rules of a decision tree are interpretable.
-	The darkness of the background corresponds to the purity of the node.\label{subfig:tree_explained}
-	\todo[inline]{make bigger boxes}}
+	The darkness of the background corresponds to the purity of the node.
+	While a human can read them, they do not make much sense to us,
+	it is just splitting the space, one feature at a time.\label{subfig:tree_explained}}
 \end{figure}
 
 
@@ -306,5 +316,14 @@ This method is particularly useful in calibration to turn predicted scores into 
 %\section{Evaluating predictions: figures of merit}
 
 \section{On the wrongness of machine learning}\label{sec:wrong}
-The results of machine learning can be 
-\todo[inline]{TODO}
+The results of machine learning can be impressive and may lead to think too much of them.
+But in their power lies their weakness: they can blindly extract a signal from the training data without humans needing to guide it, but that means they are incapable of reasoning.
+Since they lack a mechanistic model, they can find correlations, but not causations.
+
+Furthermore, they are vulnerable to outliers.
+Training a machine learning model means finding the set of parameters that ``best" fit the training points, but we have no constraints outside of that.
+If we were to feed it data points that are sufficiently far away from what was used to train, our outputs will be, essentially, unconstrained.
+A machine learning model is a mathematical function, which means it will always give us an answer, but in general, and unlike a human, it lacks the capability of murmuring \emph{``that is strange..."}.
+
+In general, a machine learning model can only get to be as good as the data it was used to train it, and will always incorporate all of its biases and limitations.
+

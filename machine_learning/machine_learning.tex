@@ -94,8 +94,17 @@ where $\alpha$ is our new regularisation strength parameter.
 The higher it is, the more weights will be close to $0$.
 
 %LASSO cannot be solved analytically, so we need to use iterative methods.
-\todo{sidetrack: parameters and hyperparameters}
+This is a good point to introduce
+\marginpar{Parameters and hyperparameters}
+some important vocabulary in machine learning:
 
+\begin{itemize}
+	\item \emph{Parameters} are a set of numbers involved in the algorithm inferred from the data.
+	In this case, the components of the vector $\vec{w}$ are the parameters learned.
+	\item {Hyperparameters} are the settings decided on by the human.
+	In this case, the strength of the regularisations, $\alpha$ and $\lambda$, are hyperparameters, but also the decision to use one or the other.
+\end{itemize}
+ 
 \subsection{Logistic regression}\label{sec:logistic_regression}
 Logistic regression \marginpar{Linear models for classification} is an adaptation of linear models for classification.
 The output of the linear model is wrapped by a logistic function:

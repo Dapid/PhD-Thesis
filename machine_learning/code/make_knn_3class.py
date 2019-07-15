@@ -47,7 +47,8 @@ for k in (1, 5, 10):
     plt.scatter(X[y == 1, 0], X[y == 1, 1], color=BLUE, label='\emph{Iris versicolor}')
     plt.scatter(X[y == 2, 0], X[y == 2, 1], color=GREEN, label='\emph{Iris virginica}')
 
-    plt.legend(loc=0)
+    if k == 1:
+        plt.legend(loc=0)
     plt.title('${}-$Nearest Neighbours'.format(k))
 
     plt.xlabel('Sepal length')

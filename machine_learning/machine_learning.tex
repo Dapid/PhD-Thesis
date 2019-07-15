@@ -61,7 +61,9 @@ But this versatility comes with a cost: they require more data to train.
 Can we take it to the extreme?
 \marginpar{A theoretical result} 
 Can we train a model completely free  of assumptions in the case of infinite data? The No Free Lunch Theorem \citep{no_free_lunch} says, averaging over all problems, all algorithms are equally good.
-In other words, without inputting domain knowledge that restricts the space of possibilities, we cannot do better than random. \todo{elaborate}
+In other words, without inputting domain knowledge that restricts the space of possibilities, we cannot do better than random.
+For a given dataset, an infinite number of models can fit it equally well.
+Domain knowledge can provide us with constraints -- for example, certain physical models must be continuous -- and give us a measure of simplicity -- all else being equal, Ockam's razor would point at the simplest one.
 
 \section[Traditional machine learning]{A point of comparison: traditional machine learning}
 In this section, I will give an overview of some of the most popular supervised machine learning algorithms to illustrate how they work, and the kind of underlying assumptions they operate under.
@@ -243,11 +245,12 @@ The process is repeated until no more cuts can improve the performance, or until
 
 \begin{figure}[p] %[p]age of floats
 	\centering
-	%\subcaptionbox{The rules of a decision tree are interpretable. The shading corresponds to the purity of the node.\label{subfig:tree_explained}}{\includegraphics[width=\textwidth]{machine_learning/figures/tree}}
-	\includegraphics[width=1.\textwidth]{machine_learning/figures/tree}
+	%\includegraphics[width=1.2\textwidth]{machine_learning/figures/tree}
+	%\makebox[\paperwidth][l]{\includegraphics[width=1.2\textwidth]{machine_learning/figures/tree}}
+	%\includegraphics[width=1.2\textwidth, center]{machine_learning/figures/tree}
+	\includegraphics[trim={20mm, 29mm, -10mm, 11mm}, clip, width=1.4\textwidth, center]{machine_learning/figures/tree} %
 	\caption{The rules of a decision tree are interpretable.
-	The darkness of the background corresponds to the purity of the node.\label{subfig:tree_explained}
-	\todo[inline]{make bigger boxes}}
+	The darkness of the background corresponds to the purity of the node.\label{subfig:tree_explained}}
 \end{figure}
 
 

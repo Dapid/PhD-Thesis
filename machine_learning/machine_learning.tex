@@ -10,13 +10,13 @@ Furthermore, the development of computers allowed for an explosion in the size a
 These applications were either developed from first principles or as effective theories; but contained at their core, relatively simple mathematical models.
 For example, modelling the dynamics of $n$-bodies gravitationally interacting are very rich and complicated to solve, but they all spawn from two simple equations, Newton's second law of motion for an object of mass $m$: $\vec{F} = m \cdot \vec{a}$ and the force of gravity between two objects of masses $m_1$ and $m_2$: $F_g=G\frac{m_1  m_2}{r^2}$.
 
-But the advent of computers
+The advent of computers
 \marginpar{How do computers fit in?}
- not only gave us mathematical muscle, it also allowed to connect them to sensors;
+ not only gave us mathematical muscle, but it also allowed to connect them to sensors;
 providing us with large amounts of data about the real world.
 Data that can be used to fit statistical models, even in the absence of underlying mathematical theories, such as recognising objects in images, identifying where in the cell a protein is going to end up, or translating natural language.
 The Scientific Revolution of the 16th century brought the concept \emph{``if it can be measured, it can be modelled"}, but the Data Revolution of the 20th century expanded it \emph{``if it can be \emph{represented}, it can be modelled"}.
-We went from measuring the variables present in our equations, to representing the world in numbers on a computer.
+We went from measuring the variables present in our equations to represent the world in numbers on a computer.
 
 %This opens new oportunities to tackle and explore anything we 
 
@@ -27,7 +27,7 @@ The models can be as concrete as relating the voltage and measured current inten
 Instead of designing algorithms that simulate reality from first principles, that can be insurmountably complex and time-consuming; a machine learning model uses data: the algorithm depends on a series of free parameters that are deduced from examples.
 \marginpar{The costs}
 This flexibility comes with a price: the programmer has relinquished the control to the dataset, and sacrificed the possibility of a mechanistic interpretation.
-More on this on Section~\ref{sec:wrong}.
+More on this in Section~\ref{sec:wrong}.
 
 \section{Classification and typology}
 Machine learning tasks can be classified according to several criteria.
@@ -44,7 +44,7 @@ The focus of this thesis will be on supervised tasks.
 \subsection[Categorical or continuous?]{Are they categorical or continuous?}
 The supervised tasks can be again divided depending on the nature of the labels:
 \begin{itemize}
-\item \emph{Classification:} our labels are categorical variables. \emph{Ex: image recognition, automated transcription of speech, presence or absence of tumours, protein sub-cellular localisation.}
+\item \emph{Classification:} our labels are categorical variables. \emph{Ex: image recognition, automated transcription of speech, presence or absence of tumours, protein subcellular localisation.}
 \item \emph{Regression:} we are interested in the value of continuous variables. \emph{Ex: curve fitting, counting.}
 \end{itemize}
 
@@ -123,7 +123,7 @@ Each class has one linear model given by the vector of weights $\left\{\vec w_i 
 \end{bmatrix} = 
 \widetilde W \cdot \vec{x},
 \end{equation*}
-where $\widetilde W$ is a $(N \times d)$ matrix.
+where $\widetilde W$ is an $(N \times d)$ matrix.
 The components of the vector $\vec{z}$ are called the \emph{logits}. 
 To obtain probabilities we use the exponential to make them all positive and normalise the sum.
 \marginpar{Softmax}
@@ -212,7 +212,7 @@ Another way of interpreting the kernel trick is to think of it as learning a def
 \subsection{\emph{k}-Nearest Neighbour}
 The Nearest Neighbour classifier takes the $k$ closest points in the training set and predicts the most common label.
 \marginpar{Bias-variance tradeoff}
-The choice of $k$ is a balance between noise and flexibility: smaller values give more distinct frontiers, but are more susceptible to noise.
+The choice of $k$ is a balance between noise and flexibility: smaller values give more distinct frontiers but are more susceptible to noise.
 
 \begin{figure}[htb]
 	\centering
@@ -229,7 +229,7 @@ The most common is the Gini impurity:
 \[ G(\vec x) = \sum_k p_{k} (1-p_k),\]
 where $p_k$ is the fraction of labels equal to $k$ in the group.
 
-A decision tree splits recursively the training based on the feature that gives the highest decrease in Gini impurity, as illustrated on the Figure~\ref{subfig:gini}.
+A decision tree splits recursively the training based on the feature that gives the highest decrease in Gini impurity, as illustrated in Figure~\ref{subfig:gini}.
 The final result is a series of simple boolean rules that can be interpreted by humans.
 Figure~\ref{subfig:tree_explained} is an example: the root of the tree -- shown in white -- contains all the training points, and each branch splits it according to a single feature.
 The process is repeated until no more cuts can improve the performance, or until the tree reaches a maximum depth.

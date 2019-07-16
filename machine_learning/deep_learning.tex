@@ -7,11 +7,11 @@ The first consists in identifying objects in digital images; while the second is
 
 It is striking that both cases correspond to tasks that humans are very good at.
 Indeed, neural networks are very good at \emph{perceptual learning}, or tasks where the computer replaces the human senses.
-This is perhaps due to the fact that neural networks are inspired by the biological nervous system, but also because humans can understand the process,
+This is perhaps because neural networks are inspired by the biological nervous system, but also because humans can understand the process,
 label more data, and guess at why it is wrong.
-Furthermore, they are problems that are \emph{solvable},
+Furthermore, they are \emph{solvable} problems.
 
-But not only.
+But we are not only limited to perceptual problems.
 Deep neural networks have shown to be good at tasks that humans cannot perform well, like contact prediction~\citep{ultra_deep_contacts}, estimation of protein model quality~\citep{casp13_ema}, and other tasks.
 
 %The rest of this chapter will contain a summary of the fundamental blocks, how to train, 
@@ -33,11 +33,11 @@ On the other hand, since the intermediate layers can be arbitrarily large, it ca
 It is often used as the last layer of the model.
 
 \subsection{Convolutions}
-A convolution is a linear operation over a small patch, that is repeated across the whole input, in order to  capture spatial relationships in the data via keeping translational invariance.
+A convolution is a linear operation over a small patch, that is repeated across the whole input, to  capture spatial relationships in the data via keeping translational invariance.
 \marginpar{1D}
 Consider the case of 1D convolutions.
 The input is a 2D matrix, where we have a number of input channels at each position.
-A convolution looks at a small but fixed window and applies a linear operation; then it moves on unit and repeats the same operation, with the same weights as before.
+A convolution looks at a small but fixed window and applies a linear operation; then it moves one unit and repeats the same operation, with the same weights as before.
 The output is another 2D vector, with an arbitrary number of channels, which outputs are mutually independent.
 The set of weights corresponding to each output is called a \emph{filter}.
 
@@ -59,16 +59,16 @@ Note that this structure is very similar to a fully connected layer with two inp
 The series of outputs at every time step $\vec y_t$ can be kept, to get a different prediction at every time step, or only considered the last one if we want a global one.
 
 This layer has practical problems. \marginpar{Convergence issues}
-In particular, as we will see in the next section, if the non-linearity is saturating -- like the hyperbolic tangent -- if any of the intermediate steps reaches the saturating region, the gradients will vanish, preventing the flow of information.
+In particular -- as we will see in the next section -- if the non-linearity is saturating and any of the intermediate steps reaches the saturating region, the gradients will vanish, preventing the flow of information.
 If instead, we use a non-saturating non-linearity we risk having an unstable dynamical system, where the values explode.
 The most popular solution \marginpar{LSTM} is the Long Short Term Memory (LSTM) layer, that will be explained in Section~\ref{sec:depth}.
 
 
-\citet{unreasonable_RNN} has a thorough introduction to Recurrent networks, and \citet{colah_rnn} delves deeper into the convergence issues in long range, and the solutions.
+\citet{unreasonable_RNN} has a thorough introduction to Recurrent networks, and \citet{colah_rnn} delves deeper into the convergence issues in long-range, and the solutions.
 
 \subsection{Non-linearities}
-The workhorse of deep learning layers are linear transformations.
-The composition of linear transformations is also linear, so in order to reap the benefits of multiple layers, we need non-linearities.
+The workhorses of deep learning layers are linear transformations.
+The composition of linear transformations is also linear, so to reap the benefits of multiple layers, we need non-linearities.
 For the most part, they are point-wise functions that act on the output of a layer.
 Historically, the first non-linearity used was the sigmoid:
 
@@ -97,7 +97,7 @@ i.e. their derivative approaches zero.
 While this is useful to control the stability of the outputs, it is a problem for the propagation of gradients.
 The alternative is using non-saturating functions, that allow the gradients to flow for a wider range of values.
 
-The simplest is the Rectified Linear Unit, or ReLU, introduced by~\citet{relu} and plotted in the Figure~\ref{subfig:relu}:
+The simplest is the Rectified Linear Unit, or ReLU, introduced by~\citet{relu} and plotted in Figure~\ref{subfig:relu}:
 \begin{equation*}
 f(x) =  \begin{cases}
 \hfil x &  \text{if } x \geq 0 \\
@@ -105,7 +105,7 @@ f(x) =  \begin{cases}
 \end{cases}
 \end{equation*}
 
-But in this thesis I have mostly used the Exponential Linear Unit, or ELU, shown in the Figure~\ref{subfig:elu}:
+But in this thesis I have mostly used the Exponential Linear Unit, or ELU, shown in Figure~\ref{subfig:elu}:
 \begin{equation*}
 f(x) =  \begin{cases}
 \hfil x &  \text{if } x \geq 0 \\
@@ -129,7 +129,7 @@ The function applied depends on the properties of the target:
 \item If the output is a binary classification or multiple mutually compatible classes, use a sigmoid, as described in Section~\ref{sec:logistic_regression} on logistic regression.
 \item If the output is a series of mutually exclusive classes, use a softmax, as explained in Section~\ref{sec:mlp} on multi-layered perceptrons.
 \item If the output is a regression, use a linear layer to minimise the squeezing of the outputs.
-This is valid even if the output is bounded between 0 and 1, when the values at the extrema are likely to appear, because the network would need to learn very high values for the logits.
+This is valid even if the output is bounded between 0 and 1, when the values at the extrema are likely to appear because the network would need to learn very high values for the logits.
 \item If the outputs are angles, split the labels into sines and cosines and use the hyperbolic tangent.
 This representation preserves angular distances -- ie, angles that differ by almost $2 \pi$ are close -- and are not biased towards an arbitrary middle point.
 The original angle can be recovered using the $\arctantwo$ function.
@@ -138,13 +138,13 @@ The original angle can be recovered using the $\arctantwo$ function.
 \section[Gradient descent]{Training procedure: gradient descent}\label{sec:grad_descent}
 A deep learning network can have millions of parameters, but how do we find the optimal values?
 
-First, we need to define a loss function, or a measurement of how wrong our predictions are on known data.
+First, we need to define a loss function, that is, a measurement of how wrong our predictions are on known data.
 For example, the mean squared error for $N$ data points  $x_i$ with labels $y_i$ and predictions $o_i$ is:
 
 \begin{equation*}
 L_{MSE} = \sum_i^N \left(y_i - o_i\right)^2
 \end{equation*}
-and the cross entropy loss, that measures the information loss between true and predicted values:
+and the cross-entropy loss, that measures the information loss between true and predicted values:
 \begin{equation*}
 L_{H} = \sum_i^N y_i \cdot \log\left(o_i\right) 
 \end{equation*}
@@ -163,7 +163,7 @@ The gradients tell us in which direction we have to ``nudge" the network to impr
 where $\eta$ is the step size, a small number that reflects our belief of the size of the region where the gradients still point in the same direction.
 
 \subsection{Back-propagation}
-In order to train the network, we need to compute the gradients of the loss with respect to all the parameters of the network.
+To train the network, we need to compute the gradients of the loss with respect to all the parameters of the network.
 This can be done automatically using the back-propagation algorithm, or \emph{backprop} \citep{backprop}, the machine version of the chain rule.
 
 We start computing the derivative of the loss with respect to the output of the network ${\partial L}/{\partial o_i}$.
@@ -185,7 +185,7 @@ The differentiation can be done automatically, so the deep learning practitioner
 
 Computing the outputs \marginpar{Backward and forward pass}
 of the network is called \emph{forward pass}, since the output of each layer depends only on the previous values, closer to the inputs.
-In order to compute the gradients, we need to keep the outputs of each layer between the weight and the labels.
+To compute the gradients, we need to keep the outputs of each layer between the weight and the labels.
 Since we transverse the graph in the opposite direction, it is called the \emph{backward pass}.
 
 \subsection{Stochastic gradient descent}\label{sec:sgd}
@@ -216,7 +216,7 @@ where the weight updates are proportional to the gradient computed at the previo
 This is the basis for all optimisers used in Deep Learning.
 
 
-In order to reduce the noise introduced by the stochasticity we can introduce a momentum term, regulated by the parameter $\mu$:
+To reduce the noise introduced by the stochasticity we can introduce a momentum term, regulated by the parameter $\mu$:
 
 \begin{align*}
 &\left.v_j\right|_{k+1} = \mu \left. v_j\right|_{k} - \left.\eta g_j\right|_{it=k}\\
@@ -224,7 +224,7 @@ In order to reduce the noise introduced by the stochasticity we can introduce a 
 \end{align*}
 
 The ``velocity" vector $v_j$ keeps a memory of the latest updates.
-The ``mass" $\mu$ controls the balance between the directions pointed at by new updates, and keeping the inertia.
+The ``mass" $\mu$ controls the balance between the directions pointed at by new updates and keeping the inertia.
 
 The momentum term \marginpar{Nesterov}
 may be pointing in the wrong direction, for example, because we have overshot the minimum.
@@ -242,7 +242,7 @@ On the $k-$th epoch, the learning rate is:
 \eta= \frac{\eta_0}{1 + \delta \cdot k}
 \end{equation}
 
-Another option is to not set the schedule up front, but adapt it to the specific training.
+Another option is to not set the schedule upfront, but adapt it to the specific training.
 I.e. reduce it by a fixed fraction when the loss has not improved for a certain number of epochs.
 We believe the system to be close to the minimum, and we need to take smaller steps to approach it.
 
@@ -265,7 +265,7 @@ ADADELTA~\citep{adadelta} solves this by accumulating only the updates over a wi
 \left.a\right|_{k+1} = \rho \left. a\right|_{k} + (1-\rho) \left.g^2\right|_{it=k},
 \end{equation*}
 allowing the algorithm to overcome past large gradients.
-It also considers the dimensionality of the quantities, and noted that in AdaGrad, the learning rate has dimensions.
+It also considers the dimensionality of the quantities: in AdaGrad the learning rate has dimensions.
 They replaced it for a value of the right dimensionality:
 
 \begin{align*}
@@ -310,7 +310,7 @@ Here are some:
 
 To prevent any single activation from \marginpar{Weight decay}
 dominating the predictions, we can add a term to the loss penalising large weights.
-If this term is proportional to the square of the weights, it is called $L^2$ regularisation, and can be interpreted as a Gaussian prior over the weights centred around $0$, as seen with linear models in Section~\ref{sec:linear}.
+If this term is proportional to the square of the weights, it is called $L^2$ regularisation and can be interpreted as a Gaussian prior over the weights centred around $0$, as seen with linear models in Section~\ref{sec:linear}.
 
 The most popular technique \marginpar{Dropout} 
 specifically developed for deep learning is Dropout,~\citep{dropout}. 
@@ -323,7 +323,7 @@ The next breakthrough in regularisation is Batch Normalisation, \marginpar{Batch
 or Batchnorm~\citep{bn}.
 This has the unusual properties of both increasing generalisation capabilities -- thus serving as a regulariser -- and helping training performance -- ergo, without hindering.
 
-It works as a layer that learns the mean and standard deviation of the distribution of its inputs, and corrects them to keep them close to 0 and 1, respectively.
+It works as a layer that learns the mean and standard deviation of the distribution of its inputs and corrects them to keep them close to 0 and 1, respectively.
 As was seen with some optimisers, it can keep a momentum term to smooth out the changes in averages.
 In the original paper, it was placed before the activation, but further research suggests it is better to place it after it.
 
@@ -340,20 +340,20 @@ Since deep learning models can leverage arbitrarily large datasets, we can use \
 So, in computer vision by showing the image of the same cat at multiple sizes and orientations, we hope our network can recognise a cat regardless of the two transformations.
 In bioinformatics, we may want to train on alignments generated with different settings to provide more robust networks.
 
-Special mention deserves the concept of \emph{Differential privacy}, \marginpar{Differential privacy}
+Special mention deserves the concept of \emph{Differential Privacy}, \marginpar{Differential Privacy}
 or how to learn from sensitive data without leaking private information~\citep{differential_privacy}.
 This framework allows users to train models with the confidence that an adversary with full access to the trained model cannot recover any single identifiable information because the model is guaranteed not to memorise any of its training data.
 
-One procedure implemented by \citet{tf_privacy} starts by splitting each mini-batch used by the Stochastic Gradient Descent into micro-batches, and computing the gradient for each of them.
-Then, the gradients are clipped, so that any micro-batch can provide only so much change in the weights, and independent random Gaussian noise is added to each of the micro-batches, to dilute any private signal they may have.
+One procedure implemented by \citet{tf_privacy} starts by splitting each mini-batch used by the Stochastic Gradient Descent into micro-batches and computing the gradient for each of them.
+Then, the gradients are clipped, so that any micro-batch can provide only so much change in the weights, and independent random Gaussian noise is added to each of them, to dilute any private signal they may have.
 At the end of the iteration, the mini-batch is averaged, and the weights updated.
 
 
 \section[Tensors and gradients]{Conjunctive tissue: tensors and gradients}\label{sec:tensors}
-As we have seen before, each layer is composed of mostly tensors\footnote{In the Computer Science definition: a hypermatrix of an arbitrary dimensions, such as 1-D vectors, 2-D matrices, or 3-D volumes.} and linear operations.
+As we have seen before, each layer is composed of mostly tensors\footnote{In the Computer Science definition: a hypermatrix of arbitrary dimensions, such as 1-D vectors, 2-D matrices, or 3-D volumes.} and linear operations.
 Every intermediate layer in a deep network is learning a transformation of its inputs, that we can interpret as a representation that brings it closer to the target.
-These representations are, in general, difficult for humans to interpret, but in some cases, like computer vision we can \emph{visualise} them.
-A convolutional network trained to identify objects in images will learn to recongise edges and simple textures in the first layers, that are combined into more complex representations as the information travels through the network.
+These representations are, in general, difficult for humans to interpret, but in some cases, like computer vision, we can \emph{visualise} them.
+A convolutional network trained to identify objects in images will learn to recognise edges and simple textures in the first layers, that are combined into more complex representations as the information travels through the network.
 
 One important consequence is that all data, regardless of its source or nature, is represented as tensors.
 We can then seamlessly connect through these tensors different branches working with dissimilar kinds of data, and train end-to-end having them talk to each other through gradients.
@@ -379,7 +379,7 @@ This activation is like ReLU, but the negative side has a small, fixed slope, so
 \footnote{ReLU has the advantage of providing a sparse intermediate representation, which is useful for information disentangling, ie, inferring the causes of the prediction, since perturbing the inputs do not affect all the outputs.}
 
 Tightly tied \marginpar{Weight initialisation} with the non-linearity is the initialisation of the weights.
-Glorot et al. recommended initialising the layers with zero mean and standard deviation $\sigma=6/\sqrt{n_{in}+ n_{out}}$, where $n_{in}$ and $n_{out}$ are the number of input and output features of the layer.
+Glorot et al. recommended initialising the layers with zero mean and standard deviation $\sigma=6/\sqrt{n_{in}+ n_{out}}$, where $n_{in}$ and $n_{out}$ are, respectively, the number of input and output features of the layer.
 In this case, small initialisations are critical because saturating neurons are very slow to train.
 With non-saturating initialisations like ReLU, we can use larger weights without fearing the plateaus.
 \citet{he} recommends $2/\sqrt{n_{in}}$ as a stable choice: each output will be a linear combination of $n_{in}$ input features.
@@ -394,7 +394,7 @@ too far from the labels, can we bring them closer, without sacrificing depth?
 While only the last one was actually used in production, the intermediate ones inject gradients and help train the lower layers.
 
 The last fundamental idea \marginpar{ResNets} is Residual Networks~\citep{resnet}, which allows to train networks of arbitrary depth.
-Resnets are composed of blocks of two layers  -- convolutions in the original paper, but applicable to any other type -- where the output is directly added to the inputs using a so-called \emph{skip connection}, as illustrated in Figure~\ref{fig:resnet}.
+ResNets are composed of blocks of two layers  -- convolutions in the original paper, but applicable to any other type -- where the output is directly added to the inputs using a so-called \emph{skip connection}, as illustrated in Figure~\ref{fig:resnet}.
 This extra path opens an information highway from the inputs to the labels.
 
 \begin{figure}[!htb]
@@ -404,8 +404,8 @@ This extra path opens an information highway from the inputs to the labels.
 	Note that placing the BatchNorm after the activation is usually advantageous.}\label{fig:resnet}
 \end{figure}
 
-Recurrent networks \marginpar{Recurrent networks, revisited}, albeit formally ``shallow" -- they typically have one or two layers -- face similar problems to feed-forward networks, now because the information has to travel along the time dimension.
-Long Short Term Memory (LSTM) layers are a variation of the simple RNN that includes some internal skip connections, allowing the network to transfer long range information, but also ``forget" gates that can learn to ignore certain parts of the input that may be irrelevant.
+Recurrent networks, \marginpar{Recurrent networks, revisited} albeit formally ``shallow" -- they typically have one or two layers -- face similar problems to feed-forward networks, now because the information has to travel along the time dimension.
+Long Short Term Memory (LSTM) layers are a variation of the simple RNN that includes some internal skip connections, allowing the network to transfer long-range information, but also ``forget" gates that can learn to ignore certain parts of the input that may be irrelevant.
 
 \citet{difficult_recurrent} explored the influence and solutions of initialisations and non-linearities to the problems of vanishing and exploding gradients, and provide recipes for training recurrent networks minimising these problems.
 
@@ -455,11 +455,11 @@ In this situation, we can apply transfer learning, which is done in two steps:
 \item \emph{Pre-training:} train a network on a related task for which we have a high-quality dataset.
 This step learns a new representation of the data.
 \item \emph{Training:} replace the top layers with new ones, and retrain on the dataset and task of interest while keeping the weights of the re-used layers unchanged.
-We keep our previous representation, but use it for a new task.
+We keep our previous representation but use it for a new task.
 This step is training fewer parameters, so it needs less data, and the architecture can be more constrained.
 \item \emph{Fine-tuning (optional):} we can refine the predictions by allowing more layers to change.
 In this stage, we unfreeze some of the pre-trained layers, and train again, but now keeping the learning rate small.
-Our network is already trained, so we only want to take small steps, otherwise we will ruin the pre-training.
+Our network is already trained, so we only want to take small steps, otherwise, we will ruin the pre-training.
 \end{enumerate}
 
 Paper \textcolor{Maroon}{IV}, makes use of this technique, where we pre-trained a section of the network on a large subset of the PDB to predict secondary structure from sequence.

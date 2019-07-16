@@ -4,16 +4,16 @@ either by analysing large amounts of data or by replacing experiments with compu
 
 \section{Predictors}
 A significant fraction of the protein bioinformatics work is the development of predictors: statistical or machine learning methods that can, given limited information, predict properties of proteins.
-A common choice is to make predictions taking only the amino acid sequence, because this is the easiest information we can acquire of a protein.
+A common choice is to make predictions taking only the amino acid sequence because this is the easiest information we can acquire of a protein.
 Other methods may require extra annotation, such as Gene Ontology -- an annotation condensing all our knowledge of the gene that produced the protein -- or 3D structures -- experimental or models.
 
 \section[Multiple Sequence Alignments]{Increasing statistics: Multiple Sequence Alignments}
 Proteins, as organisms, are products of evolution, so we can find similar versions of the same protein in different organisms.
-Even when the function is novel, it usually evolves as a minor modification on pre-existing proteins.
+Even when the function is novel, it usually evolves as a minor modification of pre-existing proteins.
 This means that, in most cases, we can obtain a better prediction when working at the \emph{family level,}
-i.e., considering not only our protein of interest, but also any related sequence in our database.
+i.e., considering not only our protein of interest but also any related sequence in our database.
 
-In order to have coherent statistics, every sequence must be aligned to the original query, as in the following example:
+To have coherent statistics, every sequence must be aligned to the original query, as in the following example:
 
 \begin{center}
 \marginpar{\phantom{a}}
@@ -39,21 +39,21 @@ This section explains how to build it.
 
 
 \subsection{Pairwise alignment}
-The building block of an MSA is the alignment of each related sequence to our query, and the first step is measure how similar they are.
-The most basic scheme is simply count the number of matching amino acids, assigning a positive score for matches, and a penalty for mismatches.
+The building block of an MSA is the alignment of each related sequence to our query, and the first step is to measure how similar they are.
+The most basic scheme simply counts the number of matching amino acids, assigning a positive score for matches, and a penalty for mismatches.
 
 Proteins \marginpar{The reason for gaps} have insertions and deletions, which means the matching regions in different proteins may be discontinuous.
 We can allow for gaps in the scores including a term that considers both opening -- our belief of how common insertions and deletions are -- and extending the gap -- considering our expectation of their length.
 
 Furthermore, not all mismatches are the same.
-For example leucine (L) and isoleucine (I) are functionally very similar, and can often be replaced without loss of function.
+For example, leucine (L) and isoleucine (I) are functionally very similar, and can often be replaced without loss of function.
 On the other hand, a single mutation from glutamic acid (E) to valine (V), in humans is enough to cause sickle cell anaemia.
 
 Nor are all matches.
 Alanine (A) forms over $7\%$ of the proteome, so we are more likely to find a hit at random than with tryptophan (W), which forms less than $2\%$.
 
 We can codify \marginpar{Substitution matrix} the difference between different amino acids in a substitution matrix.
-The most common choice to detect distant related proteins is the \texttt{BLOSUM} family.
+The most common choice to detect distantly related proteins is the \texttt{BLOSUM} family.
 \citet{blosum} derived them from a set of 500 multiple sequence alignments.
 
 \subsection{Scaling up: BLAST}
@@ -66,7 +66,7 @@ They do not guarantee an optimal alignment according to the scoring matrix, but 
 Substitution matrices assume a fixed evolution model, and that every residue is as important as every other.
 But this is not true, we can observe that some protein regions are highly conserved because they are, in one way or another, important for the function of the protein.
 In the earlier example, we can see how around column 40, there are fewer changes.
-We want our search to reflect this fact, and, for instance only accept changes in these regions if they provide enough similarity in the rest of the protein to support the fact that they are related.
+We want our search to reflect this fact, and, for instance, only accept changes in these regions if they provide enough similarity in the rest of the protein to support the fact that they are related.
 
 PSI-BLAST does this using an iterated search, and building Position Specific Scoring Matrices (PSSM).
 The first iteration is a normal BLAST search, using the default substitution matrix, but in the subsequent iterations, it uses the statistics of each column to update the substitution matrix.
@@ -74,7 +74,7 @@ Since each position is treated independently, it can model better the importance
 
 \subsection[Hidden Markov Models]{Increasing sensitivity with Hidden Markov Models}
 PSSMs can model the differences in probabilities for each amino acid at different positions, but gaps are still modelled with a flat penalty across the sequence.
-We know this is not a good representation of proteins, since they are unlikely to happen in the core, due to the lack of space.
+We know this is not a good representation of proteins, since they are unlikely to happen in the core due to the lack of space.
 Insertions are easy to introduce in short, external loops; and deletions are most likely in long loops. 
 A representation that allows us to model both mutations and insertions and deletions with different rates at different positions are Hidden Markov Models (HMM).
 
@@ -84,16 +84,16 @@ Instead, each of them has a certain probability of emitting a symbol: the observ
 Fitting a Hidden Markov Model consists on figuring the emission probability for each state -- the analogue to the PSSMs -- and the transition probability between states.
 Like in PSI-BLAST, this is done iteratively, passing several times through the data and updating our belief.
 
-The two most popular programs to perform this searches are JackHMMER \citep{jh}, and HHBlits \citep{hhblits}:
+The two most popular programs to perform these searches are JackHMMER \citep{jh}, and HHBlits \citep{hhblits}:
 
 \begin{itemize}
 \item JackHMMER compares every sequence in the database with its HMM.
-It performs a HMM-sequence comparison.
+It performs an HMM-sequence comparison.
 \item HHBlits uses a database of pre-computed HMMs based on sequence clusters.
 It compares HMM to HMM, and in case of a match, includes all the members of the cluster in the MSA.
 \end{itemize}
 
-JackHMMER is slower, 
+JackHMMER is slower
 \marginpar{Advantages and disadvantages}
 because it must consider each sequence; but it can search against any database without the need to pre-prepare it.
 JackHMMER can easily keep an up-to-date sequence database, or work on databases tailored for the search at hand.
@@ -142,7 +142,7 @@ If the MSA is of enough quality, the contacts will present high values of $MI$.
 Mutual Information has a problem with the transitivity property: consider three residues, A, B, and C; where B is close to both A and C, but A and C are far away.
 Mutual Information will likely detect a correlation between A and B, and between B and C; but it will also show a correlation between A and C!
 
-In order to discern true from spurious correlations, we need to fit a statistical model to the whole data at once, in this way, we hope to recover the true (direct) relationships.
+To discern true from spurious correlations, we need to fit a statistical model to the whole data at once, in this way, we hope to recover the true (direct) relationships.
 This can be accomplished with Direct Coupling Analysis (DCA).
 Several variations exist, but they are all based on a Potts model of statistical mechanics.
 This is a model where each position (in our case, residue), can take a number of discrete, well-defined, spin states (amino acid types), and the model depends only on the intrinsic properties at each location, and pairwise interactions.
@@ -167,7 +167,7 @@ Z = \sum_{\vec{\sigma}} e^{-\beta H\left(\vec{\sigma}\right)}
 Fitting a Potts model means to estimate the values of $J$ and $h$ that best explain the observed distribution of sequences in the MSA.
 The problem as such is intractable because computing $Z$ implies a sum over all the possible sequences of length $N$, $21^N$ (the 20 natural amino acids plus the gap state).
 
-There are several strategies that can approximate the partition function, such as plmDCA \citep{plmDCA}, or side-step it all together, like GaussDCA \citep{GaussDCA}.
+Several strategies can approximate the partition function, such as plmDCA \citep{plmDCA}, or side-step it all together, like GaussDCA \citep{GaussDCA}.
 
 Once the values of $J$ are obtained, the scores of the contacts can be estimated by taking the Frobenius norm of each of the J matrices.
 That is, the square root of the sum of the squares of the couplings between each pair of amino acids:
@@ -189,7 +189,7 @@ Natural proteins are not randomly drawn from a generative model, like Potts.
 Proteins evolve alongside a tree, where a mutation in an organism is likely to be shared among all the descendants.
 This appears as a pattern of vertical and horizontal lines on the contact map.
 
-\citet{apc} proposed a simple method to reduce this bias: for each column in the contact map, substract the average of the row times the average of the column, normalised by the total average.
+\citet{apc} proposed a simple method to reduce this bias: for each column in the contact map, subtract the average of the row times the average of the column, normalised by the total average.
 
 \missingfigure[figcolor=white]{APC effect}
 
@@ -198,7 +198,7 @@ Contacts do not appear at random.
 Since the protein is a continuous chain, contacts are rarely isolated, and appear in groups.
 Furthermore, since most of the protein is locally organised in secondary structure elements, this gives rise to specific patterns in the contact map.
 The statistical methods like DCA and Mutual Information do not consider this, so a refinement step can be done using pattern recognition.
-We can train a machine learning algorithm on the outputs of statistical methods and recognise the underlying patterns, which is able to remove much of the spurious contacts, noise, and artefacts in the alignments.
+We can train a machine learning algorithm on the outputs of statistical methods and recognise the underlying patterns, which can remove much of the spurious contacts, noise, and artefacts in the alignments.
 
 \missingfigure[figcolor=white]{alpha and beta contacts}
 
@@ -221,7 +221,7 @@ MODELLER \citep{modeller}, for example, uses the templates to infer distance res
 \subsection{\emph{Ab-initio} folding}
 In the absence of available templates, we can use \emph{ab-initio} or \emph{template-free} methods, in which we try to find the minimum energy of the system, including additional terms derived from predictors.
 
-Rosetta's \citep{Rosetta3} \marginpar{Rosetta} \emph{ab initio} protocol implements a simulated annealing that starts with an extended chain, and randomly replaces fragments with ones derived from the PDB.
+Rosetta's \citep{Rosetta3} \marginpar{Rosetta} \emph{ab initio} protocol implements a simulated annealing scheme that starts with an extended chain and randomly replaces fragments with ones derived from the PDB.
 Since the fragments are taken from real proteins, the models tend to have good chemical properties, even when completely wrong.
 In order to speed up and improve convergence, we can add additional energy terms to the force field, such as contact restraints.
 
@@ -255,13 +255,13 @@ The TM (Template Modelling score) is the same as S, but $d_0 = 1.24 \sqrt[3]{L -
 Both S and TM scores give values between $0$ and $1$.
 For TM, values below $0.3$ correspond to random structures, and scores over $0.5$ indicate structures about in the same fold \citep{tmscore05}.
 
-The problem with superposition scores are that are sensitive to conformational changes.
+The problem with superposition scores is that are sensitive to conformational changes.
 For example, consider a protein composed of two subunits connected by a small, flexible hinge; and a model where each of the subunits is perfect, but the relative orientation is not the same.
 The superposition scores would align one of the subunits, with perfect scoring, and give bad values to the other.
 
 A solution is to compare structures locally. 
 LDDT (Local Distance Difference Test) \citep{lddt} \marginpar{LDDT}
-measures, for every atom, the fraction of preserved  distances, up to a tolerance, within an inclusion radius.
+measures, for every atom, the fraction of preserved  distances, up to a given tolerance, within an inclusion radius.
 LDDT considers all inter-atomic distances that are within $\SI{0.5}{\angstrom}$, $\SI{1}{\angstrom}$, $\SI{2}{\angstrom}$, and $\SI{4}{\angstrom}$.
 The final scores is obtained averaging over all the atoms in the residue and inclusion thresholds.
 
@@ -283,12 +283,12 @@ The purpose of MQA is two-fold:
 \begin{itemize}
 \item \emph{Model selection}, or picking the best model from an ensemble generated by one or different methods.
 \item \emph{Model evaluation}, or estimating the overall quality, or how much it can be trusted.
-Some applications may require high quality models, while for others, knowing the right fold is sufficient.
+Some applications may require high-quality models, while for others, knowing the right fold is sufficient.
 \end{itemize}
 
 In principle, \emph{Energy-based MQA?} we could compute the energy of each model, assuming that the lower the energy, the closer we are to our target.
 This has two flaws: it does not provide information about \emph{how far} -- since in principle we do not know the energy of the native state -- and it is not a reliable way of comparing models from different methods -- because energy functions are very sensitive to small details.
-Consider the case of a perfect model, except for two atoms that are on the same position.
+Consider the case of a perfect model, except for two atoms that are in the same position.
 The scores presented on the previous section would all be close to 1, but the energy would be infinite!
 
 We can partially remediate this problem by repacking the models using a common energy function, but this method would still favour models that were optimised with the same energy function we are using.
@@ -299,7 +299,7 @@ The alternative solution is to use machine learning and try to predict scores di
 We can use unsupervised programs, like Pcons \citep{pcons}, that cluster the models, and select the one that is closer to the centre.
 The underlying assumption is that, if several independent methods agree, they are probably correct.
 If all our models come from a single method, but the set of restraints is good, they will all be similar; but if the restraints are insufficient or contradictory, the models will be diverse.
-This is called \emph{consensus methods}.
+They are called \emph{consensus methods}.
 
 The alternative is to use supervised machine learning,
 \marginpar{Supervised}
@@ -311,7 +311,7 @@ The features we can use fall into two categories:
 \item Agreement with predictors, such as secondary structure. A good model should have a good agreement with predictors, but not necessarily perfect.
 \end{itemize}
 
-This method is called \emph{single method}, and in this thesis, we have developed supervised methods (Papers \textcolor{Maroon}{I} and \textcolor{Maroon}{IV}).
+This approach is called \emph{single method}, and in this thesis, we have developed two supervised single methods (Papers \textcolor{Maroon}{I} and \textcolor{Maroon}{IV}).
 
 %\section{Other predictors}
 %\todo{TODO}

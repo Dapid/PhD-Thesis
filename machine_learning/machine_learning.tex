@@ -10,7 +10,9 @@ Furthermore, the development of computers allowed for an explosion in the size a
 These applications were either developed from first principles or as effective theories; but contained at their core, relatively simple mathematical models.
 For example, modelling the dynamics of $n$-bodies gravitationally interacting are very rich and complicated to solve, but they all spawn from two simple equations, Newton's second law of motion for an object of mass $m$: $\vec{F} = m \cdot \vec{a}$ and the force of gravity between two objects of masses $m_1$ and $m_2$: $F_g=G\frac{m_1  m_2}{r^2}$.
 
-But the advent of computers not only gave us mathematical muscle, it also allowed to connect them to sensors;
+But the advent of computers
+\marginpar{How do computers fit in?}
+ not only gave us mathematical muscle, it also allowed to connect them to sensors;
 providing us with large amounts of data about the real world.
 Data that can be used to fit statistical models, even in the absence of underlying mathematical theories, such as recognising objects in images, identifying where in the cell a protein is going to end up, or translating natural language.
 The Scientific Revolution of the 16th century brought the concept \emph{``if it can be measured, it can be modelled"}, but the Data Revolution of the 20th century expanded it \emph{``if it can be \emph{represented}, it can be modelled"}.
@@ -124,6 +126,7 @@ Each class has one linear model given by the vector of weights $\left\{\vec w_i 
 where $\widetilde W$ is a $(N \times d)$ matrix.
 The components of the vector $\vec{z}$ are called the \emph{logits}. 
 To obtain probabilities we use the exponential to make them all positive and normalise the sum.
+\marginpar{Softmax}
 This is called the softmax function:
 
 \begin{equation*}

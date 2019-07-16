@@ -59,7 +59,7 @@ The most common choice to detect distant related proteins is the \texttt{BLOSUM}
 \subsection{Scaling up: BLAST}
 Performing a pairwise alignment on a large sequence database would be very slow, but for a given query, most entries in the database are not related.
 Programs like BLAST (Basic Local Alignment Search Tool) introduce a set of heuristics to discard negatives as quickly as possible.
-They do not guarantee an optimal alignment according to the scoring matrix, but this is offset by a much higher amount of data.
+They do not guarantee an optimal alignment according to the scoring matrix, but they compensate it by being able to produce a much higher amount of data.
 
 \subsection[PSSMs and PSI-BLAST]{Position Specific Scoring Matrices and PSI-BLAST}
 

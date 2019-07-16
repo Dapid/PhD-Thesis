@@ -61,7 +61,7 @@ The same bond is possible with residues that are closer -- two or three -- or fu
 
 The second most common arrangement is the $\beta$-sheet  \marginpar{$\beta$} depicted in Figure~\ref{subfig:beta}, where approximately extended chains are placed next to each other and bonds are formed between juxtaposed residues.
 
-\begin{figure}[hb]
+\begin{figure}[tbp]
 	\centering
 	\subcaptionbox{$\alpha$-helix\label{subfig:alpha}}{\includegraphics[width=0.9\textwidth]{bioinfo/figures/helix}}\\
 	\subcaptionbox{$\beta$-sheet\label{subfig:beta}}{\includegraphics[width=0.9\textwidth]{bioinfo/figures/beta}}
@@ -112,14 +112,37 @@ Levinthal suggested two corrections:
 	In other words, the energy landscape of protein folding presents a wide funnel from the unfolded state to its near-native conformation, which allows for a rapid transition.
 \end{itemize}
 
-These corrections are supported by experiments showing that a certain enzyme only folds at temperatures around 37 C, but it is completely stable up to 90 C.
-Furthermore, the same enzyme produced by an organism that lives at colder temperatures is shown to require lower temperatures for renaturation, but it is still stable up to 90 C.
-The order of events greatly influences the kinetics of folding.
+%These corrections are supported by experiments showing that a certain enzyme only folds at temperatures around 37 C, but it is completely stable up to 90 C.
+%Furthermore, the same enzyme produced by an organism that lives at colder temperatures is shown to require lower temperatures for renaturation, but it is still stable up to 90 C.
+%The order of events greatly influences the kinetics of folding.
 
 \FloatBarrier
 %\subsection{The protein backbone}
 \subsection{The hydrophobic effect}
-\todo{do}
+Water molecules are electric dipoles with a partial negative charge on the oxygen, and a partial positive charge on the hydrogens.
+This introduces an electrostatic interaction between molecules in bulk of water, that self-organises to form a network of hydrogen bonds.
+Any non-polar molecule submerged in water will disrupt this network of bonds.
+To preserve as many energy-favourable hydrogen bonds the water molecules near the boundary can reorient themselves, forming a pocket around the hydrophobic substance in the process.
+The degrees of freedom for the boundary is restricted, so the entropy -- and consequently the free energy -- is reduced.
+This is the \emph{hydrophobic effect}, responsible for the immiscibility of fats and water.
+
+A protein chain \marginpar{Hydrophobicity and folding}
+will be composed of both hydrophobic and hydrophilic amino acids.
+When placed, unfolded, in the cellular environment, tiny pockets of water will be created around the hydrophobic regions.
+Quickly, these pockets will join together, expelling most of the water and forming a compact core of hydrophobic residues, surrounded by hydrophilic ones, the \emph{molten globule}.
+A partial secondary structure, close to native, is observed.
+
+\subsection{From molten globule to structure}
+The core of the molten globule is not completely devoid of solvent, which slightly increases the distance between adjacent elements, greatly reducing the van der Waals interactions.
+Long-range contacts are not preserved, which indicates a relative flexibility between its components.
+Our globule is ``soft" and ``wet".
+
+The transition to the solid, native state, involves the repacking of the side chains into a tight and compact core.
+This process finalises the packing of secondary structure and freezes most of the long-range contacts.
+
+It is noteworthy \marginpar{Further discussion}
+that not all proteins present a molten globule, and can transition directly between coil and native \citep{protein_physics}.
+
 
 \subsection{Energy terms}
 A relatively generic form of the energy dictating the dynamics of a protein is:
@@ -137,6 +160,7 @@ The terms correspond to:
 \item[$\beta$] A harmonic potential on the angles between adjacent bonds $\theta$.
 \item[$\gamma$] An arbitrary function $f$ on every torsion angle $\omega$.
 \item[$\delta$] The Lennard-Jones potential between all pairs of atoms not covalent bonded, where $r_{0ij}$ denotes the equilibrium distance and $k_{ij}$ the depth of the energy well.
+This term corresponds to the van der Waals forces.
 \item[$\epsilon$] The electrostatic energy between charges, assuming they are spherically distributed.
 \end{itemize}
 
@@ -148,8 +172,8 @@ In practice, this is not a significant problem because the deviations from the i
 From here we can see that most of the dynamics in proteins is given by the flexibility of the torsion angles.
 Roughly speaking the torsions of the backbone determine the secondary structure and those of the side chains, the packing.
 
-\section{Membrane proteins}
-\todo{do}
+%\section{Membrane proteins}
+%\todo{membrane proteins}
 \section{Experimental methods}
 How can we know the structure of a protein?
 The most commonly used methods are X-ray crystallography and NMR spectroscopy.
@@ -194,7 +218,7 @@ There are simplified methods that, while they cannot give a full structure, they
 
 The first is Small Angle X-ray Scattering, or SAXS. \marginpar{SAXS}
 The process is similar to X-ray crystallography, but now the protein is in solution.
-Each individual will produce its own interference pattern, but since they are not crystallised, the orientation of each pattern is randomised.
+Each unit will produce its own interference pattern, but since they are not crystallised, the orientation of each pattern is randomised.
 From this we can infer a rough shape of the protein, and the presence or absence of differences between conformations.
 
 A related method is Small Angle Neutron Scattering, or SANS. \marginpar{SANS}

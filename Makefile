@@ -19,6 +19,8 @@ check:
 txt:
 	pandoc -f latex --bibliography=references.bib -t plain -o thesis.txt main.tex
 
+odt:
+	pandoc -f latex --bibliography=references.bib -t odt -o thesis.odt main.tex
 force:
 	latexmk -f -lualatex -latexoption="-synctex=1" main.tex
 

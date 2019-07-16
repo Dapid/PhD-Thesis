@@ -9,7 +9,7 @@ purge:
 
 count:
 	@echo -n "TODO: "
-	@find . -name "*.tex" | xargs grep -F "\todo" |  py -x "x.split('%', 1)[-1]" | grep -F "\todo" | wc -l
+	@find . -name "*.tex" | xargs grep -n -F "\todo" |  py -x "x if r'\todo' in x.split('%', 1)[0] else None" | wc -l
 	@echo -n "FIGS: "
 	@find . -name "*.tex" | xargs grep -F "\missingfigure" | py -x "x.split('%', 1)[-1]" | grep -F "\missingfigure" | wc -l
 

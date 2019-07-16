@@ -103,15 +103,16 @@ This means the databases are not updated as often, and only a handful of version
 Furthermore, since all the members of each cluster are added, the MSA has sharp boundaries at the edges of each one.
 
 
-
-
 \section{Contact prediction}
 Folded proteins are tightly packed structures, as illustrated in Figure~\ref{fig:packing}.
 Since there is very little to no space between neighbouring residues, not every mutation is allowed.
 When a protein gains a mutation, it usually needs to be compensated by others somewhere else in the protein to keep it stable.
 \marginpar{Correlated mutations}
 For example, if an amino acid is replaced by a bigger one, a nearby residue would have to be changed for a smaller one; or if a neutral amino acid gains a positive charge, it would be energetically favourable to have a negatively charged next to it.
-Contacts in our protein will appear as sets of correlated, compensating mutations in an MSA.
+Contacts in our protein, or residues nearby in space, will appear as sets of correlated, compensating mutations in an MSA.
+
+We usually define \emph{contact} \marginpar{Distance threshold} as closer than $\SI{8}{\angstrom}$ between the C-$\beta$ atoms,
+but other authors may use $\SI{10}{\angstrom}$ between C-$\alpha$, $\SI{4}{\angstrom}$ between any pair of heavy atoms, or combinations.
 
 \begin{figure}[!htb]
 	\centering

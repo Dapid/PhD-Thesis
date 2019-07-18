@@ -197,11 +197,21 @@ This appears as a pattern of vertical and horizontal lines on the contact map.
 \subsection{Pattern recognition}
 Contacts do not appear at random.
 Since the protein is a continuous chain, contacts are rarely isolated, and appear in groups.
-Furthermore, since most of the protein is locally organised in secondary structure elements, this gives rise to specific patterns in the contact map.
+Furthermore, since most of the protein is locally organised in secondary structure elements, this gives rise to specific patterns in the contact map, as can be seen in Figure~\ref{fig:contact_patterns}.
 The statistical methods like DCA and Mutual Information do not consider this, so a refinement step can be done using pattern recognition.
 We can train a machine learning algorithm on the outputs of statistical methods and recognise the underlying patterns, which can remove much of the spurious contacts, noise, and artefacts in the alignments.
 
-\missingfigure[figcolor=white]{alpha and beta contacts}
+
+\begin{figure}[!htb]
+	\centering
+	\hfil
+	\subcaptionbox{Alpha helices, with their characteristic chequerboard pattern.\label{subfig:alphacontact}}{\input{bioinfo/figures/alpha_contactmap.tikz}}
+	\hfil
+	\subcaptionbox{Beta strands, showing the typical parallel bands\label{subfig:betacontacts}}{\input{bioinfo/figures/beta_contactmap.tikz}}
+	\hfil
+	\caption{Typical contact maps of secondary structure elements.}\label{fig:contact_patterns}
+\end{figure}
+
 
 \section{Protein folding}
 

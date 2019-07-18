@@ -1,0 +1,4 @@
+\begin{tikzpicture}
+    \node[anchor=south west, inner sep=0] (cmap) at (0,0) {\includegraphics[width=0.45\columnwidth]{bioinfo/figures/beta_contactmap_base}};
+    \node[anchor=south west, inner sep=0] (prot) at (2.2,0.8) {\includegraphics[width=0.15\columnwidth]{bioinfo/figures/beta_prot}};
+\end{tikzpicture}

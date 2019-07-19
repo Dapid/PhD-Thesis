@@ -86,7 +86,6 @@ if __name__ == '__main__':
         depth = 8
         width = 64
         L2_REG = 1e-9
-        angle = 'phi'
 
         model = model_builder.build_model_single(L2_REG, depth, width, angle)
         prefix = model.name

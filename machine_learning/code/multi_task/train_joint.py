@@ -1,6 +1,4 @@
-import sys
 import random
-import pickle
 import itertools
 
 import numpy as np
@@ -66,7 +64,7 @@ class DataGenerator(object):
 
 if __name__ == '__main__':
     data_file = '/home/david/research/PQ4/ss_pred/data/data_jhE3.ur50.v2.h5'
-    data_file_1= '/home/david/research/PQ4/ss_pred/data/data_jhE3.ur50.v2_1.h5'
+    data_file_1 = '/home/david/research/PQ4/ss_pred/data/data_jhE3.ur50.v2_1.h5'
     data_file_2 = '/home/david/research/PQ4/ss_pred/data/data_jhE3.ur50.v2_2.h5'
     testing_data = DataGenerator(data_file_1, mode='test')
     training_data = DataGenerator(data_file_2, mode='train')

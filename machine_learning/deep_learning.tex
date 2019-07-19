@@ -180,10 +180,18 @@ For example, if the last layer is a fully connected layer without a bias, the gr
 \frac{\partial L}{\partial w_{ij}} = \frac{\partial L}{\partial y_j} \frac{\partial y_j}{\partial w_{ij}} =  \frac{\partial L}{\partial y_j}  w_{ij}
 \end{equation*}
 
-The procedure \marginpar{compuational graph} can be applied recursively to an arbitrary number of layers using a computational graph: a directed graph where the nodes are inputs, outputs, and intermediate values; and the edges connect each node with the values that are immediately needed to compute it.
+The procedure \marginpar{Computational graph} can be applied recursively to an arbitrary number of layers using a computational graph: a directed graph where the nodes are inputs, outputs, and intermediate values; and the edges connect each node with the values that are immediately needed to compute it.
+Figure~\ref{fig:comp_graph} contains a simple example.
 The differentiation can be done automatically, so the deep learning practitioner can write models without needing to explicitly write down the gradients, which is time-consuming and error-prone.
 
-\missingfigure[figcolor=white]{A small computational graph}
+\begin{figure}[bht]
+	\centering
+	\input{machine_learning/figures/comp_graph.tikz} %
+	\caption{An example of a computational graph computing the simple formula above.
+	The square nodes are the three inputs, $a$, $b$, and $c$; while the diamond indicates the output value, $\mathcal{O}$.
+    The node in italics, $\mathit{d}$ is a temporary variable.}\label{fig:comp_graph}
+\end{figure}
+
 
 Computing the outputs \marginpar{Backward and forward pass}
 of the network is called \emph{forward pass}, since the output of each layer depends only on the previous values, closer to the inputs.

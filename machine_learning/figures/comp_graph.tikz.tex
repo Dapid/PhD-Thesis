@@ -1,0 +1,25 @@
+\begin{tikzpicture}[node distance=2cm and 2cm]
+	\node[align=center, anchor=south west, inner sep=0] (formula) at (2,2) {$\mathcal{O} = \underbrace{\left(a {\color{Maroon}+} b\right)}_\mathit{d} {\color{Maroon} \cdot} \: c$};
+    
+    \node[draw, rectangle, inner sep=3pt] (a) at (0,2) {a};
+    \node[draw, rectangle, inner sep=3pt] (b) at (0,1) {b};
+    \node[draw, rectangle,  inner sep=3pt] (c) at (0,0) {c};
+    
+    \node[draw, circle, inner sep=2pt] (plus) at (1, 1.5) {${\color{Maroon}+}$};
+    
+    \node[ inner sep=3pt] (d) at (2,1.5) {$\mathit{d}$};
+    
+    \node[draw, circle, inner sep=2pt] (times) at (3, 1.5/2) {${\color{Maroon}\times}$};
+    
+    \node[draw, diamond, inner sep=2pt] (o) at (5, 1.5/2) {$\mathcal{O}$};
+    
+    \draw[] (a) -- (plus);
+    \draw[] (b) -- (plus);
+    
+    \draw[->, >=stealth, ]  (plus) -- (d);
+    
+    \draw[]  (c) -- (times);
+    \draw[] (d) -- (times);
+    
+    \draw[->, >=stealth] (times) -- ( $ (times) !0.75! (o)$ ); 
+\end{tikzpicture}

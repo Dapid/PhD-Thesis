@@ -19,7 +19,7 @@ To have coherent statistics, every sequence must be aligned to the original quer
 \marginpar{\phantom{a}}
 \marginpar{\phantom{a}}
 \marginpar{\phantom{a}}
-\marginpar{An example MSA}
+\marginpar{An example \MSA}
 \begin{Verbatim}[fontsize=\small, xleftmargin=1em]
 1       10        20        30        40        50   
 FCLEPPYTGPCKARMIRYFYNARSGSCETFIYGGCKAKRNNFKSEEDCMRTCG
@@ -34,12 +34,13 @@ LCHLAMESGPCRAAKPRWYFDQGKQTCVEYIYGGCRGNSNNFETKAECMRTCS
 \end{Verbatim}
 \end{center}
 
-The collection of sequences is called a Multiple Sequence Alignment, or MSA, and the dash \texttt{-} indicates a gap, a residue that is not present at that particular position.
+The collection of sequences is called a Multiple Sequence Alignment, or \MSA.
+Here, the dash \texttt{-} indicates a gap, a residue that is not present at that particular position.
 This section explains how to build it.
 
 
 \subsection{Pairwise alignment}
-The building block of an MSA is the alignment of each related sequence to our query, and the first step is to measure how similar they are.
+The building block of an \MSA is the alignment of each related sequence to our query, and the first step is to measure how similar they are.
 The most basic scheme simply counts the number of matching amino acids, assigning a positive score for matches, and a penalty for mismatches.
 
 Proteins \marginpar{The reason for gaps} have insertions and deletions, which means the matching regions in different proteins may be discontinuous.
@@ -53,54 +54,54 @@ Nor are all matches.
 Alanine (A) forms over $7\%$ of the proteome, so we are more likely to find a hit at random than with tryptophan (W), which forms less than $2\%$.
 
 We can codify \marginpar{Substitution matrix} the difference between different amino acids in a substitution matrix.
-The most common choice to detect distantly related proteins is the \texttt{BLOSUM} family.
+The most common choice to detect distantly related proteins is the \textsc{blosum} family.
 \citet{blosum} derived them from a set of 500 multiple sequence alignments.
 
-\subsection{Scaling up: BLAST}
+\subsection{Scaling up: \BLAST}
 Performing a pairwise alignment on a large sequence database would be very slow, but for a given query, most entries in the database are not related.
-Programs like BLAST (Basic Local Alignment Search Tool) introduce a set of heuristics to discard negatives as quickly as possible.
+Programs like \BLAST (Basic Local Alignment Search Tool) introduce a set of heuristics to discard negatives as quickly as possible.
 They do not guarantee an optimal alignment according to the scoring matrix, but they compensate it by being able to produce a much higher amount of data.
 
-\subsection[PSSMs and PSI-BLAST]{Position Specific Scoring Matrices and PSI-BLAST}
+\subsection[\PSSMs and  \PSIBLAST]{Position Specific Scoring Matrices and \textsc{psi-blast}}
 
 Substitution matrices assume a fixed evolution model, and that every residue is as important as every other.
 But this is not true, we can observe that some protein regions are highly conserved because they are, in one way or another, important for the function of the protein.
 In the earlier example, we can see how around column 40, there are fewer changes.
 We want our search to reflect this fact, and, for instance, only accept changes in these regions if they provide enough similarity in the rest of the protein to support the fact that they are related.
 
-PSI-BLAST does this using an iterated search, and building Position Specific Scoring Matrices (PSSM).
-The first iteration is a normal BLAST search, using the default substitution matrix, but in the subsequent iterations, it uses the statistics of each column to update the substitution matrix.
+\PSIBLAST does this using an iterated search, and building Position Specific Scoring Matrices (\PSSM).
+The first iteration is a normal \BLAST search, using the default substitution matrix, but in the subsequent iterations, it uses the statistics of each column to update the substitution matrix.
 Since each position is treated independently, it can model better the importance of each residue.
 
 \subsection[Hidden Markov Models]{Increasing sensitivity with Hidden Markov Models}
-PSSMs can model the differences in probabilities for each amino acid at different positions, but gaps are still modelled with a flat penalty across the sequence.
+\PSSMs can model the differences in probabilities for each amino acid at different positions, but gaps are still modelled with a flat penalty across the sequence.
 We know this is not a good representation of proteins, since they are unlikely to happen in the core due to the lack of space.
 Insertions are easy to introduce in short, external loops; and deletions are most likely in long loops. 
-A representation that allows us to model both mutations and insertions and deletions with different rates at different positions are Hidden Markov Models (HMM).
+A representation that allows us to model both mutations and insertions and deletions with different rates at different positions are Hidden Markov Models (\HMM).
 
-An HMM \marginpar{The HMM} is a probabilistic model, where the system travels across a series of hidden states following a Markov chain, a model with discrete states where the probability of transition depends only on the current state -- ignoring the history.
+An HMM \marginpar{The \HMM} is a probabilistic model, where the system travels across a series of hidden states following a Markov chain, a model with discrete states where the probability of transition depends only on the current state -- ignoring the history.
 We do not have access to these states -- hence \emph{hidden}.
 Instead, each of them has a certain probability of emitting a symbol: the observed amino acids.
-Fitting a Hidden Markov Model consists on figuring the emission probability for each state -- the analogue to the PSSMs -- and the transition probability between states.
-Like in PSI-BLAST, this is done iteratively, passing several times through the data and updating our belief.
+Fitting a Hidden Markov Model consists on figuring the emission probability for each state -- the analogue to the \PSSMs -- and the transition probability between states.
+Like in \PSIBLAST, this is done iteratively, passing several times through the data and updating our belief.
 
-The two most popular programs to perform these searches are JackHMMER \citep{jh}, and HHBlits \citep{hhblits}:
+The two most popular programs to perform these searches are \JackHMMER \citep{jh}, and \HHBlits \citep{hhblits}:
 
 \begin{itemize}
-\item JackHMMER compares every sequence in the database with its HMM.
-It performs an HMM-sequence comparison.
-\item HHBlits uses a database of pre-computed HMMs based on sequence clusters.
-It compares HMM to HMM, and in case of a match, includes all the members of the cluster in the MSA.
+\item \JackHMMER compares every sequence in the database with its \HMM.
+It performs an \HMM-sequence comparison.
+\item \HHBlits uses a database of pre-computed \HMMs based on sequence clusters.
+It compares \HMM to \HMM, and in case of a match, includes all the members of the cluster in the \MSA.
 \end{itemize}
 
-JackHMMER is slower
+\JackHMMER is slower
 \marginpar{Advantages and disadvantages}
 because it must consider each sequence; but it can search against any database without the need to pre-prepare it.
-JackHMMER can easily keep an up-to-date sequence database, or work on databases tailored for the search at hand.
+\JackHMMER can easily keep an up-to-date sequence database, or work on databases tailored for the search at hand.
 
-On the other hand, each HHBlits search is faster since it only needs to compare once against each cluster, but it requires a lot of computational resources to perform the initial clustering.
+On the other hand, each \HHBlits search is faster since it only needs to compare once against each cluster, but it requires a lot of computational resources to perform the initial clustering.
 This means the databases are not updated as often, and only a handful of versions are available.
-Furthermore, since all the members of each cluster are added, the MSA has sharp boundaries at the edges of each one.
+Furthermore, since all the members of each cluster are added, the \MSA has sharp boundaries at the edges of each one.
 
 
 \section{Contact prediction}\label{sec:contacts}
@@ -109,7 +110,7 @@ Since there is very little to no space between neighbouring residues, not every 
 When a protein gains a mutation, it usually needs to be compensated by others somewhere else in the protein to keep it stable.
 \marginpar{Correlated mutations}
 For example, if an amino acid is replaced by a bigger one, a nearby residue would have to be changed for a smaller one; or if a neutral amino acid gains a positive charge, it would be energetically favourable to have a negatively charged next to it.
-Contacts in our protein, or residues nearby in space, will appear as sets of correlated, compensating mutations in an MSA.
+Contacts in our protein, or residues nearby in space, will appear as sets of correlated, compensating mutations in an \MSA.
 
 We usually define \emph{contact} \marginpar{Distance threshold} as closer than $\SI{8}{\angstrom}$ between the C-$\beta$ atoms,
 but other authors may use $\SI{10}{\angstrom}$ between C-$\alpha$, $\SI{4}{\angstrom}$ between any pair of heavy atoms, or combinations.
@@ -136,7 +137,7 @@ MI\left(i, j\right) = \sum_{x, y}^{q_{max}} f(x_i, y_j) \log \left(\frac{f(x_i, 
 \end{equation*}
 where $f(x_i, x_j)$ is the joint distribution of amino acids $x_i$ and $y_j$ at positions $i$ and $j$, $f(x_i)$ and $f(y_j)$ are the marginal distributions, and $q_{max}$ is the maximum number of amino acids types in the alignment, including gaps.
 Note that if $x$ and $y$ are independent, $f(x_i, y_j) := f(x_i)f(y_j)$, the logarithm vanishes, and thus $M(i, j) = 0$.
-If the MSA is of enough quality, the contacts will present high values of $MI$.
+If the \MSA is of enough quality, the contacts will present high values of $MI$.
 
 
 \subsection{Direct Coupling Analysis}
@@ -144,7 +145,7 @@ Mutual Information has a problem with the transitivity property: consider three 
 Mutual Information will likely detect a correlation between A and B, and between B and C; but it will also show a correlation between A and C!
 
 To discern true from spurious correlations, we need to fit a statistical model to the whole data at once, in this way, we hope to recover the true (direct) relationships.
-This can be accomplished with Direct Coupling Analysis (DCA).
+This can be accomplished with Direct Coupling Analysis (\DCA).
 Several variations exist, but they are all based on a Potts model of statistical mechanics.
 This is a model where each position (in our case, residue), can take a number of discrete, well-defined, spin states (amino acid types), and the model depends only on the intrinsic properties at each location, and pairwise interactions.
 
@@ -154,7 +155,7 @@ H(\vec \sigma) = \sum_{\substack{i,j=1\\i \neq j}}^N J_{i, j}(\sigma_i, \sigma_j
 \end{equation*}
 where $h_i(\sigma_i)$ is the chemical potential of having a given amino acid at position $i$, and $ J_{i, j}(\sigma_i, \sigma_j)$ is the pairwise interaction between residues $i$ and $j$ given their amino acid species.
 
-We can assume the proteins in our MSA were generated by a similar model, so their frequency should follow the Boltzmann distribution:
+We can assume the proteins in our \MSA were generated by a similar model, so their frequency should follow the Boltzmann distribution:
 
 \begin{equation*}
 p(\vec{\sigma} |  h, J) = \frac{1}{Z} e^{-\beta H\left(\vec{\sigma}\right)}
@@ -165,10 +166,10 @@ $\beta$ is a scaling factor, the inverse of the temperature, and $Z$ is the part
 Z = \sum_{\vec{\sigma}} e^{-\beta H\left(\vec{\sigma}\right)}
 \end{equation*}
 
-Fitting a Potts model means to estimate the values of $J$ and $h$ that best explain the observed distribution of sequences in the MSA.
+Fitting a Potts model means to estimate the values of $J$ and $h$ that best explain the observed distribution of sequences in the \MSA.
 The problem as such is intractable because computing $Z$ implies a sum over all the possible sequences of length $N$, $21^N$ (the 20 natural amino acids plus the gap state).
 
-Several strategies can approximate the partition function, such as plmDCA \citep{plmDCA}, or side-step it all together, like GaussDCA \citep{GaussDCA}.
+Several strategies can approximate the partition function, such as \plmDCA \citep{plmDCA}, or side-step it all together, like \GaussDCA \citep{GaussDCA}.
 
 Once the values of $J$ are obtained, the scores of the contacts can be estimated by taking the Frobenius norm of each of the J matrices.
 That is, the square root of the sum of the squares of the couplings between each pair of amino acids:
@@ -181,11 +182,11 @@ This number cannot be readily interpreted as a probability.
 
 This model approximations ignore the possibility of multiple rotamers for a given amino acid \marginpar{The sphericity of the cow}
 and consider that any interaction between three or more residues can be decomposed to the sum of each pair.
-Finally, DCA attempts to reconstruct the evolutionary couplings, not necessarily the contacts.
-\citet{contact_errors} showed that most of the top-scoring pairs indicated by DCA are true contacts, others correspond to contacts between different subunits in a homodimer or pairs of separated residues involved in the function.
+Finally, \DCA attempts to reconstruct the evolutionary couplings, not necessarily the contacts.
+\citet{contact_errors} showed that most of the top-scoring pairs indicated by \DCA are true contacts, others correspond to contacts between different subunits in a homodimer or pairs of separated residues involved in the function.
 The coupling is real, but its nature is different from the model explained at the beginning of this section.
 
-\subsection[Phylogenetic bias]{Phylogenetic bias: the APC correction}
+\subsection[Phylogenetic bias]{Phylogenetic bias: the \APC correction}
 Natural proteins are not randomly drawn from a generative model, like Potts.
 Proteins evolve alongside a tree, where a mutation in an organism is likely to be shared among all the descendants.
 This appears as a pattern of vertical and horizontal lines on the contact map, as seen on the upper triangle of Figure~\ref{fig:apc}.
@@ -196,7 +197,7 @@ This appears as a pattern of vertical and horizontal lines on the contact map, a
 \begin{figure}[hbt]
 	\centering
 	\includegraphics[trim={12mm 3mm 26mm 3mm},clip,width=0.7\textwidth]{bioinfo/figures/apc}
-	\caption{Contact scores without (upper) and with (lower) the APC correction.
+	\caption{Contact scores without (upper) and with (lower) the \APC correction.
 	The patterns are clearer in the lower triangle, and most of the bias shown as vertical and horizontal stripes has been removed.}\label{fig:apc}
 \end{figure}
 
@@ -206,7 +207,7 @@ This appears as a pattern of vertical and horizontal lines on the contact map, a
 Contacts do not appear at random.
 Since the protein is a continuous chain, contacts are rarely isolated, and appear in groups.
 Furthermore, since most of the protein is locally organised in secondary structure elements, this gives rise to specific patterns in the contact map, as can be seen in Figure~\ref{fig:contact_patterns}.
-The statistical methods like DCA and Mutual Information do not consider this, so a refinement step can be done using pattern recognition.
+The statistical methods like \DCA and Mutual Information do not consider this, so a refinement step can be done using pattern recognition.
 We can train a machine learning algorithm on the outputs of statistical methods and recognise the underlying patterns, which can remove much of the spurious contacts, noise, and artefacts in the alignments.
 
 
@@ -234,7 +235,7 @@ This was possible because the domain is very short -- 35 residues --, and fast f
 Proteins that are close in sequence are close in structure, so if we can find a protein of known structure that has a sequence close to our protein of interest, we can use it as a \emph{template}.
 When a good hit is found, this is the most accurate and reliable modelling strategy.
 
-MODELLER \citep{modeller}, for example, uses the templates to infer distance restraints, uses geometrical algorithms to create an initial model, and then relaxes it with a short molecular dynamics run.
+\MODELLER \citep{modeller}, for example, uses the templates to infer distance restraints, uses geometrical algorithms to create an initial model, and then relaxes it with a short molecular dynamics run.
 
 
 \subsection{\emph{Ab-initio} folding}

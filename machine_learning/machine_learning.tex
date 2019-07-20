@@ -3,12 +3,13 @@
 
 The Scientific Revolution during the Renaissance \marginpar{A historical note}
 was fuelled by the realisation that Nature can be parametrised using only a handful of equations.
+\todo{Compare with Greek/Arabic knowledge}
 With these tools and sufficient measurements, natural philosophers could use the universal equations to fully model the mechanical universe.
 As mathematical tools improved, increasingly more complex systems could be analysed, such as orbits of astrophysical objects or complex optical designs.
-Furthermore, the development of computers allowed for an explosion in the size and breadth of tractable problems, such as dynamics of atomic nuclei, or weather forecast.
+Furthermore, the later development of computers allowed for an explosion in the size and breadth of tractable problems, such as dynamics of atomic nuclei, or weather forecast.
 
 These applications were either developed from first principles or as effective theories; but contained at their core, relatively simple mathematical models.
-For example, modelling the dynamics of $n$-bodies gravitationally interacting are very rich and complicated to solve, but they all spawn from two simple equations, Newton's second law of motion for an object of mass $m$: $\vec{F} = m \cdot \vec{a}$ and the force of gravity between two objects of masses $m_1$ and $m_2$: $F_g=G\frac{m_1  m_2}{r^2}$.
+For example, modelling the dynamics of $n$-bodies gravitationally interacting is very rich and complicated to solve, but they all spawn from two simple equations, Newton's second law of motion for an object of mass $m$: $\vec{F} = m \cdot \vec{a}$ and the force of gravity between two objects of masses $m_1$ and $m_2$: $F_g=G\frac{m_1  m_2}{r^2}$.
 
 The advent of computers
 \marginpar{How do computers fit in?}
@@ -22,6 +23,7 @@ We went from measuring the variables present in our equations to represent the w
 
 Machine learning \marginpar{What is machine learning?}
 is the study of statistical models that can create inferences from collections of examples. 
+\todo{Explain inference}
 The models can be as concrete as relating the voltage and measured current intensity in a circuit, as complex as relating the sensory input of a rocket with its control, or as abstract as mapping natural images to the text describing its contents.
 
 Instead of designing algorithms that simulate reality from first principles, that can be insurmountably complex and time-consuming; a machine learning model uses data: the algorithm depends on a series of free parameters that are deduced from examples.
@@ -60,7 +62,7 @@ Can we take it to the extreme?
 \marginpar{A theoretical result} 
 Can we train a model completely free  of assumptions in the case of infinite data? The No Free Lunch Theorem \citep{no_free_lunch} says, averaging over all problems, all algorithms are equally good.
 In other words, without inputting domain knowledge that restricts the space of possibilities, we cannot do better than random.
-For a given dataset, an infinite number of models can fit it equally well.
+For a given dataset, an infinite number of models can fit it equally well.\todo{expand even more}
 Domain knowledge can provide us with constraints -- for example, certain physical models must be continuous -- and give us a measure of simplicity -- all else being equal, Ockam's razor would point at the simplest one.
 
 \section{Training and test}
@@ -69,7 +71,7 @@ Domain knowledge can provide us with constraints -- for example, certain physica
 \todo{text}
 
 \section[Traditional machine learning]{A point of comparison: traditional machine learning}
-In this section, I will give an overview of some of the most popular supervised machine learning algorithms to illustrate how they work, and the kind of underlying assumptions they operate under.
+In this section, I will give an overview of some of the most popular supervised machine learning algorithms to illustrate how they work, and the type of underlying assumptions they operate under.
 I will describe them in their simplest form, be it for regression or classification, but both can be easily generalised: a regression algorithm can be turned to a binary classifier mapping the positive and negative labels to $(1, -1)$ or vice-versa.
 A binary classifier can be used in a problem with $N$ classes by either training $N$ binary classifiers for each class versus the rest, or all the $\binom{N}{2}$ pairwise binary classifications.
 
@@ -328,7 +330,9 @@ This method is particularly useful in calibration to turn predicted scores into 
 	The isotonic regressor does not require to define a number of bins up front which would make it susceptible to noise in too small bins.}\label{fig:isotonic}
 \end{figure}
 
-%\section{Evaluating predictions: figures of merit}
+\section{Evaluating predictions: figures of merit}
+\todo{figures of merit: accuracy, F1, MCC, Pearson R, Spearman R}
+
 
 \section{On the wrongness of machine learning}\label{sec:wrong}
 The results of machine learning can be impressive and may lead to think too much of them.

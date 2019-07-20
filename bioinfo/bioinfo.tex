@@ -8,7 +8,7 @@ A common choice is to make predictions taking only the amino acid sequence becau
 Other methods may require extra annotation, such as Gene Ontology -- an annotation condensing all our knowledge of the gene that produced the protein -- or 3D structures -- experimental or models.
 
 \section[Multiple Sequence Alignments]{Increasing statistics: Multiple Sequence Alignments}
-Proteins, as organisms, are products of evolution, so we can find similar versions of the same protein in different organisms.
+Proteins, as organisms, are products of evolution, so we can find similar versions of the same protein in different organisms.\todo{introduce evolution}
 Even when the function is novel, it usually evolves as a minor modification of pre-existing proteins.
 This means that, in most cases, we can obtain a better prediction when working at the \emph{family level,}
 i.e., considering not only our protein of interest but also any related sequence in our database.
@@ -222,7 +222,7 @@ We can train a machine learning algorithm on the outputs of statistical methods 
 \end{figure}
 
 
-\section{Protein folding}
+\section[Protein structure prediction]{\emph{In-silico folding:} Protein structure prediction} \todo{move before contacts}
 
 One of the main goals of protein bioinformatics is predicting the 3D structure of a protein given only its sequence.
 
@@ -246,7 +246,7 @@ Since the fragments are taken from real proteins, the models tend to have good c
 In order to speed up and improve convergence, we can add additional energy terms to the force field, such as contact restraints.
 
 CONFOLD \citep{confold} \marginpar{CONFOLD} is the other protocol used in this thesis.
-It is build upon CNS, a NMR reconstruction software, and works by transforming contacts and secondary structure to a large set of distance restraints between atoms.
+It is build upon CNS, a NMR reconstruction software, and works by transforming contacts and secondary structure to a large set of distance restraints between atoms.\todo{Not only for NMR, not naymmore}
 Then, it runs a geometric solver, followed by a fast relaxation.
 This method is much faster than Rosetta, but since it lacks the chemical information of the fragments, it does not work well on regions without contacts.
 

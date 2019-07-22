@@ -7,33 +7,30 @@ They have crucial roles in the biochemical pathways, so understanding them can l
 
 But, how are they created?
 The information \marginpar{Protein biosynthesis}
-used by the cell to build proteins is encoded in the DNA.
-When the biosynthesis begins, the double helix unfolds, and the genetic contact is translated into RNA.
-This new molecule is then transported to the ribosome, the organelle\todo{not an organelle} that translates the RNA into functional proteins.
+used by the cell to build proteins is encoded in the \DNA.
+When the biosynthesis begins, the double helix unfolds, and the genetic contact is translated into \RNA{}.
+This new molecule is then transported to the ribosome, the machinery that translates the \RNA{} into functional proteins.
 
 \todo[inline]{Expand on translation, codons}
+\marginpar{Translation}
 
 
 \section{The many levels of protein structures}
-Proteins are structured at several levels, depending on which scale we look at them.
+Proteins are polymers, long chains of amino acids, structured at several levels, depending on which scale we look at them.
 In this section, I will present the main descriptions of proteins at different scopes.
-\todo{it is a polymer}
-
-\subsection{DNA}
-\todo{codons}
 
 \subsection{The amino acids}
 Amino acids are the building blocks of proteins.
 They are composed of a carboxyl (-$COOH$) and an amine (-$NH_2$) groups, forming the backbone, and a side-chain.
 Two examples are illustrated in Figure~\ref{fig:amino_acids}.
 \marginpar{Only a few of all amino acids appear in the DNA.}
-There are at least 500 known naturally occurring amino acids \citep{500_amino_acids}, of which only twenty different species are usually codified in the DNA.\todo{simplify, move 500 away}
+\DNA{} usually codifies up to twenty different species, but at least 500 are known to occur naturally \citep{500_amino_acids}.
 The differences between most of them are only on the side chain\footnote{The amino acid proline's side-chain has a ring connecting with the amine in the backbone.}.
 
 The side chains are the group responsible for the specific physico-chemical properties of the compound, such as hydrophobicity, pH, or electrostatic charge.
 
 The backbone can polymerise, bonding with other amino acids and forming a long chain.
-Having a common backbone means that in principle, any amino acid can be connected to any other, which gives proteins a very rich and flexible biochemistry:\todo{wrong word}
+Having a common backbone means that in principle, any amino acid can be connected to any other, which gives proteins a lot of flexibility:
 for a protein of length $L$ there are $20^L$ possible combinations. %$20/19 (20^L - 1)$
 
 \begin{figure}
@@ -56,8 +53,9 @@ The \emph{primary structure} is the sequence of amino acids as encoded in the DN
 
 \missingfigure{peptide bond}
 
-This is the easiest to obtain experimentally, since the advent of next-generation sequencing techniques.
-The collection of all protein sequences of an organism is the \emph{proteome}.\todo{Experiment gives DNA->protein translated}
+This is the easiest to obtain experimentally since the advent of next-generation sequencing techniques.
+These experiments read the \DNA{} of the organism, that can be translated into proteins.
+The collection of all protein sequences of an organism is the \emph{proteome}.
 
 
 \subsection{Secondary structure}
@@ -76,7 +74,7 @@ The second most common arrangement is the $\beta$-sheet  \marginpar{$\beta$} dep
 
 
 \subsection{Tertiary structure}
-Once the chain is locally stabilised by the hydrogen bonds it needs\todo{needs wrong word} to fold into a compact structure.
+Once the chain is locally stabilised by the hydrogen bonds it folds into a compact structure.
 The spatial arrangement of the secondary structure elements is the \emph{tertiary structure.}
 One example is the chain A of the protein \texttt{4V0B}, in Figure~\ref{fig:tertiary}.
 
@@ -99,23 +97,22 @@ The relative arrangement of each chain is the quaternary structure.
 %\subsection{Quintenary structure} %?
 \section{Protein biochemistry}
 
-Experiments show that proteins placed in the right medium of pH and temperature will unfold into a random coil, with no trace of tertiary nor secondary structure.\todo{Mover reference up here, as not all follow this}
+Experiments by \citet{fold_graciously} show that proteins placed in the right medium of pH and temperature will unfold into a random coil, with no trace of tertiary nor secondary structure.
 When restored to physiological conditions, they will refold into its natural shape, recovering its original biological and chemical properties.
 As long as the protein is chemically unaltered, it will recover the tertiary structure independently of the folding machinery of the cell.
 \marginpar{Dogmas that govern protein folding}
 This was codified as Anfinsen's dogma: under physiological conditions, the primary structure of globular proteins determines the secondary and tertiary structures, and thus, its function, independently of the cell's machinery \citep{Anfinsen_dogma}.
 Typically, the fully folded state is reached in the order of milliseconds to seconds.
-The hypothesis has a few exceptions, namely: fibrous proteins, prions -- which are proteins that have an alternative but non-functional stable tertiary structure\footnote{Infamous cause of the mad cows disease.} -- and aggregating proteins -- where the individual proteins bind to each other forming large and non-functional structures\footnote{For example, the cause of Alzheimer and Multiple Sclerosis}.\todo{large multidomain proteins
-}
+The hypothesis has a few exceptions, namely: fibrous proteins, prions -- which are proteins that have an alternative but non-functional stable tertiary structure\footnote{Infamous cause of the mad cows disease.} --  aggregating proteins -- where the individual proteins bind to each other forming large and non-functional structures\footnote{For example, the cause of Alzheimer and Multiple Sclerosis} -- and large, multi-domain proteins.
 A reasonable hypothesis is that a priori, the native conformation seems to be the state in the lowest energy, and the random coil is just rolling down the energy landscape.
 
-\citet{fold_graciously} \marginpar{Levinthal's paradox} noted that, for every amino acid, a protein has two main degrees of freedom corresponding to the torsion of the backbone, plus one more for the rotation of the side chain.
+Cyrus Levinthal \marginpar{Levinthal's paradox} noted that, for every amino acid, a protein has two main degrees of freedom corresponding to the torsion of the backbone, plus one more for the rotation of the side chain.
 This gives us a configuration space of the order of $10^{2L}$ for a protein of $L$ residues, but the kinematics suggest that it only has time to sample $10^8$ conformations, an exponentially tiny fraction for proteins of typical length.
 
 Levinthal suggested two corrections:
 \begin{itemize}
 	\item The native conformation is not necessarily the one of minimum energy, but a local meta-stable minimum with a deep enough well that it is stable.
-	10-\SI{15}{kcal/mol}\todo{not very strong}
+	For most proteins, this is not very deep, around 10-\SI{15}{\kilo cal/\mol}.
 	\item The native conformation must be kinematically accessible, possibly guided by local interactions that partially fold the protein.
 	In other words, the energy landscape of protein folding presents a wide funnel from the unfolded state to its near-native conformation, which allows for a rapid transition.
 \end{itemize}
@@ -186,29 +183,28 @@ Roughly speaking the torsions of the backbone determine the secondary structure 
 %\todo{membrane proteins}
 \section{Experimental methods}
 How can we know the structure of a protein?
-The most commonly used methods are X-ray crystallography and NMR spectroscopy.
+The most commonly used methods are X-ray crystallography and \NMR{} spectroscopy.
 
-\todo{Citations}
+
 X-ray crystallography starts by
 \marginpar{X-ray}
 purifying and crystallising the protein, and observing the diffraction pattern of an X-ray beam.
 The X-rays interact with the protein, diffract, and form a pattern of dots that is proportional to the intensity of the Fourier transform of the electron density.
 By taking the inverse transformation, the crystallographers can reconstruct the electron density, and then fit an atomic model.
-The X-ray detector -- a photographic plate or a CCD sensor -- can only measure intensities, not phase information.
+The X-ray detector -- a photographic plate or a \CCD{} sensor -- can only measure intensities, not phase information.
 Experimentalists have to apply an iterative process where they combine estimated phases from models with the real intensities.
 
 One criticism of X-ray crystallography is that the proteins are in crystals, not in physiological conditions.
-The alternative method is Nuclear Magnetic Resonance (NMR), \marginpar{NMR} which applies strong oscillating magnetic fields and measures resonances.
+The alternative method is Nuclear Magnetic Resonance (\NMR) \citep{nmr}, \marginpar{\NMR} which applies strong oscillating magnetic fields and measures resonances.
 From the spectrum, one can identify distances between atoms with non-zero nuclear spin.
 The method cannot provide sufficient constraints to determine the whole system, so it is given as an ensemble of models instead.
 The differences between individual structures can be caused by natural movements of the protein, or by uncertainties in the experiment itself.
 
-In the last decades, 
-\marginpar{cryo-EM}
-a new method has become practical for protein structures: cryogenic electron microscopy.
+In the last decades, \marginpar{cryo-\EM}
+a new method has become practical for protein structures: cryogenic electron microscopy \citep{cryoEM}.
 In this method, the protein samples are placed in solution on a thin sheet of solution, flash-frozen to cryogenic temperatures, and put under an electron microscope.
-Since proteins are diluted, each one is frozen in a random orientation, so each image is a 2D projection along a different axis.
-The different images are clustered and combined to reduce noise, and a 3D model is inferred from it.
+Since proteins are diluted, each one is frozen in a random orientation, so each image is a \textsc{2d} projection along a different axis.
+The various images are clustered and combined to reduce noise, and a \textsc{3d} model is inferred from it.
 
 This technique allows us to study large complexes in solution, without the necessity to crystallise them.
 It can reveal the presence of unknown proteins, and even provide information on the thermodynamics:
@@ -220,24 +216,25 @@ p(x) \propto e^{-\frac{H(x)}{k_B T}}
 
 So, when we have a sample with different conformations of the same protein, counting the number of images that correspond to each state gives us a measure of the difference of energies between the two states.
 
-The development of Cryo-EM was recognised in 2017 with the award of the Nobel Prize in Chemistry \emph{"for developing cryo-electron microscopy for the high-resolution structure determination of biomolecules in solution"} to Jacques Dubochet, Joachim Frank, and Richard Henderson
+The development of Cryo-EM was recognised in 2017 with the award of the Nobel Prize in Chemistry \emph{"for developing cryo-electron microscopy for the high-resolution structure determination of biomolecules in solution"} to Jacques Dubochet, Joachim Frank, and Richard Henderson.
 
 
 \subsection{Partial restraints}
 Sometimes, an experiment to obtain the full structure is not possible.
 There are simplified methods that, while they cannot give a full structure, they may be able to provide enough constraints for computational methods.
 
-The first is Small Angle X-ray Scattering, or SAXS. \marginpar{SAXS}
+The first is Small Angle X-ray Scattering, or \SAXS. \marginpar{\SAXS}
 The process is similar to X-ray crystallography, but now the protein is in solution.
 Each unit will produce its own interference pattern, but since they are not crystallised, the orientation of each pattern is randomised.
 From this we can infer a rough shape of the protein, and the presence or absence of differences between conformations.
 
-A related method is Small Angle Neutron Scattering, or SANS. \marginpar{SANS}
+A related method is Small Angle Neutron Scattering, or \SANS. \marginpar{\SANS}
 It replaces X-rays with neutrons, which changes the sensitivity to different nuclear species.
 In particular, hydrogen has one of the largest cross-sections.
 One application is the study of membrane proteins in an appropriately chosen detergent, which can be almost invisible to the neutron beam.
+More information on both methods can be found in the work of~\citet{sax}
 
-Mass-spectrometry cross-linking \marginpar{Cross-linking} can be used to measure distances within proteins.
+Mass-spectrometry cross-linking \citep{cross_linking} \marginpar{Cross-linking} can be used to measure distances within proteins.
 The protein is mixed with a reagent that connects to specific functional groups of amino acid side chains.
 Then, an enzyme is added that cleaves the protein, and the fragments are sent to a liquid chromatography tandem mass spectrometer that analyses the composition of each fragment.
 The linkers keep the fragments split by the digestion together, from which we can infer they were in contact.

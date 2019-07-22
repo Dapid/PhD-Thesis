@@ -269,7 +269,7 @@ We drop the index subscripts, as every term corresponds to one dimension:
 where $\epsilon$ is a small number to prevent division by 0.
 The effective learning rate of AdaGrad is monotonously decreasing, and it decays faster in the directions where the gradients are higher.
 This makes it sensitive to initial conditions: if any dimension is given a bad initial condition, the gradients will be large, and the effective learning rate small, so AdaGrad will be limited to only small steps in that direction.
-ADADELTA~\citep{adadelta} solves this by accumulating only the updates over a window with an exponential decay:
+\ADADELTA~\citep{adadelta} solves this by accumulating only the updates over a window with an exponential decay:
 
 \begin{equation*}
 \left.a\right|_{k+1} = \rho \left. a\right|_{k} + (1-\rho) \left.g^2\right|_{it=k},
@@ -282,7 +282,7 @@ They replaced it for a value of the right dimensionality:
 \left.\Delta w\right|_{it=k+1} = - \frac{\sqrt{\left.\Delta w\right|_{k}^2}}{\sqrt{a + \epsilon}}g 
 \end{align*}
 
-ADADELTA depends only on one parameter, $\rho$, and it is less sensitive to starting points.
+\ADADELTA{} depends only on one parameter, $\rho$, and it is less sensitive to starting points.
 
 Adaptive Moment Estimation (Adam)~\citep{adam}\marginpar{Adam}
 is the most modern optimiser, and it combines several of the ideas of previous algorithms.

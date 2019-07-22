@@ -231,7 +231,7 @@ Figure~\ref{fig:svm} illustrates an example of classifying two species from the 
 \centering
 \subcaptionbox{Linear kernel}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/svm.pdf}}%
 \hfill
-\subcaptionbox{RBF kernel\label{subfig:svm_rbf}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/svm_rbf.pdf}}%
+\subcaptionbox{\RBF{} kernel\label{subfig:svm_rbf}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/svm_rbf.pdf}}%
 \caption{Classification of two species of Iris flowers according to the length and width of sepals using Suport Vector Machines.}\label{fig:svm}
 \end{figure}
 
@@ -329,7 +329,7 @@ This induces a metric defined through the distance:
 	\[	d(f, g) =\int_{\mathcal{R}}  f(x) k(x, x') g(x') dx dx', \]
 and a series of eigenfunctions of the covariance function.
 	
-For example,\marginpar{RBF appears again} the previously seen radial basis covariance function defines the Hilbert space of $C^\infty \cap L^2$ functions: all the smooth functions of square-integrable..
+For example,\marginpar{\RBF{} appears again} the previously seen radial basis covariance function defines the Hilbert space of $C^\infty \cap L^2$ functions: all the smooth functions of square-integrable..
 	
 The GP will thus project our $n$ data points into this $N$-dimensional space -- in general, $N >> n$; usually $N = \infty$. Note that, due to geometry, our $n$ data points must live in an $n$-dimensional subspace of $\mathscr{H}$.
 The output is an estimation $\hat f$ of our latent function $f$, that can be interpreted as a decomposition in the eigenfunctions of our covariance function.

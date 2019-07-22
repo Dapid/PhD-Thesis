@@ -56,14 +56,14 @@ A simple cell has the form:
 \vec y_t &=  \widetilde W_{hy} \vec h_t,
 \end{align*}
 where $ \widetilde W_{\cdot \cdot}$ are three matrices and $\sigma$ a non-linear function, usually the hyperbolic tangent.
-\marginpar{RNN as a rolled MLP}
+\marginpar{\RNN{} as a rolled \MLP}
 Note that this structure is very similar to a fully connected layer with two inputs, where the weights are shared across steps.
 The series of outputs at every time step $\vec y_t$ can be kept, to get a different prediction at every time step, or only considered the last one if we want a global one.
 
 This layer has practical problems. \marginpar{Convergence issues}
 In particular -- as we will see in the next section -- if the non-linearity is saturating and any of the intermediate steps reaches the saturating region, the gradients will vanish, preventing the flow of information.
 If instead, we use a non-saturating non-linearity we risk having an unstable dynamical system, where the values explode.
-The most popular solution \marginpar{LSTM} is the Long Short Term Memory (LSTM) layer, that will be explained in Section~\ref{sec:depth}.
+The most popular solution \marginpar{\LSTM} is the Long Short Term Memory (\LSTM) layer, that will be explained in Section~\ref{sec:depth}.
 
 
 \citet{unreasonable_RNN} has a thorough introduction to Recurrent networks, and \citet{colah_rnn} delves deeper into the convergence issues in long-range, and the solutions.
@@ -107,7 +107,7 @@ f(x) =  \begin{cases}
 \end{cases}
 \end{equation*}
 
-But in this thesis I have mostly used the Exponential Linear Unit, or ELU, shown in Figure~\ref{subfig:elu}:
+But in this thesis I have mostly used the Exponential Linear Unit, or \ELU, shown in Figure~\ref{subfig:elu}:
 \begin{equation*}
 f(x) =  \begin{cases}
 \hfil x &  \text{if } x \geq 0 \\
@@ -121,7 +121,7 @@ The choice of this non-linearity incurs in a slight increase in training time, s
     \centering
 	\subcaptionbox{ReLU\label{subfig:relu}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/relu}}
 	\hfil
-	\subcaptionbox{ELU\label{subfig:elu}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/elu}}
+	\subcaptionbox{\ELU\label{subfig:elu}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/elu}}
 	\caption{Non-saturating non-linarities}\label{fig:non_linear2}
 \end{figure}
 
@@ -415,7 +415,7 @@ This extra path opens an information highway from the inputs to the labels.
 \end{figure}
 
 Recurrent networks, \marginpar{Recurrent networks, revisited} albeit formally ``shallow" -- they typically have one or two layers -- face similar problems to feed-forward networks, now because the information has to travel along the time dimension.
-Long Short Term Memory (LSTM) layers are a variation of the simple RNN that includes some internal skip connections, allowing the network to transfer long-range information, but also ``forget" gates that can learn to ignore certain parts of the input that may be irrelevant.
+Long Short Term Memory (\LSTM) layers are a variation of the simple RNN that includes some internal skip connections, allowing the network to transfer long-range information, but also ``forget" gates that can learn to ignore certain parts of the input that may be irrelevant.
 
 \citet{difficult_recurrent} explored the influence and solutions of initialisations and non-linearities to the problems of vanishing and exploding gradients, and provide recipes for training recurrent networks minimising these problems.
 

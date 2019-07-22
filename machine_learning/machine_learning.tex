@@ -122,7 +122,7 @@ A simple solution \marginpar{Ridge} is to add a term that tends to shrink the co
 where $\lambda$ regulates the strength of this shrinkage.
 Since the penalisation depends on the $L^2$ norm of the vector $w$, the weight of co-linear features will be ``distributed" amongst them.
 
-Sometimes, we want sparse weights, \marginpar{LASSO} for example, if we know some features are irrelevant, but we do not know which ones.
+Sometimes, we want sparse weights, \marginpar{\LASSO} for example, if we know some features are irrelevant, but we do not know which ones.
 We can then use $L^1$ regularisation:
 
 \[ L_{LASSO} = || \widetilde X \vec w - \vec y ||_2 ^2 + \alpha ||\vec w||_1^2,\]

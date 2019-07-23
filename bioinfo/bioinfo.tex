@@ -148,15 +148,15 @@ Given two structures with $L$ residues in common, and being $d_i$ the distance b
 \RMSD = \min \left(\sqrt{\frac{\sum_{i=1}^L d_i^2}{L}}\right),
 \end{equation*}
 
-The \SS-score (Superposition score) is:
+The \Ss-score (Superposition score) is:
 \begin{equation*}
-\SS = \max\left[\frac{1}{L} \sum_{i=1}^L \frac{1}{1 + \left(\frac{d_i}{d_0}\right)^2}\right],
+S = \max\left[\frac{1}{L} \sum_{i=1}^L \frac{1}{1 + \left(\frac{d_i}{d_0}\right)^2}\right],
 \end{equation*}
 where $d_0$ is a parameter to be decided, usually $\SI{3}{\angstrom}$.
 
-The \TM{} (Template Modelling score) is the same as S, but $d_0 = 1.24 \sqrt[3]{L - 15} - 1.8$, to keep TM roughly independent of the length.
+The \TM{} (Template Modelling score) is the same as \Ss, but $d_0 = 1.24 \sqrt[3]{L - 15} - 1.8$, to keep TM roughly independent of the length.
 
-Both \SS{} and \TM{} scores give values between $0$ and $1$.
+Both \Ss{} and \TM{} scores give values between $0$ and $1$.
 For TM, values below $0.3$ correspond to random structures, and scores over $0.5$ indicate structures about in the same fold \citep{tmscore05}.
 
 The problem with superposition scores is that are sensitive to conformational changes.

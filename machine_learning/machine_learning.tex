@@ -66,10 +66,11 @@ For a given dataset, an infinite number of models can fit it equally well.\todo{
 Domain knowledge can provide us with constraints -- for example, certain physical models must be continuous -- and give us a measure of simplicity -- all else being equal, Ockam's razor would point at the simplest one.
 
 \section{Training and test sets}
-In order to train a model, we need a set of examples, called the \emph{training set}.
-\subsection{Separated datasets}
-\subsubsection{Validation}
-\todo{text}
+To train a supervised model, we need a set of labelled examples, called the \emph{training set}.
+Since we want to use our model to predict the labels on unseen data, we will need a separate and independent set \marginpar{The motivation for separated datasets}
+ -- the test set --to evaluate its performance.
+
+\todo{validation}
 
 \section{Evaluating predictions: figures of merit}
 Figures of merit allow us to evaluate how well the model performs.
@@ -110,11 +111,11 @@ Ordinary Least Squares (\OLS) is the simplest linear regression model: the linea
 For a matrix $ \widetilde X$ of observations and a vector of target $\vec y$, \OLS{} finds the vector $\vec w = (w_0, w_1, ... w_d)$ that minimises the loss:
 
 \begin{equation*}
- L_{OLS} = || \widetilde  X \vec w - \vec y ||_2 ^2,
+ L_{\OLS} = || \widetilde  X \vec w - \vec y ||_2 ^2,
 \end{equation*}
 where $d$ is the number of dimensions of the inputs, ie., the number of input features.
 
-This method is simple and can be solved efficiently by linear algebra libraries through, for example, an LU decomposition\footnote{A standard procedure to solve systems of equations, where the matrix $\widetilde{X}$ is factored into the product of a lower and an upper triangular matrices, without needing to explicitly invert the matrix. Then, the components of $\vec w$ can be obtained iteratively.}.
+This method is simple and can be solved efficiently by linear algebra libraries through, for example, an \textsc{lu}{} decomposition\footnote{A standard procedure to solve systems of equations, where the matrix $\widetilde{X}$ is factored into the product of a lower and an upper triangular matrices, without needing to explicitly invert the matrix. Then, the components of $\vec w$ can be obtained iteratively.}.
 But if there is co-linearity between input features, the matrix $ \widetilde X$ is close to singular, so its inverse can become numerically unstable.
 
 A simple solution \marginpar{Ridge} is to add a term that tends to shrink the coefficients of $\vec w$, and makes the solution unique even in the singular case:
@@ -126,7 +127,7 @@ Since the penalisation depends on the $L^2$ norm of the vector $w$, the weight o
 Sometimes, we want sparse weights, \marginpar{\LASSO} for example, if we know some features are irrelevant, but we do not know which ones.
 We can then use $L^1$ regularisation:
 
-\[ L_{LASSO} = || \widetilde X \vec w - \vec y ||_2 ^2 + \alpha ||\vec w||_1^2,\]
+\[ L_{\LASSO} = || \widetilde X \vec w - \vec y ||_2 ^2 + \alpha ||\vec w||_1^2,\]
 where $\alpha$ is our new regularisation strength parameter.
 The higher it is, the more weights will be close to $0$.
 

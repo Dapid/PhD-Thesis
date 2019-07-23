@@ -23,7 +23,7 @@ We went from measuring the variables present in our equations to represent the w
 
 Machine learning \marginpar{What is machine learning?}
 is the study of statistical models that can create inferences from collections of examples. 
-\todo{Explain inference}
+In other words, a machine learning model is capable of producing generalised rules from a set of particular cases, an example of induction.
 The models can be as concrete as relating the voltage and measured current intensity in a circuit, as complex as relating the sensory input of a rocket with its control, or as abstract as mapping natural images to the text describing its contents.
 
 Instead of designing algorithms that simulate reality from first principles, that can be insurmountably complex and time-consuming; a machine learning model uses data: the algorithm depends on a series of free parameters that are deduced from examples.
@@ -65,7 +65,8 @@ In other words, without inputting domain knowledge that restricts the space of p
 For a given dataset, an infinite number of models can fit it equally well.\todo{expand even more}
 Domain knowledge can provide us with constraints -- for example, certain physical models must be continuous -- and give us a measure of simplicity -- all else being equal, Ockam's razor would point at the simplest one.
 
-\section{Training and test}
+\section{Training and test sets}
+In order to train a model, we need a set of examples, called the \emph{training set}.
 \subsection{Separated datasets}
 \subsubsection{Validation}
 \todo{text}

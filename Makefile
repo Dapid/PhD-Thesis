@@ -3,6 +3,9 @@ all:
 v:
 	latexmk -lualatex -latexoption="-synctex=1" main.tex
 
+release:
+	latexmk -lualatex -silent main.tex
+
 clean:
 	latexmk -c
 

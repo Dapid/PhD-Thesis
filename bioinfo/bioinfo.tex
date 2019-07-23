@@ -1,5 +1,6 @@
 \chapter{The informatics of biology}
-Bioinformatics is the application of computational methods to biological problems,
+\lettrine[lines=3, lhang=0.3, nindent=0em]{\color{Maroon}B}{ioinformatics}
+is the application of computational methods to biological problems,
 either by analysing large amounts of data or by replacing experiments with computer programs.
 
 \section{Predictors}
@@ -8,7 +9,8 @@ A common choice is to make predictions taking only the amino acid sequence becau
 Other methods may require extra annotation, such as Gene Ontology -- an annotation condensing all our knowledge of the gene that produced the protein -- or 3D structures -- experimental or models.
 
 \section[Multiple Sequence Alignments]{Increasing statistics: Multiple Sequence Alignments}
-Proteins, as well as organisms, are products of evolution.
+Proteins, just like organisms, are products of evolution.
+Small and random modifications are accumulated over time.
 , so we can find similar versions of the same protein in different organisms.\todo{introduce evolution}
 Even when the function is novel, it usually evolves as a minor modification of pre-existing proteins.
 This means that, in most cases, we can obtain a better prediction when working at the \emph{family level,}
@@ -21,7 +23,7 @@ To have coherent statistics, every sequence must be aligned to the original quer
 \marginpar{\phantom{a}}
 \marginpar{\phantom{a}}
 \marginpar{An example \MSA}
-\begin{Verbatim}[fontsize=\small, xleftmargin=1em]
+\begin{Verbatim}[fontsize=\small, xleftmargin=3em]
 1       10        20        30        40        50   
 FCLEPPYTGPCKARMIRYFYNARSGSCETFIYGGCKAKRNNFKSEEDCMRTCG
 FCREPPYTGPCSAHFVRYFYNATTGLCQSFVYGGCRGKQNNFMDEKECLHTCD
@@ -340,7 +342,7 @@ This was the focus of our contributions on Paper \textcolor{Maroon}{IV}.
 
 \section{Assessing the field: \CASP}
 The Critical Asessment of protein Structure Prediction (\CASP) is a biennial community-wide experiment to evaluate the status of the field.
-Over the course of a few months, they release the sequences of around 100 unpublished structures, asking groups to predict contact maps, 3\textsc{d} models, and predicting the quality of the submissions.
+\marginpar{A world-wide blind experiment}
+Over the course of a few months, they release the sequences of around 100 unpublished protein structures, asking groups to predict contact maps, 3\textsc{d} models, and predicting the quality of the submissions.
 
-This is a completely blind test.
-\todo{casp}
+Since the structures are unpublished at the time of the experiment, this is a completely blind test and can be used to establish the current status of the field.

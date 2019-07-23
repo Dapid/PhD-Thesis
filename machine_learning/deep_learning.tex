@@ -382,11 +382,12 @@ Indeed, in the first attempts with multi-layered perceptrons, more than two hidd
 
 Their first contribution \marginpar{ReLU, again} was non-saturating non-linearities, like ReLU.
 Since they do not saturate, neurons are never stuck in ranges where the gradients are almost zero, and thus prevented from learning.
+\marginpar{\scriptsize ReLU has the advantage of providing a sparse intermediate representation, which is useful for information disentangling, ie, inferring the causes of the prediction, since perturbing the inputs do not affect all the outputs.}
 ReLU has a null gradient for negative numbers, but we expect that to happen only half of the examples, while half of the others will give a positive signal.
 This is not guaranteed, and there is a chance of ``dead neurons", where the activation is always zero, but that has not been found to be a significant problem.
 If dead neurons are a problem, LeakyReLU  \marginpar{LeakyReLU} can be the solution.
 This activation is like ReLU, but the negative side has a small, fixed slope, so the gradient is non-zero everywhere.
-\footnote{ReLU has the advantage of providing a sparse intermediate representation, which is useful for information disentangling, ie, inferring the causes of the prediction, since perturbing the inputs do not affect all the outputs.}
+
 
 Tightly tied \marginpar{Weight initialisation} with the non-linearity is the initialisation of the weights.
 Glorot et al. recommended initialising the layers with zero mean and standard deviation $\sigma=6/\sqrt{n_{in}+ n_{out}}$, where $n_{in}$ and $n_{out}$ are, respectively, the number of input and output features of the layer.

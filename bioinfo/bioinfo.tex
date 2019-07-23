@@ -80,7 +80,7 @@ We know this is not a good representation of proteins, since they are unlikely t
 Insertions are easy to introduce in short, external loops; and deletions are most likely in long loops. 
 A representation that allows us to model both mutations and insertions and deletions with different rates at different positions are Hidden Markov Models (\HMM).
 
-An HMM \marginpar{The \HMM} is a probabilistic model, where the system travels across a series of hidden states following a Markov chain, a model with discrete states where the probability of transition depends only on the current state -- ignoring the history.
+An \HMM{} \marginpar{The \HMM} is a probabilistic model, where the system travels across a series of hidden states following a Markov chain, a model with discrete states where the probability of transition depends only on the current state -- ignoring the history.
 We do not have access to these states -- hence \emph{hidden}.
 Instead, each of them has a certain probability of emitting a symbol: the observed amino acids.
 Fitting a Hidden Markov Model consists on figuring the emission probability for each state -- the analogue to the \PSSMs{} -- and the transition probability between states.
@@ -130,7 +130,7 @@ Since the fragments are taken from real proteins, the models tend to have good c
 In order to speed up and improve convergence, we can add additional energy terms to the force field, such as contact restraints.
 
 \CONFOLD~\citep{confold} \marginpar{\CONFOLD} is the other protocol used in this thesis.
-It is build upon CNS, and works by transforming contacts and secondary structure to a large set of distance restraints between atoms.
+It is build upon \CNS, and works by transforming contacts and secondary structure to a large set of distance restraints between atoms.
 Then, it runs a geometric solver, followed by a fast relaxation.
 This method is much faster than Rosetta, but since it lacks the chemical information of the fragments, it does not work well on regions without contacts.
 
@@ -145,18 +145,18 @@ Given two structures with $L$ residues in common, and being $d_i$ the distance b
 
 \RMSD, or the Root Mean Squared Deviation:
 \begin{equation*}
-RMSD = \min \left(\sqrt{\frac{\sum_{i=1}^L d_i^2}{L}}\right),
+\RMSD = \min \left(\sqrt{\frac{\sum_{i=1}^L d_i^2}{L}}\right),
 \end{equation*}
 
-The S-score (Superposition score) is:
+The \SS-score (Superposition score) is:
 \begin{equation*}
-S = \max\left[\frac{1}{L} \sum_{i=1}^L \frac{1}{1 + \left(\frac{d_i}{d_0}\right)^2}\right],
+\SS = \max\left[\frac{1}{L} \sum_{i=1}^L \frac{1}{1 + \left(\frac{d_i}{d_0}\right)^2}\right],
 \end{equation*}
 where $d_0$ is a parameter to be decided, usually $\SI{3}{\angstrom}$.
 
-The TM (Template Modelling score) is the same as S, but $d_0 = 1.24 \sqrt[3]{L - 15} - 1.8$, to keep TM roughly independent of the length.
+The \TM{} (Template Modelling score) is the same as S, but $d_0 = 1.24 \sqrt[3]{L - 15} - 1.8$, to keep TM roughly independent of the length.
 
-Both S and TM scores give values between $0$ and $1$.
+Both \SS{} and \TM{} scores give values between $0$ and $1$.
 For TM, values below $0.3$ correspond to random structures, and scores over $0.5$ indicate structures about in the same fold \citep{tmscore05}.
 
 The problem with superposition scores is that are sensitive to conformational changes.
@@ -164,18 +164,18 @@ For example, consider a protein composed of two subunits connected by a small, f
 The superposition scores would align one of the subunits, with perfect scoring, and give bad values to the other.
 
 A solution is to compare structures locally. 
-LDDT (Local Distance Difference Test) \citep{lddt} \marginpar{\LDDT}
+\LDDT{} (Local Distance Difference Test) \citep{lddt} \marginpar{\LDDT}
 measures, for every atom, the fraction of preserved  distances, up to a given tolerance, within an inclusion radius.
-LDDT considers all inter-atomic distances that are within $\SI{0.5}{\angstrom}$, $\SI{1}{\angstrom}$, $\SI{2}{\angstrom}$, and $\SI{4}{\angstrom}$.
+\LDDT{} considers all inter-atomic distances that are within $\SI{0.5}{\angstrom}$, $\SI{1}{\angstrom}$, $\SI{2}{\angstrom}$, and $\SI{4}{\angstrom}$.
 The final scores is obtained averaging over all the atoms in the residue and inclusion thresholds.
 
 \citet{cad} proposed a similar method, using surface contacts instead of distances. \marginpar{\CAD}
 They represent each residue as the Voronoi volume of its atoms.
 The surface area for the contact between residues $i$ and $j$ of the model is $S_m(i,j)$, and for the reference -- native structure -- $S_r(i,j)$.
-CAD score is proportional to the difference between the two, with some normalisation terms:
+\CAD{} score is proportional to the difference between the two, with some normalisation terms:
 
 \begin{equation*}
-CAD_{score} = 1 - \frac{\sum_{i,j} \min\left( \left| \: S_{r}(i, j) - S_{m}(i, j)\right|, S_{r}(i, j)\right)}{\sum_{i,j} S_{r}(i, j)}
+\CAD_{score} = 1 - \frac{\sum_{i,j} \min\left( \left| \: S_{r}(i, j) - S_{m}(i, j)\right|, S_{r}(i, j)\right)}{\sum_{i,j} S_{r}(i, j)}
 \end{equation*}
 
 \subsection[Model Quality Assessment]{Model Quality Assessment, or Estimation of Model Accuracy}
@@ -229,8 +229,6 @@ When a protein gains a mutation, it usually needs to be compensated by others so
 \marginpar{Correlated mutations}
 For example, if an amino acid is replaced by a bigger one, a nearby residue would have to be changed for a smaller one; or if a neutral amino acid gains a positive charge, it would be energetically favourable to have a negatively charged next to it.
 Contacts in our protein, or residues nearby in space, will appear as sets of correlated, compensating mutations in an \MSA.
-
-
 
 \begin{figure}[!htb]
 	\centering
@@ -299,7 +297,7 @@ This number cannot be readily interpreted as a probability.
 
 This model approximations ignore the possibility of multiple rotamers for a given amino acid \marginpar{The sphericity of the cow}
 and consider that any interaction between three or more residues can be decomposed to the sum of each pair.
-Finally, \DCA attempts to reconstruct the evolutionary couplings, not necessarily the contacts.
+Finally, \DCA{} attempts to reconstruct the evolutionary couplings, not necessarily the contacts.
 \citet{contact_errors} showed that most of the top-scoring pairs indicated by \DCA{} are true contacts, others correspond to contacts between different subunits in a homodimer or pairs of separated residues involved in the function.
 The coupling is real, but its nature is different from the model explained at the beginning of this section.
 
@@ -345,4 +343,4 @@ The Critical Asessment of protein Structure Prediction (\CASP) is a biennial com
 Over the course of a few months, they release the sequences of around 100 unpublished structures, asking groups to predict contact maps, 3\textsc{d} models, and predicting the quality of the submissions.
 
 This is a completely blind test.
- \todo{CASP}
+\todo{casp}

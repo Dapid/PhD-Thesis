@@ -37,7 +37,7 @@ Here are, in broad strokes, some of the main types that cover the majority of th
 
 \subsection{Do we have labels?}
 \begin{itemize}
-\item \emph{Unsupervised:} we do not have data with annotated target values. \emph{Ex: clustering of DNA sequences, dimensionality reduction.}
+\item \emph{Unsupervised:} we do not have data with annotated target values. \emph{Ex: clustering of \DNA{} sequences, dimensionality reduction.}
 \item \emph{Supervised:} our training data has assigned labels, and we want to predict them to new data. \emph{Ex: protein secondary structure prediction, linear regression.}
 \end{itemize}
 
@@ -358,7 +358,7 @@ This method is particularly useful in calibration to turn predicted scores into 
 	\centering
 	\includegraphics[width=0.7\textwidth]{machine_learning/figures/isotonic}
 	\caption{Example of Isotonic regression applied for calibration.
-	On the x-axis is the score given by GaussDCA, a statistical method that correlates with the probability of two residues being in contact (more information on Section~\ref{sec:contacts}).
+	On the x-axis is the score given by \GaussDCA, a statistical method that correlates with the probability of two residues being in contact (more information on Section~\ref{sec:contacts}).
 	The black dots are the data points, the dotted line is a simple binning, and the solid line is the isotonic regression.
 	The isotonic regressor does not require to define a number of bins up front which would make it susceptible to noise in too small bins.}\label{fig:isotonic}
 \end{figure}

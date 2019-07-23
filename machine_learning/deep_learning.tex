@@ -144,7 +144,7 @@ First, we need to define a loss function, that is, a measurement of how wrong ou
 For example, the mean squared error for $N$ data points  $x_i$ with labels $y_i$ and predictions $o_i$ is:
 
 \begin{equation*}
-L_{MSE} = \sum_i^N \left(y_i - o_i\right)^2
+L_{\MSE} = \sum_i^N \left(y_i - o_i\right)^2
 \end{equation*}
 and the cross-entropy loss, that measures the information loss between true and predicted values:
 \begin{equation*}
@@ -216,7 +216,7 @@ While this may slow down convergence, it also helps the network explore the para
 
 \subsection{Optimisers}
 The optimisers are the algorithms responsible for transforming the gradient into weights updates.
-The simplest form is the already introduced Stochastic Gradient Descent (SGD), \marginpar{SGD}
+The simplest form is the already introduced Stochastic Gradient Descent (\SGD), \marginpar{\SGD}
 where the weight updates are proportional to the gradient computed at the previous iteration:
 
 \begin{equation*}
@@ -416,7 +416,7 @@ This extra path opens an information highway from the inputs to the labels.
 \end{figure}
 
 Recurrent networks, \marginpar{Recurrent networks, revisited} albeit formally ``shallow" -- they typically have one or two layers -- face similar problems to feed-forward networks, now because the information has to travel along the time dimension.
-Long Short Term Memory (\LSTM) layers are a variation of the simple RNN that includes some internal skip connections, allowing the network to transfer long-range information, but also ``forget" gates that can learn to ignore certain parts of the input that may be irrelevant.
+Long Short Term Memory (\LSTM) layers are a variation of the simple \RNN{} that includes some internal skip connections, allowing the network to transfer long-range information, but also ``forget" gates that can learn to ignore certain parts of the input that may be irrelevant.
 
 \citet{difficult_recurrent} explored the influence and solutions of initialisations and non-linearities to the problems of vanishing and exploding gradients, and provide recipes for training recurrent networks minimising these problems.
 
@@ -453,7 +453,7 @@ This was the idea behind the secondary structure predictor used in Papers \textc
 \centering
 \input{machine_learning/figures/transfer_learning_annotated.tikz} %
 \caption{Plot of the $\phi$ and $\psi$ dihedral angles for a random set of ten proteins.
-The colouring correspond to their relative exposure to solvent (RSA), 
+The colouring correspond to their relative exposure to solvent (\RSA),
 and the annotated clusters correspond to the most common secondary structure elements.
 The figure shows how the three tasks, albeit independent, can help each other. }\label{fig:transfer_learning}
 \end{figure}

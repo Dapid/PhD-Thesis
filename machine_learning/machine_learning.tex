@@ -66,13 +66,15 @@ For a given dataset, an infinite number of models can fit it equally well.\todo{
 Domain knowledge can provide us with constraints -- for example, certain physical models must be continuous -- and give us a measure of simplicity -- all else being equal, Ockam's razor would point at the simplest one.
 
 \section{Training and test sets}
-To train a supervised model, we need a set of labelled examples, called the \emph{training set}.
-Since we want to use our model to predict the labels on unseen data, we will need a separate and independent set \marginpar{The motivation for separated datasets}
- -- the test set --to evaluate its performance.
-
-\todo{validation}
+To train a supervised model, we need a set of labelled examples, called the \emph{training set},
+and a separate and independent set -- the test set -- to evaluate its performance.
+\marginpar{The motivation for separated datasets}
+Why do we need a separate test set?
+It is easy to create rules that are perfectly accurate on the training set, but do not generalise well, a phenomenon called \emph{overfitting}.
+When presented with a collection of models, we will prefer the ones that have the best performance on the test set.
 
 \section{Evaluating predictions: figures of merit}
+How can we compare them?
 Figures of merit allow us to evaluate how well the model performs.
 Here I will describe some of the most commonly used:
 

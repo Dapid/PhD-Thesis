@@ -1,9 +1,6 @@
 %\documentclass[a5paper, 10pt, twoside, openany]{book}
 \documentclass[fontsize=9pt,paper=a5,footinclude,headinclude, twoside, openany]{scrbook} % KOMA-Script book
 \usepackage[pdfpagelabels, unicode, pdfstartview=FitH]{hyperref}
-%\usepackage[utf8]{inputenc}  %necessary for pdftex
-%\usepackage[T1]{fontspec}
-
 
 %\pdfcompresslevel=9
 %\pdfminorversion=5
@@ -13,7 +10,15 @@
 %\pdfobjcompresslevel=0
 
 \usepackage{url}
-\usepackage{fontspec}
+\usepackage{iftex}
+
+\ifLuaTeX
+	\usepackage{fontspec}
+\else
+	\usepackage[utf8]{inputenc}
+	\usepackage[T1]{fontenc}
+\fi
+
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -30,7 +35,9 @@
 \usepackage{enumitem}
 \setlist{leftmargin=0mm}
 
-\usepackage[math-style=upright]{unicode-math}
+\ifLuaTeX
+	\usepackage[math-style=upright]{unicode-math}
+\fi
 
 \usepackage[eulerchapternumbers=true, eulermath=true, parts=true, floatperchapter, drafting]{classicthesis}
 \usepackage[paperwidth=165mm, paperheight=242mm, outer=40mm, inner=20mm, marginparwidth=25mm, top=20mm]{geometry}
@@ -50,11 +57,9 @@
 \SetProtrusion{encoding=*, family=*}{- = {, 1000} } % Hanging hyphens
 \SetProtrusion{encoding=*, family=palatino-it}{- = {, 1000} } % Hanging hyphens
 
-\setmathfont[Scale=MatchUppercase]{Asana Math}
-%\setmathfont{Neo Euler}
-%\newcommand{\oldvector}[1]{\vec{#1}}
-%\usepackage{accents}
-%\newcommand{\vectorh}[1]{\accentset{\rightharpoonup}{#1}}
+\ifLuaTeX
+	\setmathfont[Scale=MatchUppercase]{Asana Math}
+\fi
 
 %\usepackage{placeins}
 \usepackage{todonotes}
@@ -71,47 +76,8 @@
 %Set itemize to raggedright
 \setlist[itemize]{before=\csname par\endcsname\raggedright,	partopsep=0pt}
 
-\newcommand{\MSA}{\textsc{msa}}
-\newcommand{\HMM}{\textsc{hmm}}
-\newcommand{\HMMs}{\textsc{hmm}s}
-\newcommand{\PSSM}{\textsc{pssm}}
-\newcommand{\PSSMs}{\textsc{pssm}s}
-\newcommand{\JackHMMER}{Jack\textsc{hmmer}}
-\newcommand{\HHBlits}{\textsc{hhb}lits}
-\newcommand{\PSIBLAST}{\textsc{psi-blast}}
-\newcommand{\BLAST}{\textsc{blast}}
-\newcommand{\DCA}{\textsc{dca}}
-\newcommand{\GaussDCA}{Gauss\DCA}
-\newcommand{\plmDCA}{plm\DCA}
-\newcommand{\APC}{\textsc{apc}}
-\newcommand{\MODELLER}{\textsc{modeller}}
-\newcommand{\CONFOLD}{\textsc{confold}}
-\newcommand{\CNS}{\textsc{cns}}
-\newcommand{\RMSD}{\textsc{rmsd}}
-\newcommand{\LDDT}{\textsc{lddt}}
-\newcommand{\CAD}{\textsc{cad}}
-\newcommand{\MQA}{\textsc{mqa}}
-\newcommand{\EMA}{\textsc{ema}}
-\newcommand{\PDB}{\textsc{pdb}}
-\newcommand{\ADADELTA}{\textsc{adadelta}}
-\newcommand{\CASP}{\textsc{casp}}
-\newcommand{\DNA}{\textsc{dna}}
-\newcommand{\RNA}{\textsc{rna}}
-\newcommand{\NMR}{\textsc{nmr}}
-\newcommand{\EM}{\textsc{em}}
-\newcommand{\CCD}{\textsc{ccd}}
-\newcommand{\SAXS}{\textsc{saxs}}
-\newcommand{\SANS}{\textsc{sans}}
-\newcommand{\MSE}{\textsc{mse}}
-\newcommand{\LASSO}{\textsc{lasso}}
-\newcommand{\OLS}{\textsc{ols}}
-\newcommand{\SVM}{\textsc{svm}}
-\newcommand{\RBF}{\textsc{rbf}}
-\newcommand{\GP}{\textsc{gp}}
-\newcommand{\RNN}{\textsc{rnn}}
-\newcommand{\MLP}{\textsc{mlp}}
-\newcommand{\LSTM}{\textsc{lstm}}
-\newcommand{\ELU}{\textsc{elu}}
+\input{acronyms}
+
 
 \begin{document}
 

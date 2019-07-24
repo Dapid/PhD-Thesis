@@ -9,8 +9,8 @@ A common choice is to make predictions taking only the amino acid sequence becau
 Other methods may require extra annotation, such as Gene Ontology -- an annotation condensing all our knowledge of the gene that produced the protein -- or 3D structures -- experimental or models.
 
 \section[Multiple Sequence Alignments]{Increasing statistics: Multiple Sequence Alignments}
-Proteins, just like organisms, are products of evolution.
-Small and random modifications are accumulated over time.
+Proteins, just like organisms, are products of evolution that accumulate random modifications over time.
+As mutations accumulate, species diverge.
 , so we can find similar versions of the same protein in different organisms.\todo{introduce evolution}
 Even when the function is novel, it usually evolves as a minor modification of pre-existing proteins.
 This means that, in most cases, we can obtain a better prediction when working at the \emph{family level,}
@@ -65,7 +65,7 @@ Performing a pairwise alignment on a large sequence database would be very slow,
 Programs like \BLAST{} (Basic Local Alignment Search Tool, \citep{blast}) introduce a set of heuristics to discard negatives as quickly as possible.
 They do not guarantee an optimal alignment according to the scoring matrix, but they compensate it by being able to produce a much higher amount of data.
 
-\subsection[\PSSMs and  \PSIBLAST]{Position Specific Scoring Matrices and \textsc{psi-blast}}
+\subsection[\PSSMs{} and  \PSIBLAST]{Position Specific Scoring Matrices and \textsc{psi-blast}}
 
 Substitution matrices assume a fixed evolution model, and that every residue is as important as every other.
 But this is not true, we can observe that some protein regions are highly conserved because they are, in one way or another, important for the function of the protein.

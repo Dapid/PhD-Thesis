@@ -10,7 +10,7 @@ Furthermore, the later development of computers allowed for an explosion in the 
 %\todo{Compare with Greek/Arabic knowledge}
 
 These applications were either developed from first principles or as effective theories; but contained at their core, relatively simple mathematical models.
-For example, the dynamics of $n$-bodies gravitationally interacting are very complicated to solve, but it all spawn from two simple equations, Newton's second law of motion for an object of mass $m$: $\vec{F} = m \cdot \vec{a}$ and the force of gravity between two objects of masses $m_1$ and $m_2$: $F_g=G\frac{m_1  m_2}{r^2}$.
+For example, the dynamics of $n$-bodies gravitationally interacting are very complicated to solve, but it all spawn from two simple equations, Newton's second law of motion for an object of mass $m$: $\vec{F} = m \cdot \vec{a}$ and the force of gravity between two masses $m_1$ and $m_2$: $F_g=G\frac{m_1  m_2}{r^2}$.
 
 The advent of computers
 \marginpar{How do computers fit in?}
@@ -71,7 +71,7 @@ To train a supervised model, we need a set of labelled examples, called the \emp
 and a separate and independent set -- the test set -- to evaluate its performance.
 \marginpar{The motivation for separated datasets}
 Why do we need a separate test set?
-It is easy to create rules that are perfectly accurate on the training set, but do not generalise well, a phenomenon called \emph{overfitting}.
+It is easy to come up with rules that are perfectly accurate on the training set, but do not generalise well, a phenomenon called \emph{overfitting}.
 When presented with a collection of models, we will prefer the ones that have the best performance on the test set.
 
 \section{Evaluating predictions: figures of merit}
@@ -189,7 +189,7 @@ In particular, \ref{subfig:logistic_strong}, has a much narrower region of uncer
 
 \subsection{Multi-Layer Perceptron}\label{sec:mlp}
 A linear model on $d$ features is limited to $d$ free parameters, or at most $d \cdot N$ for $N$ classes, and is limited to linear functions.
-When we have more data, and more complicated tasks, we would like to be able to learn more parameters.
+When we have more complicated tasks, and more data for them, we would like to be able to learn more parameters.
 A simple way to do so is to build upon linear models, and have an intermediate \emph{hidden state} $\vec{h}$ of arbitrary dimension.
 The vector of probabilities for every class is then:
 
@@ -248,7 +248,7 @@ For example, in Figure~\ref{subfig:svm_rbf} we have used a Radial Basis Function
 \[k(\vec{x}_1, \vec{x}_2) = e^{-\gamma ||\vec{x}_1 - \vec{x}_2||^2 },\]
 which implicitly projects the data into an infinite-dimensional space.
 
-Another way of interpreting the kernel trick is to think of it as learning a deformation of the space that makes the data separable by a hyperplane, a linear function.
+Another way of interpreting the kernel trick is to think of it as learning a topological transformation of the space that makes the data separable by the final hyperplane, a linear function.
 
 \subsection{\emph{k}-Nearest Neighbour}
 The Nearest Neighbour classifier takes the $k$ closest points in the training set and predicts the most common label.
@@ -373,7 +373,7 @@ Since they lack a mechanistic model, they can find correlations, but not causati
 
 Furthermore, they are vulnerable to outliers.
 Training a machine learning model means finding the set of parameters that ``best" fit the training points, but we have no constraints outside of that.
-If we were to feed it data points that are sufficiently far away from what was used to train, our outputs will be, essentially, unconstrained.
+If we were to feed it input data that are sufficiently far away from what was used to train, our outputs will be, essentially, unconstrained.
 A machine learning model is a mathematical function, which means it will always give us an answer, but in general, and unlike a human, it lacks the capability of murmuring \emph{``that is strange..."}.
 
 In general, a machine learning model can only get to be as good as the data it was used to train it, and will always incorporate all of its biases and limitations.

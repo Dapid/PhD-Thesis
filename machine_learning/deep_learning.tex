@@ -147,7 +147,8 @@ For example, the mean squared error for $N$ data points  $x_i$ with labels $y_i$
 \begin{equation*}
 L_{\MSE} = \sum_i^N \left(y_i - o_i\right)^2
 \end{equation*}
-and the cross-entropy loss, that measures the information loss between true and predicted values:
+
+Another popular choice is the cross-entropy loss, that measures the information loss between true and predicted values:
 \begin{equation*}
 L_{H} = \sum_i^N y_i \cdot \log\left(o_i\right) 
 \end{equation*}
@@ -239,8 +240,7 @@ The ``mass" $\mu$ controls the balance between the directions pointed at by new 
 
 The momentum term \marginpar{Nesterov}
 may be pointing in the wrong direction, for example, because we have overshot the minimum.
-The Nesterov momentum update~\citep{nag} performs the momentum update before computing the gradients.
-This gives the gradient the possibility of correcting mistakes if the momentum was misleading.
+The Nesterov momentum update~\citep{nag} performs the momentum update before computing the gradients, giving the gradient the possibility of correcting mistakes if the momentum was misleading.
 If the momentum term was instead a good estimation, the new gradient will be computed closer to the minimum, yielding a better estimation.
 
 In similarity \marginpar{Learning rate schedule}
@@ -470,8 +470,9 @@ This step learns a new representation of the data.
 We keep our previous representation but use it for a new task.
 This step is training fewer parameters, so it needs less data, and the architecture can be more constrained.
 \item \emph{Fine-tuning (optional):} we can refine the predictions by allowing more layers to change.
-In this stage, we unfreeze some of the pre-trained layers, and train again, but now keeping the learning rate small.
-Our network is already trained, so we only want to take small steps, otherwise, we will ruin the pre-training.
+In this stage, we unfreeze some of the pre-trained layers, and train again.
+Our network is already trained, so we only want to take small steps.
+This can be done keeping the learning rate small. Otherwise, we will ruin the pre-training.
 \end{enumerate}
 
 Paper \textcolor{Maroon}{IV}, makes use of this technique, where we pre-trained a section of the network on a large subset of the PDB to predict secondary structure from sequence.

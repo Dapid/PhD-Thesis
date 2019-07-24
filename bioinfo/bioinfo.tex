@@ -85,10 +85,10 @@ A representation that allows us to model both mutations and insertions and delet
 An \HMM{} \marginpar{The \HMM} is a probabilistic model, where the system travels across a series of hidden states following a Markov chain, a model with discrete states where the probability of transition depends only on the current state -- ignoring the history.
 We do not have access to these states -- hence \emph{hidden}.
 Instead, each of them has a certain probability of emitting a symbol: the observed amino acids.
-Fitting a Hidden Markov Model consists on figuring the emission probability for each state -- the analogue to the \PSSMs{} -- and the transition probability between states.
+Fitting a Hidden Markov Model consists on estimating the emission probability for each state -- the analogue to the \PSSMs{} -- and also the transition probability between states.
 Like in \PSIBLAST, this is done iteratively, passing several times through the data and updating our belief.
 
-The two most popular programs to perform these searches are \JackHMMER \citep{jh}, and \HHBlits \citep{hhblits}:
+The two most popular programs to perform these searches are \JackHMMER{} \citep{jh}, and \HHBlits~\citep{hhblits}:
 
 \begin{itemize}
 \item \JackHMMER{} compares every sequence in the database with its \HMM.
@@ -97,10 +97,10 @@ It performs an \HMM-sequence comparison.
 It compares \HMM{} to \HMM, and in case of a match, includes all the members of the cluster in the \MSA.
 \end{itemize}
 
-\JackHMMER is slower
+\JackHMMER{} is slower
 \marginpar{Advantages and disadvantages}
 because it must consider each sequence; but it can search against any database without the need to pre-prepare it.
-\JackHMMER can easily keep an up-to-date sequence database, or work on databases tailored for the search at hand.
+\JackHMMER{} can easily keep an up-to-date sequence database, or work on databases tailored for the search at hand.
 
 On the other hand, each \HHBlits{} search is faster since it only needs to compare once against each cluster, but it requires a lot of computational resources to perform the initial clustering.
 This means the databases are not updated as often, and only a handful of versions are available.

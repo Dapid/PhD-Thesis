@@ -46,6 +46,13 @@ for a protein of length $L$ there are $20^L$ possible combinations. %$20/19 (20^
 The \textcolor{Maroon}{maroon}, solid rectangle indicates the backbone, common to all amino acids; and the \textcolor{RoyalBlue}{blue} dashed the side chain, that determines the specific chemical properties.}\label{fig:amino_acids}
 \end{figure}
 
+
+\begin{figure}
+\centering
+\includegraphics[width=0.9\textwidth]{bioinfo/figures/bond}
+\caption{The peptide bond, shown in blue. The different shades correspond to different elements.}\label{fig:bond}
+\end{figure}
+
 \subsection{Primary structure or sequence}
 The amino acids can connect to each other through the peptide bond, forming a chain.
 The \emph{primary structure} is the sequence of amino acids as encoded in the \DNA:
@@ -53,7 +60,6 @@ The \emph{primary structure} is the sequence of amino acids as encoded in the \D
 \texttt{ALA ARG ILE ASN GLY ARG GLU ILE ASN VAL THR LYS LYS}
 \end{center}
 
-%\missingfigure{peptide bond}
 
 This is the easiest to obtain experimentally since the advent of next-generation sequencing techniques.
 These experiments read the \DNA{} of the organism, that can be translated into proteins.
@@ -134,9 +140,10 @@ To preserve as many energy-favourable hydrogen bonds the water molecules near th
 The degrees of freedom for the boundary is restricted, so the entropy -- and consequently the free energy -- is reduced.
 This is the \emph{hydrophobic effect}, responsible for the immiscibility of fats and water.
 
-A protein chain \marginpar{Hydrophobicity and folding} \todo{This is weird? H-network}
+A protein chain \marginpar{Hydrophobicity and folding}
 will be composed of both hydrophobic and hydrophilic amino acids.
-When placed, unfolded, in the cellular environment, tiny pockets of water will be created around the hydrophobic regions.
+When placed, unfolded, in the cellular environment, the hydrophobic ones will not be able to form hydrogen bonds with the water.
+The water molecules will then reorient themselves to form hydrogen bonds with their neighbours, which creates tiny pockets around them.
 Quickly, these pockets will join together, expelling most of the water and forming a compact core of hydrophobic residues, surrounded by hydrophilic ones, the \emph{molten globule}.
 A partial secondary structure, close to native, is observed.
 
@@ -179,6 +186,8 @@ Of these terms, $\alpha$ and $\beta$ are strictly valid only near their respecti
 In practice, this is not a significant problem because the deviations from the ideal values are small. \marginpar{Dynamics}
 From here we can see that most of the dynamics in proteins is given by the flexibility of the torsion angles.
 Roughly speaking the torsions of the backbone determine the secondary structure and those of the side chains, the packing.
+
+The final thermodynamical component is the entropy, \marginpar{Entropy} which measures the number of accessible states.
 
 \todo{Entropic terms}
 

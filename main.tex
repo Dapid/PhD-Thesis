@@ -1,13 +1,7 @@
 %\documentclass[a5paper, 10pt, twoside, openany]{book}
 \documentclass[fontsize=9pt,paper=a5,footinclude,headinclude, twoside, openany]{scrbook} % KOMA-Script book
+\usepackage[cmyk,hyperref,dvipsnames]{xcolor} %The two first options are for pdf-x, the last is for classicthesis
 \usepackage[pdfpagelabels, unicode, pdfstartview=FitH]{hyperref}
-
-%\pdfcompresslevel=9
-%\pdfminorversion=5
-%\pdfobjcompresslevel=2
-
-%\usepackage[x-3]{pdfx}
-%\pdfobjcompresslevel=0
 
 \usepackage{url}
 \usepackage{iftex}
@@ -62,12 +56,13 @@
 	\setmathfont[Scale=MatchUppercase]{Asana Math}
 \fi
 
-
 %\usepackage{placeins}
-\usepackage{todonotes}
+%\usepackage{todonotes}
 
 \usepackage[hyphenation,lastparline,nosingleletter,homeoarchy]{impnattypo} %draft
 \usepackage[all]{nowidow}
+
+\usepackage[x-4]{pdfx} % X is printing standard. 5g is the latest supported version.
 
 \hyphenation{PSICOV, PconsC3, PconsFold, PconsC2, PconsFold2, begi-nning}
 \DeclareMathOperator{\arctantwo}{arctan2}

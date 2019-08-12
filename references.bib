@@ -986,7 +986,7 @@ journal = {Bioinformatics}
 	journal = {Proceedings of the National Academy of Sciences}
 }
 
-@article{PconsC3, title={Predicting accurate contacts in thousands of Pfam domain families using PconsC3},
+@article{PconsC3, title={Predicting accurate contacts in thousands of {Pfam} domain families using {PconsC3}},
         volume={33},
         ISSN={1460-2059},
         url={http://dx.doi.org/10.1093/bioinformatics/btx332},
@@ -999,3 +999,39 @@ journal = {Bioinformatics}
         year={2017},
         month={May},
         pages={2859–2866}}
+
+@article{large_scale,
+    author = {Michel, Mirco and Menéndez Hurtado, David and Uziela, Karolis and Elofsson, Arne},
+    title = "{Large-scale structure prediction by improved contact predictions and model quality assessment}",
+    journal = {Bioinformatics},
+    volume = {33},
+    number = {14},
+    pages = {i23-i29},
+    year = {2017},
+    month = {07},
+    abstract = "{Accurate contact predictions can be used for predicting the structure of proteins. Until recently these methods were limited to very big protein families, decreasing their utility. However, recent progress by combining direct coupling analysis with machine learning methods has made it possible to predict accurate contact maps for smaller families. To what extent these predictions can be used to produce accurate models of the families is not known.We present the PconsFold2 pipeline that uses contact predictions from PconsC3, the CONFOLD folding algorithm and model quality estimations to predict the structure of a protein. We show that the model quality estimation significantly increases the number of models that reliably can be identified. Finally, we apply PconsFold2 to 6379 Pfam families of unknown structure and find that PconsFold2 can, with an estimated 90\\% specificity, predict the structure of up to 558 Pfam families of unknown structure. Out of these, 415 have not been reported before.Datasets as well as models of all the 558 Pfam families are available at http://c3.pcons.net/. All programs used here are freely available.}",
+    issn = {1367-4803},
+    doi = {10.1093/bioinformatics/btx239},
+    url = {https://doi.org/10.1093/bioinformatics/btx239},
+    eprint = {http://oup.prod.sis.lan/bioinformatics/article-pdf/33/14/i23/25156786/btx239.pdf},
+}
+
+@article{pconsc4,
+    author = {Michel, Mirco and Menéndez Hurtado, David and Elofsson, Arne},
+    title = "{{PconsC4}: fast, accurate and hassle-free contact predictions}",
+    journal = {Bioinformatics},
+    volume = {35},
+    number = {15},
+    pages = {2677-2679},
+    year = {2018},
+    month = {12},
+    abstract = "{Residue contact prediction was revolutionized recently by the introduction of direct coupling analysis (DCA). Further improvements, in particular for small families, have been obtained by the combination of DCA and deep learning methods. However, existing deep learning contact prediction methods often rely on a number of external programs and are therefore computationally expensive.Here, we introduce a novel contact predictor, PconsC4, which performs on par with state of the art methods. PconsC4 is heavily optimized, does not use any external programs and therefore is significantly faster and easier to use than other methods.PconsC4 is freely available under the GPL license from https://github.com/ElofssonLab/PconsC4. Installation is easy using the pip command and works on any system with Python 3.5 or later and a GCC compiler. It does not require a GPU nor special hardware.Supplementary data are available at Bioinformatics online.}",
+    issn = {1367-4803},
+    doi = {10.1093/bioinformatics/bty1036},
+    url = {https://doi.org/10.1093/bioinformatics/bty1036},
+    eprint = {http://oup.prod.sis.lan/bioinformatics/article-pdf/35/15/2677/29012536/bty1036.pdf},
+}
+
+
+
+

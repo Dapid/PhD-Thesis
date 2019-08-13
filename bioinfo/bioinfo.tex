@@ -284,8 +284,8 @@ Z = \sum_{\vec{\sigma}} e^{-\beta H\left(\vec{\sigma}\right)}
 
 Fitting a Potts model means to estimate the values of $J$ and $h$ that best explain the observed distribution of sequences in the \MSA.
 The problem as such is intractable because computing $Z$ implies a sum over all the possible sequences of length $N$, $21^N$ (the 20 natural amino acids plus the gap state).
-
-Several strategies can approximate the partition function, such as \plmDCA~\citep{plmDCA}, or side-step it all together, like \GaussDCA~\citep{GaussDCA}.
+One solution is to replace the partition function with an approximation, such as done by \plmDCA~\citep{plmDCA};
+or side-step it all together, like \GaussDCA~\citep{GaussDCA}.
 
 Once the values of $J$ are obtained, the scores of the contacts can be estimated by taking the Frobenius norm of each of the J matrices.
 That is, the square root of the sum of the squares of the couplings between each pair of amino acids:

@@ -1,8 +1,9 @@
 %\documentclass[a5paper, 10pt, twoside, openany]{book}
-\documentclass[fontsize=9pt,paper=a5,footinclude,headinclude, twoside, openany]{scrbook} % KOMA-Script book
+\documentclass[fontsize=10pt,paper=a5,footinclude,headinclude, twoside, final]{scrbook} % KOMA-Script book
 \usepackage[cmyk,hyperref,dvipsnames]{xcolor} %The two first options are for pdf-x, the last is for classicthesis
-\usepackage[pdfpagelabels, unicode, pdfstartview=FitH]{hyperref}
 
+\usepackage[pdfpagelabels, unicode, pdfstartview=FitH]{hyperref}
+\usepackage[swedish,british]{babel}
 \usepackage{url}
 \usepackage{iftex}
 
@@ -39,6 +40,7 @@
 \usepackage[paperwidth=165mm, paperheight=242mm, outer=40mm, inner=20mm, marginparwidth=25mm, top=20mm]{geometry}
 %\usepackage[paperwidth=165mm, paperheight=242mm]{geometry}
 
+%\usepackage{gfsdidot}
 %\usepackage{ebgaramond}
 
 \usepackage[authoryear, round]{natbib} % Allow to split citations across lines.
@@ -52,7 +54,7 @@
 \usetikzlibrary{calc,shapes,decorations}
 
 \usepackage{microtype}
-\SetProtrusion{encoding=*, family=*}{- = {, 1000} } % Hanging hyphens
+\SetProtrusion{encoding=*, family=*}{- = {, 1000}} % Hanging hyphens
 \SetProtrusion{encoding=*, family=palatino-it}{- = {, 1000} } % Hanging hyphens
 
 \ifLuaTeX
@@ -63,11 +65,14 @@
 %\usepackage{todonotes}
 
 \usepackage[hyphenation,lastparline,nosingleletter,homeoarchy]{impnattypo} %draft
-\usepackage[all]{nowidow}
+\usepackage[defaultlines=2]{nowidow}
+\setnowidow
+
+\frenchspacing   % Do not include extra space after sentences.
 
 \usepackage[x-4]{pdfx} % X is printing standard. 5g is the latest supported version.
 
-\hyphenation{PSICOV, PconsC3, PconsFold, PconsC2, PconsFold2, begi-nning}
+\hyphenation{PSICOV, PconsC3, PconsFold, PconsC2, PconsFold2}
 \DeclareMathOperator{\arctantwo}{arctan2}
 
 %\setcounter{tocdepth}{1} % Show sections
@@ -88,14 +93,15 @@
 \input{title}
 \frontmatter
 
-{\Large
+{\large
 \include{intro/abstract}
 \include{intro/sammanfatning}
 }
 
 \include{papers}
 
-{\small \tableofcontents}
+{ %\small
+	 \tableofcontents}
 
 \setlist{leftmargin=15mm}
 \include{intro/intro}

@@ -324,7 +324,7 @@ dominating the predictions, we can add a term to the loss penalising large weigh
 If this term is proportional to the square of the weights, it is called $L^2$ regularisation and can be interpreted as a Gaussian prior over the weights centred around $0$, as seen with linear models in Section~\ref{sec:linear}.
 
 The most popular technique \marginpar{Dropout} 
-specifically developed for deep learning is Dropout,~\citep{dropout}. 
+specifically developed for deep learning is Dropout, \citep{dropout}.
 During training, a random fraction $0 < \rho < 1$ of intermediate inputs is set to $0$ -- \emph{dropped out} --  while the rest of values are scaled by a factor of $\frac{1}{1-\rho}$ to compensate.
 Since the network cannot trust any particular neuron activation to be present, it must distribute the information across different parts.
 The network is effectively different for every batch, so we are training an ensemble of models, most of which have not seen any data, but are heavily regularised to the average.

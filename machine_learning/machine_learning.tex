@@ -211,11 +211,12 @@ p(\vec x \in i) &= \sigma(\vec z)_i
 
 Since we have no constraints over the properties of $f$, common choices are simple point-wise functions, such as $\tanh(x)$; the logistic, $\frac{1}{1 + e^{-x}}$; or the Rectified Linear Unit, $ReLU(x)=[x \; if \; x > 0 \; else \; 0]$.
 
-We can repeat the same procedure \marginpar{More layers!} and chain two hidden layers:
+We can repeat the same procedure and chain two hidden layers:
 
+\marginpar{More layers!}
 \begin{align*}
 \vec{h_1} &= \widetilde W_1 \cdot \vec{x} \\
-\vec{h_2} &= \widetilde W_2 \cdot f(\vec{h_2}) \\
+\vec{h_2} &= \widetilde W_2 \cdot f(\vec{h_1}) \\
 \vec{z} &= \widetilde W_3 \cdot f(\vec{h_2}) \\
 p(\vec x \in i) &= \sigma(\vec z)_i
 \end{align*}

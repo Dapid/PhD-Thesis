@@ -1,5 +1,5 @@
 %\documentclass[a5paper, 10pt, twoside, openany]{book}
-\documentclass[fontsize=10pt,paper=a5,footinclude,headinclude, twoside, final]{scrbook} % KOMA-Script book
+\documentclass[fontsize=9pt,paper=a5,footinclude,headinclude, twoside, final]{scrbook} % KOMA-Script book
 \usepackage[cmyk,hyperref,dvipsnames]{xcolor} %The two first options are for pdf-x, the last is for classicthesis
 
 \usepackage[pdfpagelabels, unicode, pdfstartview=FitH]{hyperref}
@@ -8,6 +8,7 @@
 \usepackage{iftex}
 
 \ifLuaTeX
+	\usepackage{luatextra}
 	\usepackage{fontspec}
 \else
 	\usepackage[utf8]{inputenc}
@@ -20,7 +21,7 @@
 \usepackage{bibentry}
 
 \usepackage[centertags]{amsmath}
-\usepackage{amsfonts}
+%\usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{amsmath}
@@ -33,20 +34,23 @@
 \setlist{leftmargin=0mm}
 
 \ifLuaTeX
-	\usepackage[math-style=upright]{unicode-math}
+	\usepackage[math-style=french]{unicode-math}
 \fi
 
 \usepackage[eulerchapternumbers=true, eulermath=true, parts=true, floatperchapter]{classicthesis}
 \usepackage[paperwidth=165mm, paperheight=242mm, outer=40mm, inner=20mm, marginparwidth=25mm, top=20mm]{geometry}
 %\usepackage[paperwidth=165mm, paperheight=242mm]{geometry}
 
-%\usepackage{gfsdidot}
 %\usepackage{ebgaramond}
-%\usepackage{Baskervaldx}
 
+\ifLuaTeX
+%	\setmathfont[Scale=MatchUppercase]{Asana Math}
+\fi
+
+%\usepackage[backend=biber, style=mla, natbib=True]{biblatex}
+%\addbibresource{references.bib}
 \usepackage[authoryear, round]{natbib} % Allow to split citations across lines.
-\usepackage{doi}
-\bibliographystyle{plainnat}
+\bibliographystyle{abbrvnat}
 
 \usepackage{xpatch} %Adjust the spacing in smallcaps
 \xapptocmd{\scshape}{\spaceskip=2\fontdimen2\font plus 2\fontdimen3\font minus \fontdimen4\font	\xspaceskip=0\fontdimen7\font}{}{}
@@ -57,10 +61,6 @@
 \usepackage{microtype}
 \SetProtrusion{encoding=*, family=*}{- = {, 1000}} % Hanging hyphens
 \SetProtrusion{encoding=*, family=palatino-it}{- = {, 1000} } % Hanging hyphens
-
-\ifLuaTeX
-	\setmathfont[Scale=MatchUppercase]{Asana Math}
-\fi
 
 %\usepackage{placeins}
 %\usepackage{todonotes}
@@ -94,12 +94,14 @@
 \input{title}
 \frontmatter
 
-{\large
+{\Large
 \include{intro/abstract}
 \include{intro/sammanfatning}
 }
 
+{\raggedright
 \include{papers}
+}
 
 \KOMAoptions{open=left}
 { %\small
@@ -132,6 +134,7 @@
 \newgeometry{outer=24mm, inner=12mm}
 
 {\small \raggedright
+%	\printbibliography}
 	\bibliography{references}}
 
 \end{document}

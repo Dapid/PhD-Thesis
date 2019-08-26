@@ -25,12 +25,17 @@ On the other hand, ProQ3 is the product of several generations of progressive im
 \noindent
 Here we present a pipeline for contact-based \emph{ab-initio} protein structure prediction.
 It predicts contacts with PconsC3, folds models with \CONFOLD, and selects and evaluates the accuracy using Pcons and ProQ3.
-This work combines, in a single package, the main programs developed in the group.
+This work combines, in a single package, the programs for structure prediction developed in the group.
 
 We then applied to all the \textsc{pfam} families, of both known and unknown structure, and benchmarked our quality estimation methods.
-We found out that a linear combination between the scores predicted by Pcons \citep{pcons}, ProQ3, and the contact agreement yielded the best results.
+We found out that a linear combination of the uniformity of the different models -- computed with Pcons \citep{pcons} -- , the ProQ3 predictions, and the agreement with predicted contacts yielded the best results.
 
-\newpage
+The better the contact map, the better the model; and the main driving factor is the quality and depth of the \MSA, with some exceptions.
+We can successfully model ($TM>0.5$, 0.1 \textsc{fpr}) 558 \textsc{pfam} families.
+\citet{ovchinnikov2017protein} published a similar study based on metagenomics data.
+They are successful in a comparable number of families, but only 26\% of them coincide.
+This shows that independent methods are still useful, as they can succeed where others fail.
+
 
 \section*{Paper \textcolor[cmyk]{0, 0.87, 0.68, 0.32}{III}}
 \begin{center}
@@ -43,11 +48,17 @@ We found out that a linear combination between the scores predicted by Pcons \ci
 Unfortunately, their method is only available as a web server, and not for download.
 Other programs, such as PconsC3~\citet{PconsC3}, developed in this lab, have a large number of dependencies, making it hard to install, and slow to run.
 
-PconsC4 is a contact predictor designed to be fast and easy to use.
-To accomplish this, the code is very optimised, requires only one \MSA, and does not depend on external predictors.
-Therefore, it is easy to install, deploy, and apply in large-scale studies.
+PconsC4 is a contact predictor designed to be fast and easy to use, clocking an average of 12 s per \MSA.
+This is more than twice as fast as the reference implementation of Gauss\DCA{} \citep{GaussDCA}, and 244 times faster than PconsC3.
+We accomplished this through heavily optimised code and algorithms.
+It also requires a single \MSA{} and no external predictors, which makes it easy to install, deploy, and apply in large-scale studies.
 
-We showed that
+Our method is based on a combination of \DCA{} (a faster re-implementation of Gauss\DCA{}), mutual information, and other statistics derived from the \MSA, combined and refined by a convolutional neural network (\CNN).
+In order to train as big a network as possible, we used the U-net architecture, which allows for large receptive fields and number of parameters on the limited memory of our \textsc{gpu}s.
+Our training data is taken from \textsc{pisces}~\citep{pdbcull}.
+
+In order to maximise the information from our training data, we used multi-task learning (see Section~\ref{sec:transfer}) to predict contacts at 6, 8, and \SI{10}{\angstrom}, as well as the distance between residues under the transformation $1/(d + \SI{20}{\angstrom})$.
+
 
 
 \section*{Paper \textcolor[cmyk]{0, 0.87, 0.68, 0.32}{IV}}
@@ -60,6 +71,9 @@ We showed that
 The power of deep learning lies in its ability to leverage the inherent structure of the data.
 In this work, we show how we can take this one step further, and bake the structure of the \emph{problem} in the network architecture.
 We demonstrate it is a viable alternative reaching or surpassing ProQ3D's performance (from Paper \textcolor{Maroon}{I}) on the same training and test sets, but using only a subset of the inputs.
+
+In this paper we made extensive use of transfer learning, as explained in Section~\ref{sec:transfer}, in both multi-task and pre-training.
+\todo{finish}
 
 \section*{Paper \textcolor[cmyk]{0, 0.87, 0.68, 0.32}{V}}
 \begin{center}

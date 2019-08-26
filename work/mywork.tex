@@ -10,6 +10,12 @@ ProQ3 \citep{ProQ3} was a \MQA{} program developed in our lab that combines a la
 In this paper, we took the same features and dataset used to develop ProQ3, but replaced the machine learning algorithm with a multi-layer perceptron.
 This allows us to make full use of the whole dataset, and boosted its performance, improving the correlation between predicted and true from 0.85 to 0.90.
 
+The main limitation of ProQ3D from a theoretical point of view is that the features are engineered for a traditional machine learning framework, as opposed to deep learning.
+That is, many features and derivations of features, with no attempt to preserve the structure.
+From a practical consideration, ProQ3D requires several predictors and other programs, that while they are all freely available for researchers, we cannot distribute as a single package. Hence, installing it and running is slow and difficult.
+
+On the other hand, ProQ3 is the product of several generations of progressive improvements in model quality assessment, and ProQ3D keeps all of them, with a minimal, focalised change. 
+
 \section*{Paper  \textcolor[cmyk]{0, 0.87, 0.68, 0.32}{II}}
 \begin{center}
 	\textsc{Large-scale structure prediction by improved contact predictions and model quality assessment.}
@@ -19,9 +25,12 @@ This allows us to make full use of the whole dataset, and boosted its performanc
 \noindent
 Here we present a pipeline for contact-based \emph{ab-initio} protein structure prediction.
 It predicts contacts with PconsC3, folds models with \CONFOLD, and selects and evaluates the accuracy using Pcons and ProQ3.
+This work combines, in a single package, the main programs developed in the group.
+
+We then applied to all the \textsc{pfam} families, of both known and unknown structure, and benchmarked our quality estimation methods.
+We found out that a linear combination between the scores predicted by Pcons \citep{pcons}, ProQ3, and the contact agreement yielded the best results.
 
 \newpage
-
 
 \section*{Paper \textcolor[cmyk]{0, 0.87, 0.68, 0.32}{III}}
 \begin{center}
@@ -37,6 +46,8 @@ Other programs, such as PconsC3~\citet{PconsC3}, developed in this lab, have a l
 PconsC4 is a contact predictor designed to be fast and easy to use.
 To accomplish this, the code is very optimised, requires only one \MSA, and does not depend on external predictors.
 Therefore, it is easy to install, deploy, and apply in large-scale studies.
+
+We showed that
 
 
 \section*{Paper \textcolor[cmyk]{0, 0.87, 0.68, 0.32}{IV}}
@@ -59,3 +70,5 @@ We demonstrate it is a viable alternative reaching or surpassing ProQ3D's perfor
 \noindent
 This paper presents the results on model quality assessment of the latest edition of the blind test Critical Assessment of (Protein) Structure Prediction, \CASP13,
 and serves as independent validation for the results in Papers \textcolor{Maroon}{I} and \textcolor{Maroon}{IV}.
+
+The main conclusion is that P

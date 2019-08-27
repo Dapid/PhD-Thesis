@@ -44,7 +44,9 @@ A convolution looks at a small but fixed window and applies a linear operation; 
 The output is another 2D vector, with an arbitrary number of channels, which outputs are mutually independent.
 The set of weights corresponding to each output is called a \emph{filter}.
 
-Each convolution  \marginpar{Receptive fields} has a limited field of view, that can be increased stacking layers.
+Each convolution  \marginpar{Receptive fields} has a limited field of view, called the \emph{receptive field}.
+The size of the input region that is visible to a layer depends on the width of the filters and number of layers before it.
+We can obtain a bigger receptive field using wider filters, strided convolutions -- introducing gaps in the filter --, or most commonly, stacking layers.
  
 
 \subsection{Recurrent}

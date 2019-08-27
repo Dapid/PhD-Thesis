@@ -59,6 +59,7 @@ Our training data is taken from \textsc{pisces}~\citep{pdbcull}.
 
 In order to maximise the information from our training data, we used multi-task learning (see Section~\ref{sec:transfer}) to predict contacts at 6, 8, and \SI{10}{\angstrom}, as well as the distance between residues under the transformation $1/(d + \SI{20}{\angstrom})$.
 
+At the time of publication, it was the best freely available contact predictor that could use a single \MSA.
 
 
 \section*{Paper \textcolor[cmyk]{0, 0.87, 0.68, 0.32}{IV}}
@@ -69,11 +70,17 @@ In order to maximise the information from our training data, we used multi-task 
 
 \noindent
 The power of deep learning lies in its ability to leverage the inherent structure of the data.
-In this work, we show how we can take this one step further, and bake the structure of the \emph{problem} in the network architecture.
-We demonstrate it is a viable alternative reaching or surpassing ProQ3D's performance (from Paper \textcolor{Maroon}{I}) on the same training and test sets, but using only a subset of the inputs.
+In this work, we show how we can take this one step further, and bake the structure of the \emph{problem} in the network architecture, introducing ProQ4.
+We demonstrate it is a viable alternative reaching or surpassing ProQ3D's performance (from Paper \textcolor{Maroon}{I}) on the same training and test sets, but  using only a subset of the inputs, following the line of simplicity outlined in PconsC4, and no external predictors.
 
-In this paper we made extensive use of transfer learning, as explained in Section~\ref{sec:transfer}, in both multi-task and pre-training.
-\todo{finish}
+ProQ4 was designed as a coarse-grained program with a focus on model selection and ranking.
+Coarse-grained means we are not overly sensitive to finer details of a model, such as the side chain packing, which is relatively unimportant for \MQA, yet may change widely from group to group.
+The last step of a protein structure prediction is to select the best model from our pool.
+An improvement in model selection will impact positively any protein structure prediction pipeline by selecting better candidates, and with more confidence.
+
+In this paper we made extensive use of transfer learning, as explained in Section~\ref{sec:transfer}, in both multi-task and pre-training to extract the maximum amount of information and minimise the impact of bias.
+In particular, we have developed a model that can be used to both predict secondary structure from a \MSA, and learn a representation of said \MSA{} that can be applied for any other deep learning tasks.
+
 
 \section*{Paper \textcolor[cmyk]{0, 0.87, 0.68, 0.32}{V}}
 \begin{center}
@@ -82,7 +89,12 @@ In this paper we made extensive use of transfer learning, as explained in Sectio
 \end{center}
 
 \noindent
-This paper presents the results on model quality assessment of the latest edition of the blind test Critical Assessment of (Protein) Structure Prediction, \CASP13,
+This paper presents the results on model quality assessment of the latest edition of the blind test Critical Assessment of (\textsw{Protein}) Structure Prediction, \CASP13,
 and serves as independent validation for the results in Papers \textcolor{Maroon}{I} and \textcolor{Maroon}{IV}.
 
-The main conclusion is that P
+We can see that indeed, the results are better on the loss selected for training.
+The different ProQ3D-\textsc{xx} variants -- where \textsc{xx} stands for different target functions, but using the same training data, model, and features  -- performs best on the target function was trained on.
+
+ProQ4 has a better ranking than ProQ3D, but has poor performance in local scores.
+We believe this is because of the limited description of the protein, using only the properties of the backbone.
+Further research should include physico-chemical and finer-grained descriptors that could add orthogonal information.

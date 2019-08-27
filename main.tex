@@ -2,7 +2,7 @@
 \documentclass[fontsize=9pt,paper=a5,footinclude,headinclude, twoside, final]{scrbook} % KOMA-Script book
 \usepackage[cmyk,hyperref,dvipsnames]{xcolor} %The two first options are for pdf-x, the last is for classicthesis
 
-\usepackage[pdfpagelabels, unicode, pdfstartview=FitH]{hyperref}
+\usepackage[pdfpagelabels, unicode, pdfversion=1.5]{hyperref}
 \usepackage[swedish,british]{babel}
 \usepackage{url}
 \usepackage{iftex}
@@ -35,6 +35,7 @@
 \ifLuaTeX
 	\usepackage[math-style=french]{unicode-math}
 \fi
+\usepackage{ebgaramond} % To get the swash
 
 \usepackage[eulerchapternumbers=true, eulermath=true, parts=true, floatperchapter]{classicthesis}
 \usepackage[paperwidth=165mm, paperheight=242mm, outer=40mm, inner=20mm, marginparwidth=25mm, top=20mm]{geometry}
@@ -42,7 +43,7 @@
 
 %\usepackage{Baskervaldx}
 %\usepackage[p,osf]{baskervillef}
-%\usepackage{ebgaramond}
+
 
 \ifLuaTeX
 %	\setmathfont[Scale=MatchUppercase]{Asana Math}
@@ -130,6 +131,7 @@
 \part{My work} \label{part:work}
 
 \include{work/mywork}
+
 
 \backmatter
 \newgeometry{outer=24mm, inner=12mm}

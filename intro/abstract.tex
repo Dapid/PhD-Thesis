@@ -1,20 +1,23 @@
 \KOMAoptions{open=left}
 \chapter*{Abstract}
 \lettrine[lines=3, lhang=0.25, nindent=0em, findent=2pt]{\color{Maroon}P}{roteins are\ }
-the basic molecular machines of the cell.
-Experimental studies are usually labour-intensive and expensive; and in no few cases, fail without giving a result.
-One of the aims of the field of Bioinformatics is to, when possible, replace these experiments with computational models.
+the basic molecular machines of the cell, performing a broad range of tasks, from structural support to catalysis of chemical reactions.
+Their function is determined by their \textsc{3d} structure, which in turn is dictated by the order of their components, the amino acids.
+Experimental determinations are usually labour-intensive and expensive; and in no few cases, fail to yield a result.
+The aim of the field of Protein Structure Prediction is to replace these experiments with computational models, to the extent that it is possible.
 
 The human impulse is to categorise and model everything based on hard and simple rules.
-But Nature is messy and resists to adhere to these rules.
+But Nature is messy and resists adhering to these rules.
 One of the solutions put forward was the use of machine learning: soft and complicated rules, reached by the computer after looking at the data.
 The rules are ``soft" because they are probabilistic in nature, and ``complicated" because they are the result of analysing large datasets.
 
-In the last decade, deep learning has revolutionised the field of machine learning, in particular in computer vision and speech recognition.
-The primary reason for their success is the ability to train very flexible models, capable of capturing the complexity of the real world, on large amounts of data.
-But the key that makes it feasible is the ability to leverage the structure in the data. 
+This thesis is dedicated to applications of machine learning to the problems of contact prediction, \emph{ab-initio}, and model quality assessment.
+In particular, my research has been focused on exploring how to represent the protein data in a way that is suitable for deep learning, and in developing methods that are both effective, and easy to use.
 
-This work presents the application of machine learning in general, and deep learning in particular, to several tasks in the field of protein structure prediction: contact prediction, \emph{ab-initio} modelling, model quality assessment.
+In the first paper, we improved the already state-of-the-art model quality assessment (\MQA) program ProQ3 replacing the underlying machine learning algorithm from \SVM{} to Deep Learning, baptised ProQ3D.
+The second paper joined several programs into a single pipeline for \emph{ab-initio} structure prediction: contact prediction, folding, and model selection.
+The third and fourth papers introduce new methods for the first and last stages  -- contact prediction and model selection -- respectively: PconsC4 and ProQ4.
 
-The focus of my research has been exploring how to represent the protein data in a way that is suitable for deep learning.
-On more practical matters, I have worked on the development of methods that are effective yet easy to install and use.
+PconsC4 uses advances in machine learning to build a fast predictor that requires a single \MSA, yet providing state-of-the-art predictions.
+With ProQ4, we introduce a novel way of training deep networks for \MQA{} in a way that minimises the bias of the training data, and emphasises model ranking, and demonstrate its viability with a minimal description of the protein.
+Lastly, in the fifth paper, we show the results of ProQ3D and ProQ4 in a completely blind test: \CASP13.

@@ -53,6 +53,8 @@
 %\addbibresource{references.bib}
 \usepackage[authoryear, round]{natbib} % Allow to split citations across lines.
 \bibliographystyle{abbrvnat}
+\usepackage{bibentry}
+\nobibliography*
 
 \usepackage{xpatch} %Adjust the spacing in smallcaps
 \xapptocmd{\scshape}{\spaceskip=2\fontdimen2\font plus 2\fontdimen3\font minus \fontdimen4\font	\xspaceskip=0\fontdimen7\font}{}{}
@@ -96,7 +98,7 @@
 \input{title}
 \frontmatter
 
-{\Large
+{\large
 \include{intro/abstract}
 \include{intro/sammanfatning}
 }
@@ -107,6 +109,7 @@
 
 \KOMAoptions{open=left}
 { %\small
+	\large
 	 \tableofcontents}
 \KOMAoptions{open=right}
 
@@ -139,5 +142,6 @@
 {\small \raggedright
 %	\printbibliography}
 	\bibliography{references}}
+
 
 \end{document}

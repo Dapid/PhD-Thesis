@@ -1,23 +1,22 @@
 \KOMAoptions{open=left}
 \chapter*{Abstract}
-\lettrine[lines=3, lhang=0.25, nindent=0em, findent=2pt]{\color{Maroon}P}{roteins are\ }
+\lettrine[lines=3, lhang=0.15, nindent=0em, findent=2pt]{\color{Maroon}P}{roteins are\ }
 the basic molecular machines of the cell, performing a broad range of tasks, from structural support to catalysis of chemical reactions.
 Their function is determined by their \textsc{3d} structure, which in turn is dictated by the order of their components, the amino acids.
-Experimental determinations are usually labour-intensive and expensive; and in no few cases, fail to yield a result.
-The aim of the field of Protein Structure Prediction is to replace these experiments with computational models, to the extent that it is possible.
-
-The human impulse is to categorise and model everything based on hard and simple rules.
-But Nature is messy and resists adhering to these rules.
-One of the solutions put forward was the use of machine learning: soft and complicated rules, reached by the computer after looking at the data.
-The rules are ``soft" because they are probabilistic in nature, and ``complicated" because they are the result of analysing large datasets.
 
 This thesis is dedicated to applications of machine learning to the problems of contact prediction, \emph{ab-initio}, and model quality assessment.
-In particular, my research has been focused on exploring how to represent the protein data in a way that is suitable for deep learning, and in developing methods that are both effective, and easy to use.
+In particular, my research has been focused on developing methods that are both effective, and easy to use.
 
 In the first paper, we improved the already state-of-the-art model quality assessment (\MQA) program ProQ3 replacing the underlying machine learning algorithm from \SVM{} to Deep Learning, baptised ProQ3D.
-The second paper joined several programs into a single pipeline for \emph{ab-initio} structure prediction: contact prediction, folding, and model selection.
-The third and fourth papers introduce new methods for the first and last stages  -- contact prediction and model selection -- respectively: PconsC4 and ProQ4.
+The correlation between predicted and true scores was improved from 0.85 to 0.90, using the same training data and features.
 
-PconsC4 uses advances in machine learning to build a fast predictor that requires a single \MSA, yet providing state-of-the-art predictions.
-With ProQ4, we introduce a novel way of training deep networks for \MQA{} in a way that minimises the bias of the training data, and emphasises model ranking, and demonstrate its viability with a minimal description of the protein.
+The second paper joined several programs into a single pipeline for \emph{ab-initio} structure prediction: contact prediction, folding, and model selection.
+We attempted to predict the structures of all 6379 \PFAM{} families with unknown structure, of which 558 we believe to be accurate.
+Of these, 415 had not been reported before.
+
+The third paper uses advances in machine learning to build a contact predictor, PconsC4, that is fast and easy to deploy in large-scale studies, since it requires a single Multiple Sequence Alignment (\MSA), and no external dependencies.
+The predictions are state-of-the-art, yielding a 12\% improvement in precision over PconsC3, and 244 times faster.
+
+With ProQ4, in the fourth paper, we introduce a novel way of training deep networks for \MQA{} in a way that minimises the bias of the training data, and emphasises model ranking, and demonstrate its viability with a minimal description of the protein.
+The ranking correlation was improved with respect to ProQ3D from 0.82 to 0.90.
 Lastly, in the fifth paper, we show the results of ProQ3D and ProQ4 in a completely blind test: \CASP13.

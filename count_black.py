@@ -1,5 +1,12 @@
+import sys
 import subprocess
-out = subprocess.check_output('gs -o - -sDEVICE=inkcov main.pdf', shell=True)
+
+if len(sys.argv) > 1:
+    pdf = sys.argv[-1]
+else:
+    pdf = 'main.pdf'
+
+out = subprocess.check_output(f'gs -o - -sDEVICE=inkcov {pdf}', shell=True)
 out = out.splitlines()
 
 # Skip header:

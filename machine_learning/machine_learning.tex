@@ -11,7 +11,10 @@ As mathematical tools improved, increasingly more complex systems could be analy
 Furthermore, the later development of computers allowed for an explosion in the size and breadth of tractable problems, such as dynamics of atomic nuclei, or weather forecast.
 %\todo{Compare with Greek/Arabic knowledge}
 
-These applications were either developed from first principles or as effective theories; but contained at their core, relatively simple mathematical models.
+These applications 
+\longsidenote{An \emph{effective theory} is a scientific theory that is capable of making predictions, but without necessarily representing the physical causes.
+	For example, phonons as quasiparticles.}
+were either developed from first principles or as effective theories; but contained at their core, relatively simple mathematical models.
 For example, the dynamics of $n$-bodies gravitationally interacting are very complicated to solve, but it all spawn from two simple equations, Newton's second law of motion for an object of mass $m$: $\vec{F} = m \cdot \vec{a}$ and the force of gravity between two masses $m_1$ and $m_2$: $F_g=G\frac{m_1  m_2}{r^2}$.
 
 The advent of computers not only gave us mathematical muscle, but it also allowed to connect them to sensors;
@@ -38,8 +41,8 @@ Here are, in broad strokes, some of the main types that cover the majority of th
 
 \subsection{Do we have labels?}
 \begin{itemize}
-\item \emph{Unsupervised:} we do not have data with annotated target values. \emph{Ex: clustering of \DNA{} sequences, dimensionality reduction.}
-\item \emph{Supervised:} our training data has assigned labels, and we want to predict them to new data. \emph{Ex: protein secondary structure prediction, linear regression.}
+\item \emph{Unsupervised:} we do not have data with annotated target values. \emph{Examples: clustering of \DNA{} sequences, dimensionality reduction.}
+\item \emph{Supervised:} our training data has assigned labels, and we want to predict them to new data. \emph{Examples: protein secondary structure prediction, linear regression.}
 \end{itemize}
 
 The focus of this thesis will be on supervised tasks.
@@ -47,8 +50,8 @@ The focus of this thesis will be on supervised tasks.
 \subsection[Categorical or continuous?]{Are they categorical or continuous?}
 The supervised tasks can be again divided depending on the nature of the labels:
 \begin{itemize}
-\item \emph{Classification:} our labels are categorical variables. \emph{Ex: image recognition, automated transcription of speech, presence or absence of tumours, protein subcellular localisation.}
-\item \emph{Regression:} we are interested in the value of continuous variables. \emph{Ex: curve fitting, counting.}
+\item \emph{Classification:} our labels are categorical variables. \emph{Examples: image recognition, automated transcription of speech, presence or absence of tumours, protein subcellular localisation.}
+\item \emph{Regression:} we are interested in the value of continuous variables. \emph{Examples: curve fitting, counting.}
 \end{itemize}
 
 \section{The machine learning spectrum}
@@ -68,10 +71,11 @@ Domain knowledge can provide us with constraints -- for example, certain physica
 
 \section{Training and test sets}
 To train a supervised model, we need a set of labelled examples, called the \emph{training set},
-and a separate and independent set -- the test set -- to evaluate its performance.
+and a separate and independent set -- the \emph{test set} -- to evaluate its performance.
 \sidenote{The motivation for separated datasets}
 Why do we need a separate test set?
 It is easy to come up with rules that are perfectly accurate on the training set, but do not generalise well, a phenomenon called \emph{overfitting}.
+Thus, we will use the performance on the test set as an estimation of the performance on real-world data. 
 When presented with a collection of models, we will prefer the ones that have the best performance on the test set.
 
 \section{Evaluating predictions: figures of merit}
@@ -83,9 +87,11 @@ Here I will describe some of the most commonly used:
 The most obvious measure is the \emph{accuracy}, or the proportion of predictions that are correct.
 This is easy to implement and interpret, but it is of limited use on unbalanced datasets: when the number of positive and negative classes are very different.
 \sidenote{The problem with unbalance}
-For example, if 99\% of our data are negative examples, a model that always predicts the negative class has an accuracy of 99 \%, but it is useless in practice.
+For example, if 99\% of our data are negative examples, a model that \emph{always} predicts the negative class has an accuracy of 99 \%!
+Yet, it is useless in practice because it does not add any new information.
 
-In order to get \sidenote{Precision and recall} a more nuanced view we should consider the \emph{precision} -- the fraction of correctly predicted positive examples -- and \emph{recall} -- the fraction of positive examples correctly identified.
+In order to get  a more nuanced view we should consider the \emph{precision} -- the fraction of correctly predicted positive examples -- \sidenote{Precision and recall}
+and \emph{recall} -- the fraction of positive examples correctly identified.
 A combination \sidenote{$F_1$ score} of both is the $F_1$ score: the harmonic mean of precision and recall:
 
 \begin{equation*}
@@ -95,14 +101,15 @@ F_1 = \frac{2}{\frac{1}{precision} + \frac{1}{recall}}
 \subsection{Regression problems}
 When predicting a continuous variable, the simplest measure is the Mean Squared Error, or \MSE.
 Often, we want the measure to be in the same units as the input, so we take the square root.
-We may also be interested in the correlation between predicted -- $p$ -- and true -- $t$ -- which can be \sidenote{Correlations} expressed by the Pearson correlation R:
+\sidenote{Correlations}
+We may also be interested in the correlation between predicted -- $p$ -- and true -- $t$ -- which can be expressed by the Pearson correlation R:
 
 \begin{equation*}
 R = \frac{\sum_{i=1}^N (p_i - \bar{p}) (t_i - \bar t)}{\sqrt{\sum_{i=1}^N (p_i - \bar{p})^2} \sqrt{\sum_{i=1}^N(t_i - \bar t)^2}}
 \end{equation*}
 
-This measures the linear correlation between two variables, and can be affected by outliers. \sidenote{Spearman}
-An alternative is the Spearman correlation, which computes the Pearson R on the indexes.
+This measures the linear correlation between two variables, and can be affected by outliers or skewed distributions. \sidenote{Spearman}
+An alternative is the Spearman correlation, which computes the Pearson R on the indexes, thus measuring the correlation between rankings.
 
 \section[Traditional machine learning]{A point of comparison: traditional machine learning}
 In this section, I will give an overview of some of the most popular supervised machine learning algorithms to illustrate how they work, and the type of underlying assumptions they operate under.
@@ -118,13 +125,13 @@ For a matrix $ \widetilde X$ of observations and a vector of target $\vec y$, \O
 \end{equation*}
 where $d$ is the number of dimensions of the inputs, ie., the number of input features.
 
-This method is simple and can be solved efficiently by linear algebra libraries through, for example, an \textsc{lu}{} decomposition \footnote{A standard procedure to solve systems of equations, where the matrix $\widetilde{X}$ is factored into the product of a lower and an upper triangular matrices, without needing to explicitly invert the matrix. Then, the components of $\vec w$ can be obtained iteratively.}.
+This method is simple and can be solved efficiently by linear algebra libraries through, for example, an \textsc{lu}{} decomposition\footnote{A standard procedure to solve systems of equations, where the matrix $\widetilde{X}$ is factored into the product of a lower and an upper triangular matrices, without needing to explicitly invert the matrix. Then, the components of $\vec w$ can be obtained iteratively.}.
 But if there is co-linearity between input features, the matrix $ \widetilde X$ is close to singular, so its inverse can become numerically unstable.
 
 A simple solution \sidenote{Ridge} is to add a term that tends to shrink the coefficients of $\vec w$, and makes the solution unique even in the singular case:
 
 \[ L_{Ridge} = || \widetilde  X \vec w - \vec y ||_2 ^2 + \lambda ||\vec w||_2^2,\]
-where $\lambda$ regulates the strength of this shrinkage.
+where $\lambda$ is a number that regulates the strength of this shrinkage.
 Since the penalisation depends on the $L^2$ norm of the vector $w$, the weight of co-linear features will be ``distributed" amongst them.
 
 Sometimes, we want sparse weights, \sidenote{\LASSO} for example, if we know some features are irrelevant, but we do not know which ones.
@@ -147,7 +154,7 @@ some important vocabulary in machine learning:
 \end{itemize}
  
 \subsection{Logistic regression}\label{sec:logistic_regression}
-Logistic regression \sidenote{Linear models for classification} is an adaptation of linear models for classification.
+Logistic regression, despite its name, \sidenote{Linear models for classification} is an adaptation of linear models for classification.
 The output of the linear model is wrapped by a logistic function:
 
 \begin{equation*}
@@ -177,12 +184,13 @@ This is called the softmax function:
 If the logits are scaled up, the softmax will be more concentrated around the maximum, suggesting a more confident prediction.
 As before, we can apply $L^1$ or $L^2$ regularisations, which imply lower coefficients on $W$, ergo lower values for the logits.
 A stronger regularisation returns a less confident predictor, as shown in Figure~\ref{fig:logistic}.
-In particular, \ref{subfig:logistic_strong}, has a much narrower region of uncertain predictions. 
+In particular, \ref{subfig:logistic_strong}, has a much narrower region of uncertain predictions, hence it is more confident. 
 
 \begin{figure}
 	\centering
-	\subcaptionbox{Weak regularisation}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/logistic_3}}
-	\subcaptionbox{Strong regularisation\label{subfig:logistic_strong}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/logistic_1}}
+	\subcaptionbox{Weak regularisation}{\includegraphics[width=0.49\textwidth]{machine_learning/figures/logistic_3}}
+	\hfil
+	\subcaptionbox{Strong regularisation\label{subfig:logistic_strong}}{\includegraphics[width=0.49\textwidth]{machine_learning/figures/logistic_1}}
 	\caption{Classification of two species of Iris flowers according to the length and width of sepals using logistic regression.}\label{fig:logistic}
 \end{figure}
 
@@ -200,7 +208,7 @@ p(\vec x \in i) &= \sigma(\vec z)_i
 \end{align*}
 where the last line is only necessary for classification.
 
-Although we now have more free parameters -- the components of the matrices $W_1$ and $W_2$ -- the model is exactly equivalent to a linear model, since the two matrices $W_1$ and $W_2$ act right one after the other, so can be multiplied together to recover our equivalent weights.
+Although we now have more free parameters -- the components of the matrices $\widetilde W_1$ and $\widetilde W_2$ -- the model is exactly equivalent to a linear model, since the two matrices $\widetilde W_1$ and $\widetilde W_2$ act right one after the other, so can be multiplied together to recover the equivalent of our old matrix $\widetilde W$.
 This can be fixed by introducing an arbitrary non-linear function $f$ to the hidden layer:
 
 \begin{align*}
@@ -223,7 +231,7 @@ p(\vec x \in i) &= \sigma(\vec z)_i
 
 The training is done by computing the gradients of the loss -- the measure of how wrong our predictions are -- with respect to every parameter -- the matrix elements -- given a set of data, and updating the weights accordingly.
 We will discuss this in more detail in Section~\ref{sec:grad_descent}.
-While there is no theoretical limit to how many hidden layers can be added, but two is the practical limit.
+While there is no theoretical limit to how many hidden layers can be added, two is the practical limit.
 This is because adding layers degrades the gradient from the previous ones, making it harder to converge, as the information cannot reach the first layers.
 
 
@@ -235,34 +243,36 @@ Figure~\ref{fig:svm} illustrates an example of classifying two species from the 
 
 \begin{figure}
 \centering
-\subcaptionbox{Linear kernel}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/svm.pdf}}%
-\hfill
-\subcaptionbox{\RBF{} kernel\label{subfig:svm_rbf}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/svm_rbf.pdf}}%
+\subcaptionbox{Linear kernel}{\includegraphics[width=0.49\textwidth]{machine_learning/figures/svm.pdf}}%
+\hfil
+\subcaptionbox{\RBF{} kernel\label{subfig:svm_rbf}}{\includegraphics[width=0.49\textwidth]{machine_learning/figures/svm_rbf.pdf}}%
 \caption{Classification of two species of Iris flowers according to the length and width of sepals using Suport Vector Machines.}\label{fig:svm}
 \end{figure}
 
 It can be generalised to non-flat boundaries using the so-called \emph{kernel trick},
-where Euclidean distances  \sidenote{The kernel trick}
+where Euclidean distances \sidenote{The kernel trick}
 are replaced with an arbitrary measure of similarity given by positive-definite kernel function:
 \[||\vec{x}_1 - \vec{x}_2|| \rightarrow k(\vec{x}_1, \vec{x}_2)\]
 
-For example, in Figure~\ref{subfig:svm_rbf} we have used a Radial Basis Function:
+For example, in Figure~\ref{subfig:svm_rbf} we have used a Radial Basis Function (\RBF):
 
 \[k(\vec{x}_1, \vec{x}_2) = e^{-\gamma ||\vec{x}_1 - \vec{x}_2||^2 },\]
 which implicitly projects the data into an infinite-dimensional space.
 
+\longsidenote{A \emph{topological transformation} is a continuous deformation of the space, without introducing tears or breaks.}
 Another way of interpreting the kernel trick is to think of it as learning a topological transformation of the space that makes the data separable by the final hyperplane, a linear function.
 
 \subsection{\emph{k}-Nearest Neighbour}
 The Nearest Neighbour classifier takes the $k$ closest points in the training set and predicts the most common label.
 \sidenote{Bias-variance tradeoff}
 The choice of $k$ is a balance between noise and flexibility: smaller values give more distinct frontiers but are more susceptible to noise.
+See it illustrated in the Figure~\ref{fig:knn}.
 
 \begin{figure}[htb]
 	\centering
-	\subcaptionbox{Closest neighbour ($k=1$)}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/knn_1}}
-	\hfill
-	\subcaptionbox{Average of the five closest neighbours. ($k=5$)}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/knn_5}}
+	\subcaptionbox{Closest neighbour ($k=1$)}{\includegraphics[width=0.49\textwidth]{machine_learning/figures/knn_1}}
+	\hfil
+	\subcaptionbox{Average of the five closest neighbours. ($k=5$)}{\includegraphics[width=0.49\textwidth]{machine_learning/figures/knn_5}}
 	\caption{Classification of three species of Iris flowers according to the length and width of sepals using Nearest Neighbour.}\label{fig:knn}
 \end{figure}
 
@@ -280,19 +290,21 @@ The process is repeated until no more cuts can improve the performance, or until
 
 \begin{figure}[tb]
 	\subcaptionbox{Gini impurity as a function of the first split.
-	The ideal cut is selected.\label{subfig:gini}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/tree_split}}
-	\hfill
-	\subcaptionbox{Regions predicted by the tree.\label{subfig:tree}}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/tree_2d}}
+	The ideal cut is selected.\label{subfig:gini}}{\includegraphics[width=0.49\textwidth]{machine_learning/figures/tree_split}}
+	\hfil
+	\subcaptionbox{Regions predicted by the tree.\label{subfig:tree}}{\includegraphics[width=0.49\textwidth]{machine_learning/figures/tree_2d}}
 	\caption{Classifications made by a decision tree on the Iris species dataset.}\label{fig:tree}
 \end{figure}
 
-\newgeometry{outer=10mm, inner=10mm}
+
 \begin{figure}[tb] %[p]age of floats
+	\newgeometry{outer=10mm, inner=10mm}
 	\centering
 	%\includegraphics[width=1.2\textwidth]{machine_learning/figures/tree}
 	%\makebox[\paperwidth][l]{\includegraphics[width=1.2\textwidth]{machine_learning/figures/tree}}
 	%\includegraphics[width=1.2\textwidth, center]{machine_learning/figures/tree}
 	%\fcolorbox{black}{red}{
+	\hspace{-15mm} %
 	\includegraphics[trim={24mm, 33mm, 5mm, 14mm}, clip, width=1.\textwidth]{machine_learning/figures/tree}
 	%}
 	\restoregeometry
@@ -318,9 +330,9 @@ A Gaussian Process (\GP) takes as an input a set of data points $(x, y)$ that ar
 
 \begin{figure}[htb]
 	\centering
-	\subcaptionbox{Complete data}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/sin_toy}}
-	\hfill
-	\subcaptionbox{Gapped data.}{\includegraphics[width=0.45\textwidth]{machine_learning/figures/sin_toy_gapped}}
+	\subcaptionbox{Complete data}{\includegraphics[width=0.49\textwidth]{machine_learning/figures/sin_toy}}
+	\hfil
+	\subcaptionbox{Gapped data.}{\includegraphics[width=0.49\textwidth]{machine_learning/figures/sin_toy_gapped}}
 	\caption{Reconstruction of the $\sin$ function using Gaussian Processes.
 	Note the larger uncertainty when there is a gap in the training set.}\label{fig:gp_toy}
 \end{figure}
@@ -357,7 +369,7 @@ Thus, we can use them to sample likely candidates for the latent function, as sh
 \subsection{Isotonic regression}
 Isotonic regression minimises the squared errors of a function that is piecewise constant, and non-decreasing.
 Given enough data points, it can fit arbitrarily complex curves, as long as they are monotonous.
-This method is particularly useful in calibration to turn predicted scores into actual probabilities.
+This method is particularly useful in calibration to turn predicted scores into actual probabilities, as shown in the Figure~\ref{fig:isotonic}.
 
 \begin{figure}[hbt]
 	\centering

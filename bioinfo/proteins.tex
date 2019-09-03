@@ -1,19 +1,17 @@
 \chapter{Proteins}
 \section[What are proteins?]{What are proteins and why do we care?}
-\lettrine[lines=3, lhang=0.25,  nindent=0em, findent=2pt]{\color{Maroon}P}{roteins are\ }
+\lettrine[lines=3, lhang=0.2,  nindent=0em, findent=2pt]{\color{Maroon}P}{roteins are\ }
 the fundamental machines in biology, performing tasks such as catalysis, transporting molecules, and providing the structural backbone of the cell.
 They have crucial roles in the biochemical pathways, so understanding them can lead us to create new and refined drugs or bio-engineered organisms.
 
 %In this chapter I will present the basic vocabulary of protein structures, and give an overview of their biochemistry.
 
 But, how are they created?
-The information \sidenote{Protein biosynthesis}
-used by the cell to build proteins is encoded in the \DNA.
+The information used by the cell to build proteins is encoded in the \DNA. \sidenote{Protein biosynthesis}
 When the biosynthesis begins, the double helix unfolds, and the genetic contact is translated into \RNA{}.
 This new molecule is then transported to the ribosome, the machinery that translates the \RNA{} into functional proteins.
 
-The \DNA{} is in itself a polymer of four blocks: the bases A, T, G, and C,
-\sidenote{Translation}
+The \DNA{} is in itself a polymer of four blocks: the bases \textsc{a, t, g,} and \textsc{c}, \sidenote{Translation}
 grouped in non-overlapping triplets called \emph{codons}.
 A protein is encoded between a start (usually \textsc{atg}) and a stop (\textsc{tag}, \textsc{tga}, and \textsc{taa}) codons, while each of the codons in between codifies for one amino acid.
 
@@ -22,12 +20,12 @@ Proteins are polymers, long chains of amino acids, structured at several levels,
 In this section, I will present the main descriptions of proteins at different scopes.
 
 \subsection{The amino acids}
-Amino acids are the building blocks of proteins.
+Amino acids are the building blocks of proteins. \sidenote{Only a few of all amino acids appear in the \DNA.}
 They are composed of a carboxyl (-$COOH$) and an amine (-$NH_2$) groups, forming the backbone, and a side-chain.
 Two examples are illustrated in Figure~\ref{fig:amino_acids}.
-\sidenote{Only a few of all amino acids appear in the \DNA.}
 \DNA{} usually codifies up to twenty different species, but at least 500 are known to occur naturally \citep{500_amino_acids}.
-The differences between most of them are only on the side chain\footnote{The amino acid proline's side-chain has a ring connecting with the amine in the backbone.}.
+\longsidenote{The amino acid proline is an exception: side-chain has a ring connecting with the amine in the backbone.}
+The differences between most of them are only on the side chain.
 
 The side chains are the group responsible for the specific physico-chemical properties of the compound, such as hydrophobicity, pH, or electrostatic charge.
 
@@ -55,7 +53,8 @@ The \textcolor{Maroon}{maroon}, solid rectangle indicates the backbone, common t
 
 \subsection{Primary structure or sequence}
 The amino acids can connect to each other through the peptide bond, forming a chain.
-The \emph{primary structure} is the sequence of amino acids as encoded in the \DNA:
+The \emph{primary structure} is the sequence of amino acids as encoded in the \DNA.
+For example:
 \begin{center}
 \texttt{ALA ARG ILE ASN GLY ARG GLU ILE ASN VAL THR LYS LYS}
 \end{center}
@@ -108,11 +107,12 @@ The relative arrangement of each chain is the quaternary structure.
 
 Experiments by \citet{fold_graciously} show that proteins placed in the right medium of pH and temperature will unfold into a random coil, with no trace of tertiary nor secondary structure.
 When restored to physiological conditions, they will refold into its natural shape, recovering its original biological and chemical properties.
-As long as the protein is chemically unaltered, it will recover the tertiary structure independently of the folding machinery of the cell.
 \sidenote{Dogmas that govern protein folding}
+As long as the protein is chemically unaltered, it will recover the tertiary structure independently of the folding machinery of the cell.
 This was codified as Anfinsen's dogma: under physiological conditions, the primary structure of globular proteins determines the secondary and tertiary structures, and thus, its function, independently of the cell's machinery \citep{Anfinsen_dogma}.
-Typically, the fully folded state is reached in the order of milliseconds to seconds.
-The hypothesis has a few exceptions, namely: fibrous proteins, prions -- which are proteins that have an alternative but non-functional stable tertiary structure\footnote{Infamous cause of the mad cows disease.} --  aggregating proteins -- where the individual proteins bind to each other forming large and non-functional structures\footnote{For example, the cause of Alzheimer and Multiple Sclerosis} -- and large, multi-domain proteins.
+Typically, the fully folded state is reached in the order of milliseconds to seconds. \longsidenote{The most infamous case is the mad cows disease.}
+The hypothesis has a few exceptions, namely: fibrous proteins, prions  -- which are proteins that have an alternative but non-functional stable tertiary structure 
+ --  aggregating proteins \longsidenote{Both Alzheimer and Multiple Sclerosis are caused by aggregating proteins.} -- where the individual proteins bind to each other forming large and non-functional structures -- and large, multi-domain proteins.
 A reasonable hypothesis is that a priori, the native conformation seems to be the state in the lowest energy, and the random coil is just rolling down the energy landscape.
 
 Cyrus Levinthal \sidenote{Levinthal's paradox} noted that, for every amino acid, a protein has two main degrees of freedom corresponding to the torsion of the backbone, plus one more for the rotation of the side chain.
@@ -187,7 +187,7 @@ In practice, this is not a significant problem because the deviations from the i
 From here we can see that most of the dynamics in proteins is given by the flexibility of the torsion angles.
 Roughly speaking the torsions of the backbone determine the secondary structure and those of the side chains, the packing.
 
-The final thermodynamical component is the entropy, \sidenote{Entropy} which measures the number of accessible states.
+The final thermodynamical component is the entropy, which measures the number of accessible states. \sidenote{Entropy} 
 An important contribution comes from the interaction between water and hydrophobic areas.
 In the presence of a hydrophobic surface, water has to reorient to preserve the hydrogen bonds -- they are very energetically favourable, around \SI{5}{kcal/mol}, so there is a high cost to its breakage.
 This puts a constraint to their orientation, partially freezing them around the surface, which reduces their entropy.
@@ -199,9 +199,7 @@ How can we know the structure of a protein?
 The most commonly used methods are X-ray crystallography and \NMR{} spectroscopy.
 
 
-X-ray crystallography starts by
-\sidenote{X-ray}
-purifying and crystallising the protein, and observing the diffraction pattern of an X-ray beam.
+X-ray crystallography starts by purifying and crystallising the protein, and observing the diffraction pattern of an X-ray beam. \sidenote{X-ray}
 The X-rays interact with the protein, diffract, and form a pattern of dots that is proportional to the intensity of the Fourier transform of the electron density.
 By taking the inverse transformation, the crystallographers can reconstruct the electron density, and then fit an atomic model.
 The X-ray detector -- a photographic plate or a \CCD{} sensor -- can only measure intensities, not phase information.
@@ -229,7 +227,7 @@ p(x) \propto e^{-\frac{H(x)}{k_B T}}
 
 So, when we have a sample with different conformations of the same protein, counting the number of images that correspond to each state gives us a measure of the difference of energies between the two states.
 
-The development of Cryo-EM was recognised in 2017 with the award of the Nobel Prize in Chemistry \emph{``for developing cryo-electron microscopy for the high-resolution structure determination of biomolecules in solution"} to Jacques Dubochet, Joachim Frank, and Richard Henderson  \citep{cryoEM_nobel}.
+The development of Cryo-\EM{} was recognised in 2017 with the award of the Nobel Prize \sidenote{The Nobel Prize} in Chemistry \emph{``for developing cryo-electron microscopy for the high-resolution structure determination of biomolecules in solution"} to Jacques Dubochet, Joachim Frank, and Richard Henderson  \citep{cryoEM_nobel}.
 
 
 \subsection{Partial restraints}
@@ -247,7 +245,7 @@ In particular, hydrogen has one of the largest cross-sections.
 One application is the study of membrane proteins in an appropriately chosen detergent, which can be almost invisible to the neutron beam.
 More information on both methods can be found in the work of~\citet{sax}
 
-Mass-spectrometry cross-linking \citep{cross_linking} \sidenote{Cross-linking} can be used to measure distances within proteins.
+Mass-spectrometry cross-linking \citep{cross_linking} can be used to measure distances within proteins. \sidenote{Cross-linking}
 The protein is mixed with a reagent that connects to specific functional groups of amino acid side chains.
 Then, an enzyme is added that cleaves the protein, and the fragments are sent to a liquid chromatography tandem mass spectrometer that analyses the composition of each fragment.
 The linkers keep the fragments split by the digestion together, from which we can infer they were in contact.

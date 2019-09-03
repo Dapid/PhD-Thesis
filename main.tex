@@ -40,14 +40,12 @@
 \usepackage[eulerchapternumbers=true, eulermath=true, parts=true, floatperchapter]{classicthesis}
 \usepackage[paperwidth=165mm, paperheight=242mm, outer=40mm, inner=20mm, marginparwidth=25mm, top=20mm]{geometry}
 %\usepackage[paperwidth=165mm, paperheight=242mm]{geometry}
-
 %\usepackage{Baskervaldx}
 %\usepackage[p,osf]{baskervillef}
 
-
-\ifLuaTeX
+%\ifLuaTeX
 %	\setmathfont[Scale=MatchUppercase]{Asana Math}
-\fi
+%\fi
 
 %\usepackage[backend=biber, style=mla, natbib=True]{biblatex}
 %\addbibresource{references.bib}
@@ -55,6 +53,8 @@
 \bibliographystyle{abbrvnat}
 \usepackage{bibentry}
 \nobibliography*
+
+\usepackage{enumitem}
 
 \usepackage{xpatch} %Adjust the spacing in smallcaps
 \xapptocmd{\scshape}{\spaceskip=2\fontdimen2\font plus 2\fontdimen3\font minus \fontdimen4\font	\xspaceskip=0\fontdimen7\font}{}{}

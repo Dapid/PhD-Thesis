@@ -43,19 +43,19 @@ This section explains how to build it.
 
 \subsection{Pairwise alignment}
 The building block of an \MSA{} is the alignment of each related sequence to our query, and the first step is to measure how similar they are.
-The most basic scheme simply counts the number of matching amino acids, assigning a positive score for matches, and a penalty for mismatches.
+The most basic scheme simply counts the number of matching amino acids, assigning a positive score for matches, and a penalty for mismatches. 
 
-Proteins \sidenote{The reason for gaps} have insertions and deletions, which means the matching regions in different proteins may be discontinuous.
+Proteins have insertions and deletions, which means the matching regions in different proteins may be discontinuous.  \sidenote{The reason for gaps}
 We can allow for gaps in the scores including a term that considers both opening -- our belief of how common insertions and deletions are -- and extending the gap -- considering our expectation of their length.
 
 Furthermore, not all mismatches are the same.
 For example, leucine (L) and isoleucine (I) are functionally very similar, and can often be replaced without loss of function.
 On the other hand, a single mutation from glutamic acid (E) to valine (V), in humans is enough to cause sickle cell anaemia.
 
-Nor are all matches.
+Neither are all matches alike.
 Alanine (A) forms over $7\%$ of the proteome, so we are more likely to find a hit at random than with tryptophan (W), which forms less than $2\%$.
 
-We can codify \sidenote{Substitution matrix} the difference between different amino acids in a substitution matrix.
+We can codify the difference between different amino acids in a substitution matrix. \sidenote{Substitution matrix}
 The most common choice to detect distantly related proteins is the \textsc{blosum} family.
 \citet{blosum} derived them from a set of 500 multiple sequence alignments.
 
@@ -125,6 +125,7 @@ When a good hit is found, this is the most accurate and reliable modelling strat
 
 \subsection{\emph{Ab-initio} folding}
 In the absence of available templates, we can use \emph{ab-initio} or \emph{template-free} methods, in which we try to find the minimum energy of the system, including additional terms derived from predictors.
+The two most widely-used programs are Rosetta and \CONFOLD.
 
 Rosetta's \citep{Rosetta3} \sidenote{Rosetta} \emph{ab initio} protocol implements a simulated annealing scheme that starts with an extended chain and randomly replaces fragments with ones derived from the \PDB.
 Since the fragments are taken from real proteins, the models tend to have good chemical properties, even when completely wrong.
@@ -134,14 +135,13 @@ In order to speed up and improve convergence, we can add additional energy terms
 It is build upon \CNS, and works by transforming contacts and secondary structure to a large set of distance restraints between atoms.
 Then, it runs a geometric solver, followed by a fast relaxation.
 This method is much faster than Rosetta, but since it lacks the chemical information of the fragments, it does not work well on regions without contacts.
+%This program was used in Paper \textcolor{Maroon}{II}.
 
 
 \subsection{Evaluation}
 Once we have a model, how can we compare it with the native structure? How can we measure how accurate it is?
 
-One option is to superimpose model 
-\sidenote{Superposition}
-in such a way that the metric is optimised.
+One option is to superimpose model in such a way that the metric is optimised. \sidenote{Superposition}
 Given two structures with $L$ residues in common, and being $d_i$ the distance between the $i-$th residues of both structures, we define the distances as:
 
 \RMSD, or the Root Mean Squared Deviation:
@@ -149,7 +149,7 @@ Given two structures with $L$ residues in common, and being $d_i$ the distance b
 \RMSD = \min \left(\sqrt{\frac{\sum_{i=1}^L d_i^2}{L}}\right),
 \end{equation*}
 
-The \Ss-score (Superposition score) is:
+The S-score (Superposition score) is:
 \begin{equation*}
 S = \max\left[\frac{1}{L} \sum_{i=1}^L \frac{1}{1 + \left(\frac{d_i}{d_0}\right)^2}\right],
 \end{equation*}
@@ -167,7 +167,7 @@ The superposition scores would align one of the subunits, with perfect scoring, 
 A solution is to compare structures locally. 
 \LDDT{} (Local Distance Difference Test) \citep{lddt} \sidenote{\LDDT}
 measures, for every atom, the fraction of preserved  distances, up to a given tolerance, within an inclusion radius.
-\LDDT{} considers all inter-atomic distances that are within $\SI{0.5}{\angstrom}$, $\SI{1}{\angstrom}$, $\SI{2}{\angstrom}$, and $\SI{4}{\angstrom}$.
+\LDDT{} considers all inter-atomic distances that are within 0.5 $\SI{}{\angstrom}$, 1 $\SI{}{\angstrom}$, 2 $\SI{}{\angstrom}$, and 4 $\SI{}{\angstrom}$.
 The final scores is obtained averaging over all the atoms in the residue and inclusion thresholds.
 
 \citet{cad} proposed a similar method, using surface contacts instead of distances. \sidenote{\CAD}
@@ -191,7 +191,7 @@ The purpose of \MQA{} is two-fold:
 Some applications may require high-quality models, while for others, knowing the right fold is sufficient.
 \end{itemize}
 
-In principle, \sidenote{Energy-based \MQA?} we could compute the energy of each model, assuming that the lower the energy, the closer we are to our target.
+In principle, we could compute the energy of each model, assuming that the lower the energy, the closer we are to our target.  \sidenote{Energy-based \MQA?} 
 This has two flaws: it does not provide information about \emph{how far} -- since in principle we do not know the energy of the native state -- and it is not a reliable way of comparing models from different methods -- because energy functions are very sensitive to small details.
 Consider the case of a perfect model, except for two atoms that are in the same position.
 The scores presented on the previous section would all be close to 1, but the energy would be infinite!

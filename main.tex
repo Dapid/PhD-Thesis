@@ -89,12 +89,8 @@
 \input{acronyms}
 
 
-
 \newcommand{\sidenote}[1]{\marginpar{\normalsize #1}}
 \newcommand{\longsidenote}[1]{\marginpar{\footnotesize #1}}
-
-
-
 
 
 \begin{document}
@@ -119,12 +115,13 @@
 { %\small
 	\large
 	 \tableofcontents}
-\KOMAoptions{open=right}
 
+\KOMAoptions{open=left}
 \setlist{leftmargin=15mm}
 \include{intro/intro}
 \setlist{leftmargin=0mm}
 
+\KOMAoptions{open=right}
 \mainmatter 
 
 \part{The informatics} \label{part:info}

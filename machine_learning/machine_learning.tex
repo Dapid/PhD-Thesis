@@ -56,7 +56,7 @@ The supervised tasks can be again divided depending on the nature of the labels:
 
 \section{The machine learning spectrum}
 We can design machine learning models with different degrees of restrictions, or parametric assumptions.
-A more restricted model needs less data to converge, and its performance will not be hindered if the underlying assumptions are correct.
+A more restricted model needs less data to converge, and if the underlying assumptions are correct, they will not hinder its performance.
 On the other hand, if these restrictions are not accurate, the model will be biased and its performance, limited.
 
 If we instead relax the parametric assumptions we obtain a more flexible model, capable of tackling more complex problems.
@@ -67,7 +67,7 @@ Can we take it to the extreme?
 Can we train a model completely free  of assumptions in the case of infinite data? The No Free Lunch Theorem \citep{no_free_lunch} says, averaging over all problems, all algorithms are equally good.
 In other words, without inputting domain knowledge that restricts the space of possibilities, we cannot do better than random.
 For a given training dataset, an infinite number of models can fit it equally well, while giving completely different answers for any point outside of that.
-Domain knowledge can provide us with constraints -- for example, certain physical models must be continuous -- and give us a measure of simplicity -- all else being equal, Ockam's razor would point at the simplest one.
+Domain knowledge can provide us with constraints -- for example, certain physical models must be continuous -- or point at the relevant inputs -- weather prediction would depend on temperature, but not on the day of the week -- and give us a measure of simplicity -- for models of equal quality, Ockam's razor would slash away the more complex ones.
 
 \section{Training and test sets}
 To train a supervised model, we need a set of labelled examples, called the \emph{training set},
@@ -92,6 +92,12 @@ Yet, it is useless in practice because it does not add any new information.
 
 In order to get  a more nuanced view we should consider the \emph{precision} -- the fraction of correctly predicted positive examples -- \sidenote{Precision and recall}
 and \emph{recall} -- the fraction of positive examples correctly identified.
+
+\begin{align*}
+precision &= \frac{\mathrm{True\ Positives}}{\mathrm{Predicted\ Positives}}\\
+recall &= \frac{\mathrm{True\ Positives}}{\mathrm{All\ Positives}}
+\end{align*}
+
 A combination \sidenote{$F_1$ score} of both is the $F_1$ score: the harmonic mean of precision and recall:
 
 \begin{equation*}

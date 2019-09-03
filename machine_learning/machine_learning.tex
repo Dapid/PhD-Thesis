@@ -87,7 +87,7 @@ Here I will describe some of the most commonly used:
 The most obvious measure is the \emph{accuracy}, or the proportion of predictions that are correct.
 This is easy to implement and interpret, but it is of limited use on unbalanced datasets: when the number of positive and negative classes are very different.
 \sidenote{The problem with unbalance}
-For example, if 99\% of our data are negative examples, a model that \emph{always} predicts the negative class has an accuracy of 99 \%!
+For example, if 99\% of our data are negative examples, a model that \emph{always} predicts the negative class has an accuracy of 99\%!
 Yet, it is useless in practice because it does not add any new information.
 
 In order to get  a more nuanced view we should consider the \emph{precision} -- the fraction of correctly predicted positive examples -- \sidenote{Precision and recall}
@@ -311,8 +311,8 @@ The process is repeated until no more cuts can improve the performance, or until
 	%\includegraphics[width=1.2\textwidth, center]{machine_learning/figures/tree}
 	%\fcolorbox{black}{red}{
 	\hspace{-15mm} %
-	\includegraphics[trim={24mm, 33mm, 5mm, 14mm}, clip, width=1.\textwidth]{machine_learning/figures/tree}
-	%}
+	\includegraphics[trim={10mm, 20mm, 15mm, 23mm}, clip, width=1.\textwidth]{machine_learning/figures/tree}
+%	}
 	\restoregeometry
 	\caption{The rules of a decision tree are interpretable.
 	The saturation of the background corresponds to the purity of the node.
@@ -389,14 +389,26 @@ This method is particularly useful in calibration to turn predicted scores into 
 
 
 \section{On the wrongness of machine learning}\label{sec:wrong}
-The results of machine learning can be impressive and may lead to think too much of them.
-But in their power lies their weakness: they can blindly extract a signal from the training data without humans needing to guide it, but that means they are incapable of reasoning.
+The results of machine learning can be impressive, which explains the general excitement surrounding any possible application.
+Their strength is that they are able to extract a signal from data without needing human guidance, but there lies their weakness: machine learning algorithms are incapable of reasoning.
 Since they lack a mechanistic model, they can find correlations, but not causations.
+That is, they can answer the \emph{what}, but cannot say \emph{why}.
 
-Furthermore, they are vulnerable to outliers.
-Training a machine learning model means finding the set of parameters that ``best" fit the training points, but we have no constraints outside of that.
+Furthermore, they cannot extrapolate.
+Training a machine learning model means finding the set of parameters that ``best" fit the training points,  but we have no constraints outside of that region.
 If we were to feed it input data that are sufficiently far away from what was used to train, our outputs will be, essentially, unconstrained.
-A machine learning model is a mathematical function, which means it will always give us an answer, but in general, and unlike a human, it lacks the capability of murmuring \emph{``that is strange..."}.
+For example, rare diseases are a problem for Artificial Intelligence in healthcare.
+Since they are rare, they do not have many training examples, and even less when several rare conditions appear on the same patient.
 
-In general, a machine learning model can only get to be as good as the data it was used to train it, and will always incorporate all of its biases and limitations.
+Moreover, input data can, on occasions, be wrong, but the machine will accept it unless it has explicitly been trained to recognise these failure modes.
+In general, a machine learning model can only get to be as good as the data it was used to train it, and the data it is being fed on, and will always incorporate all of its biases and limitations.
 
+%A machine learning model is a mathematical function, which means it will always give us an answer, but in general, and unlike a human, it lacks the capability of murmuring \emph{``that is strange..."}.
+
+Attempts at mitigate these problems gave rise to explainable machine learning models, where the reasoning can be studied by a human.
+In general, these models are either limited in their expressibility, or their interpretability is hardly related to the way humans reason (see Figure~\ref{subfig:tree_explained}).
+But yet, unexplainable models are often more accurate, and good enough when the cost of errors is tolerable, or there are alternative safeguards in place.
+
+\longsidenote{Isaac Asimov already pointed at this problem in 1989 in his short story \emph{Alexander the God}, where a computer fails to take into account the effects of its own actions. The story can be found in \citep{gold}.}
+One of the last frontiers of machine learning is dealing with the situations when they are so widely used that their decisions directly affects the landscape on which they act, such as high-frequency trading or recommending systems.
+% TODO: Netflix?

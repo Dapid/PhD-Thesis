@@ -191,6 +191,7 @@ class _BaseTreeExporter(object):
                 alpha = 0
             else:
                 alpha = ((sorted_values[0] - sorted_values[1]) / (1 - sorted_values[1])) ** 3
+                alpha *= 0.8
                 print('alpha = ', alpha)
         else:
             # Regression tree or multi-output
@@ -227,6 +228,7 @@ class _BaseTreeExporter(object):
         else:
             # If multi-output color node by impurity
             node_val = -tree.impurity[node_id]
+        #print('-#-#->', node_val)
         return self.get_color(node_val)
 
     def node_to_str(self, tree, node_id, criterion):
@@ -605,15 +607,15 @@ class _MPLTreeExporter(_BaseTreeExporter):
         # need to copy bbox args because matplotib <1.5 modifies them
         kwargs = dict(bbox=self.bbox_args.copy(), ha='center', va='center',
                       zorder=100 - 10 * depth, xycoords='axes pixels')
-        print('scale x--->', scale_x, '<----')
-        print('scale y---->', scale_y ,'<-----')
+        #print('scale x--->', scale_x, '<----')
+        #print('scale y---->', scale_y ,'<-----')
         scale_x = 120
         scale_y = 100
         if self.fontsize is not None:
             kwargs['fontsize'] = self.fontsize
 
         # offset things by .5 to center them in plot
-        print('((((((', node.x, node.y, ')))))))')
+        #print('((((((', node.x, node.y, ')))))))')
         #if node.parent is None:
         node.y += 1
         xy = ((node.x + .5) * scale_x, height - (node.y + .5) * scale_y)

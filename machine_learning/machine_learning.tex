@@ -1,9 +1,9 @@
 \chapter{Machine learning}
 %\section{What is machine learning?}
-\lettrine[lines=3, lhang=0.25, nindent=0em]{\color{Maroon}T}{he Scientific Revolution}
+\lettrine[lines=3, lhang=0.2, nindent=0em]{\color{Maroon}T}{he Scientific Revolution}
 during the Renaissance 
 was fuelled by the realisation that Nature can be parametrised using only a handful of equations.
-\marginpar{A historical note}
+\sidenote{A historical note}
 With these tools and sufficient measurements, natural philosophers could use the universal equations to fully model the mechanical universe.
 In the words of \citet{carranza}: \emph{{``The arts that belong to the common use of mankind have a generality link because Nature is mother of all things, and common to all"}}.
 
@@ -16,19 +16,19 @@ For example, the dynamics of $n$-bodies gravitationally interacting are very com
 
 The advent of computers not only gave us mathematical muscle, but it also allowed to connect them to sensors;
 providing us with large amounts of data about the real world.
-\marginpar{How do computers fit in?}
+\sidenote{How do computers fit in?}
 Data that can be used to fit statistical models, even in the absence of underlying mathematical theories, such as recognising objects in images, identifying where in the cell a protein is going to end up, or translating natural language.
 The Scientific Revolution of the 16th century brought the concept \emph{``if it can be measured, it can be modelled"}, but the Data Revolution of the 20th century expanded it \emph{``if it can be \emph{represented}, it can be modelled"}.
 We went from measuring the variables present in our equations to represent the world in numbers on a computer.
 
 %This opens new oportunities to tackle and explore anything we 
 
-Machine learning is the study of statistical models that can create inferences from collections of examples. \marginpar{Definition of machine learning}
+Machine learning is the study of statistical models that can create inferences from collections of examples. \sidenote{Definition of machine learning}
 In other words, a machine learning model is capable of producing generalised rules from a set of particular cases, an example of induction.
 The models can be as concrete as relating the voltage and measured current intensity in a circuit, as complex as relating the sensory input of a rocket with its control, or as abstract as mapping natural images to the text describing its contents.
 
 Instead of designing algorithms that simulate reality from first principles, that can be insurmountably complex and time-consuming; a machine learning model uses data: the algorithm depends on a series of free parameters that are deduced from examples.
-\marginpar{The costs}
+\sidenote{The costs}
 This flexibility comes with a price: the programmer has relinquished the control to the dataset, and sacrificed the possibility of a mechanistic interpretation.
 More on this in Section~\ref{sec:wrong}.
 
@@ -60,7 +60,7 @@ If we instead relax the parametric assumptions we obtain a more flexible model, 
 But this versatility comes with a cost: they require more data to train.
 
 Can we take it to the extreme?
-\marginpar{A theoretical result} 
+\sidenote{A theoretical result} 
 Can we train a model completely free  of assumptions in the case of infinite data? The No Free Lunch Theorem \citep{no_free_lunch} says, averaging over all problems, all algorithms are equally good.
 In other words, without inputting domain knowledge that restricts the space of possibilities, we cannot do better than random.
 For a given training dataset, an infinite number of models can fit it equally well, while giving completely different answers for any point outside of that.
@@ -69,7 +69,7 @@ Domain knowledge can provide us with constraints -- for example, certain physica
 \section{Training and test sets}
 To train a supervised model, we need a set of labelled examples, called the \emph{training set},
 and a separate and independent set -- the test set -- to evaluate its performance.
-\marginpar{The motivation for separated datasets}
+\sidenote{The motivation for separated datasets}
 Why do we need a separate test set?
 It is easy to come up with rules that are perfectly accurate on the training set, but do not generalise well, a phenomenon called \emph{overfitting}.
 When presented with a collection of models, we will prefer the ones that have the best performance on the test set.
@@ -82,11 +82,11 @@ Here I will describe some of the most commonly used:
 \subsection{Classification problems}
 The most obvious measure is the \emph{accuracy}, or the proportion of predictions that are correct.
 This is easy to implement and interpret, but it is of limited use on unbalanced datasets: when the number of positive and negative classes are very different.
-\marginpar{The problem with unbalance}
+\sidenote{The problem with unbalance}
 For example, if 99\% of our data are negative examples, a model that always predicts the negative class has an accuracy of 99 \%, but it is useless in practice.
 
-In order to get \marginpar{Precision and recall} a more nuanced view we should consider the \emph{precision} -- the fraction of correctly predicted positive examples -- and \emph{recall} -- the fraction of positive examples correctly identified.
-A combination \marginpar{$F_1$ score} of both is the $F_1$ score: the harmonic mean of precision and recall:
+In order to get \sidenote{Precision and recall} a more nuanced view we should consider the \emph{precision} -- the fraction of correctly predicted positive examples -- and \emph{recall} -- the fraction of positive examples correctly identified.
+A combination \sidenote{$F_1$ score} of both is the $F_1$ score: the harmonic mean of precision and recall:
 
 \begin{equation*}
 F_1 = \frac{2}{\frac{1}{precision} + \frac{1}{recall}}
@@ -95,13 +95,13 @@ F_1 = \frac{2}{\frac{1}{precision} + \frac{1}{recall}}
 \subsection{Regression problems}
 When predicting a continuous variable, the simplest measure is the Mean Squared Error, or \MSE.
 Often, we want the measure to be in the same units as the input, so we take the square root.
-We may also be interested in the correlation between predicted -- $p$ -- and true -- $t$ -- which can be \marginpar{Correlations} expressed by the Pearson correlation R:
+We may also be interested in the correlation between predicted -- $p$ -- and true -- $t$ -- which can be \sidenote{Correlations} expressed by the Pearson correlation R:
 
 \begin{equation*}
 R = \frac{\sum_{i=1}^N (p_i - \bar{p}) (t_i - \bar t)}{\sqrt{\sum_{i=1}^N (p_i - \bar{p})^2} \sqrt{\sum_{i=1}^N(t_i - \bar t)^2}}
 \end{equation*}
 
-This measures the linear correlation between two variables, and can be affected by outliers. \marginpar{Spearman}
+This measures the linear correlation between two variables, and can be affected by outliers. \sidenote{Spearman}
 An alternative is the Spearman correlation, which computes the Pearson R on the indexes.
 
 \section[Traditional machine learning]{A point of comparison: traditional machine learning}
@@ -118,16 +118,16 @@ For a matrix $ \widetilde X$ of observations and a vector of target $\vec y$, \O
 \end{equation*}
 where $d$ is the number of dimensions of the inputs, ie., the number of input features.
 
-This method is simple and can be solved efficiently by linear algebra libraries through, for example, an \textsc{lu}{} decomposition\footnote{A standard procedure to solve systems of equations, where the matrix $\widetilde{X}$ is factored into the product of a lower and an upper triangular matrices, without needing to explicitly invert the matrix. Then, the components of $\vec w$ can be obtained iteratively.}.
+This method is simple and can be solved efficiently by linear algebra libraries through, for example, an \textsc{lu}{} decomposition \footnote{A standard procedure to solve systems of equations, where the matrix $\widetilde{X}$ is factored into the product of a lower and an upper triangular matrices, without needing to explicitly invert the matrix. Then, the components of $\vec w$ can be obtained iteratively.}.
 But if there is co-linearity between input features, the matrix $ \widetilde X$ is close to singular, so its inverse can become numerically unstable.
 
-A simple solution \marginpar{Ridge} is to add a term that tends to shrink the coefficients of $\vec w$, and makes the solution unique even in the singular case:
+A simple solution \sidenote{Ridge} is to add a term that tends to shrink the coefficients of $\vec w$, and makes the solution unique even in the singular case:
 
 \[ L_{Ridge} = || \widetilde  X \vec w - \vec y ||_2 ^2 + \lambda ||\vec w||_2^2,\]
 where $\lambda$ regulates the strength of this shrinkage.
 Since the penalisation depends on the $L^2$ norm of the vector $w$, the weight of co-linear features will be ``distributed" amongst them.
 
-Sometimes, we want sparse weights, \marginpar{\LASSO} for example, if we know some features are irrelevant, but we do not know which ones.
+Sometimes, we want sparse weights, \sidenote{\LASSO} for example, if we know some features are irrelevant, but we do not know which ones.
 We can then use $L^1$ regularisation:
 
 \[ L_{\LASSO} = || \widetilde X \vec w - \vec y ||_2 ^2 + \alpha ||\vec w||_1^2,\]
@@ -136,7 +136,7 @@ The higher it is, the more weights will be close to $0$.
 
 %LASSO cannot be solved analytically, so we need to use iterative methods.
 This is a good point to introduce
-\marginpar{Parameters and hyperparameters}
+\sidenote{Parameters and hyperparameters}
 some important vocabulary in machine learning:
 
 \begin{itemize}
@@ -147,7 +147,7 @@ some important vocabulary in machine learning:
 \end{itemize}
  
 \subsection{Logistic regression}\label{sec:logistic_regression}
-Logistic regression \marginpar{Linear models for classification} is an adaptation of linear models for classification.
+Logistic regression \sidenote{Linear models for classification} is an adaptation of linear models for classification.
 The output of the linear model is wrapped by a logistic function:
 
 \begin{equation*}
@@ -167,7 +167,7 @@ Each class has one linear model given by the vector of weights $\left\{\vec w_i 
 where $\widetilde W$ is an $(N \times d)$ matrix.
 The components of the vector $\vec{z}$ are called the \emph{logits}. 
 To obtain probabilities we use the exponential to make them all positive and normalise the sum.
-\marginpar{Softmax}
+\sidenote{Softmax}
 This is called the softmax function:
 
 \begin{equation*}
@@ -213,7 +213,7 @@ Since we have no constraints over the properties of $f$, common choices are simp
 
 We can repeat the same procedure and chain two hidden layers:
 
-\marginpar{More layers!}
+\sidenote{More layers!}
 \begin{align*}
 \vec{h_1} &= \widetilde W_1 \cdot \vec{x} \\
 \vec{h_2} &= \widetilde W_2 \cdot f(\vec{h_1}) \\
@@ -241,7 +241,9 @@ Figure~\ref{fig:svm} illustrates an example of classifying two species from the 
 \caption{Classification of two species of Iris flowers according to the length and width of sepals using Suport Vector Machines.}\label{fig:svm}
 \end{figure}
 
-It can be generalised \marginpar{The kernel trick} to non-flat boundaries using the so-called \emph{kernel trick}, where Euclidean distances are replaced with an arbitrary measure of similarity given by positive-definite kernel function:
+It can be generalised to non-flat boundaries using the so-called \emph{kernel trick},
+where Euclidean distances  \sidenote{The kernel trick}
+are replaced with an arbitrary measure of similarity given by positive-definite kernel function:
 \[||\vec{x}_1 - \vec{x}_2|| \rightarrow k(\vec{x}_1, \vec{x}_2)\]
 
 For example, in Figure~\ref{subfig:svm_rbf} we have used a Radial Basis Function:
@@ -253,7 +255,7 @@ Another way of interpreting the kernel trick is to think of it as learning a top
 
 \subsection{\emph{k}-Nearest Neighbour}
 The Nearest Neighbour classifier takes the $k$ closest points in the training set and predicts the most common label.
-\marginpar{Bias-variance tradeoff}
+\sidenote{Bias-variance tradeoff}
 The choice of $k$ is a balance between noise and flexibility: smaller values give more distinct frontiers but are more susceptible to noise.
 
 \begin{figure}[htb]
@@ -306,7 +308,7 @@ A Random Forest is an ensemble of decision trees, as described in Section~\ref{s
 Each tree is trained on a random subset of the data, and the final score is a vote across the trees.
 Furthermore, for every split, we only consider a new random subset of the features, to increase diversity.
 The advantage over a single decision tree is that now we have an ensemble of trees, each trained on slightly different data.
-\marginpar{Bias-variance tradeoff}
+\sidenote{Bias-variance tradeoff}
 Since every data point is only considered by a fraction of the trees, the random forest is more robust against noise; but for the same reason, it will not be able to model so well outliers.
 
 
@@ -324,26 +326,27 @@ A Gaussian Process (\GP) takes as an input a set of data points $(x, y)$ that ar
 \end{figure}
 
 
-Consider a vector space over functions\footnote{This is a mathematical justification. If you are not interested in Hilbert spaces, jump to the last equation.}, called Hilbert space $\mathscr{H}$, and define a complete, orthonormal basis $\{\phi_i(x)\}_{i=0}^{n}$.
+Consider a vector space over functions, \longsidenote{This is a mathematical justification. If you are not interested in Hilbert spaces, jump to the last equation.} called Hilbert space $\mathscr{H}$, and define a complete, orthonormal basis $\{\phi_i(x)\}_{i=0}^{n}$.
 Any function $f$ in this space can be decomposed as a linear combination of the basis:
 
  \[f(x) = \sum_{i=0}^{n} c_i \phi_i(x)\]
  
-In GP, we define our Hilbert space through a positive semi-definite \emph{covariance function} $k(x, x')$.
+In \GP, we define our Hilbert space through a positive semi-definite \emph{covariance function}, $k(x, x')$.
 This induces a metric defined through the distance:
 
 	\[	d(f, g) =\int_{\mathcal{R}}  f(x) k(x, x') g(x') dx dx', \]
 and a series of eigenfunctions of the covariance function.
 	
-For example,\marginpar{\RBF{} appears again} the previously seen radial basis covariance function defines the Hilbert space of $C^\infty \cap L^2$ functions: all the smooth functions of square-integrable..
+For example,\sidenote{\RBF{} appears again} the previously seen radial basis covariance function defines the Hilbert space of $C^\infty \cap L^2$ functions: all the smooth functions of square-integrable.
 	
-The GP will thus project our $n$ data points into this $N$-dimensional space -- in general, $N >> n$; usually $N = \infty$. Note that, due to geometry, our $n$ data points must live in an $n$-dimensional subspace of $\mathscr{H}$.
+The GP will thus project our $n$ data points into this $N$-dimensional space~--~in general, $N >> n$; usually $N = \infty$. Note that, due to geometry, our $n$ data points must live in an $n$-dimensional subspace of $\mathscr{H}$.
 The output is an estimation $\hat f$ of our latent function $f$, that can be interpreted as a decomposition in the eigenfunctions of our covariance function.
 	
 	\[\hat f(x) = \sum_{i=0}^{n} c_i \phi_i(x)\]
 	
-But, unlike other procedures, $c_i$ have probability distributions over them.
-We can use them to sample likely candidates for the latent function, as shown in Figure~\ref{fig:gp_sampling}.
+But, unlike other procedures, $c_i$ are not just numbers, but have probability distributions over them:
+Gaussian Processes gives a probabilistic view of the answer.
+Thus, we can use them to sample likely candidates for the latent function, as shown in Figure~\ref{fig:gp_sampling}.
 	
 \begin{figure}[hbt]
 \centering

@@ -18,10 +18,10 @@ i.e., considering not only our protein of interest but also any related sequence
 To have coherent statistics, every sequence must be aligned to the original query, as in the following example:
 
 \begin{center}
-\marginpar{\phantom{x}}
-\marginpar{\phantom{x}}
-\marginpar{\phantom{x}}
-\marginpar{An example \MSA}
+\sidenote{\phantom{x}}
+\sidenote{\phantom{x}}
+\sidenote{\phantom{x}}
+\sidenote{An example \MSA}
 \begin{Verbatim}[fontsize=\small, xleftmargin=3em]
 1       10        20        30        40        50   
 FCLEPPYTGPCKARMIRYFYNARSGSCETFIYGGCKAKRNNFKSEEDCMRTCG
@@ -45,7 +45,7 @@ This section explains how to build it.
 The building block of an \MSA{} is the alignment of each related sequence to our query, and the first step is to measure how similar they are.
 The most basic scheme simply counts the number of matching amino acids, assigning a positive score for matches, and a penalty for mismatches.
 
-Proteins \marginpar{The reason for gaps} have insertions and deletions, which means the matching regions in different proteins may be discontinuous.
+Proteins \sidenote{The reason for gaps} have insertions and deletions, which means the matching regions in different proteins may be discontinuous.
 We can allow for gaps in the scores including a term that considers both opening -- our belief of how common insertions and deletions are -- and extending the gap -- considering our expectation of their length.
 
 Furthermore, not all mismatches are the same.
@@ -55,7 +55,7 @@ On the other hand, a single mutation from glutamic acid (E) to valine (V), in hu
 Nor are all matches.
 Alanine (A) forms over $7\%$ of the proteome, so we are more likely to find a hit at random than with tryptophan (W), which forms less than $2\%$.
 
-We can codify \marginpar{Substitution matrix} the difference between different amino acids in a substitution matrix.
+We can codify \sidenote{Substitution matrix} the difference between different amino acids in a substitution matrix.
 The most common choice to detect distantly related proteins is the \textsc{blosum} family.
 \citet{blosum} derived them from a set of 500 multiple sequence alignments.
 
@@ -81,7 +81,7 @@ We know this is not a good representation of proteins, since they are unlikely t
 Insertions are easy to introduce in short, external loops; and deletions are most likely in long loops. 
 A representation that allows us to model both mutations and insertions and deletions with different rates at different positions are Hidden Markov Models (\HMM).
 
-An \HMM{} \marginpar{The \HMM} is a probabilistic model, where the system travels across a series of hidden states following a Markov chain, a model with discrete states where the probability of transition depends only on the current state -- ignoring the history.
+An \HMM{} \sidenote{The \HMM} is a probabilistic model, where the system travels across a series of hidden states following a Markov chain, a model with discrete states where the probability of transition depends only on the current state -- ignoring the history.
 We do not have access to these states -- hence \emph{hidden}.
 Instead, each of them has a certain probability of emitting a symbol: the observed amino acids.
 Fitting a Hidden Markov Model consists on estimating the emission probability for each state -- the analogue to the \PSSMs{} -- and also the transition probability between states.
@@ -97,7 +97,7 @@ It compares \HMM{} to \HMM, and in case of a match, includes all the members of 
 \end{itemize}
 
 \JackHMMER{} is slower
-\marginpar{Advantages and disadvantages}
+\sidenote{Advantages and disadvantages}
 because it must consider each sequence; but it can search against any database without the need to pre-prepare it.
 \JackHMMER{} can easily keep an up-to-date sequence database, or work on databases tailored for the search at hand.
 
@@ -126,11 +126,11 @@ When a good hit is found, this is the most accurate and reliable modelling strat
 \subsection{\emph{Ab-initio} folding}
 In the absence of available templates, we can use \emph{ab-initio} or \emph{template-free} methods, in which we try to find the minimum energy of the system, including additional terms derived from predictors.
 
-Rosetta's \citep{Rosetta3} \marginpar{Rosetta} \emph{ab initio} protocol implements a simulated annealing scheme that starts with an extended chain and randomly replaces fragments with ones derived from the \PDB.
+Rosetta's \citep{Rosetta3} \sidenote{Rosetta} \emph{ab initio} protocol implements a simulated annealing scheme that starts with an extended chain and randomly replaces fragments with ones derived from the \PDB.
 Since the fragments are taken from real proteins, the models tend to have good chemical properties, even when completely wrong.
 In order to speed up and improve convergence, we can add additional energy terms to the force field, such as contact restraints.
 
-\CONFOLD~\citep{confold} \marginpar{\CONFOLD} is the other protocol used in this thesis.
+\CONFOLD~\citep{confold} \sidenote{\CONFOLD} is the other protocol used in this thesis.
 It is build upon \CNS, and works by transforming contacts and secondary structure to a large set of distance restraints between atoms.
 Then, it runs a geometric solver, followed by a fast relaxation.
 This method is much faster than Rosetta, but since it lacks the chemical information of the fragments, it does not work well on regions without contacts.
@@ -140,7 +140,7 @@ This method is much faster than Rosetta, but since it lacks the chemical informa
 Once we have a model, how can we compare it with the native structure? How can we measure how accurate it is?
 
 One option is to superimpose model 
-\marginpar{Superposition}
+\sidenote{Superposition}
 in such a way that the metric is optimised.
 Given two structures with $L$ residues in common, and being $d_i$ the distance between the $i-$th residues of both structures, we define the distances as:
 
@@ -165,12 +165,12 @@ For example, consider a protein composed of two subunits connected by a small, f
 The superposition scores would align one of the subunits, with perfect scoring, and give bad values to the other.
 
 A solution is to compare structures locally. 
-\LDDT{} (Local Distance Difference Test) \citep{lddt} \marginpar{\LDDT}
+\LDDT{} (Local Distance Difference Test) \citep{lddt} \sidenote{\LDDT}
 measures, for every atom, the fraction of preserved  distances, up to a given tolerance, within an inclusion radius.
 \LDDT{} considers all inter-atomic distances that are within $\SI{0.5}{\angstrom}$, $\SI{1}{\angstrom}$, $\SI{2}{\angstrom}$, and $\SI{4}{\angstrom}$.
 The final scores is obtained averaging over all the atoms in the residue and inclusion thresholds.
 
-\citet{cad} proposed a similar method, using surface contacts instead of distances. \marginpar{\CAD}
+\citet{cad} proposed a similar method, using surface contacts instead of distances. \sidenote{\CAD}
 They represent each residue as the Voronoi volume of its atoms.
 The surface area for the contact between residues $i$ and $j$ of the model is $S_m(i,j)$, and for the reference -- native structure -- $S_r(i,j)$.
 \CAD{} score is proportional to the difference between the two, with some normalisation terms:
@@ -191,7 +191,7 @@ The purpose of \MQA{} is two-fold:
 Some applications may require high-quality models, while for others, knowing the right fold is sufficient.
 \end{itemize}
 
-In principle, \marginpar{Energy-based \MQA?} we could compute the energy of each model, assuming that the lower the energy, the closer we are to our target.
+In principle, \sidenote{Energy-based \MQA?} we could compute the energy of each model, assuming that the lower the energy, the closer we are to our target.
 This has two flaws: it does not provide information about \emph{how far} -- since in principle we do not know the energy of the native state -- and it is not a reliable way of comparing models from different methods -- because energy functions are very sensitive to small details.
 Consider the case of a perfect model, except for two atoms that are in the same position.
 The scores presented on the previous section would all be close to 1, but the energy would be infinite!
@@ -200,14 +200,14 @@ We can partially remediate this problem by repacking the models using a common e
 
 
 The alternative solution is to use machine learning and try to predict scores directly.
-\marginpar{Unsupervised: clustering}
+\sidenote{Unsupervised: clustering}
 We can use unsupervised programs, like Pcons \citep{pcons}, that cluster the models, and select the one that is closer to the centre.
 The underlying assumption is that, if several independent methods agree, they are probably correct.
 If all our models come from a single method, but the set of restraints is good, they will all be similar; but if the restraints are insufficient or contradictory, the models will be diverse.
 They are called \emph{consensus methods}.
 
 The alternative is to use supervised machine learning,
-\marginpar{Supervised}
+\sidenote{Supervised}
 describe the model with a set of features, and try to predict in isolation its quality.
 The features we can use fall into two categories:
 
@@ -221,13 +221,13 @@ This approach is called \emph{single method}, and in this thesis, we have develo
 
 \section{Contact prediction}\label{sec:contacts}
 To be able to predict a structure without a template, we need an crucial  bit of additional information: the contact map, or the collection of residues that are in contact.
-We usually define \emph{contact} \marginpar{Distance threshold} as closer than $\SI{8}{\angstrom}$ between the C-$\beta$ atoms,
+We usually define \emph{contact} \sidenote{Distance threshold} as closer than $\SI{8}{\angstrom}$ between the C-$\beta$ atoms,
 but other authors may use $\SI{10}{\angstrom}$ between C-$\alpha$, $\SI{4}{\angstrom}$ between any pair of heavy atoms, or combinations.
 
-Folded proteins \marginpar{How is this possible?} are tightly packed structures, as illustrated in Figure~\ref{fig:packing}.
+Folded proteins \sidenote{How is this possible?} are tightly packed structures, as illustrated in Figure~\ref{fig:packing}.
 Since there is very little to no space between neighbouring residues, not every mutation is allowed.
 When a protein gains a mutation, it usually needs to be compensated by others somewhere else in the protein to keep it stable.
-\marginpar{Correlated mutations}
+\sidenote{Correlated mutations}
 For example, if an amino acid is replaced by a bigger one, a nearby residue would have to be changed for a smaller one; or if a neutral amino acid gains a positive charge, it would be energetically favourable to have a negatively charged next to it.
 Contacts in our protein, or residues nearby in space, will appear as sets of correlated, compensating mutations in an \MSA.
 
@@ -296,7 +296,7 @@ C(i, j) = \sqrt{\sum_{\sigma_i, \sigma_j=1}^{21} J_{i, j}(\sigma_i, \sigma_j)^2}
 where $C(i, j)$ is the contact score between residues $i$ and $j$.
 This number cannot be readily interpreted as a probability.
 
-This model approximations ignore the possibility of multiple rotamers for a given amino acid \marginpar{The sphericity of the cow}
+This model approximations ignore the possibility of multiple rotamers for a given amino acid \sidenote{The sphericity of the cow}
 and consider that any interaction between three or more residues can be decomposed to the sum of each pair.
 Finally, \DCA{} attempts to reconstruct the evolutionary couplings, not necessarily the contacts.
 \citet{contact_errors} showed that most of the top-scoring pairs indicated by \DCA{} are true contacts, others correspond to contacts between different subunits in a homodimer or pairs of separated residues involved in the function.
@@ -341,7 +341,7 @@ This was the focus of our contributions on Paper \textcolor{Maroon}{IV}.
 
 \section{Assessing the field: \CASP}
 The Critical Asessment of protein Structure Prediction (\CASP) is a biennial community-wide experiment to evaluate the status of the field.
-\marginpar{A world-wide blind experiment}
+\sidenote{A world-wide blind experiment}
 Over the course of a few months, they release the sequences of around 100 unpublished protein structures, asking groups to predict contact maps, 3\textsc{d} models, and predicting the quality of the submissions.
 
 Since the structures are unpublished at the time of the experiment, this is a completely blind test and can be used to establish the current status of the field.

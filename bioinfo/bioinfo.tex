@@ -153,7 +153,7 @@ The S-score (Superposition score) is:
 \begin{equation*}
 S = \max\left[\frac{1}{L} \sum_{i=1}^L \frac{1}{1 + \left(\frac{d_i}{d_0}\right)^2}\right],
 \end{equation*}
-where $d_0$ is a parameter to be decided, usually $\SI{3}{\angstrom}$.
+where $d_0$ is a parameter to be decided, usually 3$\SI{}{\angstrom}$.
 
 The \TM{} (Template Modelling score) is the same as \Ss, but $d_0 = 1.24 \sqrt[3]{L - 15} - 1.8$, to keep TM roughly independent of the length.
 
@@ -206,9 +206,7 @@ The underlying assumption is that, if several independent methods agree, they ar
 If all our models come from a single method, but the set of restraints is good, they will all be similar; but if the restraints are insufficient or contradictory, the models will be diverse.
 They are called \emph{consensus methods}.
 
-The alternative is to use supervised machine learning,
-\sidenote{Supervised}
-describe the model with a set of features, and try to predict in isolation its quality.
+The alternative is to use supervised machine learning, describe the model with a set of features, and try to predict in isolation its quality. \sidenote{Supervised}
 The features we can use fall into two categories:
 
 \begin{itemize}
@@ -221,8 +219,8 @@ This approach is called \emph{single method}, and in this thesis, we have develo
 
 \section{Contact prediction}\label{sec:contacts}
 To be able to predict a structure without a template, we need an crucial  bit of additional information: the contact map, or the collection of residues that are in contact.
-We usually define \emph{contact} \sidenote{Distance threshold} as closer than $\SI{8}{\angstrom}$ between the C-$\beta$ atoms,
-but other authors may use $\SI{10}{\angstrom}$ between C-$\alpha$, $\SI{4}{\angstrom}$ between any pair of heavy atoms, or combinations.
+We usually define \emph{contact} \sidenote{Distance threshold} as closer than 8$\SI{}{\angstrom}$ between the C-$\beta$ atoms,
+but other authors may use 10$\SI{}{\angstrom}$ between C-$\alpha$, 4$\SI{}{\angstrom}$ between any pair of heavy atoms, or combinations.
 
 Folded proteins \sidenote{How is this possible?} are tightly packed structures, as illustrated in Figure~\ref{fig:packing}.
 Since there is very little to no space between neighbouring residues, not every mutation is allowed.

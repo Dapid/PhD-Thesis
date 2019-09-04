@@ -3,7 +3,7 @@
 \usepackage[cmyk,hyperref,dvipsnames]{xcolor} %The two first options are for pdf-x, the last is for classicthesis
 
 \usepackage[pdfpagelabels, unicode, pdfversion=1.5]{hyperref}
-\usepackage[swedish,british]{babel}
+\usepackage[swedish,spanish,british]{babel}
 \usepackage{url}
 \usepackage{iftex}
 
@@ -90,9 +90,9 @@
 
 \input{acronyms}
 
-
+\setsansfont[Ligatures=TeX]{Cabin}
 \newcommand{\sidenote}[1]{\marginpar{\normalsize #1}}
-\newcommand{\longsidenote}[1]{\marginpar{\footnotesize #1}}
+\newcommand{\longsidenote}[1]{\marginpar{\footnotesize\upshape\sffamily #1}}
 
 
 \begin{document}

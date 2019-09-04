@@ -87,7 +87,7 @@ We do not have access to these states -- hence \emph{hidden}.
 Instead, each of them has a certain probability of emitting a symbol: the observed amino acids.
 Fitting a Hidden Markov Model consists on estimating the emission probability for each state -- the analogue to the \PSSMs{} -- and also the transition probability between states.
 Like in \PSIBLAST, this is done iteratively, passing several times through the data and updating our belief.
-Since \HMM{} is a fully probabilistic model, we can apply heuristics with more rigorous underpinnings, which also helps to increase sensitivity while keeping the number of \CPU{} cycles low.
+Since \HMM{} is a fully probabilistic model, we can apply heuristics with more rigorous underpinnings, which also helps to increase sensitivity while keeping the number of \textsc{cpu} cycles low.
 
 The two most popular programs to perform these searches are \JackHMMER{} \citep{jh}, and \HHBlits~\citep{hhblits}:
 

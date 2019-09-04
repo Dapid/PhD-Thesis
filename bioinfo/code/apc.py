@@ -20,10 +20,11 @@ corr = data['gdca_corr']
 
 compare = np.tril(original) / norm(original) + np.triu(corr) / norm(corr)
 
-plt.show()
-plt.imshow(compare, cmap='Greys')
+plt.imshow(compare, cmap='Greys', vmin=-0.1, vmax=2)
 plt.ylabel('Original score')
 plt.xlabel('With APC')
 plt.tight_layout()
 plt.savefig('../figures/apc.pdf')
+plt.figure()
+plt.hist(compare.flatten(), histtype='step', bins='auto')
 plt.show()

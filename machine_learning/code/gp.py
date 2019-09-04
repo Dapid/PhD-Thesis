@@ -27,7 +27,7 @@ std = np.sqrt(var_.squeeze())
 
 plt.plot(x_true, y_true, color='k', alpha=0.8, label='True')
 plt.plot(x_true, pred.squeeze(), color=MAROON, label='Prediction')
-plt.fill_between(x_true, pred - std, pred + std, alpha=0.2, color=MAROON, label='$\pm 1\sigma$')
+plt.fill_between(x_true, pred - std, pred + std, alpha=0.4, color=MAROON, label='$\pm 1\sigma$')
 
 plt.legend(loc=4)
 plt.title('Gaussian Processes')
@@ -65,7 +65,7 @@ std = np.sqrt(var_.squeeze())
 
 plt.plot(x_true, y_true, color='k', alpha=0.8, label='True')
 plt.plot(x_true, pred.squeeze(), color=MAROON, label='Prediction')
-plt.fill_between(x_true, pred - std, pred + std, alpha=0.2, color=MAROON, label='$\pm 1\sigma$')
+plt.fill_between(x_true, pred - std, pred + std, alpha=0.4, color=MAROON, label='$\pm 1\sigma$')
 
 plt.legend(loc=4)
 plt.title('Gaussian Processes, gapped')

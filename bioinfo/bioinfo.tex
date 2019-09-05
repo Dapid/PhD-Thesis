@@ -87,6 +87,7 @@ We do not have access to these states -- hence \emph{hidden}.
 Instead, each of them has a certain probability of emitting a symbol: the observed amino acids.
 Fitting a Hidden Markov Model consists on estimating the emission probability for each state -- the analogue to the \PSSMs{} -- and also the transition probability between states.
 Like in \PSIBLAST, this is done iteratively, passing several times through the data and updating our belief.
+\longsidenote{The most important heuristic in \textsc{hmm}s is modelling the length of insertion and deletion regions per position. \PSSMs{} can only have a global gap length model.}
 Since \HMM{} is a fully probabilistic model, we can apply heuristics with more rigorous underpinnings, which also helps to increase sensitivity while keeping the number of \textsc{cpu} cycles low.
 
 The two most popular programs to perform these searches are \JackHMMER{} \citep{jh}, and \HHBlits~\citep{hhblits}:
@@ -131,7 +132,7 @@ Rosetta's \citep{Rosetta3} \sidenote{Rosetta} \emph{ab initio} protocol implemen
 Since the fragments are taken from real proteins, the models tend to have good chemical properties, even when completely wrong.
 In order to speed up and improve convergence, we can add additional energy terms to the force field, such as contact restraints.
 
-\CONFOLD~\citep{confold} \sidenote{\CONFOLD} is the other protocol used in this thesis.
+\CONFOLD~\citep{confold} \sidenote{CONFOLD} is the other protocol used in this thesis.
 It is build upon \CNS, and works by transforming contacts and secondary structure to a large set of distance restraints between atoms.
 Then, it runs a geometric solver, followed by a fast relaxation.
 This method is much faster than Rosetta, but since it lacks the chemical information of the fragments, it does not work well on regions without contacts.
@@ -141,7 +142,7 @@ This method is much faster than Rosetta, but since it lacks the chemical informa
 \subsection{Evaluation}
 Once we have a model, how can we compare it with the native structure? How can we measure how accurate it is?
 
-One option is to superimpose model in such a way that the metric is optimised. \sidenote{Superposition}
+One option is to superimpose model in such a way that the metric is optimised. \sidenote{Superposition scores}
 Given two structures with $L$ residues in common, and being $d_i$ the distance between the $i-$th residues of both structures, we define the distances as:
 
 \RMSD, or the Root Mean Squared Deviation:
@@ -165,12 +166,12 @@ For example, consider a protein composed of two subunits connected by a small, f
 The superposition scores would align one of the subunits, with perfect scoring, and give bad values to the other.
 
 A solution is to compare structures locally. 
-\LDDT{} (Local Distance Difference Test) \citep{lddt} \sidenote{\LDDT}
+\LDDT{} (Local Distance Difference Test) \citep{lddt} \sidenote{LDDT}
 measures, for every atom, the fraction of preserved  distances, up to a given tolerance, within an inclusion radius.
 \LDDT{} considers all inter-atomic distances that are within 0.5 $\SI{}{\angstrom}$, 1 $\SI{}{\angstrom}$, 2 $\SI{}{\angstrom}$, and 4 $\SI{}{\angstrom}$.
 The final scores is obtained averaging over all the atoms in the residue and inclusion thresholds.
 
-\citet{cad} proposed a similar method, using surface contacts instead of distances. \sidenote{\CAD}
+\citet{cad} proposed a similar method, using surface contacts instead of distances. \sidenote{CAD}
 They represent each residue as the Voronoi volume of its atoms.
 The surface area for the contact between residues $i$ and $j$ of the model is $S_m(i,j)$, and for the reference -- native structure -- $S_r(i,j)$.
 \CAD{} score is proportional to the difference between the two, with some normalisation terms:

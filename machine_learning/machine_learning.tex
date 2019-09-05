@@ -244,8 +244,11 @@ This is because adding layers degrades the gradient from the previous ones, maki
 
 \subsection{Support Vector Machines}
 A Support Vector Machine, or \SVM, is in its simplest form, a supervised, binary classification algorithm that tries to find the hyperplane that maximises the separation of the two groups.
+\longsidenote{The article was published in the journal \emph{Annals of Eugenics}, later renamed to \emph{Annals of Human Genetics}.
+	The word \emph{eugenics} has a complicated history \citep{eugenics}.}
 To account for noise, a slack parameter, that will ignore points that are too close to the boundary can be included.
 Figure~\ref{fig:svm} illustrates an example of classifying two species from the classic Iris dataset~\citep{iris_dataset}.
+It consists on measurements of the length and width of petals and sepals of three species of Iris flowers, \emph{Iris setosa}, \emph{Iris versicolor}, and \emph{Iris virginica}, taken from the same field, on the same day, by the same person using the same instrument.
 
 
 \begin{figure}
@@ -327,7 +330,7 @@ A Random Forest is an ensemble of decision trees, as described in Section~\ref{s
 Each tree is trained on a random subset of the data, and the final score is a vote across the trees.
 Furthermore, for every split, we only consider a new random subset of the features, to increase diversity.
 The advantage over a single decision tree is that now we have an ensemble of trees, each trained on slightly different data.
-\sidenote{Bias-variance tradeoff}
+\sidenote{Bias-variance tradeoff in \textsc{rf}}
 Since every data point is only considered by a fraction of the trees, the random forest is more robust against noise; but for the same reason, it will not be able to model so well outliers.
 
 
@@ -408,8 +411,9 @@ In general, a machine learning model can only get to be as good as the data it w
 
 Attempts at mitigate these problems gave rise to explainable machine learning models, where the reasoning can be studied by a human.
 In general, these models are either limited in their expressibility, or their interpretability is hardly related to the way humans reason (see Figure~\ref{subfig:tree_explained}).
+\longsidenote{Isaac Asimov already pointed at this problem in 1989 in his short story \emph{Alexander the God}, where a computer fails to take into account the effects of its own actions. The story can be found in his Gold collection \citep{gold}.}
 But yet, unexplainable models are often more accurate, and good enough when the cost of errors is tolerable, or there are alternative safeguards in place.
 
-\longsidenote{Isaac Asimov already pointed at this problem in 1989 in his short story \emph{Alexander the God}, where a computer fails to take into account the effects of its own actions. The story can be found in \citep{gold}.}
+
 One of the last frontiers of machine learning is dealing with the situations when they are so widely used that their decisions directly affects the landscape on which they act, such as high-frequency trading or recommending systems.
 % TODO: Netflix?

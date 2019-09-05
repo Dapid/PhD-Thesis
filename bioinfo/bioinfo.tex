@@ -4,12 +4,14 @@ is the application of computational methods to biological problems,
 either by analysing large amounts of data or by replacing experiments with computer programs.
 
 \section{Predictors}
-A significant fraction of the protein bioinformatics work is the development of predictors: statistical or machine learning methods that can, given limited information, predict properties of proteins.
+A significant fraction of the protein bioinformatics work is the development of predictors: \sidenote{The workhorse of Bioinformatics}
+statistical or machine learning methods that can, given limited information, predict properties of proteins.
 A common choice is to make predictions taking only the amino acid sequence because this is the easiest information we can acquire of a protein.
 Other methods may require extra annotation, such as Gene Ontology -- an annotation condensing all our knowledge of the gene that produced the protein -- or 3D structures -- experimental or models.
 
 \section[Multiple Sequence Alignments]{Increasing statistics: Multiple Sequence Alignments}
 Proteins, just like organisms, are products of evolution that accumulate random modifications over time.
+\longsidenote{Remember that obtaining sequences is far easier than obtaining structures. The sequence databases are three orders of magnitude bigger than PDB, and growing at a faster pace.}
 As mutations accumulate, species diverge, but they retain certain similarity due to their common origin, thus, we can find similar versions of the same protein in different organisms.
 Even when the function is novel, it usually evolves as a minor modification of pre-existing proteins.
 This means that, in most cases, we can obtain a better prediction when working at the \emph{family level,}
@@ -22,7 +24,7 @@ To have coherent statistics, every sequence must be aligned to the original quer
 \sidenote{\phantom{x}}
 \sidenote{\phantom{x}}
 \sidenote{An example \MSA}
-\begin{Verbatim}[fontsize=\small, xleftmargin=3em]
+\begin{Verbatim}[fontsize=\small, xleftmargin=4em]
 1       10        20        30        40        50   
 FCLEPPYTGPCKARMIRYFYNARSGSCETFIYGGCKAKRNNFKSEEDCMRTCG
 FCREPPYTGPCSAHFVRYFYNATTGLCQSFVYGGCRGKQNNFMDEKECLHTCD

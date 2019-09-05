@@ -104,9 +104,8 @@ The relative arrangement of each chain is the quaternary structure.
 %\subsection{Quintenary structure} %?
 \section{Protein biochemistry}
 
-Experiments by \citet{fold_graciously} show that proteins placed in the right medium of pH and temperature will unfold into a random coil, with no trace of tertiary nor secondary structure.
+Experiments by \citet{fold_graciously} show that proteins placed in the right medium of pH and temperature will unfold into a random coil, with no trace of tertiary nor secondary structure. \sidenote{Dogmas that govern protein folding}
 When restored to physiological conditions, they will refold into its natural shape, recovering its original biological and chemical properties.
-\sidenote{Dogmas that govern protein folding}
 As long as the protein is chemically unaltered, it will recover the tertiary structure independently of the folding machinery of the cell.
 This was codified as Anfinsen's dogma: under physiological conditions, the primary structure of globular proteins determines the secondary and tertiary structures, and thus, its function, independently of the cell's machinery \citep{Anfinsen_dogma}.
 Typically, the fully folded state is reached in the order of milliseconds to seconds. \longsidenote{The most infamous case of prions is the mad cows disease.}
@@ -121,7 +120,7 @@ This gives us a configuration space of the order of $10^{2L}$ for a protein of $
 Levinthal suggested two corrections:
 \begin{itemize}
 	\item The native conformation is not necessarily the one of minimum energy, but a local meta-stable minimum with a deep enough well that it is stable.
-	For most proteins, this is not very deep, around 10-\SI{15}{\kilo cal/\mol}.
+	For most proteins, this is not very deep, around 10-15~kcal/mol.
 	\item The native conformation must be kinematically accessible, possibly guided by local interactions that partially fold the protein.
 	In other words, the energy landscape of protein folding presents a wide funnel from the unfolded state to its near-native conformation, which allows for a rapid transition.
 \end{itemize}
@@ -134,14 +133,14 @@ Levinthal suggested two corrections:
 %\subsection{The protein backbone}
 \subsection{The hydrophobic effect}
 Water molecules are electric dipoles with a partial negative charge on the oxygen, and a partial positive charge on the hydrogens.
+\longsidenote{This discussion applies to globular proteins, that is, those that are dissolved in water, as opposed to membrane proteins, that live inserted in the cellular membrane: straddled between two water environments separated by a lipid layer.}
 This introduces an electrostatic interaction between molecules in bulk of water, that self-organises to form a network of hydrogen bonds.
 Any non-polar molecule submerged in water will disrupt this network of bonds.
 To preserve as many energy-favourable hydrogen bonds the water molecules near the boundary can reorient themselves, forming a pocket around the hydrophobic substance in the process.
 The degrees of freedom for the boundary is restricted, so the entropy -- and consequently the free energy -- is reduced.
 This is the \emph{hydrophobic effect}, responsible for the immiscibility of fats and water.
 
-A protein chain \sidenote{Hydrophobicity and folding}
-will be composed of both hydrophobic and hydrophilic amino acids.
+A protein chain will be composed of both hydrophobic and hydrophilic amino acids. \sidenote{Hydrophobicity and folding}
 When placed, unfolded, in the cellular environment, the hydrophobic ones will not be able to form hydrogen bonds with the water.
 The water molecules will then reorient themselves to form hydrogen bonds with their neighbours, which creates tiny pockets around them.
 Quickly, these pockets will join together, expelling most of the water and forming a compact core of hydrophobic residues, surrounded by hydrophilic ones, the \emph{molten globule}.
@@ -189,7 +188,7 @@ Roughly speaking the torsions of the backbone determine the secondary structure 
 
 The final thermodynamical component is the entropy, which measures the number of accessible states. \sidenote{Entropy} 
 An important contribution comes from the interaction between water and hydrophobic areas.
-In the presence of a hydrophobic surface, water has to reorient to preserve the hydrogen bonds -- they are very energetically favourable, around \SI{5}{kcal/mol}, so there is a high cost to its breakage.
+In the presence of a hydrophobic surface, water has to reorient to preserve the hydrogen bonds -- they are very energetically favourable, around 5~kcal/mol, so there is a high cost to its breakage.
 This puts a constraint to their orientation, partially freezing them around the surface, which reduces their entropy.
 
 %\section{Membrane proteins}
@@ -206,13 +205,12 @@ The X-ray detector -- a photographic plate or a \CCD{} sensor -- can only measur
 Experimentalists have to apply an iterative process where they combine estimated phases from models with the real intensities.
 
 One criticism of X-ray crystallography is that the proteins are in crystals, not in physiological conditions.
-The alternative method is Nuclear Magnetic Resonance (\NMR) \citep{nmr}, \sidenote{\NMR} which applies strong oscillating magnetic fields and measures resonances.
+The alternative method is Nuclear Magnetic Resonance (\NMR) \citep{nmr}, \sidenote{NMR} which applies strong oscillating magnetic fields and measures resonances.
 From the spectrum, one can identify distances between atoms with non-zero nuclear spin.
 The method cannot provide sufficient constraints to determine the whole system, so it is given as an ensemble of models instead.
 The differences between individual structures can be caused by natural movements of the protein, or by uncertainties in the experiment itself.
 
-In the last decades, \sidenote{cryo-\EM}
-a new method has become practical for protein structures: cryogenic electron microscopy.
+In the last decades, a new method has become practical for protein structures: cryogenic electron microscopy. \sidenote{cryo-EM}
 In this method, the protein samples are placed in solution on a thin sheet of solution, flash-frozen to cryogenic temperatures, and put under an electron microscope.
 Since proteins are diluted, each one is frozen in a random orientation, so each image is a \textsc{2d} projection along a different axis.
 The various images are clustered and combined to reduce noise, and a \textsc{3d} model is inferred from it.
@@ -234,13 +232,13 @@ The development of Cryo-\EM{} was recognised in 2017 with the award of the Nobel
 Sometimes, an experiment to obtain the full structure is not possible.
 There are simplified methods that, while they cannot give a full structure, they may be able to provide enough constraints for computational methods.
 
-The first is Small Angle X-ray Scattering, or \SAXS. \sidenote{\SAXS}
-The process is similar to X-ray crystallography, but now the protein is in solution.
+The first is Small Angle X-ray Scattering, or \SAXS.
+The process is similar to X-ray crystallography, but now the protein is in solution.  \sidenote{SAXS}
 Each unit will produce its own interference pattern, but since they are not crystallised, the orientation of each pattern is randomised.
 From this we can infer a rough shape of the protein, and the presence or absence of differences between conformations.
 
-A related method is Small Angle Neutron Scattering, or \SANS. \sidenote{\SANS}
-It replaces X-rays with neutrons, which changes the sensitivity to different nuclear species.
+A related method is Small Angle Neutron Scattering, or \SANS.
+It replaces X-rays with neutrons, \sidenote{SANS} which changes the sensitivity to different nuclear species.
 In particular, hydrogen has one of the largest cross-sections.
 One application is the study of membrane proteins in an appropriately chosen detergent, which can be almost invisible to the neutron beam.
 More information on both methods can be found in the work of~\citet{sax}

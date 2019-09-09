@@ -200,7 +200,7 @@ Nowadays, the differentiation can be done automatically using frameworks like Te
     The node in italics, $\mathit{d}$ is a temporary variable.}\label{fig:comp_graph}
 \end{figure}
 
-
+\newpage
 Computing the outputs of the network is called \emph{forward pass}, since the output of each layer  \sidenote{Backward and forward pass}
 depends only on the previous values, closer to the inputs.
 To compute the gradients, we need to keep the outputs of each layer between the weight and the labels.
@@ -343,9 +343,15 @@ In the original paper, it was placed before the activation, but further research
 
 
 The reason why Batch Normalisation 
-\longsidenote{It was previously thought that Batchnorm was preventing the weights to covariate together.}
+\longsidenote{It was previously thought that Batchnorm was preventing the weights to covariate together, by forcing $\sigma \simeq 1$.}
 actually works as a regulariser was not well understood until the work of \citet{how_bn_works}, who showed how it smooths the loss function landscape, both helping the training and converging to more generalised minima.
 \citet{large_batch} had shown that smoother landscapes lead to better generalisation.
+
+\begin{center}
+	%\smallskip
+	{\adfleafleft}
+	%\smallskip
+\end{center}
 
 On a higher level, we can design our network to be robust with respect to invariances in our data. \sidenote{Architectural}
 For example, convolutions are translational invariant, so a convolution-based secondary structure predictor will be able to recognise the sequence signature of an $\alpha$-helix regardless of its relative position.
@@ -366,7 +372,7 @@ At the end of the iteration, the mini-batch is averaged, and the weights updated
 
 
 \section[Tensors and gradients]{Conjunctive tissue: tensors and gradients}\label{sec:tensors}
-As we have seen before, each layer is composed of mostly tensors\longsidenote{In the Computer Science definition: a hypermatrix of arbitrary dimensions, such as 1-D vectors, 2-D matrices, or 3-D volumes.} and linear operations.
+As we have seen before, each layer is composed of mostly tensors\longsidenote{We are using the Computer Science definition of \emph{tensor}: a hypermatrix of arbitrary dimensions, such as 1-D vectors, 2-D matrices, or 3-D volumes.} and linear operations.
 Every intermediate layer in a deep network is learning a transformation of its inputs, that we can interpret as a representation that brings it closer to the target.
 These representations are, in general, difficult for humans to interpret, but in some cases, like computer vision, we can \emph{visualise} them.
 A convolutional network trained to identify objects in images will learn to recognise edges and simple textures in the first layers, that are combined into more complex representations as the information travels through the network.
@@ -423,6 +429,9 @@ This extra path opens an information highway from the inputs to the labels.
 	Note that placing the BatchNorm after the activation is usually advantageous.}\label{fig:resnet}
 \end{figure}
 
+\begin{center}
+	\adfsmallleafright
+\end{center}
 Recurrent networks,  albeit formally ``shallow" -- they typically have one or two layers -- face similar problems \sidenote{Recurrent networks, revisited}
 to feed-forward networks, now because the information has to travel along the time dimension. 
 Long-Short Term Memory (\LSTM) layers are a variation of the simple \RNN{} that includes some internal skip connections, allowing the network to transfer long-range information, but also ``forget" gates that can learn to ignore certain parts of the input that may be irrelevant.

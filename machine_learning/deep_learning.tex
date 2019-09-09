@@ -209,7 +209,8 @@ Since we transverse the graph in the opposite direction, it is called the \emph{
 \subsection{Stochastic gradient descent}\label{sec:sgd}
 Computing the backward pass takes roughly 3 times longer than the forward pass~\citep{dl_course}.
 Since deep learning models require large amounts of data, computing the gradients on the whole dataset is impractical.
-Instead, we can approximate the gradients of the loss w.r.t the whole data by a random sample:
+Instead, we can approximate the gradients of the loss w.r.t the whole data by a random sample: 
+
 
 \begin{equation*}
 g_j = \frac{1}{N} \sum_i^N \frac{\partial L\left(o_i, y_i\right)}{\partial w_i} \simeq \frac{1}{n} \sum_i^n \frac{\partial L\left(o_i, y_i\right)}{\partial w_i}
